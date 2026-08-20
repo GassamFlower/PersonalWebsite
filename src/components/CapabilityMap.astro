@@ -1,0 +1,150 @@
+---
+// CapabilityMap.astro — 档案 04 · 四梯队能力地图
+// 四层"系统层级"：独立交付 / 业务落地 / 工具提效 / 边界诚实
+const tiers = [
+  {
+    key: '01',
+    title: '独立交付',
+    desc: '最能证明"从零做到能交付"。接过活、做出来、上线跑起来。',
+    color: 'ink',
+    items: [
+      '工业运维平台 OPS —— 把没人管的设备与运维信息，做成能查能追、可诊断的系统',
+      '工程用车助手（外单，已上线）—— 从谈需求到交付全程独立完成',
+      '视频批量混剪 Web 平台 —— 字幕 / 贴片 / 转码的批量流水线',
+      '统一用户中心 UUC —— 企业内部统一的身份 / 权限体系',
+    ],
+  },
+  {
+    key: '02',
+    title: '业务落地',
+    desc: '懂业务、扛得住、解决真问题。',
+    color: 'ink',
+    items: [
+      '政务系统 8 年数据与业务支持：SQL 报表、业务数据分析、口径梳理',
+      '一批内部自动化工具：日志自动化 / 文件分区 / 数据爬虫 / 网页自动化',
+    ],
+  },
+  {
+    key: '03',
+    title: '工具提效',
+    desc: '会用、了解、能做；实操面广，诚实标注不精。',
+    color: 'accent',
+    items: [
+      '智能体 / AI 编程工具：Trae / Cursor / Claude Code / Codex / DeepSeek Harness',
+      '无代码 / AI 平台：Coze / Dify / n8n；ComfyUI / 视频制作',
+      '智能体编排框架：LangGraph / CrewAI（学过原理、实战中）',
+    ],
+  },
+  {
+    key: '04',
+    title: '边界诚实',
+    desc: '会用能扛基础，深层在持续学习精进；开发中 / 正在学如实标注。',
+    color: 'line',
+    items: [
+      '数据库 / 网络运维 / Linux：能完成基础与日常实用工作，深层持续精进',
+      '正在学 / 在开发：智能网关平台（开发中）、数据治理（正在学）、深度智能体落地',
+    ],
+  },
+];
+---
+
+<section id="capability" class="section capability">
+  <div class="container">
+    <p class="section-head"><span class="no">档案 03</span> 四梯队能力</p>
+    <div class="tier-list">
+      {
+        tiers.map((tier) => (
+          <article class={`tier tier-${tier.color}`}>
+            <header class="tier-head">
+              <span class="tier-no">{tier.key}</span>
+              <h3 class="tier-title">{tier.title}</h3>
+              <p class="tier-desc">{tier.desc}</p>
+            </header>
+            <ul class="tier-items">
+              {
+                tier.items.map((it) => <li>{it}</li>)
+              }
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .capability {
+    border-top: 1px solid var(--color-line);
+  }
+  .tier-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .tier {
+    border-bottom: 1px solid var(--color-line);
+    padding-block: var(--space-10);
+    display: grid;
+    grid-template-columns: 4rem 1fr 2fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+  .tier-no {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-highlight);
+    padding-top: 0.4em;
+    letter-spacing: 0.06em;
+  }
+  .tier-title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .tier-desc {
+    color: var(--color-line);
+    font-size: var(--text-sm);
+    margin-top: var(--space-3);
+    grid-column: 2;
+    line-height: 1.7;
+    max-width: 34em;
+  }
+  .tier-items {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    font-size: var(--text-base);
+    line-height: 1.7;
+  }
+  .tier-items li {
+    padding-left: var(--space-4);
+    position: relative;
+  }
+  .tier-items li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+  .tier-accent .tier-title {
+    color: var(--color-accent);
+  }
+  .tier-line .tier-title {
+    color: var(--color-line);
+  }
+  @media (max-width: 800px) {
+    .tier {
+      grid-template-columns: 3rem 1fr;
+      gap: var(--space-4);
+    }
+    .tier-desc {
+      grid-column: 2;
+    }
+    .tier-items {
+      grid-column: 2;
+      grid-row: auto;
+    }
+  }
+</style>

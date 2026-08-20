@@ -1,0 +1,50 @@
+---
+// Story.astro — 档案 02 · 品牌故事（克制 2-3 句身世转折）
+const paragraphs = [
+  '在真实世界的钢筋混凝土里待了 8 年 —— 从法院政务系统维护起，长期和数据、业务、真实的坑打交道。',
+  '进入一家工业类企业后，看到长期被忽视的数字化空白，从零搭起手里的 OPS 与 UUC，一路把系统做深、做实用。',
+  '靠好奇心和持续的劲头，如今已经能上手 AI 落地，并沉淀出一套自己的工程化方法论 —— 把一团乱麻，理成能用的系统。',
+];
+---
+
+<section id="story" class="section story">
+  <div class="container">
+    <p class="section-head"><span class="no">档案 02</span> 品牌故事</p>
+    <div class="story-body">
+      {
+        paragraphs.map((p) => (
+          <p class="story-para">{p}</p>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .story {
+    /* 编辑式短段：左文字块 + 右留白 */
+  }
+  .story-body {
+    max-width: 44em;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-7);
+    padding-left: var(--space-8);
+    border-left: 2px solid var(--color-accent);
+  }
+  .story-para {
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    color: var(--color-ink);
+  }
+  .story-para + .story-para {
+    padding-top: var(--space-2);
+  }
+  @media (max-width: 640px) {
+    .story-para {
+      font-size: var(--text-xl);
+    }
+  }
+</style>

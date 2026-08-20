@@ -1,0 +1,81 @@
+---
+// Principles.astro — 档案 07 · 做事的规矩（系统流程图 · 四门禁）
+const gates = [
+  { no: '01', title: '立项门', desc: '先把话说清楚，再动手。' },
+  { no: '02', title: '架构门', desc: '参考图为准绳，不凭感觉。' },
+  { no: '03', title: '业务门', desc: '素材有清单，证据才能过。' },
+  { no: '04', title: '上线门', desc: '可访问、可追溯、可复盘。' },
+];
+---
+
+<section id="principles" class="section principles">
+  <div class="container">
+    <p class="section-head"><span class="no">档案 07</span> 做事的规矩</p>
+    <div class="flow">
+      {
+        gates.map((g) => (
+          <div class="flow-node">
+            <span class="flow-no">{g.no}</span>
+            <h3 class="flow-title">{g.title}</h3>
+            <p class="flow-desc">{g.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+    <p class="principles-foot">
+      知识库与工作台分离 · 文档 a–q 前缀排序 · SSOT 单一信源
+    </p>
+  </div>
+</section>
+
+<style>
+  .principles {
+    border-top: 1px solid var(--color-line);
+  }
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+  }
+  .flow-node {
+    flex: 1 1 220px;
+    border: 1px solid var(--color-line);
+    padding: var(--space-8);
+    position: relative;
+    background: var(--color-base);
+  }
+  .flow-node::after {
+    content: "→";
+    position: absolute;
+    right: -1.1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+  }
+  .flow-node:last-child::after {
+    content: none;
+  }
+  .flow-no {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-highlight);
+    letter-spacing: 0.1em;
+  }
+  .flow-title {
+    font-size: var(--text-xl);
+    margin: var(--space-3) 0;
+  }
+  .flow-desc {
+    color: var(--color-line);
+    font-size: var(--text-sm);
+    line-height: 1.7;
+  }
+  .principles-foot {
+    margin-top: var(--space-10);
+    font-size: var(--text-sm);
+    color: var(--color-line);
+  }
+</style>

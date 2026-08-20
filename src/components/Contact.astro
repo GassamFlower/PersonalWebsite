@@ -1,0 +1,76 @@
+---
+// Contact.astro — 档案 08 · 联系交流（极简居中 · 达成转化）
+const wechat = 'G10S7H21';
+const email = '1462882928@qq.com';
+---
+
+<section id="contact" class="section contact">
+  <div class="container">
+    <p class="section-head centered"><span class="no">档案 08</span> 联系交流</p>
+    <h2 class="contact-title">聊得来，就一起做事。</h2>
+    <div class="contact-actions">
+      <button class="btn btn-solid" data-copy={wechat}>
+        加微信聊聊 · {wechat}
+      </button>
+      <span class="contact-or">或</span>
+      <a class="btn btn-line" href={`mailto:${email}`}>写邮件</a>
+    </div>
+    <p class="contact-source">雇主与过程细节对公开版隐去 · 详询索取 ↘</p>
+  </div>
+</section>
+
+<script>
+  // 复制微信号：clipboard API 失败用 prompt 兜底（老浏览器）
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const val = btn.dataset.copy;
+      if (!val) return;
+      try {
+        await navigator.clipboard.writeText(val);
+        const original = btn.textContent;
+        btn.textContent = '已复制 ✓';
+        setTimeout(() => (btn.textContent = original), 1500);
+      } catch {
+        try {
+          window.prompt('请复制微信号', val);
+        } catch {
+          /* 老环境：提示用户手记 */
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .contact {
+    border-top: 1px solid var(--color-line);
+    text-align: center;
+  }
+  .section-head.centered {
+    justify-content: center;
+  }
+  .section-head.centered::before {
+    content: none;
+  }
+  .contact-title {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-10);
+    letter-spacing: 0.02em;
+  }
+  .contact-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-10);
+  }
+  .contact-or {
+    color: var(--color-line);
+    font-size: var(--text-sm);
+  }
+  .contact-source {
+    font-size: var(--text-sm);
+    color: var(--color-line);
+  }
+</style>

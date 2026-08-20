@@ -1,0 +1,107 @@
+---
+// Hero.astro — 档案 01 · 首屏定位
+// 大字开门句 + 小字署名 + 克制入口，不立即摆技能。
+const brand = '独立系统建构者';
+const titleLine1 = '把复杂的事情';
+const titleLine2 = '变成可以运行的系统。';
+const subtitle = '8 年在真实系统里 · 工业数字化 · 全栈 · 真实交付';
+const footerLinks = [
+  { href: '#capability', label: '独立交付 →' },
+  { href: '#growth', label: '边界诚实 →' },
+  { href: '#contact', label: '联系 →' },
+];
+---
+
+<section id="hero" class="hero">
+  <div class="container hero-inner">
+    <p class="masthead-top">
+      档案 01 · PERSONAL DOSSIER · {brand}
+    </p>
+
+    <h1 class="hero-title">
+      {titleLine1}<br />
+      <span>{titleLine2}</span>
+    </h1>
+
+    <p class="hero-sub">{subtitle}</p>
+
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="#capability">看看我能做什么</a>
+      <a class="btn btn-line" href="#contact">联系我</a>
+    </div>
+
+    <hr class="hr-line hero-hr" />
+
+    <nav class="hero-links" aria-label="目录入口">
+      {
+        footerLinks.map((l) => (
+          <a href={l.href}>{l.label}</a>
+        ))
+      }
+    </nav>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    padding-block: var(--space-20);
+  }
+  .hero-inner {
+    width: 100%;
+  }
+  .masthead-top {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    margin-bottom: var(--space-10);
+  }
+  .hero-title {
+    font-size: var(--text-hero);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.08;
+    margin-bottom: var(--space-8);
+    max-width: 14em;
+  }
+  .hero-title span {
+    color: var(--color-ink);
+  }
+  .hero-sub {
+    font-size: var(--text-lg);
+    color: var(--color-line);
+    max-width: 30em;
+    margin-bottom: var(--space-12);
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: flex;
+    gap: var(--space-4);
+    margin-bottom: var(--space-20);
+    flex-wrap: wrap;
+  }
+  .hero-hr {
+    margin-bottom: var(--space-6);
+  }
+  .hero-links {
+    display: flex;
+    gap: var(--space-10);
+    flex-wrap: wrap;
+  }
+  .hero-links a {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-ink);
+    opacity: 0.7;
+    letter-spacing: 0.04em;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .hero-links a:hover {
+    opacity: 1;
+    color: var(--color-accent);
+  }
+</style>

@@ -1,0 +1,84 @@
+---
+// Timeline.astro — 档案 · 做过的事（纵向档案 / 真实时间顺序 5 节点）
+const nodes = [
+  { year: '2018—2026', title: '法院政务系统', desc: '8 年数据与业务支持：SQL 报表、业务分析、口径梳理、远程支持一线。' },
+  { year: '', title: '进入一家工业类企业', desc: '看到长期被忽视的数字化空白。' },
+  { year: '', title: '从零搭起 OPS + UUC', desc: '设备与运维信息平台 + 统一身份权限体系，一路做深做实用。' },
+  { year: '', title: '工程用车助手（外单）', desc: '接了活、做出来、上线交付 —— 已上线的真实外单。' },
+  { year: '', title: '沉淀方法论', desc: '建立工程化知识库、五级项目体系、workLog / SSOT 纪律。' },
+];
+---
+
+<section id="timeline" class="section timeline">
+  <div class="container">
+    <p class="section-head"><span class="no">档案 04</span> 做过的事</p>
+    <div class="tl">
+      {
+        nodes.map((n, i) => (
+          <article class="tl-node">
+            <span class="tl-marker" aria-hidden="true"></span>
+            <div class="tl-body">
+              <p class="tl-year">{n.year || `0${i + 1}`}</p>
+              <h3 class="tl-title">{n.title}</h3>
+              <p class="tl-desc">{n.desc}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    border-top: 1px solid var(--color-line);
+  }
+  .tl {
+    position: relative;
+    padding-left: var(--space-8);
+  }
+  .tl::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-line);
+  }
+  .tl-node {
+    position: relative;
+    padding-bottom: var(--space-8);
+  }
+  .tl-node:last-child {
+    padding-bottom: 0;
+  }
+  .tl-marker {
+    position: absolute;
+    left: calc(-1 * var(--space-8) + 4px);
+    top: 0.45em;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    border: 2px solid var(--color-base);
+  }
+  .tl-year {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-highlight);
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-1);
+  }
+  .tl-title {
+    font-size: var(--text-xl);
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-2);
+  }
+  .tl-desc {
+    color: var(--color-line);
+    max-width: 40em;
+    line-height: 1.7;
+    font-size: var(--text-sm);
+  }
+</style>

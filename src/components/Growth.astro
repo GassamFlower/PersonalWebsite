@@ -1,0 +1,94 @@
+---
+// Growth.astro — 档案 · 成长记录（月度档案索引 / md 驱动）
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('growth'))
+  .sort((a, b) => (a.data.month < b.data.month ? 1 : -1));
+---
+
+<section id="growth" class="section growth">
+  <div class="container growth-grid">
+    <aside class="growth-lead">
+      <p class="section-head"><span class="no">档案 06</span> 成长记录</p>
+      <p class="growth-quote">给自己一个每月进步的交代。</p>
+    </aside>
+    <div class="growth-list">
+      {
+        posts.map((p) => (
+          <article class="growth-item">
+            <span class="growth-month">{p.data.month}</span>
+            <div class="growth-body">
+              <p class="growth-takeaway">{p.data.takeaway}</p>
+              <p class="growth-tags">
+                {
+                  p.data.tags.map((t) => <span class="growth-tag">{t}</span>)
+                }
+              </p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .growth {
+    border-top: 1px solid var(--color-line);
+  }
+  .growth-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-16);
+  }
+  .growth-quote {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    color: var(--color-line);
+    line-height: 1.7;
+    max-width: 16em;
+  }
+  .growth-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .growth-item {
+    border-bottom: 1px solid var(--color-line);
+    padding-block: var(--space-6);
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: var(--space-5);
+    align-items: baseline;
+  }
+  .growth-month {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-highlight);
+    letter-spacing: 0.04em;
+  }
+  .growth-takeaway {
+    font-size: var(--text-base);
+    line-height: 1.7;
+  }
+  .growth-tags {
+    display: flex;
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+  }
+  .growth-tag {
+    font-size: var(--text-xs);
+    color: var(--color-accent);
+    letter-spacing: 0.04em;
+  }
+  .growth-tag::before {
+    content: "·";
+    margin-right: var(--space-2);
+    color: var(--color-line);
+  }
+  @media (max-width: 800px) {
+    .growth-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+</style>

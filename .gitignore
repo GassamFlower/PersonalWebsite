@@ -27,3 +27,7 @@ Thumbs.db
 # 本地临时
 *.tmp
 *.temp
+.npm-cache/
+
+# 设计参考草稿（生图阶段的基准图，非站点素材，不入库）
+images/
