@@ -1,8 +1,14 @@
 ---
 // Contact.astro — 档案 08 · 联系交流（居中布局 + 信封制图 + 铜金 CTA）
+// 右上：信封 + 十字准星
+// 居中：标题 + 单行联系（微信 + 3 邮箱） + 1 铜金按钮 + 副文
+// 底部：slogan
 const wechat = 'G10S7H21';
-const emails = ['1462882928@qq.com'];
-const phone = '+86 138 0000 0000';
+const emails = [
+  '1462882928@qq.com',
+  'luoyongui07@gmail.com',
+  'dblandlyg@163.com',
+];
 ---
 
 <section id="contact" class="section contact">
@@ -11,18 +17,23 @@ const phone = '+86 138 0000 0000';
       <span class="tag"><b>档案 08</b> · 联系</span>
       <span class="meta">08</span>
     </div>
+    <div class="ct-rule"></div>
 
-    <!-- 信封线稿（右上 · 十字准星虚线对齐） -->
+    <!-- 右上：信封 + 十字准星 -->
     <div class="envelope-art" aria-hidden="true">
-      <svg viewBox="0 0 120 100" class="envelope-svg">
-        <line x1="60" y1="4" x2="60" y2="18" stroke="var(--color-line)" stroke-width="0.8" stroke-dasharray="2 2"/>
-        <line x1="60" y1="82" x2="60" y2="96" stroke="var(--color-line)" stroke-width="0.8" stroke-dasharray="2 2"/>
-        <line x1="4" y1="50" x2="18" y2="50" stroke="var(--color-line)" stroke-width="0.8" stroke-dasharray="2 2"/>
-        <line x1="102" y1="50" x2="116" y2="50" stroke="var(--color-line)" stroke-width="0.8" stroke-dasharray="2 2"/>
-        <rect x="20" y="30" width="80" height="42" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.5"/>
-        <polyline points="20,32 60,58 100,32" fill="none" stroke="var(--color-ink)" stroke-width="1.5"/>
-        <line x1="20" y1="72" x2="47" y2="51" stroke="var(--color-line)" stroke-width="0.8"/>
-        <line x1="100" y1="72" x2="73" y2="51" stroke="var(--color-line)" stroke-width="0.8"/>
+      <svg viewBox="0 0 140 120" class="envelope-svg">
+        <!-- 十字准星（虚线对位） -->
+        <line x1="70" y1="6" x2="70" y2="22" stroke="var(--color-line)" stroke-width="0.8" stroke-dasharray="2 2"/>
+        <line x1="70" y1="96" x2="70" y2="114" stroke="var(--color-line)" stroke-width="0.8" stroke-dasharray="2 2"/>
+        <line x1="6" y1="58" x2="22" y2="58" stroke="var(--color-line)" stroke-width="0.8" stroke-dasharray="2 2"/>
+        <line x1="118" y1="58" x2="134" y2="58" stroke="var(--color-line)" stroke-width="0.8" stroke-dasharray="2 2"/>
+        <!-- 信封主体（略微倾斜） -->
+        <g transform="rotate(-8 70 58)">
+          <rect x="22" y="34" width="96" height="50" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.6"/>
+          <polyline points="22,36 70,68 118,36" fill="none" stroke="var(--color-ink)" stroke-width="1.6"/>
+          <line x1="22" y1="84" x2="56" y2="58" stroke="var(--color-line)" stroke-width="0.8"/>
+          <line x1="118" y1="84" x2="84" y2="58" stroke="var(--color-line)" stroke-width="0.8"/>
+        </g>
       </svg>
     </div>
 
@@ -31,17 +42,24 @@ const phone = '+86 138 0000 0000';
     <div class="contact-info">
       <span class="info-item"><b>微信</b>　{wechat}</span>
       <span class="info-sep">·</span>
-      <span class="info-item"><b>邮箱</b>　{emails[0]}</span>
-      <span class="info-sep">·</span>
-      <span class="info-item"><b>手机</b>　{phone}</span>
+      <span class="info-item"><b>邮箱</b></span>
+      {
+        emails.map((e) => (
+          <>
+            <a class="info-mail" href={`mailto:${e}`}>{e}</a>
+            <span class="info-sep">|</span>
+          </>
+        ))
+      }
     </div>
 
     <div class="contact-actions">
       <button class="btn btn-solid" data-copy={wechat}>加微信聊聊</button>
-      <a class="btn btn-ghost" href={`mailto:${emails[0]}`}>写邮件 ↗</a>
     </div>
 
     <p class="contact-note">雇主与过程细节对公开版隐去 · 详询索取 ↘</p>
+
+    <p class="contact-slogan">PERSONAL DOSSIER · 把一团乱麻，理成能用的系统</p>
   </div>
 </section>
 
@@ -70,36 +88,42 @@ const phone = '+86 138 0000 0000';
   .contact-inner {
     position: relative;
     text-align: center;
-    padding-top: var(--space-10);
+    padding-top: var(--space-2);
   }
-  .contact-inner .section-head {
-    position: absolute;
-    top: var(--space-10);
-    left: var(--gutter);
-    right: var(--gutter);
+  .ct-rule {
+    height: 1px;
+    background: var(--color-ink);
+    opacity: 0.85;
+    margin-bottom: var(--space-12);
   }
+  /* 信封定位右上 */
   .envelope-art {
     display: flex;
-    justify-content: center;
-    margin-bottom: var(--space-8);
+    justify-content: flex-end;
+    margin-bottom: var(--space-4);
   }
   .envelope-svg {
-    width: 96px;
+    width: 120px;
     height: auto;
   }
   .contact-title {
     font-size: var(--text-4xl);
     letter-spacing: 0.01em;
-    margin: 0 auto var(--space-10);
+    margin: 0 auto var(--space-8);
+    font-family: var(--font-serif);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--color-ink);
   }
   .contact-info {
     display: flex;
     justify-content: center;
     align-items: baseline;
-    gap: var(--space-5);
+    gap: var(--space-3);
     flex-wrap: wrap;
     margin-bottom: var(--space-10);
     font-size: var(--text-base);
+    color: var(--color-ink);
   }
   .info-item b {
     font-family: var(--font-sans);
@@ -108,6 +132,14 @@ const phone = '+86 138 0000 0000';
   }
   .info-sep {
     color: var(--color-faint);
+    font-family: var(--font-mono);
+  }
+  .info-mail {
+    color: var(--color-ink);
+    transition: color 0.2s;
+  }
+  .info-mail:hover {
+    color: var(--color-gold);
   }
   .contact-actions {
     display: flex;
@@ -115,30 +147,35 @@ const phone = '+86 138 0000 0000';
     align-items: center;
     gap: var(--space-5);
     flex-wrap: wrap;
-    margin-bottom: var(--space-12);
+    margin-bottom: var(--space-6);
   }
   .btn-solid {
     background: var(--color-gold);
     color: #fbf8f1;
-    padding: var(--space-4) var(--space-10);
+    padding: var(--space-4) var(--space-12);
     font-size: var(--text-base);
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    transition: background-color 0.2s;
   }
-  .btn-ghost {
-    border: 1px solid var(--color-line);
-    color: var(--color-ink);
-    padding: var(--space-4) var(--space-8);
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .btn-ghost:hover {
-    border-color: var(--color-ink);
+  .btn-solid:hover {
+    background: color-mix(in srgb, var(--color-gold) 88%, #000);
   }
   .contact-note {
     font-size: var(--text-sm);
     color: var(--color-line);
+    margin-bottom: var(--space-16);
+    letter-spacing: 0.04em;
   }
-  @media (max-width: 560px) {
-    .contact-title {
-      font-size: var(--text-3xl);
-    }
+  .contact-slogan {
+    font-size: var(--text-xs);
+    color: var(--color-line);
+    letter-spacing: 0.12em;
+    font-family: var(--font-mono);
+  }
+  @media (max-width: 720px) {
+    .envelope-art { justify-content: center; }
+    .contact-title { font-size: var(--text-3xl); }
+    .contact-info { font-size: var(--text-sm); }
   }
 </style>

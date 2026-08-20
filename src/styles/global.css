@@ -1,29 +1,20 @@
 /* ============================================================
-   global.css — 设计 token + 全局基元
-   依据 images/ 参考图：米白工艺底 + 建筑制图线条 + 双强调色
+   global.css — 设计 token
+   生图提示词：暖米白底 + 深棕文字 + 橄榄绿细线 + 铜金强调
+   + 大宋体衬线标题 + 1px 横线作为档案分隔
    ============================================================ */
 
-/* ---- 自托管衬线大标题字体（规避 Google Fonts 在国内不可达，
-        保证思源宋体 editorial 大标题在任何访客环境都正常渲染） ---- */
-@font-face {
-  font-family: "Noto Serif SC";
-  font-style: normal;
-  font-weight: 100 900;   /* 可变字体：wght 轴全量 */
-  font-display: swap;
-  src: url("/fonts/noto-serif-sc.woff") format("woff");
-}
-
 :root {
-  /* ---- 配色（参考图 #f5f1e9 暖米白 · 铜金/橄榄绿双强调） ---- */
-  --color-base: #f5f1e9;         /* 暖米白 · 主底 */
-  --color-ink: #1c1b18;           /* 近黑 · 主文字 */
-  --color-line: #8a867d;          /* 中灰 · 细线/脚注 */
-  --color-faint: #c2bdb2;         /* 浅灰 · 次要线 */
-  --color-accent: #4a5d23;        /* 橄榄绿 · 在线/UI/项目 */
-  --color-gold: #a1875e;          /* 铜金  · 编号/CTA/印章（参考 #a68b5c） */
+  /* ---- 配色（取自 images/ 实测） ---- */
+  --color-base: #f5f0e8;          /* 暖米白 · 主底 */
+  --color-ink: #2b2924;            /* 深棕近黑 · 主文字 */
+  --color-line: #6e6a62;           /* 中性灰 · 细线/脚注 */
+  --color-faint: #b8b3a8;          /* 浅灰 · 极细辅助线 */
+  --color-accent: #4a5d23;         /* 橄榄绿 · 状态点/折线/末位圆章 */
+  --color-gold: #a3854f;           /* 铜金  · 编号/印章/CTA */
 
-  /* ---- 字体 ---- */
-  --font-serif: "Noto Serif SC", "Songti SC", "SimSun", serif; /* 大标题 */
+  /* ---- 字体（标题用宋体细高对比） ---- */
+  --font-serif: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
   --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
 
@@ -41,25 +32,24 @@
   --space-20: 5rem;
   --space-24: 6rem;
   --space-32: 8rem;
-  --space-40: 10rem;
 
-  --container-max: 1360px;
-  --gutter: clamp(1.5rem, 6vw, 5rem);
+  --container-max: 1280px;
+  --gutter: clamp(1.5rem, 5vw, 4rem);
 
-  /* ---- 排版 ---- */
-  --text-xs: 0.75rem;
-  --text-sm: 0.9rem;
+  /* ---- 排版（标题占行高 1.05-1.1） ---- */
+  --text-xs: 0.78rem;
+  --text-sm: 0.92rem;
   --text-base: 1.0625rem;
-  --text-lg: 1.25rem;
+  --text-lg: 1.18rem;
   --text-xl: 1.5rem;
-  --text-2xl: clamp(1.6rem, 3.2vw, 2.4rem);
-  --text-3xl: clamp(2.4rem, 4.8vw, 3.6rem);
-  --text-4xl: clamp(3rem, 6vw, 4.6rem);
-  --text-hero: clamp(3.2rem, 9vw, 6.4rem);
-  --type-cjk-lh: 1.6;
+  --text-2xl: 1.85rem;
+  --text-3xl: 2.4rem;
+  --text-4xl: 3.4rem;
+  --text-5xl: 4.2rem;
+  --text-hero: clamp(3.6rem, 8vw, 6rem);
 
-  --radius: 2px;
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --type-cjk-lh: 1.55;
+  --type-heading-lh: 1.1;
 }
 
 *,
@@ -72,12 +62,12 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--space-8));
+  scroll-padding-top: 100px;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background-color: var(--color-base);
+  background: var(--color-base);
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: var(--text-base);
@@ -87,26 +77,15 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-button {
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; cursor: pointer; border: none; background: none; }
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: var(--type-heading-lh);
+  letter-spacing: 0;
+  color: var(--color-ink);
 }
 
 .container {
@@ -116,97 +95,101 @@ h1, h2, h3, h4 {
   padding-inline: var(--gutter);
 }
 
+/* 档案分隔横线 —— 参考图每张图顶部那条细线 */
 .section {
-  padding-block: var(--space-24);
-  border-top: 1px solid var(--color-ink);
-}
-.section:first-of-type {
-  border-top: none;
-}
-@media (max-width: 640px) {
-  .section {
-    padding-block: var(--space-16);
-  }
+  padding-block: var(--space-16);
 }
 
-/* ---- 档案页眉（右对齐元数据 + 左上小标） ---- */
+/* 档案头 —— 左上"档案 NN · 名字"，上接横线 */
 .section-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-10);
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
-}
-.section-head .tag {
-  letter-spacing: 0.08em;
   color: var(--color-ink);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
 }
 .section-head .tag b {
-  font-family: var(--font-serif);
-  font-weight: 700;
+  color: var(--color-gold);
+  font-weight: 600;
   margin-right: 0.5ch;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+}
+.section-head .tag {
+  color: var(--color-ink);
+  letter-spacing: 0.04em;
 }
 .section-head .meta {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  letter-spacing: 0.12em;
   color: var(--color-line);
-  text-align: right;
+  letter-spacing: 0.1em;
 }
-
-/* ---- 大号衬线主标题 ---- */
-.section-title {
-  font-size: var(--text-3xl);
+.section-head .right-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+.section-head .right-nav a {
+  color: var(--color-ink);
+  opacity: 0.85;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  letter-spacing: 0.04em;
+}
+.section-head .right-nav a:hover { opacity: 1; }
+.section-head .page-num {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  color: var(--color-line);
+  margin-left: var(--space-4);
   font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.18;
+}
+
+/* 主标题 —— 大号衬线 1.1 行高（参考图） */
+.section-title {
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  line-height: var(--type-heading-lh);
   margin-bottom: var(--space-12);
-  max-width: 18em;
+  color: var(--color-ink);
+  max-width: 16em;
+  font-family: var(--font-serif);
 }
 
-/* ---- 制图通用：技术线稿支持类 ---- */
-.dim-line {                /* 尺寸标注主轴线 */
-  stroke: var(--color-line);
-  stroke-width: 1;
-}
-.center-line {             /* 中心线：点划线 */
-  stroke: var(--color-line);
-  stroke-width: 0.6;
-  stroke-dasharray: 8 1 1.5 1;
-}
-.ghost-line {              /* 构造辅助线：细虚线 */
-  stroke: var(--color-line);
-  stroke-width: 0.6;
-  stroke-dasharray: 3 3;
+/* 档案分隔细线 utility */
+.rule {
+  height: 1px;
+  background: var(--color-ink);
+  opacity: 0.85;
+  border: 0;
 }
 
-/* ---- 按钮家族 ---- */
 .btn {
   display: inline-block;
-  padding: var(--space-3) var(--space-7, 1.75rem);
-  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-7);
+  border-radius: 2px;
   font-size: var(--text-sm);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   transition: background-color 0.2s, color 0.2s;
 }
 .btn-solid {
   background: var(--color-gold);
-  color: #fbf8f1;
+  color: #fdfbf5;
+  padding: var(--space-4) var(--space-10);
+  font-size: var(--text-base);
 }
 .btn-solid:hover {
   background: color-mix(in srgb, var(--color-gold) 88%, #000);
 }
-.btn-line {
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
-}
-.btn-line:hover {
-  background: var(--color-accent);
-  color: var(--color-base);
-}
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
 }

@@ -1,11 +1,22 @@
 ---
-// Story.astro — 档案 02 · 品牌故事（左文 / 右斜拉桥工程制图）
+// Story.astro — 参考图 2 · 品牌故事
+// 顶部：档案头 + 子导航 + 页码 + 贯穿横线
+// 主体：左侧 5 段衬线正文（行距宽松），右侧单塔斜拉桥工程制图
+// 底部：FILE 脚注（与上方横线呼应）
 const paragraphs = [
-  '八年政务系统维护，让我懂业务、懂数据，也看见系统背后真实的需求与约束。',
+  '八年政务系统维护，让我懂业务、懂数据、也看见系统背后的真实需求与约束。',
   '进入一家工业类企业，我看见长期被忽视的数字化空白——流程割裂、数据孤岛、体验落后。',
   '我从零搭起工业运维平台 OPS 与统一用户中心 UUC，让数据流动，让一线可用，让管理可视。',
   '靠强烈的好奇心与持续学习的劲头，我把系统做深、做实用；已经能上手 AI 落地（RAG、知识库、智能体），仍在往更深之处精进。',
   '我自建「五级项目体系 + 单一信源 SSOT」的做事规矩，以结构化的方法，把复杂的事做成可持续的系统。',
+];
+const subNav = [
+  { href: '#hero', label: '定位' },
+  { href: '#story', label: '品牌故事' },
+  { href: '#principles', label: '方法与体系' },
+  { href: '#cases', label: '项目精选' },
+  { href: '#growth', label: '洞见' },
+  { href: '#contact', label: '联系' },
 ];
 ---
 
@@ -13,8 +24,12 @@ const paragraphs = [
   <div class="container">
     <div class="section-head">
       <span class="tag"><b>档案 02</b> · 品牌故事</span>
-      <span class="meta">02</span>
+      <div class="right-nav">
+        {subNav.map((n) => <a href={n.href}>{n.label}</a>)}
+        <span class="page-num">02</span>
+      </div>
     </div>
+    <div class="story-rule"></div>
 
     <div class="story-grid">
       <div class="story-body">
@@ -26,108 +41,155 @@ const paragraphs = [
       </div>
 
       <div class="story-art" aria-hidden="true">
-        <!-- 斜拉桥工程制图：V面线中心线 / 虚线基准 / 尺寸线 / V形墩 -->
-        <svg viewBox="0 0 460 560" class="bridge-svg">
-          <!-- 垂直中心线（点划线） -->
-          <line x1="230" y1="20" x2="230" y2="520" class="center-line"/>
-          <!-- 顶部基准虚线 -->
-          <line x1="20" y1="60" x2="440" y2="60" class="ghost-line"/>
-          <!-- 桥面基准虚线 -->
-          <line x1="20" y1="330" x2="440" y2="330" class="ghost-line"/>
-          <!-- 地面线 -->
-          <line x1="20" y1="440" x2="440" y2="440" stroke="var(--color-line)"/>
+        <!-- 单塔斜拉桥工程制图（更精细的刻度/对位辅助线） -->
+        <svg viewBox="0 0 420 540" class="bridge-svg">
+          <!-- 顶部基准虚线 + 刻度 -->
+          <line x1="20" y1="50" x2="400" y2="50" stroke="var(--color-faint)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <g stroke="var(--color-faint)" stroke-width="0.5">
+            <line x1="40"  y1="46" x2="40"  y2="50"/>
+            <line x1="80"  y1="46" x2="80"  y2="50"/>
+            <line x1="120" y1="46" x2="120" y2="50"/>
+            <line x1="160" y1="46" x2="160" y2="50"/>
+            <line x1="200" y1="46" x2="200" y2="50"/>
+            <line x1="240" y1="42" x2="240" y2="50"/>
+            <line x1="280" y1="46" x2="280" y2="50"/>
+            <line x1="320" y1="46" x2="320" y2="50"/>
+            <line x1="360" y1="46" x2="360" y2="50"/>
+          </g>
 
-          <!-- 桥塔（主结构实线） -->
-          <line x1="230" y1="60" x2="230" y2="420" stroke="var(--color-ink)" stroke-width="2.5"/>
-          <line x1="226" y1="60" x2="234" y2="60" stroke="var(--color-ink)" stroke-width="2.5"/>
+          <!-- 桥面水平基线 + 刻度 -->
+          <line x1="20" y1="320" x2="400" y2="320" stroke="var(--color-faint)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <g stroke="var(--color-faint)" stroke-width="0.5">
+            <line x1="40"  y1="320" x2="40"  y2="324"/>
+            <line x1="80"  y1="320" x2="80"  y2="324"/>
+            <line x1="120" y1="320" x2="120" y2="324"/>
+            <line x1="160" y1="320" x2="160" y2="324"/>
+            <line x1="200" y1="320" x2="200" y2="324"/>
+            <line x1="280" y1="320" x2="280" y2="324"/>
+            <line x1="320" y1="320" x2="320" y2="324"/>
+            <line x1="360" y1="320" x2="360" y2="324"/>
+          </g>
 
-          <!-- 扇形拉索（左） -->
-          <line x1="230" y1="90" x2="70" y2="332" stroke="var(--color-line)" stroke-width="0.8"/>
-          <line x1="230" y1="120" x2="95" y2="332" stroke="var(--color-line)" stroke-width="0.8"/>
-          <line x1="230" y1="150" x2="120" y2="332" stroke="var(--color-line)" stroke-width="0.8"/>
-          <line x1="230" y1="180" x2="145" y2="332" stroke="var(--color-line)" stroke-width="0.8"/>
-          <line x1="230" y1="210" x2="170" y2="332" stroke="var(--color-line)" stroke-width="0.8"/>
-          <line x1="230" y1="240" x2="195" y2="332" stroke="var(--color-line)" stroke-width="0.8"/>
-          <!-- 扇形拉索（右） -->
-          <line x1="230" y1="90" x2="390" y2="332" stroke="var(--color-line)" stroke-width="0.8"/>
-          <line x1="230" y1="120" x2="365" y2="332" stroke="var(--color-line)" stroke-width="0.8"/>
-          <line x1="230" y1="150" x2="340" y2="332" stroke="var(--color-line)" stroke-width="0.8"/>
-          <line x1="230" y1="180" x2="315" y2="332" stroke="var(--color-line)" stroke-width="0.8"/>
-          <line x1="230" y1="210" x2="290" y2="332" stroke="var(--color-line)" stroke-width="0.8"/>
-          <line x1="230" y1="240" x2="265" y2="332" stroke="var(--color-line)" stroke-width="0.8"/>
+          <!-- 底部基线虚线 -->
+          <line x1="20" y1="490" x2="400" y2="490" stroke="var(--color-faint)" stroke-width="0.5" stroke-dasharray="3 3"/>
 
-          <!-- 桥面 -->
-          <line x1="20" y1="330" x2="440" y2="330" stroke="var(--color-ink)" stroke-width="2"/>
-          <line x1="28" y1="337" x2="432" y2="337" stroke="var(--color-line)" stroke-width="0.8"/>
+          <!-- 桥塔（细实线 · 略加粗） -->
+          <line x1="240" y1="50" x2="240" y2="420" stroke="var(--color-ink)" stroke-width="1.8"/>
+          <!-- 桥塔顶部小标记 -->
+          <line x1="232" y1="58" x2="248" y2="58" stroke="var(--color-ink)" stroke-width="0.8"/>
 
-          <!-- V形桥墩 -->
-          <line x1="230" y1="330" x2="182" y2="440" stroke="var(--color-ink)" stroke-width="1.6"/>
-          <line x1="230" y1="330" x2="278" y2="440" stroke="var(--color-ink)" stroke-width="1.6"/>
+          <!-- 扇形拉索（左）—— 10 根（更密） -->
+          <line x1="240" y1="70"  x2="60"  y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="90"  x2="80"  y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="110" x2="100" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="130" x2="120" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="150" x2="140" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="170" x2="160" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="190" x2="180" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="210" x2="200" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="230" x2="220" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="250" x2="235" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <!-- 扇形拉索（右）—— 10 根（更密） -->
+          <line x1="240" y1="70"  x2="420" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="90"  x2="400" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="110" x2="380" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="130" x2="360" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="150" x2="340" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="170" x2="320" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="190" x2="300" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="210" x2="280" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="230" x2="260" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
+          <line x1="240" y1="250" x2="245" y2="320" stroke="var(--color-ink)" stroke-width="0.5"/>
 
-          <!-- 承台 + 桩基 -->
-          <line x1="150" y1="440" x2="310" y2="440" stroke="var(--color-ink)" stroke-width="1.6"/>
-          <line x1="182" y1="440" x2="182" y2="470" stroke="var(--color-line)" stroke-width="1"/>
-          <line x1="230" y1="440" x2="230" y2="470" stroke="var(--color-line)" stroke-width="1"/>
-          <line x1="278" y1="440" x2="278" y2="470" stroke="var(--color-line)" stroke-width="1"/>
-          <line x1="165" y1="470" x2="295" y2="470" stroke="var(--color-line)" stroke-width="1"/>
+          <!-- 桥面（细横线 + 阴影虚线） -->
+          <line x1="20" y1="318" x2="400" y2="318" stroke="var(--color-faint)" stroke-width="0.6"/>
+          <line x1="20" y1="322" x2="400" y2="322" stroke="var(--color-ink)" stroke-width="1.4"/>
+          <line x1="20" y1="330" x2="400" y2="330" stroke="var(--color-faint)" stroke-width="0.5"/>
+          <!-- 桥面分隔短划线 -->
+          <g stroke="var(--color-faint)" stroke-width="0.5">
+            <line x1="60"  y1="322" x2="60"  y2="330"/>
+            <line x1="100" y1="322" x2="100" y2="330"/>
+            <line x1="140" y1="322" x2="140" y2="330"/>
+            <line x1="180" y1="322" x2="180" y2="330"/>
+            <line x1="220" y1="322" x2="220" y2="330"/>
+            <line x1="260" y1="322" x2="260" y2="330"/>
+            <line x1="300" y1="322" x2="300" y2="330"/>
+            <line x1="340" y1="322" x2="340" y2="330"/>
+            <line x1="380" y1="322" x2="380" y2="330"/>
+          </g>
 
-          <!-- 尺寸标注：跨长 -->
-          <line x1="30" y1="520" x2="430" y2="520" class="dim-line"/>
-          <line x1="30" y1="514" x2="30" y2="526" stroke="var(--color-line)" stroke-width="1"/>
-          <line x1="430" y1="514" x2="430" y2="526" stroke="var(--color-line)" stroke-width="1"/>
-          <text x="180" y="536" font-size="10" fill="var(--color-line)" font-family="monospace">跨度 4200</text>
+          <!-- V 形桥墩（双斜线） -->
+          <line x1="240" y1="320" x2="200" y2="420" stroke="var(--color-ink)" stroke-width="1.4"/>
+          <line x1="240" y1="320" x2="280" y2="420" stroke="var(--color-ink)" stroke-width="1.4"/>
+          <line x1="200" y1="420" x2="280" y2="420" stroke="var(--color-ink)" stroke-width="1.4"/>
+          <!-- 桥墩下竖线 -->
+          <line x1="200" y1="420" x2="200" y2="450" stroke="var(--color-ink)" stroke-width="1.4"/>
+          <line x1="280" y1="420" x2="280" y2="450" stroke="var(--color-ink)" stroke-width="1.4"/>
 
-          <!-- 尺寸标注：塔高 -->
-          <line x1="300" y1="60" x2="300" y2="420" stroke="var(--color-line)" stroke-width="0.8"/>
-          <line x1="294" y1="60" x2="306" y2="60" stroke="var(--color-line)" stroke-width="1"/>
-          <line x1="294" y1="420" x2="306" y2="420" stroke="var(--color-line)" stroke-width="1"/>
-          <text x="305" y="245" font-size="10" fill="var(--color-line)" font-family="monospace">塔高 3600</text>
+          <!-- 承台 -->
+          <line x1="170" y1="450" x2="310" y2="450" stroke="var(--color-ink)" stroke-width="1.2"/>
+          <line x1="180" y1="450" x2="180" y2="490" stroke="var(--color-faint)" stroke-width="0.6"/>
+          <line x1="240" y1="450" x2="240" y2="490" stroke="var(--color-faint)" stroke-width="0.6"/>
+          <line x1="300" y1="450" x2="300" y2="490" stroke="var(--color-faint)" stroke-width="0.6"/>
+
+          <!-- 两侧基准短虚线（拉索末端） -->
+          <line x1="60"  y1="320" x2="60"  y2="332" stroke="var(--color-faint)" stroke-width="0.5"/>
+          <line x1="400" y1="320" x2="400" y2="332" stroke="var(--color-faint)" stroke-width="0.5"/>
         </svg>
       </div>
     </div>
 
-    <div class="story-footer">
+    <div class="story-foot">
       <span>FILE 02 / 06</span>
+      <span class="foot-sep">|</span>
       <span>DATE 2025-08-19</span>
+      <span class="foot-sep">|</span>
       <span>BY YIYI</span>
     </div>
   </div>
 </section>
 
 <style>
+  .story-rule {
+    height: 1px;
+    background: var(--color-ink);
+    opacity: 0.85;
+    margin-bottom: var(--space-12);
+  }
   .story-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
+    align-items: center;
+    gap: var(--space-12);
   }
-  /* 中间细垂直分隔线 —— 参考图品牌故事分栏 */
   .story-body {
     display: flex;
     flex-direction: column;
-    gap: var(--space-6);
-    padding: var(--space-16) var(--space-12) var(--space-16) 0;
-    border-right: 1px solid var(--color-line);
+    gap: var(--space-7);
   }
   .story-para {
+    font-family: var(--font-serif);
     font-size: var(--text-lg);
-    line-height: 1.9;
-    letter-spacing: 0.02em;
+    line-height: 2;
     color: var(--color-ink);
+    letter-spacing: 0.01em;
+    font-weight: 500;
   }
   .story-art {
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: var(--space-16) 0 var(--space-16) var(--space-12);
+    align-items: center;
   }
   .bridge-svg {
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     height: auto;
   }
-  .story-footer {
+  .story-foot {
     display: flex;
-    gap: var(--space-12);
+    align-items: center;
+    gap: var(--space-5);
+    margin-top: var(--space-16);
     padding-top: var(--space-5);
     border-top: 1px solid var(--color-ink);
     font-family: var(--font-mono);
@@ -135,25 +197,11 @@ const paragraphs = [
     color: var(--color-line);
     letter-spacing: 0.12em;
   }
+  .foot-sep { color: var(--color-faint); }
   @media (max-width: 860px) {
-    .story-grid {
-      grid-template-columns: 1fr;
-    }
-    .story-body {
-      border-right: none;
-      padding: var(--space-8) 0;
-    }
-    .story-art {
-      display: none;
-    }
-  }
-  @media (max-width: 640px) {
-    .story-para {
-      font-size: var(--text-base);
-    }
-    .story-footer {
-      gap: var(--space-6);
-      flex-wrap: wrap;
-    }
+    .story-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+    .story-art { display: none; }
+    .story-foot { gap: var(--space-3); flex-wrap: wrap; }
+    .story-para { font-size: var(--text-base); line-height: 1.9; }
   }
 </style>

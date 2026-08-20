@@ -1,10 +1,14 @@
 ---
-// Principles.astro — 档案 07 · 做事的规矩（四圆节点流程 + 末端对勾章 + 橡皮图章制图）
+// Principles.astro — 档案 07 · 做事的规矩（参考图 7）
+// 标题"先立规矩，再让 AI 干活"特大衬线
+// 4 阶段：顶部大铜金编号 + 标题 + 水平线圆圈 + 描述
+// 水平线：4 个空心圆圈 + 末端大对勾章（带十字准星）
+// 底部：知识库说明 + 右下立着等轴测橡皮图章
 const gates = [
-  { no: '01', title: '一 · 立项门', desc: '先把话说清楚，再动手' },
-  { no: '02', title: '二 · 架构门', desc: '参考图为准绳，不凭感觉' },
-  { no: '03', title: '三 · 业务门', desc: '素材有清单，证据才能过' },
-  { no: '04', title: '四 · 上线门', desc: '可访问、可追溯、可复盘' },
+  { no: '01', title: '一 · 立项门', desc: '先把话说清楚，\n再动手' },
+  { no: '02', title: '二 · 架构门', desc: '参考图为准绳，\n不凭感觉' },
+  { no: '03', title: '三 · 业务门', desc: '素材有清单，\n证据才能过' },
+  { no: '04', title: '四 · 上线门', desc: '可访问、可追溯、\n可复盘' },
 ];
 ---
 
@@ -14,69 +18,97 @@ const gates = [
       <span class="tag"><b>档案 07</b> · 做事的规矩</span>
       <span class="meta">07</span>
     </div>
+    <div class="pr-rule"></div>
 
-    <h2 class="section-title principles-title">
-      先立规矩，再让 <span class="ai">AI</span> 干活
-    </h2>
+    <h2 class="pr-mega">先立规矩，<br/>再让 <span class="ai">AI</span> 干活</h2>
 
-    <!-- 水平四节点流程 + 末端对勾圆章 -->
+    <!-- 4 阶段：编号 + 标题 + 水平线圆圈 + 描述 + 末端对勾章 -->
     <div class="flow">
-      {
-        gates.map((g, i) => (
-          <div class="flow-node">
-            <div class="node-bubble">
-              <span class="node-no">{g.no}</span>
+      <div class="stages">
+        {
+          gates.map((g) => (
+            <div class="stage">
+              <span class="stage-no">{g.no}</span>
+              <h3 class="stage-title">{g.title}</h3>
             </div>
-            <h3 class="flow-title">{g.title}</h3>
-            <p class="flow-desc">{g.desc}</p>
-          </div>
-        ))
-      }
-      <div class="flow-finish">
-        <div class="finish-bubble" aria-hidden="true">
-          <svg viewBox="0 0 60 60">
+          ))
+        }
+      </div>
+      <!-- 水平线 + 4 圆圈 + 末端大对勾章 -->
+      <div class="flow-line" aria-hidden="true">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="line-svg">
+          <!-- 主横线（穿过4个圆圈中心+末端对勾章中心） -->
+          <line x1="40" y1="40" x2="1100" y2="40" stroke="var(--color-ink)" stroke-width="1"/>
+          <!-- 4 段箭头（在每两个圆圈之间） -->
+          <polygon points="335,40 325,36 325,44" fill="var(--color-ink)"/>
+          <polygon points="615,40 605,36 605,44" fill="var(--color-ink)"/>
+          <polygon points="895,40 885,36 885,44" fill="var(--color-ink)"/>
+          <!-- 4 个空心圆圈（每个阶段的连接点） -->
+          <circle cx="150" cy="40" r="7" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1.4"/>
+          <circle cx="430" cy="40" r="7" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1.4"/>
+          <circle cx="710" cy="40" r="7" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1.4"/>
+          <circle cx="990" cy="40" r="7" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1.4"/>
+        </svg>
+        <!-- 末端大对勾章（带十字准星） -->
+        <div class="finish-mark" aria-hidden="true">
+          <svg viewBox="0 0 80 80" class="finish-svg">
             <!-- 十字准星定位标记 -->
-            <line x1="30" y1="2" x2="30" y2="13" stroke="var(--color-ink)" stroke-width="1"/>
-            <line x1="30" y1="47" x2="30" y2="58" stroke="var(--color-ink)" stroke-width="1"/>
-            <line x1="2" y1="30" x2="13" y2="30" stroke="var(--color-ink)" stroke-width="1"/>
-            <line x1="47" y1="30" x2="58" y2="30" stroke="var(--color-ink)" stroke-width="1"/>
-            <circle cx="30" cy="30" r="21" fill="none" stroke="var(--color-ink)" stroke-width="1.5"/>
-            <polyline points="20,31 27,38 41,23" fill="none"
+            <line x1="40" y1="2" x2="40" y2="16" stroke="var(--color-ink)" stroke-width="1.2"/>
+            <line x1="40" y1="64" x2="40" y2="78" stroke="var(--color-ink)" stroke-width="1.2"/>
+            <line x1="2" y1="40" x2="16" y2="40" stroke="var(--color-ink)" stroke-width="1.2"/>
+            <line x1="64" y1="40" x2="78" y2="40" stroke="var(--color-ink)" stroke-width="1.2"/>
+            <!-- 中心对勾圆章（双层） -->
+            <circle cx="40" cy="40" r="24" fill="none" stroke="var(--color-ink)" stroke-width="1.6"/>
+            <circle cx="40" cy="40" r="19" fill="none" stroke="var(--color-ink)" stroke-width="0.6"/>
+            <!-- 大对勾（橄榄绿） -->
+            <polyline points="29,40 36,48 52,30" fill="none"
               stroke="var(--color-accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <p class="finish-label">过站通过</p>
+      </div>
+
+      <!-- 4 段描述（在水平线下方） -->
+      <div class="descs">
+        {
+          gates.map((g) => (
+            <div class="desc">
+              {g.desc.split('\n').map((line) => (
+                <p class="line">{line}</p>
+              ))}
+            </div>
+          ))
+        }
       </div>
     </div>
 
-    <hr class="principles-hr" />
-
-    <!-- 横躺橡皮图章制图（technical blueprint 风） -->
-    <div class="stamp-row">
-      <p class="principles-note">知识库与工作台分离，文档前缀排序，单一信源 SSOT。</p>
+    <div class="pr-foot">
+      <p class="pr-note">知识库与工作台分离，文档前缀排序，单一信源 SSOT。</p>
       <div class="stamp-art" aria-hidden="true">
-        <svg viewBox="0 0 220 130" class="stamp-svg">
-          <!-- 基准虚线 -->
-          <line x1="8" y1="30" x2="212" y2="30" class="ghost-line"/>
-          <line x1="8" y1="96" x2="212" y2="96" class="ghost-line"/>
-          <!-- 印章底座：横躺（侧面视角） -->
-          <rect x="50" y="30" width="120" height="66" rx="4" fill="none" stroke="var(--color-ink)" stroke-width="1.6"/>
+        <!-- 立着的橡皮图章（等轴测） -->
+        <svg viewBox="0 0 200 220" class="stamp-svg">
+          <!-- 中心线（点划线） -->
+          <line x1="100" y1="10" x2="100" y2="210" stroke="var(--color-faint)" stroke-width="0.5" stroke-dasharray="6 1 1 1"/>
+          <!-- 顶部手柄（立着） -->
+          <rect x="80" y="14" width="40" height="22" rx="4" fill="none" stroke="var(--color-ink)" stroke-width="1.4"/>
+          <line x1="80" y1="22" x2="120" y2="22" stroke="var(--color-ink)" stroke-width="0.8"/>
+          <!-- 中段连接 -->
+          <rect x="86" y="36" width="28" height="6" fill="none" stroke="var(--color-ink)" stroke-width="1"/>
+          <!-- 印章主体（立着、略微下宽） -->
+          <polygon points="76,46 124,46 130,180 70,180" fill="none" stroke="var(--color-ink)" stroke-width="1.6"/>
+          <!-- 印面（底面，带刻字） -->
+          <rect x="74" y="178" width="52" height="14" rx="1" fill="none" stroke="var(--color-ink)" stroke-width="1.4"/>
           <!-- 印面刻字 -->
-          <rect x="58" y="38" width="104" height="50" rx="2" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-          <text x="110" y="62" font-size="12" fill="var(--color-ink)" font-family="serif" font-weight="700"
-            text-anchor="middle">档案 · 通过</text>
-          <text x="110" y="78" font-size="7" fill="var(--color-line)" font-family="monospace"
-            text-anchor="middle">APPROVED · NO.005</text>
-          <!-- 柄：横圆柱 -->
-          <rect x="72" y="14" width="76" height="20" rx="9" fill="none" stroke="var(--color-ink)" stroke-width="1.4"/>
-          <line x1="72" y1="24" x2="148" y2="24" stroke="var(--color-ink)" stroke-width="1"/>
-          <!-- 尺寸标注（顶部长度） -->
-          <line x1="28" y1="8" x2="192" y2="8" stroke="var(--color-line)" stroke-width="0.7"/>
-          <line x1="50" y1="3" x2="50" y2="13" stroke="var(--color-line)" stroke-width="0.7"/>
-          <line x1="170" y1="3" x2="170" y2="13" stroke="var(--color-line)" stroke-width="0.7"/>
-          <text x="96" y="24" font-size="8" fill="var(--color-line)" font-family="monospace">120</text>
-          <!-- 中心线 -->
-          <line x1="110" y1="30" x2="110" y2="96" class="center-line"/>
+          <text x="100" y="120" text-anchor="middle" font-family="var(--font-serif)" font-size="14"
+            fill="var(--color-ink)" font-weight="700" letter-spacing="0.2em">档案</text>
+          <text x="100" y="142" text-anchor="middle" font-family="var(--font-serif)" font-size="14"
+            fill="var(--color-ink)" font-weight="700" letter-spacing="0.2em">通过</text>
+          <line x1="86" y1="155" x2="114" y2="155" stroke="var(--color-line)" stroke-width="0.7"/>
+          <text x="100" y="170" text-anchor="middle" font-family="monospace" font-size="7"
+            fill="var(--color-line)" letter-spacing="0.15em">APPROVED</text>
+          <!-- 基准虚线（底） -->
+          <line x1="30" y1="206" x2="170" y2="206" stroke="var(--color-faint)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <text x="100" y="218" text-anchor="middle" font-family="monospace" font-size="7"
+            fill="var(--color-line)" letter-spacing="0.1em">NO.005</text>
         </svg>
       </div>
     </div>
@@ -84,144 +116,129 @@ const gates = [
 </section>
 
 <style>
-  .principles-title {
-    font-size: var(--text-3xl);
-    margin-bottom: var(--space-16);
+  .pr-rule {
+    height: 1px;
+    background: var(--color-ink);
+    opacity: 0.85;
+    margin-bottom: var(--space-12);
   }
-  /* "AI" 轻字重 —— 参考图做规矩标题 */
+  /* 特大衬线主标题 —— 参考图 7 */
+  .pr-mega {
+    font-family: var(--font-serif);
+    font-size: clamp(2.6rem, 5.8vw, 4.6rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    color: var(--color-ink);
+    margin: 0 0 var(--space-14);
+  }
   .ai {
     font-family: var(--font-sans);
-    font-weight: 300;
-    letter-spacing: 0.02em;
-  }
-
-  .flow {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-2);
-    flex-wrap: wrap;
-  }
-  .flow-node {
-    flex: 1 1 160px;
-    max-width: 220px;
-    text-align: center;
-    padding: 0 var(--space-3);
-    position: relative;
-  }
-  .node-bubble {
-    width: 92px;
-    height: 92px;
-    margin: 0 auto var(--space-5);
-    border-radius: 50%;
-    border: 1.5px solid var(--color-ink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-base);
-  }
-  .node-no {
-    font-family: var(--font-serif);
-    font-size: var(--text-3xl);
     font-weight: 700;
-    color: var(--color-gold);
-  }
-  .flow-title {
-    font-size: var(--text-lg);
-    margin-bottom: var(--space-2);
-  }
-  .flow-desc {
-    font-size: var(--text-sm);
-    color: var(--color-line);
-    line-height: 1.7;
-  }
-  /* 节点间箭头 */
-  .flow-node + .flow-node::before,
-  .flow-finish::before {
-    content: "→";
-    position: absolute;
-    left: -0.5rem;
-    top: 34px;
-    color: var(--color-line);
-    font-size: var(--text-xl);
-  }
-  .flow-finish {
-    flex: 1 1 120px;
-    max-width: 140px;
-    text-align: center;
-    padding: 0 var(--space-3);
-    position: relative;
-  }
-  .finish-bubble {
-    width: 92px;
-    height: 92px;
-    margin: 0 auto var(--space-5);
-  }
-  .finish-bubble svg {
-    width: 100%;
-    height: 100%;
-  }
-  .finish-label {
-    font-size: var(--text-sm);
-    color: var(--color-line);
+    letter-spacing: 0.01em;
+    color: var(--color-ink);
   }
 
-  .principles-hr {
-    border: 0;
-    border-top: 1px solid var(--color-ink);
-    margin-top: var(--space-16);
+  /* 4 阶段流 */
+  .flow {
+    display: grid;
+    grid-template-columns: 1fr 110px;
+    column-gap: 0;
+    row-gap: 0;
   }
-  .stamp-row {
+  .stages {
+    grid-column: 1 / 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+  .stage {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-8);
-    margin-top: var(--space-10);
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  .principles-note {
+  /* 大铜金编号 —— 参考图做事的规矩 */
+  .stage-no {
+    font-family: var(--font-serif);
+    font-size: 3.4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-gold);
+    margin-bottom: var(--space-3);
+    letter-spacing: 0.01em;
+  }
+  .stage-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-ink);
+    letter-spacing: 0.01em;
+    line-height: 1.3;
+  }
+
+  /* 水平线：4 圆圈 + 末端对勾章 */
+  .flow-line {
+    grid-column: 1 / -1;
+    position: relative;
+    margin: var(--space-4) 0 var(--space-6);
+  }
+  .line-svg {
+    width: 100%;
+    height: 80px;
+    display: block;
+  }
+  .finish-mark {
+    position: absolute;
+    right: -2px;
+    top: 0;
+  }
+  .finish-svg {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* 描述行（4 列对齐） */
+  .descs {
+    grid-column: 1 / 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+  }
+  .desc {
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    color: var(--color-ink);
+    white-space: pre-line;
+    letter-spacing: 0.02em;
+  }
+  .desc .line { display: block; margin: 0; }
+
+  /* 底部：知识库说明 + 立着图章 */
+  .pr-foot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-12);
+    margin-top: var(--space-20);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-ink);
+  }
+  .pr-note {
     font-size: var(--text-sm);
     color: var(--color-line);
-    letter-spacing: 0.02em;
-    max-width: 30em;
+    letter-spacing: 0.04em;
+    max-width: 36em;
     line-height: 1.8;
   }
-  .stamp-art {
-    display: flex;
-    justify-content: flex-end;
+  .stamp-art { flex-shrink: 0; }
+  .stamp-svg { width: 160px; height: auto; }
+
+  @media (max-width: 960px) {
+    .flow { grid-template-columns: 1fr; }
+    .finish-mark { position: static; margin-top: var(--space-4); }
+    .stages, .descs { grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
   }
-  .stamp-svg {
-    width: 220px;
-    height: auto;
-  }
-  @media (max-width: 760px) {
-    .flow {
-      flex-direction: column;
-      align-items: stretch;
-      max-width: 380px;
-    }
-    .flow-node,
-    .flow-finish {
-      flex: none;
-      max-width: none;
-      text-align: left;
-      display: grid;
-      grid-template-columns: 3rem 1fr;
-      gap: var(--space-4);
-      align-items: center;
-    }
-    .node-bubble,
-    .finish-bubble {
-      width: 60px;
-      height: 60px;
-      margin: 0;
-      grid-row: span 2;
-    }
-    .node-no {
-      font-size: var(--text-2xl);
-    }
-    .flow-node + .flow-node::before,
-    .flow-finish::before {
-      content: none;
-    }
+  @media (max-width: 560px) {
+    .stages, .descs { grid-template-columns: 1fr; }
   }
 </style>

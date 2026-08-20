@@ -17,7 +17,7 @@ import { getCollection } from 'astro:content';
 const cases = (await getCollection('cases', ({ data }) => data.published !== false))
   .sort((a, b) => a.data.order - b.data.order);
 const statusBadge = { 已上线: '已上线 · 第 1 位', 内部系统: '内部系统', 开发中: '开发中' };
-const statusTone = { 已上线: 'ok', 内部系统: 'sys', 开发中: 'wc' };
+const statusTone = { 已上线: 'ok', 内部系统: 'ok', 开发中: 'wc' }; // 全部统一绿点，差异在文案
 const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 02-04 横
 ---
 
@@ -92,40 +92,41 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 
   }
   .case-card {
     border-top: 1px solid var(--color-line);
-    padding-block: var(--space-12);
+    padding-block: var(--space-10);
     display: grid;
     grid-template-columns: 1.1fr 1fr;
     gap: var(--space-12);
     align-items: center;
   }
+  .case-card:last-child { border-bottom: 1px solid var(--color-line); }
   .case-head {
     display: flex;
     align-items: flex-end;
     gap: var(--space-6);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-5);
   }
   /* 铜金大编号 —— 参考图项目大编号 */
   .case-no {
     font-family: var(--font-serif);
-    font-size: var(--text-4xl);
+    font-size: var(--text-5xl);
     font-weight: 700;
-    line-height: 0.9;
+    line-height: 0.85;
     color: var(--color-gold);
   }
   .case-title {
     font-size: var(--text-2xl);
     letter-spacing: 0.01em;
+    line-height: 1.2;
+    margin-bottom: var(--space-2);
   }
   .badge {
     display: inline-block;
-    margin-top: var(--space-2);
     font-size: var(--text-xs);
     letter-spacing: 0.04em;
-    padding: var(--space-1) var(--space-3);
-    border-radius: 2px;
+    color: var(--color-line);
+    font-family: var(--font-sans);
   }
-  .badge-ok { color: var(--color-accent); }
-  .badge-sys { color: var(--color-line); }
+  .badge-ok { color: var(--color-line); }
   .badge-wc { color: var(--color-gold); }
   .case-line {
     font-size: var(--text-sm);
@@ -158,11 +159,10 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 
     height: 8px;
     border-radius: 50%;
     display: inline-block;
+    background: var(--color-accent);
   }
-  .status-ok { color: var(--color-accent); }
+  .status-ok { color: var(--color-ink); }
   .status-ok .status-dot { background: var(--color-accent); }
-  .status-sys { color: var(--color-line); }
-  .status-sys .status-dot { background: var(--color-line); }
   .status-wc { color: var(--color-gold); }
   .status-wc .status-dot { background: var(--color-gold); }
 
@@ -170,15 +170,15 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 
   .case-visual {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
   }
   .shot {
     width: 100%;
-    max-width: 340px;
-    border-radius: var(--radius);
+    max-width: 360px;
     background: #fdfbf5;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-faint);
     overflow: hidden;
+    position: relative;
   }
   /* 比例：01 竖版 3:4，02-04 横版 4:3 */
   .shot-portrait { aspect-ratio: 3 / 4; }
@@ -226,7 +226,7 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 
       gap: var(--space-8);
     }
     .case-no {
-      font-size: var(--text-3xl);
+      font-size: var(--text-4xl);
     }
   }
 </style>

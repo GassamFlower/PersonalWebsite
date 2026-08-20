@@ -1,53 +1,67 @@
 ---
-// Growth.astro — 档案 06 · 成长记录（左标题+黑白图 / 右月度列表）
+// Growth.astro — 档案 06 · 成长记录
+// 左：主标题 + 副标 + 黑白柱状+上升箭头 · 右：8 条月度列表
+// 右上子导航：档案 / 作品 / 方法 / 记录 / 关于 + →
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('growth')).sort((a, b) =>
   a.data.month < b.data.month ? 1 : -1
 );
+const subNav = [
+  { href: '#hero', label: '档案' },
+  { href: '#cases', label: '作品' },
+  { href: '#principles', label: '方法' },
+  { href: '#growth', label: '记录' },
+  { href: '#contact', label: '关于' },
+];
 ---
 
 <section id="growth" class="section growth">
   <div class="container">
     <div class="section-head">
       <span class="tag"><b>档案 06</b> · 成长记录</span>
-      <span class="meta">06</span>
+      <div class="right-nav">
+        {subNav.map((n) => <a href={n.href}>{n.label}</a>)}
+        <a class="right-arrow" href="#contact" aria-label="下一页">→</a>
+      </div>
     </div>
+    <div class="growth-rule"></div>
 
     <div class="growth-grid">
       <div class="growth-left">
-        <h2 class="section-title growth-title">公开的成长，<br />一个月记一次</h2>
-        <p class="growth-sub">给自己一个每月进步的交代</p>
-        <!-- 黑白柱状 + 趋势折线（参考图成长单色图） -->
+        <h2 class="section-title growth-title">公开的成长，<br/>一个月记一次</h2>
+        <p class="growth-sub">给自己一个月进步的交代</p>
+        <!-- 黑白柱状 + 上升趋势线（参考图成长单色图） -->
         <div class="growth-chart" aria-hidden="true">
-          <svg viewBox="0 0 300 190">
-            <line x1="22" y1="160" x2="285" y2="160" stroke="var(--color-ink)" stroke-width="1"/>
-            <line x1="22" y1="20" x2="22" y2="160" stroke="var(--color-ink)" stroke-width="1"/>
-            <!-- 上升柱 -->
-            <rect x="44"  y="150" width="16" height="10" opacity="0.35"/>
-            <rect x="82"  y="150" width="16" height="34" opacity="0.45"/>
-            <rect x="120" y="150" width="16" height="52" opacity="0.55"/>
-            <rect x="158" y="150" width="16" height="72" opacity="0.7"/>
-            <rect x="196" y="150" width="16" height="90" opacity="0.85"/>
-            <rect x="234" y="150" width="16" height="112" opacity="1"/>
-            <!-- 趋势折线 -->
-            <polyline points="52,146 90,120 128,102 166,80 204,62 242,38"
+          <svg viewBox="0 0 320 220">
+            <!-- 坐标轴 -->
+            <line x1="24" y1="180" x2="304" y2="180" stroke="var(--color-ink)" stroke-width="1"/>
+            <line x1="24" y1="20" x2="24" y2="180" stroke="var(--color-ink)" stroke-width="1"/>
+            <!-- 8 根柱 -->
+            <rect x="40"  y="172" width="20" height="8" opacity="0.32"/>
+            <rect x="76"  y="160" width="20" height="20" opacity="0.40"/>
+            <rect x="112" y="146" width="20" height="34" opacity="0.50"/>
+            <rect x="148" y="128" width="20" height="52" opacity="0.60"/>
+            <rect x="184" y="106" width="20" height="74" opacity="0.72"/>
+            <rect x="220" y="82"  width="20" height="98" opacity="0.84"/>
+            <rect x="256" y="58"  width="20" height="122" opacity="0.95"/>
+            <rect x="292" y="34"  width="20" height="146" opacity="1"/>
+            <!-- 趋势折线（穿过所有柱顶） -->
+            <polyline points="50,168 86,154 122,140 158,122 194,100 230,76 266,52 302,28"
               fill="none" stroke="var(--color-ink)" stroke-width="1.6"/>
-            <circle cx="52" cy="146" r="3" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1"/>
-            <circle cx="90" cy="120" r="3" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1"/>
-            <circle cx="128" cy="102" r="3" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1"/>
-            <circle cx="166" cy="80" r="3" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1"/>
-            <circle cx="204" cy="62" r="3" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1"/>
-            <circle cx="242" cy="38" r="3" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1"/>
+            <!-- 上升箭头 -->
+            <polyline points="294,30 302,28 300,36" fill="none" stroke="var(--color-ink)" stroke-width="1.6" stroke-linecap="round"/>
+            <!-- 折线节点圆圈 -->
+            <circle cx="50"  cy="168" r="2.5" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1.2"/>
+            <circle cx="86"  cy="154" r="2.5" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1.2"/>
+            <circle cx="122" cy="140" r="2.5" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1.2"/>
+            <circle cx="158" cy="122" r="2.5" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1.2"/>
+            <circle cx="194" cy="100" r="2.5" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1.2"/>
+            <circle cx="230" cy="76"  r="2.5" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1.2"/>
+            <circle cx="266" cy="52"  r="2.5" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1.2"/>
+            <circle cx="302" cy="28"  r="2.5" fill="var(--color-base)" stroke="var(--color-ink)" stroke-width="1.2"/>
           </svg>
         </div>
-        <nav class="growth-nav" aria-label="档案导航">
-          <a href="#story">定位</a>
-          <a href="#capability">方法</a>
-          <a href="#cases">作品</a>
-          <a href="#growth">记录</a>
-          <a href="#contact">关于</a>
-        </nav>
       </div>
 
       <div class="growth-list">
@@ -66,6 +80,12 @@ const posts = (await getCollection('growth')).sort((a, b) =>
 </section>
 
 <style>
+  .growth-rule {
+    height: 1px;
+    background: var(--color-ink);
+    opacity: 0.85;
+    margin-bottom: var(--space-12);
+  }
   .growth-grid {
     display: grid;
     grid-template-columns: 1fr 1.25fr;
@@ -74,33 +94,21 @@ const posts = (await getCollection('growth')).sort((a, b) =>
   }
   .growth-title {
     font-size: var(--text-3xl);
+    margin-bottom: var(--space-4);
   }
   .growth-sub {
     font-size: var(--text-sm);
     color: var(--color-line);
     margin-bottom: var(--space-10);
+    letter-spacing: 0.04em;
   }
   .growth-chart {
     margin-top: var(--space-8);
   }
   .growth-chart svg {
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
     height: auto;
-  }
-  .growth-nav {
-    display: flex;
-    gap: var(--space-4);
-    margin-top: var(--space-10);
-    flex-wrap: wrap;
-  }
-  .growth-nav a {
-    font-size: var(--text-sm);
-    color: var(--color-line);
-    transition: color 0.2s;
-  }
-  .growth-nav a:hover {
-    color: var(--color-ink);
   }
   .growth-list {
     display: flex;
@@ -119,6 +127,7 @@ const posts = (await getCollection('growth')).sort((a, b) =>
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     color: var(--color-line);
+    letter-spacing: 0.04em;
   }
   .growth-takeaway {
     font-size: var(--text-base);
@@ -131,7 +140,12 @@ const posts = (await getCollection('growth')).sort((a, b) =>
     transition: color 0.2s;
   }
   .growth-item:hover .growth-arrow {
-    color: #7a8f6d; /* 柔和橄榄灰绿 · 参考图成长强调 */
+    color: #7a8f6d;
+  }
+  .right-arrow {
+    color: var(--color-ink);
+    opacity: 0.7;
+    margin-left: var(--space-3);
   }
   @media (max-width: 820px) {
     .growth-grid {

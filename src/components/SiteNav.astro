@@ -1,7 +1,9 @@
 ---
-// SiteNav.astro — 极简导航：品牌字 + 6 锚点 + 绿点"在线"
+// SiteNav.astro — 全局顶部水平导航（参考图 1 · Hero 顶部）
+// 左：PERSONAL DOSSIER · 独立交付档案 品牌
+// 右：6 个主导航 + 在线状态点
 const navItems = [
-  { href: '#timeline', label: '做过的事' },
+  { href: '#hero', label: '做过的' },
   { href: '#cases', label: '项目' },
   { href: '#capability', label: '能力' },
   { href: '#growth', label: '成长' },
@@ -13,7 +15,9 @@ const navItems = [
 <header class="site-nav">
   <div class="container nav-inner">
     <a class="brand" href="#hero">
-      PERSONAL DOSSIER <span class="brand-dot">·</span> 独立交付档案
+      <span class="brand-en">PERSONAL DOSSIER</span>
+      <span class="dot">·</span>
+      <span class="brand-zh">独立交付档案</span>
     </a>
     <nav class="nav-links" aria-label="主导航">
       {
@@ -22,10 +26,11 @@ const navItems = [
         ))
       }
       <span class="nav-status">
-        <span class="status-dot" aria-hidden="true"></span>在线
+        <span class="status-dot"></span>在线
       </span>
     </nav>
   </div>
+  <div class="nav-rule"></div>
 </header>
 
 <style>
@@ -33,74 +38,70 @@ const navItems = [
     position: sticky;
     top: 0;
     z-index: 50;
-    background: color-mix(in srgb, var(--color-base) 92%, transparent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--color-ink);
+    background: var(--color-base);
   }
   .nav-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-4);
     padding-block: var(--space-4);
+    gap: var(--space-8);
   }
   .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5ch;
+    color: var(--color-ink);
     font-family: var(--font-mono);
     font-size: var(--text-xs);
-    letter-spacing: 0.1em;
-    font-weight: 500;
+    letter-spacing: 0.15em;
     white-space: nowrap;
   }
-  .brand-dot {
+  .brand-en { font-weight: 600; }
+  .brand-zh {
     color: var(--color-line);
+    font-weight: 500;
+    letter-spacing: 0.08em;
   }
+  .dot { color: var(--color-gold); margin: 0 0.4ch; }
   .nav-links {
     display: flex;
     align-items: center;
     gap: var(--space-6);
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .nav-links::-webkit-scrollbar {
-    display: none;
+    font-size: var(--text-sm);
+    color: var(--color-ink);
   }
   .nav-links a {
-    font-size: var(--text-sm);
     color: var(--color-ink);
-    opacity: 0.72;
+    opacity: 0.75;
+    transition: opacity 0.2s;
     white-space: nowrap;
-    transition: opacity 0.2s, color 0.2s;
   }
-  .nav-links a:hover {
-    opacity: 1;
-    color: var(--color-accent);
-  }
+  .nav-links a:hover { opacity: 1; }
   .nav-status {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: 0.4em;
+    color: var(--color-accent);
     font-size: var(--text-sm);
-    color: var(--color-ink);
     white-space: nowrap;
+    padding-left: var(--space-2);
   }
-  /* 在线绿点 —— 参考图首屏"● 在线" */
   .status-dot {
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: var(--color-accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
     display: inline-block;
   }
-  @media (max-width: 760px) {
-    .nav-inner {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-3);
-    }
-    .nav-links {
-      width: 100%;
-    }
+  .nav-rule {
+    height: 1px;
+    background: var(--color-ink);
+    opacity: 0.85;
+  }
+  @media (max-width: 720px) {
+    .nav-inner { flex-direction: column; gap: var(--space-3); }
+    .nav-links { gap: var(--space-3); flex-wrap: wrap; justify-content: center; }
+    .brand-zh { display: none; }
   }
 </style>
