@@ -50,6 +50,30 @@ const { title = 'PERSONAL DOSSIER · 独立交付档案' } = Astro.props;
   </body>
 </html>
 
+<script>
+  // 轻动效 fade-up（架构门 §7：克制、尊重 prefers-reduced-motion）
+  // JS 未执行或用户偏好减弱动效时，内容始终完整可见。
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
+    const els = document.querySelectorAll('.section');
+    if (!els.length) return;
+    els.forEach((el) => el.classList.add('reveal'));
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { threshold: 0.1 }
+    );
+    els.forEach((el) => io.observe(el));
+  })();
+</script>
+
 <style>
   .site-footer {
     border-top: 1px solid var(--color-ink);
