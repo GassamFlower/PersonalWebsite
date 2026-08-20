@@ -154,7 +154,7 @@ const props = [
   .hero-focus:hover {
     opacity: 0.7;
   }
-  /* 三张 UI 卡片 —— 圆角 + 柔和投影（参考图项目截图质感） */
+  /* 三张 UI 工作卡片 —— 参考图提示词 §0：直角/圆角≤2px、以细线为主、克制不喧宾夺主 */
   .hero-shots {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -163,10 +163,9 @@ const props = [
   }
   .ui-card {
     background: #fffdf8;
-    border: 1px solid var(--color-faint);
-    border-radius: 6px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
     padding: var(--space-3);
-    box-shadow: 0 8px 24px rgba(28, 27, 24, 0.08);
   }
   .ui-card:nth-child(2) {
     margin-top: var(--space-6);

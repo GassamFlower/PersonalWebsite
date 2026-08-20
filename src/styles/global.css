@@ -58,7 +58,7 @@
   --text-hero: clamp(3.2rem, 9vw, 6.4rem);
   --type-cjk-lh: 1.6;
 
-  --radius: 3px;
+  --radius: 2px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
