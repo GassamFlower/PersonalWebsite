@@ -1,0 +1,6 @@
+# 真实脱敏截图存放目录
+# 命名：case-01.png / case-02.png / case-03.png / case-04.png
+# 在对应 src/content/cases/case-0N.md 的 frontmatter 设置：
+#   image: /cases/case-0N.png
+#   imageAlt: 一句话说明
+# 建议尺寸：case-01 移动端 3:4（如 900×1200），其余界面 4:3（如 1280×960）

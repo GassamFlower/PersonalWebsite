@@ -9,8 +9,8 @@ stack:
   - 云开发
   - OCR
 evidence: 已上线交付（甲方案例，匿名化处理）
-# 放脱敏截图到 public/ 后，把下面两行 image/imageAlt 改为真实路径即可显示实图
-# image: /case-01.png
+# 放真实脱敏截图到 public/cases/ 后，把下面两行 image/imageAlt 改为真实路径即可显示实图
+# image: /cases/case-01.png
 # imageAlt: 工程用车助手的脱敏示意
 published: true
 ---

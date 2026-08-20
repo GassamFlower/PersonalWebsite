@@ -1,5 +1,5 @@
 ---
-// Timeline.astro — 档案 · 做过的事（垂直时间线 + 存档图标）
+// Timeline.astro — 档案 03 · 做过的事（垂直时间线 + 环形文件夹 + 存档印章）
 const nodes = [
   { year: '2018—2025', title: '政务系统技术支持', desc: '业务与数据，SQL、远程支持' },
   { year: '2025', title: '工业运维平台 OPS', desc: '从零搭建，Go+Next.js' },
@@ -11,8 +11,13 @@ const nodes = [
 
 <section id="timeline" class="section timeline">
   <div class="container">
-    <p class="section-head"><span class="no">档案 03</span> · 做过的事</p>
+    <div class="section-head">
+      <span class="tag"><b>档案 03</b> · 做过的事</span>
+      <span class="meta">03</span>
+    </div>
+
     <h2 class="section-title">干过的活，<br />都有据可查</h2>
+
     <div class="tl">
       {
         nodes.map((n) => (
@@ -20,83 +25,108 @@ const nodes = [
             <span class="tl-marker" aria-hidden="true"></span>
             <div class="tl-body">
               <p class="tl-year">{n.year}</p>
-              <h3 class="tl-title">{n.title}</h3>
-              <p class="tl-desc">{n.desc}</p>
+              <div class="tl-main">
+                <h3 class="tl-title">{n.title}</h3>
+                <p class="tl-desc">{n.desc}</p>
+              </div>
             </div>
           </article>
         ))
       }
     </div>
+
+    <!-- 环形活页夹 + 存档印章（制图风） -->
     <div class="tl-archive" aria-hidden="true">
-      <!-- 存档图标：文件盒 + 印章 -->
-      <svg viewBox="0 0 200 120" class="archive-svg">
-        <!-- 文件盒 -->
-        <rect x="10" y="20" width="120" height="80" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1.5"/>
-        <rect x="15" y="10" width="20" height="30" rx="1" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-        <rect x="40" y="10" width="20" height="30" rx="1" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-        <rect x="65" y="10" width="20" height="30" rx="1" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-        <!-- 文件 -->
-        <rect x="20" y="30" width="100" height="60" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-        <line x1="30" y1="45" x2="100" y2="45" stroke="var(--color-line)" stroke-width="0.5"/>
-        <line x1="30" y1="55" x2="90" y2="55" stroke="var(--color-line)" stroke-width="0.5"/>
-        <line x1="30" y1="65" x2="95" y2="65" stroke="var(--color-line)" stroke-width="0.5"/>
-        <line x1="30" y1="75" x2="80" y2="75" stroke="var(--color-line)" stroke-width="0.5"/>
-        <!-- 印章 -->
-        <circle cx="150" cy="70" r="30" fill="none" stroke="var(--color-accent)" stroke-width="1.5"/>
-        <circle cx="150" cy="70" r="24" fill="none" stroke="var(--color-accent)" stroke-width="0.8"/>
-        <text x="138" y="75" font-size="14" fill="var(--color-accent)" font-weight="700">存档</text>
-      </svg>
+      <div class="archive-boxes">
+        <svg viewBox="0 0 300 200" class="archive-svg">
+          <!-- 三个环形档案盒，左为拉出状态 -->
+          <g class="box-pull">
+            <line x1="30" y1="28" x2="30" y2="168" stroke="var(--color-ink)" stroke-width="1.4"/>
+            <line x1="78" y1="28" x2="78" y2="168" stroke="var(--color-ink)" stroke-width="1.4"/>
+            <line x1="30" y1="168" x2="78" y2="168" stroke="var(--color-ink)" stroke-width="1.4"/>
+            <line x1="30" y1="28" x2="78" y2="28" stroke="var(--color-ink)" stroke-width="1.4"/>
+            <!-- 环扣 -->
+            <circle cx="45" cy="40" r="10" fill="none" stroke="var(--color-line)" stroke-width="1.2"/>
+            <circle cx="64" cy="40" r="10" fill="none" stroke="var(--color-line)" stroke-width="1.2"/>
+          </g>
+          <g class="box">
+            <rect x="105" y="20" width="52" height="150" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.4"/>
+            <circle cx="122" cy="30" r="8" fill="none" stroke="var(--color-line)" stroke-width="1.2"/>
+            <circle cx="140" cy="30" r="8" fill="none" stroke="var(--color-line)" stroke-width="1.2"/>
+            <line x1="112" y1="60" x2="150" y2="60" stroke="var(--color-faint)" stroke-width="0.7"/>
+            <line x1="112" y1="80" x2="150" y2="80" stroke="var(--color-faint)" stroke-width="0.7"/>
+            <line x1="112" y1="100" x2="150" y2="100" stroke="var(--color-faint)" stroke-width="0.7"/>
+          </g>
+          <g class="box">
+            <rect x="172" y="20" width="52" height="150" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.4"/>
+            <circle cx="189" cy="30" r="8" fill="none" stroke="var(--color-line)" stroke-width="1.2"/>
+            <circle cx="207" cy="30" r="8" fill="none" stroke="var(--color-line)" stroke-width="1.2"/>
+            <line x1="179" y1="60" x2="217" y2="60" stroke="var(--color-faint)" stroke-width="0.7"/>
+            <line x1="179" y1="80" x2="217" y2="80" stroke="var(--color-faint)" stroke-width="0.7"/>
+          </g>
+          <g class="box">
+            <rect x="239" y="20" width="52" height="150" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.4"/>
+            <circle cx="256" cy="30" r="8" fill="none" stroke="var(--color-line)" stroke-width="1.2"/>
+            <circle cx="274" cy="30" r="8" fill="none" stroke="var(--color-line)" stroke-width="1.2"/>
+            <line x1="246" y1="60" x2="284" y2="60" stroke="var(--color-faint)" stroke-width="0.7"/>
+          </g>
+          <!-- 圆形"存档"印章（叠加右下） -->
+          <g transform="translate(232,120)">
+            <circle r="34" fill="none" stroke="var(--color-gold)" stroke-width="1.6"/>
+            <circle r="28" fill="none" stroke="var(--color-gold)" stroke-width="0.8"/>
+            <text text-anchor="middle" dy="5" font-size="15" fill="var(--color-gold)"
+              font-family="var(--font-serif)" font-weight="700">存档</text>
+          </g>
+        </svg>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .timeline {
-    border-top: 1px solid var(--color-line);
-  }
-  .section-title {
-    margin-bottom: var(--space-12);
-  }
   .tl {
     position: relative;
-    padding-left: var(--space-10);
+    padding-left: var(--space-12);
+    max-width: 760px;
   }
+  /* 垂直时间线 */
   .tl::before {
     content: "";
     position: absolute;
-    left: 4px;
-    top: 0;
-    bottom: 0;
+    left: var(--space-1);
+    top: 4px;
+    bottom: 4px;
     width: 1px;
-    background: var(--color-line);
+    background: var(--color-ink);
   }
   .tl-node {
     position: relative;
-    padding-bottom: var(--space-10);
+    padding-bottom: var(--space-12);
   }
   .tl-node:last-child {
-    padding-bottom: 0;
+    padding-bottom: var(--space-8);
   }
   .tl-marker {
     position: absolute;
-    left: calc(-1 * var(--space-10) + 1px);
-    top: 0.35em;
-    width: 8px;
-    height: 8px;
+    left: calc(-1 * var(--space-12) + var(--space-1) - 4px);
+    top: 6px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
-    background: var(--color-accent);
+    background: var(--color-base);
+    border: 1.5px solid var(--color-ink);
   }
   .tl-body {
     display: grid;
-    grid-template-columns: 8rem 1fr;
+    grid-template-columns: 9.5rem 1fr;
     gap: var(--space-6);
     align-items: baseline;
   }
   .tl-year {
     font-family: var(--font-mono);
     font-size: var(--text-sm);
-    color: var(--color-highlight);
-    letter-spacing: 0.06em;
+    color: var(--color-line);
+    letter-spacing: 0.05em;
   }
   .tl-title {
     font-size: var(--text-xl);
@@ -105,25 +135,24 @@ const nodes = [
     margin-bottom: var(--space-1);
   }
   .tl-desc {
-    grid-column: 2;
     color: var(--color-line);
     font-size: var(--text-sm);
     line-height: 1.7;
   }
   .tl-archive {
-    margin-top: var(--space-12);
-    padding-left: var(--space-10);
+    margin-top: var(--space-10);
+    max-width: 760px;
   }
   .archive-svg {
-    width: 200px;
+    width: 300px;
     height: auto;
   }
-  @media (max-width: 640px) {
+  @media (max-width: 560px) {
     .tl-body {
       grid-template-columns: 1fr;
       gap: var(--space-2);
     }
-    .tl-desc {
+    .tl-main {
       grid-column: 1;
     }
   }

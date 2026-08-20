@@ -1,145 +1,156 @@
 ---
-// CapabilityMap.astro — 档案 05 · 能力（四梯队水平流程 + 文件柜插图）
+// CapabilityMap.astro — 档案 05 · 能力（四档制图插图 + 右侧四抽屉文件柜）
 const tiers = [
   {
-    key: '01',
+    key: '01', level: 'LEVEL 01 / 04',
     title: '独立交付',
     desc: '从零搭建工业运维平台 / 外单微信小程序已上线交付 / 视频批量混剪工具。',
-    level: 'LEVEL 01 / 04',
   },
   {
-    key: '02',
+    key: '02', level: 'LEVEL 02 / 04',
     title: '业务落地',
-    desc: '政务系统 8 年数据与业务支持——数据服务、数据维护、SQL 报表、业务数据核对与分析、远程支持 / 批量内部自动化工具（日志 / 文件 / 爬虫 / 网页）。',
-    level: 'LEVEL 02 / 04',
+    desc: '政务系统 8 年数据与业务支持——数据服务、维护、SQL 报表、核对与分析、远程支持 / 批量内部自动化工具（日志 / 文件 / 爬虫 / 网页）。',
   },
   {
-    key: '03',
+    key: '03', level: 'LEVEL 03 / 04',
     title: '工具与提效',
-    desc: '智能体与 AI 编程工具实操广泛（Trae / Cursor / Claude Code / Codex / DeepSeek Harness / CodeBuddy 等，用于开发与写作）；WordBuddy 等写公众号 / 小红书运营；Coze / Dify / n8n、ComfyUI 了解能数——诚实标注："实操面广、会用不称精通"。',
-    level: 'LEVEL 03 / 04',
+    desc: '智能体与 AI 编程工具实操面广（Trae / Cursor / Claude Code / Codex 等）；WordBuddy 写作运营；Coze / Dify / n8n、ComfyUI 了解能数——诚实标注："实操面广、会用不称精通"。',
   },
   {
-    key: '04',
+    key: '04', level: 'LEVEL 04 / 04',
     title: '边界诚实',
     desc: '数据库 / 网络运维 / Linux 能完成很多基础实用工作，深层专项在持续学习精进；数据治理在学、如实标注。',
-    level: 'LEVEL 04 / 04',
   },
 ];
 ---
 
 <section id="capability" class="section capability">
   <div class="container">
-    <p class="section-head"><span class="no">档案 05</span> · 能力</p>
+    <div class="section-head">
+      <span class="tag"><b>档案 05</b> · 能力</span>
+      <span class="meta">05</span>
+    </div>
     <h2 class="section-title">边界清晰的自己</h2>
-    <div class="tier-list">
-      {
-        tiers.map((tier, i) => (
-          <div class={`tier ${i < tiers.length - 1 ? 'tier-has-border' : ''}`}>
-            <div class="tier-left">
-              <span class="tier-no">{tier.key}</span>
-              <span class="tier-level">{tier.level}</span>
-            </div>
-            <div class="tier-content">
-              <h3 class="tier-title">{tier.title}</h3>
-              <p class="tier-desc">{tier.desc}</p>
-            </div>
-            <div class="tier-visual" aria-hidden="true">
-              {i === 0 && (
-                <svg viewBox="0 0 120 80" class="tier-svg">
-                  <rect x="10" y="20" width="100" height="50" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-                  <rect x="15" y="10" width="30" height="20" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-                  <rect x="50" y="10" width="30" height="20" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-                  <line x1="20" y1="40" x2="100" y2="40" stroke="var(--color-line)" stroke-width="0.5"/>
-                  <line x1="20" y1="55" x2="100" y2="55" stroke="var(--color-line)" stroke-width="0.5"/>
-                </svg>
-              )}
-              {i === 1 && (
-                <svg viewBox="0 0 120 80" class="tier-svg">
-                  <rect x="5" y="10" width="50" height="60" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-                  <rect x="65" y="10" width="50" height="60" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-                  <line x1="10" y1="25" x2="50" y2="25" stroke="var(--color-line)" stroke-width="0.5"/>
-                  <line x1="10" y1="40" x2="45" y2="40" stroke="var(--color-line)" stroke-width="0.5"/>
-                  <line x1="10" y1="55" x2="48" y2="55" stroke="var(--color-line)" stroke-width="0.5"/>
-                  <line x1="70" y1="25" x2="110" y2="25" stroke="var(--color-line)" stroke-width="0.5"/>
-                  <line x1="70" y1="40" x2="105" y2="40" stroke="var(--color-line)" stroke-width="0.5"/>
-                  <line x1="70" y1="55" x2="108" y2="55" stroke="var(--color-line)" stroke-width="0.5"/>
-                  <line x1="55" y1="40" x2="65" y2="40" stroke="var(--color-accent)" stroke-width="1"/>
-                </svg>
-              )}
-              {i === 2 && (
-                <svg viewBox="0 0 120 80" class="tier-svg">
-                  <rect x="5" y="10" width="35" height="60" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-                  <rect x="45" y="10" width="35" height="60" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-                  <rect x="85" y="10" width="35" height="60" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-                  <text x="10" y="25" font-size="5" fill="var(--color-line)">AI</text>
-                  <text x="50" y="25" font-size="5" fill="var(--color-line)">NoCode</text>
-                  <text x="90" y="25" font-size="5" fill="var(--color-line)">Content</text>
-                  <rect x="10" y="30" width="25" height="4" fill="var(--color-accent)" opacity="0.3"/>
-                  <rect x="10" y="38" width="20" height="4" fill="var(--color-accent)" opacity="0.2"/>
-                  <rect x="10" y="46" width="22" height="4" fill="var(--color-accent)" opacity="0.15"/>
-                </svg>
-              )}
-              {i === 3 && (
-                <svg viewBox="0 0 120 80" class="tier-svg">
-                  <rect x="10" y="20" width="100" height="40" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-                  <line x1="10" y1="35" x2="110" y2="35" stroke="var(--color-line)" stroke-width="0.5"/>
-                  <line x1="10" y1="50" x2="110" y2="50" stroke="var(--color-line)" stroke-width="0.5"/>
-                  <line x1="40" y1="20" x2="40" y2="60" stroke="var(--color-line)" stroke-width="0.5"/>
-                  <line x1="70" y1="20" x2="70" y2="60" stroke="var(--color-line)" stroke-width="0.5"/>
-                </svg>
-              )}
-            </div>
-          </div>
-        ))
-      }
+
+    <div class="cap-grid">
+      <div class="tier-list">
+        {
+          tiers.map((t, i) => (
+            <article class="tier">
+              <div class="tier-head">
+                <span class="tier-no">{t.key}</span>
+                <div class="tier-titles">
+                  <h3 class="tier-title">{t.title}</h3>
+                  <span class="tier-level">{t.level}</span>
+                </div>
+              </div>
+              <p class="tier-desc">{t.desc}</p>
+              <div class="tier-art" aria-hidden="true">
+                {i === 0 && (
+                  <svg viewBox="0 0 140 90">
+                    <!-- 等轴测设备 -->
+                    <polygon points="70,12 118,34 70,56 22,34" fill="none" stroke="var(--color-ink)" stroke-width="1.3"/>
+                    <polygon points="70,56 118,34 118,64 70,86" fill="none" stroke="var(--color-ink)" stroke-width="1.3"/>
+                    <polygon points="22,34 70,12 70,40 22,64" fill="none" stroke="var(--color-line)" stroke-width="1.3"/>
+                    <circle cx="70" cy="44" r="8" fill="none" stroke="var(--color-gold)" stroke-width="1.2"/>
+                    <line x1="70" y1="64" x2="70" y2="86" stroke="var(--color-faint)" stroke-width="0.7"/>
+                    <line x1="30" y1="68" x2="58" y2="78" stroke="var(--color-faint)" stroke-width="0.7"/>
+                    <line x1="110" y1="68" x2="82" y2="78" stroke="var(--color-faint)" stroke-width="0.7"/>
+                  </svg>
+                )}
+                {i === 1 && (
+                  <svg viewBox="0 0 140 90">
+                    {/* ER 关系：两张表 + 连线 */}
+                    <rect x="8" y="10" width="52" height="66" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.2"/>
+                    <line x1="8" y1="24" x2="60" y2="24" stroke="var(--color-ink)" stroke-width="1"/>
+                    <text x="12" y="19" font-size="6" fill="var(--color-line)">TABLE A</text>
+                    {[0,1,2].map(k => (
+                      <line key={k} x1="12" y1={34+k*14} x2="52" y2={34+k*14} stroke="var(--color-faint)" stroke-width="0.6"/>
+                    ))}
+                    <rect x="80" y="16" width="52" height="66" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.2"/>
+                    <line x1="80" y1="30" x2="132" y2="30" stroke="var(--color-ink)" stroke-width="1"/>
+                    <text x="84" y="25" font-size="6" fill="var(--color-line)">TABLE B</text>
+                    {[0,1].map(k => (
+                      <line key={k} x1="84" y1={40+k*16} x2="124" y2={40+k*16} stroke="var(--color-faint)" stroke-width="0.6"/>
+                    ))}
+                    <circle cx="66" cy="44" r="4" fill="none" stroke="var(--color-gold)" stroke-width="1"/>
+                    <circle cx="75" cy="44" r="4" fill="none" stroke="var(--color-gold)" stroke-width="1"/>
+                    <line x1="70" y1="44" x2="80" y2="44" stroke="var(--color-gold)" stroke-width="1"/>
+                  </svg>
+                )}
+                {i === 2 && (
+                  <svg viewBox="0 0 140 90">
+                    <!-- 三个小屏 + 流程箭头 -->
+                    <rect x="4" y="16" width="36" height="56" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.1"/>
+                    <polyline points="8,28 20,22 30,26" fill="none" stroke="var(--color-accent)" stroke-width="1"/>
+                    <rect x="52" y="16" width="36" height="56" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.1"/>
+                    <circle cx="70" cy="34" r="5" fill="none" stroke="var(--color-gold)" stroke-width="1"/>
+                    <line x1="70" y1="39" x2="70" y2="50" stroke="var(--color-gold)" stroke-width="1" stroke-dasharray="0.8 0.8"/>
+                    <text x="64" y="62" font-size="5" fill="var(--color-line)">flow</text>
+                    <rect x="100" y="16" width="36" height="56" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.1"/>
+                    <line x1="104" y1="30" x2="132" y2="30" stroke="var(--color-faint)" stroke-width="0.7"/>
+                    <line x1="104" y1="42" x2="132" y2="42" stroke="var(--color-faint)" stroke-width="0.7"/>
+                    <text x="40" y="80" font-size="5" fill="var(--color-line)">→</text>
+                    <text x="88" y="80" font-size="5" fill="var(--color-line)">→</text>
+                  </svg>
+                )}
+                {i === 3 && (
+                  <svg viewBox="0 0 140 90">
+                    {/* 基础表格网格 */}
+                    <rect x="10" y="10" width="120" height="70" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.2"/>
+                    <line x1="10" y1="28" x2="130" y2="28" stroke="var(--color-ink)" stroke-width="0.8"/>
+                    {[46,64].map(y => (
+                      <line key={y} x1="10" y1={y} x2="130" y2={y} stroke="var(--color-faint)" stroke-width="0.6"/>
+                    ))}
+                    {[40,70,100].map(x => (
+                      <line key={x} x1={x} y1="10" x2={x} y2="80" stroke="var(--color-faint)" stroke-width="0.6"/>
+                    ))}
+                  </svg>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <!-- 右侧四抽屉文件柜 -->
+      <aside class="cabinet" aria-hidden="true">
+        <svg viewBox="0 0 300 460">
+          {/* 顶部基准虚线 */}
+          <line x1="10" y1="20" x2="290" y2="20" class="ghost-line"/>
+          <line x1="250" y1="20" x2="250" y2="20" class="center-line"/>
+          {/* 柜体 */}
+          <rect x="55" y="24" width="170" height="420" rx="4" fill="none" stroke="var(--color-ink)" stroke-width="2"/>
+          {/* 抽屉 1 */}
+          <rect x="60" y="30" width="160" height="98" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1.2"/>
+          <rect x="120" y="68" width="40" height="12" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <text x="216" y="78" font-size="11" fill="var(--color-gold)" font-family="serif" font-weight="700">01</text>
+          {/* 抽屉 2 */}
+          <rect x="60" y="134" width="160" height="98" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1.2"/>
+          <rect x="120" y="172" width="40" height="12" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <text x="216" y="182" font-size="11" fill="var(--color-gold)" font-family="serif" font-weight="700">02</text>
+          {/* 抽屉 3（拉开，浅色前移到 3D 错觉） */}
+          <rect x="70" y="240" width="150" height="96" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.4"/>
+          {/* 拉出抽屉内的文件 */}
+          <rect x="76" y="248" width="9" height="80" rx="1" fill="none" stroke="var(--color-faint)" stroke-width="0.8"/>
+          <rect x="88" y="250" width="9" height="78" rx="1" fill="none" stroke="var(--color-faint)" stroke-width="0.8"/>
+          <rect x="100" y="246" width="9" height="82" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
+          <rect x="112" y="252" width="9" height="76" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
+          <rect x="124" y="248" width="9" height="80" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
+          <rect x="136" y="246" width="9" height="82" rx="1" fill="none" stroke="var(--color-accent)" stroke-width="1"/>
+          <rect x="148" y="250" width="9" height="78" rx="1" fill="none" stroke="var(--color-faint)" stroke-width="0.8"/>
+          <rect x="124" y="280" width="40" height="12" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.2"/>
+          <text x="216" y="285" font-size="11" fill="var(--color-gold)" font-family="serif" font-weight="700">03</text>
+          {/* 抽屉 4 */}
+          <rect x="60" y="344" width="160" height="94" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1.2"/>
+          <rect x="120" y="380" width="40" height="12" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <text x="216" y="392" font-size="11" fill="var(--color-gold)" font-family="serif" font-weight="700">04</text>
+        </svg>
+      </aside>
     </div>
-    <!-- 文件柜插图 -->
-    <div class="cabinet-visual" aria-hidden="true">
-      <svg viewBox="0 0 200 400" class="cabinet-svg">
-        <!-- 文件柜主体 -->
-        <rect x="30" y="20" width="140" height="360" rx="3" fill="none" stroke="var(--color-ink)" stroke-width="1.5"/>
-        <!-- 抽屉1 -->
-        <rect x="35" y="25" width="130" height="80" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-        <rect x="75" y="55" width="50" height="12" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-        <line x1="45" y1="40" x2="155" y2="40" stroke="var(--color-line)" stroke-width="0.5"/>
-        <!-- 抽屉2 -->
-        <rect x="35" y="110" width="130" height="80" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-        <rect x="75" y="140" width="50" height="12" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-        <line x1="45" y1="125" x2="155" y2="125" stroke="var(--color-line)" stroke-width="0.5"/>
-        <!-- 抽屉3（拉开） -->
-        <rect x="35" y="195" width="130" height="80" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-        <rect x="20" y="200" width="130" height="70" rx="2" fill="none" stroke="var(--color-accent)" stroke-width="1" opacity="0.5"/>
-        <rect x="75" y="225" width="50" height="12" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-        <!-- 文件 -->
-        <rect x="25" y="205" width="8" height="55" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-        <rect x="36" y="208" width="8" height="52" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-        <rect x="47" y="205" width="8" height="55" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-        <rect x="58" y="210" width="8" height="50" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-        <rect x="69" y="207" width="8" height="53" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-        <rect x="80" y="205" width="8" height="55" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-        <rect x="91" y="209" width="8" height="51" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-        <rect x="102" y="206" width="8" height="54" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-        <rect x="113" y="208" width="8" height="52" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-        <rect x="124" y="205" width="8" height="55" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-        <rect x="135" y="210" width="8" height="50" rx="1" fill="none" stroke="var(--color-line)" stroke-width="0.8"/>
-        <!-- 抽屉4 -->
-        <rect x="35" y="280" width="130" height="95" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-        <rect x="75" y="318" width="50" height="12" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
-        <line x1="45" y1="295" x2="155" y2="295" stroke="var(--color-line)" stroke-width="0.5"/>
-        <!-- 层级标注 -->
-        <text x="175" y="70" font-size="10" fill="var(--color-line)" font-family="var(--font-mono)">01</text>
-        <line x1="170" y1="65" x2="172" y2="65" stroke="var(--color-line)" stroke-width="0.5"/>
-        <text x="175" y="155" font-size="10" fill="var(--color-line)" font-family="var(--font-mono)">02</text>
-        <line x1="170" y1="150" x2="172" y2="150" stroke="var(--color-line)" stroke-width="0.5"/>
-        <text x="175" y="240" font-size="10" fill="var(--color-line)" font-family="var(--font-mono)">03</text>
-        <line x1="170" y1="235" x2="172" y2="235" stroke="var(--color-line)" stroke-width="0.5"/>
-        <text x="175" y="330" font-size="10" fill="var(--color-line)" font-family="var(--font-mono)">04</text>
-        <line x1="170" y1="325" x2="172" y2="325" stroke="var(--color-line)" stroke-width="0.5"/>
-      </svg>
-    </div>
-    <div class="capability-footer">
-      <span>DATE &nbsp; 2025-05-24</span>
+
+    <div class="cap-foot">
+      <span>DATE 2025-05-24</span>
       <span>ARCHIVE 0005</span>
       <span>PERSONAL DOSSIER</span>
     </div>
@@ -147,105 +158,111 @@ const tiers = [
 </section>
 
 <style>
-  .capability {
-    border-top: 1px solid var(--color-line);
+  .cap-grid {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: var(--space-16);
+    align-items: start;
   }
   .tier-list {
     display: flex;
     flex-direction: column;
   }
   .tier {
+    border-top: 1px solid var(--color-line);
+    padding-block: var(--space-10);
     display: grid;
-    grid-template-columns: 5rem 1fr 1fr;
-    gap: var(--space-6);
-    align-items: start;
-    padding-block: var(--space-8);
+    grid-template-columns: 1.4fr 1fr 130px;
+    gap: var(--space-8);
+    align-items: center;
   }
-  .tier-has-border {
-    border-bottom: 1px solid var(--color-line);
+  .tier:first-child {
+    border-top: none;
   }
-  .tier-left {
+  .tier-head {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
+    align-items: baseline;
+    gap: var(--space-5);
   }
+  /* 铜金层级号 —— 参考图做规矩/能力大编号 */
   .tier-no {
     font-family: var(--font-serif);
-    font-size: var(--text-3xl);
+    font-size: var(--text-4xl);
     font-weight: 700;
-    color: var(--color-highlight);
     line-height: 1;
+    color: var(--color-gold);
+  }
+  .tier-titles {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .tier-title {
+    font-size: var(--text-xl);
+    letter-spacing: 0.01em;
   }
   .tier-level {
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     color: var(--color-line);
-    letter-spacing: 0.06em;
-  }
-  .tier-title {
-    font-size: var(--text-2xl);
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    margin-bottom: var(--space-3);
+    letter-spacing: 0.08em;
   }
   .tier-desc {
-    color: var(--color-ink);
     font-size: var(--text-sm);
-    line-height: 1.7;
-    max-width: 36em;
+    line-height: 1.8;
+    color: var(--color-ink);
   }
-  .tier-visual {
+  .tier-art {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .tier-svg {
-    width: 120px;
+  .tier-art svg {
+    width: 100%;
+    max-width: 140px;
     height: auto;
   }
-  .cabinet-visual {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: var(--space-8);
+  .cabinet {
+    position: sticky;
+    top: var(--space-24);
   }
-  .cabinet-svg {
-    width: 200px;
+  .cabinet svg {
+    width: 100%;
     height: auto;
-    max-height: 400px;
   }
-  .capability-footer {
+  .cap-foot {
     display: flex;
     justify-content: space-between;
     margin-top: var(--space-12);
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--color-line);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-ink);
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     color: var(--color-line);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
   }
   @media (max-width: 900px) {
+    .cap-grid {
+      grid-template-columns: 1fr;
+    }
+    .cabinet {
+      display: none;
+    }
     .tier {
-      grid-template-columns: 4rem 1fr;
+      grid-template-columns: 1.4fr 1fr;
     }
-    .tier-visual {
-      display: none;
-    }
-    .cabinet-visual {
-      display: none;
+    .tier-art {
+      grid-column: 1 / -1;
+      justify-content: flex-start;
     }
   }
-  @media (max-width: 640px) {
+  @media (max-width: 620px) {
     .tier {
       grid-template-columns: 1fr;
-      gap: var(--space-3);
+      gap: var(--space-4);
     }
-    .tier-no {
-      font-size: var(--text-2xl);
-    }
-    .capability-footer {
-      flex-direction: column;
-      gap: var(--space-2);
+    .tier-art {
+      grid-column: auto;
     }
   }
 </style>

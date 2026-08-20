@@ -1,5 +1,5 @@
 ---
-// SiteNav.astro — 极简导航（纯文字锚点 + 在线状态）
+// SiteNav.astro — 极简导航：品牌字 + 6 锚点 + 绿点"在线"
 const navItems = [
   { href: '#timeline', label: '做过的事' },
   { href: '#cases', label: '项目' },
@@ -13,8 +13,7 @@ const navItems = [
 <header class="site-nav">
   <div class="container nav-inner">
     <a class="brand" href="#hero">
-      <span class="brand-sub">PERSONAL DOSSIER</span>
-      <span class="brand-mark">· 独立交付档案</span>
+      PERSONAL DOSSIER <span class="brand-dot">·</span> 独立交付档案
     </a>
     <nav class="nav-links" aria-label="主导航">
       {
@@ -23,8 +22,7 @@ const navItems = [
         ))
       }
       <span class="nav-status">
-        <span class="status-dot"></span>
-        在线
+        <span class="status-dot" aria-hidden="true"></span>在线
       </span>
     </nav>
   </div>
@@ -35,10 +33,10 @@ const navItems = [
     position: sticky;
     top: 0;
     z-index: 50;
-    background: color-mix(in srgb, var(--color-base) 90%, transparent);
+    background: color-mix(in srgb, var(--color-base) 92%, transparent);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-ink);
   }
   .nav-inner {
     display: flex;
@@ -48,28 +46,19 @@ const navItems = [
     padding-block: var(--space-4);
   }
   .brand {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-1);
-    white-space: nowrap;
-  }
-  .brand-sub {
     font-family: var(--font-mono);
     font-size: var(--text-xs);
-    letter-spacing: 0.12em;
-    color: var(--color-ink);
+    letter-spacing: 0.1em;
     font-weight: 500;
+    white-space: nowrap;
   }
-  .brand-mark {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    letter-spacing: 0.04em;
+  .brand-dot {
     color: var(--color-line);
   }
   .nav-links {
     display: flex;
     align-items: center;
-    gap: var(--space-5);
+    gap: var(--space-6);
     overflow-x: auto;
     scrollbar-width: none;
   }
@@ -79,7 +68,7 @@ const navItems = [
   .nav-links a {
     font-size: var(--text-sm);
     color: var(--color-ink);
-    opacity: 0.7;
+    opacity: 0.72;
     white-space: nowrap;
     transition: opacity 0.2s, color 0.2s;
   }
@@ -95,14 +84,16 @@ const navItems = [
     color: var(--color-ink);
     white-space: nowrap;
   }
+  /* 在线绿点 —— 参考图首屏"● 在线" */
   .status-dot {
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
     display: inline-block;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 760px) {
     .nav-inner {
       flex-direction: column;
       align-items: flex-start;
