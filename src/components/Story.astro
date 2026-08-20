@@ -8,24 +8,45 @@ const paragraphs = [
 ---
 
 <section id="story" class="section story">
-  <div class="container">
-    <p class="section-head"><span class="no">档案 02</span> 品牌故事</p>
-    <div class="story-body">
-      {
-        paragraphs.map((p) => (
-          <p class="story-para">{p}</p>
-        ))
-      }
+    <div class="container">
+      <p class="section-head"><span class="no">档案 02</span> 品牌故事</p>
+      <div class="story-split">
+        <div class="story-body">
+          {
+            paragraphs.map((p) => (
+              <p class="story-para">{p}</p>
+            ))
+          }
+        </div>
+        <div class="story-art" aria-hidden="true">
+          <!-- 单色深橄榄细线几何线稿：桥/结构剖面，呼应"从空白搭起系统" -->
+          <svg viewBox="0 0 320 260" role="img" aria-label="桥与结构剖面线稿">
+            <path
+              d="M20 200 Q 90 120 160 150 T 300 130"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            />
+            <line x1="40" y1="210" x2="40" y2="250" stroke="currentColor" stroke-width="1.5" />
+            <line x1="160" y1="210" x2="160" y2="250" stroke="currentColor" stroke-width="1.5" />
+            <line x1="280" y1="210" x2="280" y2="250" stroke="currentColor" stroke-width="1.5" />
+            <line x1="40" y1="250" x2="280" y2="250" stroke="currentColor" stroke-width="1" />
+            <circle cx="160" cy="150" r="4" fill="var(--color-highlight)" />
+          </svg>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
 <style>
   .story {
     /* 编辑式短段：左文字块 + 右留白 */
   }
+  .story-split {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-16);
+    align-items: center;
+  }
   .story-body {
-    max-width: 44em;
     display: flex;
     flex-direction: column;
     gap: var(--space-7);
@@ -41,6 +62,26 @@ const paragraphs = [
   }
   .story-para + .story-para {
     padding-top: var(--space-2);
+  }
+  .story-art {
+    color: var(--color-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+  }
+  .story-art svg {
+    width: 100%;
+    height: 100%;
+  }
+  @media (max-width: 800px) {
+    .story-split {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+    .story-art {
+      display: none;
+    }
   }
   @media (max-width: 640px) {
     .story-para {
