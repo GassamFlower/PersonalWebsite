@@ -190,6 +190,28 @@ h1, h2, h3, h4 {
   background: color-mix(in srgb, var(--color-gold) 88%, #000);
 }
 
+/* ============================================================
+   移动端——让手机打开与桌面同样成立的 editoral 排版
+   提示词要求大标题在窄屏也保持舒适，而非盲目放大溢出
+   ============================================================ */
+@media (max-width: 720px) {
+  .container { padding-inline: 1.25rem; }
+
+  /* 分区纵向留白收敛，消除手机端过大的"空档" */
+  .section { padding-block: var(--space-12); }
+
+  /* 大号衬线标题在窄屏收敛到 2.4rem，保持一致的编辑强度 */
+  .section-title { font-size: 2.4rem; margin-bottom: var(--space-10); }
+
+  /* 档案头允许换行，避免 tag 被右侧 meta 挤压换行错乱 */
+  .section-head { flex-wrap: wrap; }
+  .section-head .right-nav { gap: var(--space-4); }
+}
+
+@media (max-width: 420px) {
+  .section-title { font-size: 2.1rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
