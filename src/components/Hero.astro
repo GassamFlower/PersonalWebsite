@@ -206,4 +206,10 @@ const props = [
     .hero-foot { grid-template-columns: 1fr; }
     .hero-prop + .hero-prop { border-left: none; border-top: 1px solid var(--color-ink); padding-left: 0; }
   }
+  @media (max-width: 520px) {
+    /* 窄屏：三条示例卡片更紧凑、更"极小缩略图"不喧宾夺主 */
+    .hero-grid { gap: var(--space-10); }
+    .hero-shots { grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+    .ui-card { padding: var(--space-2); }
+  }
 </style>

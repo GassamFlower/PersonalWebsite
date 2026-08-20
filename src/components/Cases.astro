@@ -229,4 +229,14 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 
       font-size: var(--text-4xl);
     }
   }
+  @media (max-width: 520px) {
+    /* 手机端：编号与标题同处一行不喧宾夺主，截图槽位居中限宽 */
+    .case-head {
+      align-items: baseline;
+      gap: var(--space-4);
+    }
+    .case-no { font-size: var(--text-3xl); }
+    .case-title { font-size: var(--text-xl); margin-bottom: 0; }
+    .shot { max-width: 300px; margin-inline: auto; }
+  }
 </style>

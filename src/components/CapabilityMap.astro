@@ -453,8 +453,13 @@ const tiers = [
     .tool-shots { grid-template-columns: repeat(3, 1fr); }
   }
   @media (max-width: 560px) {
-    .tier { grid-template-columns: 50px 1fr; gap: var(--space-4); }
-    .tier-no { font-size: 2.4rem; }
+    .tier { grid-template-columns: 46px 1fr; gap: var(--space-4); }
+    .tier-no { font-size: 2.2rem; }
     .tool-shots { grid-template-columns: 1fr; }
+    /* 特大主标题收敛，避免手机端过大溢出 */
+    .cap-mega { font-size: 2.5rem; margin-bottom: var(--space-10); }
+    /* 工具卡纵排不放满整个屏宽 */
+    .tool-card { max-width: 220px; }
+    .cap-foot { flex-wrap: wrap; gap: var(--space-3); }
   }
 </style>
