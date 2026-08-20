@@ -1,5 +1,5 @@
 ---
-// Growth.astro — 档案 · 成长记录（月度档案索引 / md 驱动）
+// Growth.astro — 档案 · 成长记录（左标题+柱状图 / 右列表）
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('growth'))
@@ -8,25 +8,39 @@ const posts = (await getCollection('growth'))
 
 <section id="growth" class="section growth">
   <div class="container">
-    <p class="section-head"><span class="no">档案 06</span> 成长记录</p>
-    <h2 class="section-title">公开的成长，一个月记一次</h2>
+    <p class="section-head"><span class="no">档案 06</span> · 成长记录</p>
     <div class="growth-grid">
-      <aside class="growth-lead">
-        <p class="growth-quote">给自己一个每月进步的交代。</p>
-      </aside>
+      <div class="growth-left">
+        <h2 class="growth-title">公开的成长，<br />一个月记一次</h2>
+        <p class="growth-subtitle">给自己一个每月进步的交代</p>
+        <div class="growth-chart" aria-hidden="true">
+          <svg viewBox="0 0 280 180" class="chart-svg">
+            <!-- 坐标轴 -->
+            <line x1="20" y1="160" x2="270" y2="160" stroke="var(--color-line)" stroke-width="1"/>
+            <line x1="20" y1="20" x2="20" y2="160" stroke="var(--color-line)" stroke-width="1"/>
+            <!-- 柱状图 -->
+            <rect x="35" y="130" width="22" height="30" fill="none" stroke="var(--color-accent)" stroke-width="1"/>
+            <rect x="70" y="110" width="22" height="50" fill="none" stroke="var(--color-accent)" stroke-width="1"/>
+            <rect x="105" y="90" width="22" height="70" fill="none" stroke="var(--color-accent)" stroke-width="1"/>
+            <rect x="140" y="70" width="22" height="90" fill="none" stroke="var(--color-accent)" stroke-width="1"/>
+            <rect x="175" y="50" width="22" height="110" fill="none" stroke="var(--color-accent)" stroke-width="1"/>
+            <rect x="210" y="35" width="22" height="125" fill="none" stroke="var(--color-accent)" stroke-width="1"/>
+            <!-- 趋势线 -->
+            <polyline points="46,125 81,105 116,85 151,65 186,45 221,30" fill="none" stroke="var(--color-accent)" stroke-width="1.5"/>
+            <!-- 箭头 -->
+            <line x1="221" y1="30" x2="240" y2="15" stroke="var(--color-accent)" stroke-width="1.5"/>
+            <line x1="235" y1="12" x2="242" y2="13" stroke="var(--color-accent)" stroke-width="1.5"/>
+            <line x1="238" y1="18" x2="242" y2="13" stroke="var(--color-accent)" stroke-width="1.5"/>
+          </svg>
+        </div>
+      </div>
       <div class="growth-list">
         {
           posts.map((p) => (
             <article class="growth-item">
               <span class="growth-month">{p.data.month}</span>
-              <div class="growth-body">
-                <p class="growth-takeaway">{p.data.takeaway}</p>
-                <p class="growth-tags">
-                  {
-                    p.data.tags.map((t) => <span class="growth-tag">{t}</span>)
-                  }
-                </p>
-              </div>
+              <p class="growth-takeaway">{p.data.takeaway}</p>
+              <span class="growth-arrow">→</span>
             </article>
           ))
         }
@@ -41,57 +55,80 @@ const posts = (await getCollection('growth'))
   }
   .growth-grid {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 1.2fr;
     gap: var(--space-16);
+    align-items: start;
   }
-  .growth-quote {
-    font-family: var(--font-serif);
-    font-size: var(--text-xl);
+  .growth-title {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin-bottom: var(--space-4);
+  }
+  .growth-subtitle {
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
     color: var(--color-line);
-    line-height: 1.7;
-    max-width: 16em;
+    margin-bottom: var(--space-8);
+  }
+  .growth-chart {
+    margin-top: var(--space-4);
+  }
+  .chart-svg {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
   }
   .growth-list {
     display: flex;
     flex-direction: column;
   }
   .growth-item {
-    border-bottom: 1px solid var(--color-line);
-    padding-block: var(--space-6);
     display: grid;
-    grid-template-columns: 6.5rem 1fr;
-    gap: var(--space-5);
+    grid-template-columns: 6rem 1fr 2rem;
+    gap: var(--space-4);
     align-items: baseline;
+    padding-block: var(--space-5);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .growth-item:first-child {
+    padding-top: 0;
   }
   .growth-month {
     font-family: var(--font-mono);
     font-size: var(--text-sm);
-    color: var(--color-highlight);
+    color: var(--color-ink);
     letter-spacing: 0.04em;
   }
   .growth-takeaway {
     font-size: var(--text-base);
     line-height: 1.7;
+    color: var(--color-ink);
   }
-  .growth-tags {
-    display: flex;
-    gap: var(--space-4);
-    margin-top: var(--space-2);
-  }
-  .growth-tag {
-    font-size: var(--text-xs);
+  .growth-arrow {
+    font-size: var(--text-lg);
     color: var(--color-accent);
-    letter-spacing: 0.04em;
-  }
-  .growth-tag::before {
-    content: "·";
-    margin-right: var(--space-2);
-    color: var(--color-line);
+    text-align: right;
   }
   @media (max-width: 800px) {
     .growth-grid {
       grid-template-columns: 1fr;
-      gap: var(--space-6);
+      gap: var(--space-8);
+    }
+    .growth-chart {
+      display: none;
+    }
+  }
+  @media (max-width: 640px) {
+    .growth-item {
+      grid-template-columns: 5rem 1fr;
+    }
+    .growth-arrow {
+      display: none;
+    }
+    .growth-title {
+      font-size: var(--text-2xl);
     }
   }
 </style>

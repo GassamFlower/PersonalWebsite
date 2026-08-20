@@ -1,26 +1,70 @@
 ---
-// Contact.astro — 档案 08 · 联系交流（极简居中 · 达成转化）
+// Contact.astro — 档案 08 · 联系交流（联系信息 + 椅子插图）
 const wechat = 'G10S7H21';
 const email = '1462882928@qq.com';
+const phone = '+86 138 0000 0000';
+const location = '上海 · 中国';
 ---
 
 <section id="contact" class="section contact">
   <div class="container">
-    <p class="section-head centered"><span class="no">档案 08</span> 联系交流</p>
-    <h2 class="contact-title">聊得来，就一起做事。</h2>
-    <div class="contact-actions">
-      <button class="btn btn-solid" data-copy={wechat}>
-        加微信聊聊 · {wechat}
-      </button>
-      <span class="contact-or">或</span>
-      <a class="btn btn-line" href={`mailto:${email}`}>写邮件</a>
+    <div class="contact-grid">
+      <div class="contact-left">
+        <p class="section-head"><span class="no">档案 08</span> · 联系我们</p>
+        <h2 class="contact-title">聊得来，就一起做事。</h2>
+        <div class="contact-actions">
+          <button class="btn btn-solid" data-copy={wechat}>
+            加微信聊聊 · {wechat}
+          </button>
+          <span class="contact-or">或</span>
+          <a class="btn btn-line" href={`mailto:${email}`}>写邮件</a>
+        </div>
+        <p class="contact-source">雇主与过程细节对公开版隐去 · 详询索取 ↘</p>
+      </div>
+      <div class="contact-right">
+        <div class="contact-info">
+          <div class="contact-row">
+            <span class="contact-icon">✉</span>
+            <span>{email}</span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-icon"></span>
+            <span>{phone}</span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-icon">◎</span>
+            <span>{location}</span>
+          </div>
+        </div>
+        <div class="contact-chair" aria-hidden="true">
+          <svg viewBox="0 0 120 140" class="chair-svg">
+            <!-- 椅背 -->
+            <rect x="25" y="5" width="70" height="50" rx="3" fill="none" stroke="var(--color-ink)" stroke-width="1.5"/>
+            <line x1="30" y1="15" x2="90" y2="15" stroke="var(--color-line)" stroke-width="0.8"/>
+            <line x1="30" y1="25" x2="90" y2="25" stroke="var(--color-line)" stroke-width="0.8"/>
+            <line x1="30" y1="35" x2="90" y2="35" stroke="var(--color-line)" stroke-width="0.8"/>
+            <line x1="30" y1="45" x2="90" y2="45" stroke="var(--color-line)" stroke-width="0.8"/>
+            <!-- 椅面 -->
+            <rect x="20" y="55" width="80" height="12" rx="2" fill="none" stroke="var(--color-ink)" stroke-width="1.5"/>
+            <!-- 椅腿 -->
+            <line x1="28" y1="67" x2="22" y2="130" stroke="var(--color-ink)" stroke-width="1.5"/>
+            <line x1="92" y1="67" x2="98" y2="130" stroke="var(--color-ink)" stroke-width="1.5"/>
+            <line x1="35" y1="67" x2="30" y2="130" stroke="var(--color-line)" stroke-width="1"/>
+            <line x1="85" y1="67" x2="90" y2="130" stroke="var(--color-line)" stroke-width="1"/>
+            <!-- 横撑 -->
+            <line x1="24" y1="100" x2="96" y2="100" stroke="var(--color-line)" stroke-width="1"/>
+            <line x1="26" y1="115" x2="94" y2="115" stroke="var(--color-line)" stroke-width="0.8"/>
+            <!-- 辅助线 -->
+            <line x1="10" y1="55" x2="110" y2="55" stroke="var(--color-line)" stroke-width="0.3" stroke-dasharray="3 3"/>
+            <line x1="60" y1="0" x2="60" y2="135" stroke="var(--color-line)" stroke-width="0.3" stroke-dasharray="3 3"/>
+          </svg>
+        </div>
+      </div>
     </div>
-    <p class="contact-source">雇主与过程细节对公开版隐去 · 详询索取 ↘</p>
   </div>
 </section>
 
 <script>
-  // 复制微信号：clipboard API 失败用 prompt 兜底（老浏览器）
   document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
     btn.addEventListener('click', async () => {
       const val = btn.dataset.copy;
@@ -44,26 +88,25 @@ const email = '1462882928@qq.com';
 <style>
   .contact {
     border-top: 1px solid var(--color-line);
-    text-align: center;
   }
-  .section-head.centered {
-    justify-content: center;
-  }
-  .section-head.centered::before {
-    content: none;
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: start;
   }
   .contact-title {
-    font-size: var(--text-4xl);
-    margin-bottom: var(--space-10);
-    letter-spacing: 0.02em;
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-8);
+    letter-spacing: 0.01em;
+    line-height: 1.2;
   }
   .contact-actions {
     display: flex;
     align-items: center;
     gap: var(--space-5);
-    justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: var(--space-10);
+    margin-bottom: var(--space-6);
   }
   .contact-or {
     color: var(--color-line);
@@ -72,5 +115,46 @@ const email = '1462882928@qq.com';
   .contact-source {
     font-size: var(--text-sm);
     color: var(--color-line);
+  }
+  .contact-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-8);
+  }
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-base);
+    color: var(--color-ink);
+  }
+  .contact-icon {
+    width: 1.5em;
+    text-align: center;
+    color: var(--color-accent);
+    font-size: var(--text-lg);
+  }
+  .contact-chair {
+    display: flex;
+    justify-content: center;
+  }
+  .chair-svg {
+    width: 120px;
+    height: auto;
+  }
+  @media (max-width: 800px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+    .contact-right {
+      align-items: flex-start;
+    }
   }
 </style>

@@ -1,30 +1,52 @@
 ---
-// Principles.astro — 档案 07 · 做事的规矩（系统流程图 · 四门禁）
+// Principles.astro — 档案 07 · 做事的规矩（水平流程 + 箭头 + 印章插图）
 const gates = [
-  { no: '01', title: '立项门', desc: '先把话说清楚，再动手。' },
-  { no: '02', title: '架构门', desc: '参考图为准绳，不凭感觉。' },
-  { no: '03', title: '业务门', desc: '素材有清单，证据才能过。' },
-  { no: '04', title: '上线门', desc: '可访问、可追溯、可复盘。' },
+  { no: '01', title: '一 · 立项门', desc: '先把话说清楚，再动手' },
+  { no: '02', title: '二 · 架构门', desc: '参考图为准绳，不凭感觉' },
+  { no: '03', title: '三 · 业务门', desc: '素材有清单，证据才能过' },
+  { no: '04', title: '四 · 上线门', desc: '可访问、可追溯、可复盘' },
 ];
 ---
 
 <section id="principles" class="section principles">
   <div class="container">
-    <p class="section-head"><span class="no">档案 07</span> 做事的规矩</p>
-    <h2 class="section-title">先立规矩，再让 AI 干活</h2>
+    <p class="section-head"><span class="no">档案 07</span> · 做事的规矩</p>
+    <h2 class="section-title">先立规矩，<br />再让 AI 干活</h2>
     <div class="flow">
       {
-        gates.map((g) => (
+        gates.map((g, i) => (
           <div class="flow-node">
             <span class="flow-no">{g.no}</span>
             <h3 class="flow-title">{g.title}</h3>
             <p class="flow-desc">{g.desc}</p>
+            {i < gates.length - 1 && <span class="flow-arrow" aria-hidden="true">→</span>}
           </div>
         ))
       }
+      <div class="flow-stamp" aria-hidden="true">
+        <svg viewBox="0 0 120 120" class="stamp-svg">
+          <!-- 外圈 -->
+          <circle cx="60" cy="60" r="50" fill="none" stroke="var(--color-accent)" stroke-width="2"/>
+          <circle cx="60" cy="60" r="44" fill="none" stroke="var(--color-accent)" stroke-width="1"/>
+          <!-- 十字准星 -->
+          <line x1="60" y1="5" x2="60" y2="20" stroke="var(--color-accent)" stroke-width="1"/>
+          <line x1="60" y1="100" x2="60" y2="115" stroke="var(--color-accent)" stroke-width="1"/>
+          <line x1="5" y1="60" x2="20" y2="60" stroke="var(--color-accent)" stroke-width="1"/>
+          <line x1="100" y1="60" x2="115" y2="60" stroke="var(--color-accent)" stroke-width="1"/>
+          <!-- 对勾 -->
+          <polyline points="38,62 52,76 82,44" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <!-- 印章底座 -->
+        <svg viewBox="0 0 120 60" class="stamp-base-svg">
+          <ellipse cx="60" cy="50" rx="40" ry="8" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <rect x="45" y="10" width="30" height="40" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <rect x="50" y="0" width="20" height="15" rx="3" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+        </svg>
+      </div>
     </div>
+    <hr class="hr-line" style="margin-top: var(--space-12);" />
     <p class="principles-foot">
-      知识库与工作台分离 · 文档 a–q 前缀排序 · SSOT 单一信源
+      知识库与工作台分离，文档前缀排序，单一信源 SSOT。
     </p>
   </div>
 </section>
@@ -35,48 +57,84 @@ const gates = [
   }
   .flow {
     display: flex;
-    align-items: stretch;
-    gap: var(--space-5);
+    align-items: flex-start;
+    gap: 0;
     flex-wrap: wrap;
+    position: relative;
   }
   .flow-node {
-    flex: 1 1 220px;
-    border: 1px solid var(--color-line);
-    padding: var(--space-8);
+    flex: 1 1 200px;
+    min-width: 180px;
+    padding: var(--space-6) var(--space-4);
     position: relative;
-    background: var(--color-base);
-  }
-  .flow-node::after {
-    content: "→";
-    position: absolute;
-    right: -1.1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--color-accent);
-    font-family: var(--font-mono);
-    font-size: var(--text-lg);
-  }
-  .flow-node:last-child::after {
-    content: none;
   }
   .flow-no {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
+    font-family: var(--font-serif);
+    font-size: var(--text-3xl);
+    font-weight: 700;
     color: var(--color-highlight);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    display: block;
+    margin-bottom: var(--space-3);
   }
   .flow-title {
-    font-size: var(--text-xl);
-    margin: var(--space-3) 0;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+    letter-spacing: 0.01em;
   }
   .flow-desc {
     color: var(--color-line);
     font-size: var(--text-sm);
     line-height: 1.7;
   }
+  .flow-arrow {
+    position: absolute;
+    right: -0.5rem;
+    top: 2.5rem;
+    color: var(--color-accent);
+    font-size: var(--text-xl);
+    font-family: var(--font-sans);
+  }
+  .flow-stamp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-6);
+    min-width: 120px;
+  }
+  .stamp-svg {
+    width: 100px;
+    height: 100px;
+  }
+  .stamp-base-svg {
+    width: 80px;
+    height: 50px;
+    margin-top: -10px;
+  }
   .principles-foot {
-    margin-top: var(--space-10);
+    margin-top: var(--space-6);
     font-size: var(--text-sm);
     color: var(--color-line);
+    letter-spacing: 0.02em;
+  }
+  @media (max-width: 800px) {
+    .flow {
+      flex-direction: column;
+    }
+    .flow-arrow {
+      right: auto;
+      top: auto;
+      bottom: -1rem;
+      left: 2rem;
+      transform: rotate(90deg);
+    }
+    .flow-stamp {
+      flex-direction: row;
+      gap: var(--space-4);
+      justify-content: flex-start;
+      margin-top: var(--space-4);
+    }
   }
 </style>

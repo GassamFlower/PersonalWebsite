@@ -1,14 +1,13 @@
 /* ============================================================
    Global.css — 设计 token + 全局基元
-   依据 docs/视觉方向-v3-架构门.md（架构门视觉准绳）
-   只在这里定义配色/字体/间距；组件内不得另起业务样式。
+   依据参考图片设计方向（images/ 文件夹）
    ============================================================ */
 
 :root {
-  /* ---- 配色 token（视觉准绳锁定，勿改） ---- */
-  --color-base: #f2efe9;      /* 骨白 / 暖灰白底 */
-  --color-ink: #1c1a17;       /* 近黑深灰文字 */
-  --color-line: #8a8580;      /* 中性灰 · 弱文字/网格线 */
+  /* ---- 配色 token ---- */
+  --color-base: #ede8df;      /* 暖米白 / 奶油底 */
+  --color-ink: #1a1a1a;       /* 近黑深灰文字 */
+  --color-line: #9a9590;      /* 中性灰 · 弱文字/网格线 */
   --color-accent: #4a5a3a;    /* 深橄榄绿 · 全站唯一识别色 */
   --color-highlight: #8b6f47; /* 铜棕/暗金 · 少量点睛 */
 
@@ -17,7 +16,7 @@
   --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
 
-  /* ---- 间距 / 栅格（严格 12-column 的感觉基元） ---- */
+  /* ---- 间距 / 栅格 ---- */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -34,24 +33,22 @@
   --space-32: 8rem;
   --space-40: 10rem;
 
-  --container-max: 1240px;
-  --gutter: clamp(1.25rem, 6vw, 4.5rem);
+  --container-max: 1280px;
+  --gutter: clamp(1.5rem, 6vw, 5rem);
 
-  /* ---- 排版尺度（衬托"建筑事务所敢放大"的对比度） ---- */
+  /* ---- 排版尺度（建筑事务所敢放大） ---- */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
-  --text-base: 1.0625rem;      /* 正文略放大，更耐读 */
+  --text-base: 1.0625rem;
   --text-lg: 1.3125rem;
   --text-xl: 1.5rem;
-  --text-2xl: clamp(1.5rem, 3vw, 2.125rem);
-  --text-3xl: clamp(2rem, 4vw, 2.75rem);
-  --text-4xl: clamp(2.25rem, 4.5vw, 3.25rem); /* 联系区大标题 */
-  --text-hero: clamp(2.75rem, 9vw, 6rem); /* 巨大衬线标题 · 敢放大 */
-  --type-cjk-lh: 1.6;          /* 中文正文字高 */
+  --text-2xl: clamp(1.75rem, 3.5vw, 2.5rem);
+  --text-3xl: clamp(2.5rem, 5vw, 3.75rem);
+  --text-4xl: clamp(3rem, 6vw, 4.5rem);
+  --text-hero: clamp(3.5rem, 10vw, 7rem);
+  --type-cjk-lh: 1.6;
 
-  --radius: 2px;              /* 极轻或直角 */
-
-  /* ---- 动效 ---- */
+  --radius: 2px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -102,9 +99,9 @@ button {
 
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
-  font-weight: 600;
-  line-height: 1.28;
-  letter-spacing: 0.01em;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 /* ---- 通用容器 ---- */
@@ -115,31 +112,18 @@ h1, h2, h3, h4 {
   padding-inline: var(--gutter);
 }
 
-/* ---- 档案分区眉题（全站统一母题 · 卷宗编号头） ---- */
-.section {
-  position: relative;
-}
+/* ---- 档案分区眉题（简洁无装饰） ---- */
 .section-head {
   display: flex;
   align-items: baseline;
   gap: var(--space-3);
-  margin-bottom: var(--space-5);
-  /* 眉题标签用等宽橄榄小字 */
+  margin-bottom: var(--space-6);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-accent);
   padding-top: var(--space-4);
-}
-/* 卷宗编号头：外框 + 细线，强化"档案 0X"母题，同时改善对齐 */
-.section-head::before {
-  content: "";
-  width: 2.6em;
-  height: 1px;
-  background: var(--color-highlight);
-  align-self: center;
-  margin-right: var(--space-1);
 }
 
 .section-head .no {
@@ -148,15 +132,15 @@ h1, h2, h3, h4 {
   white-space: nowrap;
 }
 
-/* ---- 分区大号衬线主标题（对照参考图每区都有的大标题） ---- */
+/* ---- 分区大号衬线主标题 ---- */
 .section-title {
   font-family: var(--font-serif);
   font-size: var(--text-3xl);
   font-weight: 700;
-  letter-spacing: 0.01em;
-  line-height: 1.2;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
   color: var(--color-ink);
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-10);
   max-width: 16em;
 }
 @media (max-width: 640px) {
@@ -165,17 +149,17 @@ h1, h2, h3, h4 {
   }
 }
 
-/* ---- 分区公共留白（内聚但不局促） ---- */
+/* ---- 分区公共留白 ---- */
 .section {
-  padding-block: var(--space-20);
+  padding-block: var(--space-24);
 }
 @media (max-width: 640px) {
   .section {
-    padding-block: var(--space-12);
+    padding-block: var(--space-16);
   }
 }
 
-/* ---- CTA 家族（铜棕实心 + 深橄榄描边） ---- */
+/* ---- CTA 家族 ---- */
 .btn {
   display: inline-block;
   padding: var(--space-3) var(--space-6);
@@ -200,7 +184,7 @@ h1, h2, h3, h4 {
   color: var(--color-base);
 }
 
-/* ---- 轻动效：fade-up（尊重 reduced-motion，默认全显示） ---- */
+/* ---- 轻动效 ---- */
 .fade-up {
   animation: fadeUp 0.6s var(--ease-out) both;
 }
@@ -216,7 +200,7 @@ h1, h2, h3, h4 {
   }
 }
 
-/* ---- 细线（档案/工程感的核心媒介） ---- */
+/* ---- 细线 ---- */
 .hr-line {
   height: 1px;
   border: none;

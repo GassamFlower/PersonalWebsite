@@ -1,6 +1,5 @@
 ---
 // Base.astro — 全局布局：head / 字体 / 导航 / 背景 / 骨架
-// 依据 docs/视觉方向-v3-架构门.md + docs/e-架构设计文档.md
 import '../styles/global.css';
 import SiteNav from '../components/SiteNav.astro';
 
@@ -23,7 +22,6 @@ const { title = 'PERSONAL DOSSIER · 独立交付档案' } = Astro.props;
     />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- 衬线中文标题字体（可加载本地子集/在线） -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"

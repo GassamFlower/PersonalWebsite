@@ -1,78 +1,113 @@
 ---
-// Story.astro — 档案 02 · 品牌故事（克制 2-3 句身世转折）
+// Story.astro — 档案 02 · 品牌故事
+// 左文右图 + FILE 信息脚注
 const paragraphs = [
-  '在真实世界的钢筋混凝土里待了 8 年 —— 从法院政务系统维护起，长期和数据、业务、真实的坑打交道。',
-  '进入一家工业类企业后，看到长期被忽视的数字化空白，从零搭起手里的 OPS 与 UUC，一路把系统做深、做实用。',
-  '靠好奇心和持续的劲头，如今已经能上手 AI 落地，并沉淀出一套自己的工程化方法论 —— 把一团乱麻，理成能用的系统。',
+  '八年政务系统维护，让我懂业务、懂数据、也看见系统背后的真实需求与约束。',
+  '进入一家工业类企业，我看见长期被忽视的数字化空白——流程割裂、数据孤岛、体验落后。',
+  '我从零搭起工业运维平台 OPS 与统一用户中心 UUC，让数据流动，让一线可用，让管理可视。',
+  '靠强烈的好奇心与持续学习的劲头，我把系统做深、做实用；已经能上手 AI 落地（RAG、知识库、智能体），仍在往更深之处精进。',
+  '我自建「五级项目体系 + 单一信源 SSOT」的做事规矩，以结构化的方法，把复杂的事做成可持续的系统。',
 ];
 ---
 
 <section id="story" class="section story">
-    <div class="container">
-      <p class="section-head"><span class="no">档案 02</span> 品牌故事</p>
-      <div class="story-split">
-        <div class="story-body">
-          {
-            paragraphs.map((p) => (
-              <p class="story-para">{p}</p>
-            ))
-          }
-        </div>
-        <div class="story-art" aria-hidden="true">
-          <!-- 单色深橄榄细线几何线稿：桥/结构剖面，呼应"从空白搭起系统" -->
-          <svg viewBox="0 0 320 260" role="img" aria-label="桥与结构剖面线稿">
-            <path
-              d="M20 200 Q 90 120 160 150 T 300 130"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            />
-            <line x1="40" y1="210" x2="40" y2="250" stroke="currentColor" stroke-width="1.5" />
-            <line x1="160" y1="210" x2="160" y2="250" stroke="currentColor" stroke-width="1.5" />
-            <line x1="280" y1="210" x2="280" y2="250" stroke="currentColor" stroke-width="1.5" />
-            <line x1="40" y1="250" x2="280" y2="250" stroke="currentColor" stroke-width="1" />
-            <circle cx="160" cy="150" r="4" fill="var(--color-highlight)" />
-          </svg>
-        </div>
+  <div class="container">
+    <p class="section-head"><span class="no">档案 02</span> · 品牌故事</p>
+    <div class="story-split">
+      <div class="story-body">
+        {
+          paragraphs.map((p) => (
+            <p class="story-para">{p}</p>
+          ))
+        }
+      </div>
+      <div class="story-art" aria-hidden="true">
+        <!-- 桥/结构剖面线稿 -->
+        <svg viewBox="0 0 400 500" class="bridge-svg">
+          <!-- 桥塔 -->
+          <line x1="200" y1="60" x2="200" y2="350" stroke="var(--color-ink)" stroke-width="2"/>
+          <line x1="196" y1="60" x2="196" y2="350" stroke="var(--color-line)" stroke-width="0.5"/>
+          <line x1="204" y1="60" x2="204" y2="350" stroke="var(--color-line)" stroke-width="0.5"/>
+          <!-- 桥面 -->
+          <line x1="40" y1="280" x2="380" y2="280" stroke="var(--color-ink)" stroke-width="2"/>
+          <line x1="40" y1="286" x2="380" y2="286" stroke="var(--color-line)" stroke-width="1"/>
+          <!-- 拉索 -->
+          <line x1="200" y1="80" x2="60" y2="278" stroke="var(--color-line)" stroke-width="0.8"/>
+          <line x1="200" y1="100" x2="80" y2="278" stroke="var(--color-line)" stroke-width="0.8"/>
+          <line x1="200" y1="120" x2="100" y2="278" stroke="var(--color-line)" stroke-width="0.8"/>
+          <line x1="200" y1="140" x2="120" y2="278" stroke="var(--color-line)" stroke-width="0.8"/>
+          <line x1="200" y1="160" x2="140" y2="278" stroke="var(--color-line)" stroke-width="0.8"/>
+          <line x1="200" y1="180" x2="160" y2="278" stroke="var(--color-line)" stroke-width="0.8"/>
+          <line x1="200" y1="80" x2="340" y2="278" stroke="var(--color-line)" stroke-width="0.8"/>
+          <line x1="200" y1="100" x2="320" y2="278" stroke="var(--color-line)" stroke-width="0.8"/>
+          <line x1="200" y1="120" x2="300" y2="278" stroke="var(--color-line)" stroke-width="0.8"/>
+          <line x1="200" y1="140" x2="280" y2="278" stroke="var(--color-line)" stroke-width="0.8"/>
+          <line x1="200" y1="160" x2="260" y2="278" stroke="var(--color-line)" stroke-width="0.8"/>
+          <line x1="200" y1="180" x2="240" y2="278" stroke="var(--color-line)" stroke-width="0.8"/>
+          <!-- 桥墩 -->
+          <rect x="180" y="286" width="40" height="80" fill="none" stroke="var(--color-ink)" stroke-width="1.5"/>
+          <line x1="180" y1="310" x2="220" y2="310" stroke="var(--color-line)" stroke-width="0.5"/>
+          <line x1="180" y1="340" x2="220" y2="340" stroke="var(--color-line)" stroke-width="0.5"/>
+          <!-- 地基 -->
+          <line x1="150" y1="366" x2="250" y2="366" stroke="var(--color-line)" stroke-width="1"/>
+          <line x1="160" y1="366" x2="160" y2="420" stroke="var(--color-line)" stroke-width="1"/>
+          <line x1="240" y1="366" x2="240" y2="420" stroke="var(--color-line)" stroke-width="1"/>
+          <line x1="155" y1="420" x2="245" y2="420" stroke="var(--color-line)" stroke-width="1"/>
+          <!-- 辅助线 -->
+          <line x1="200" y1="40" x2="200" y2="440" stroke="var(--color-line)" stroke-width="0.3" stroke-dasharray="4 4"/>
+          <line x1="20" y1="280" x2="390" y2="280" stroke="var(--color-line)" stroke-width="0.3" stroke-dasharray="4 4"/>
+        </svg>
       </div>
     </div>
-  </section>
+    <div class="story-footer">
+      <span>FILE &nbsp; 02 / 06</span>
+      <span>DATE &nbsp; 2025-08-19</span>
+      <span>BY &nbsp; YIYI</span>
+    </div>
+  </div>
+</section>
 
 <style>
-  .story {
-    /* 编辑式短段：左文字块 + 右留白 */
-  }
   .story-split {
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--space-16);
-    align-items: center;
+    align-items: start;
   }
   .story-body {
     display: flex;
     flex-direction: column;
-    gap: var(--space-7);
-    padding-left: var(--space-8);
-    border-left: 2px solid var(--color-accent);
+    gap: var(--space-6);
+    padding-top: var(--space-8);
   }
   .story-para {
-    font-family: var(--font-serif);
-    font-size: var(--text-2xl);
-    line-height: 1.7;
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    line-height: 1.8;
     letter-spacing: 0.02em;
     color: var(--color-ink);
   }
-  .story-para + .story-para {
-    padding-top: var(--space-2);
-  }
   .story-art {
-    color: var(--color-line);
     display: flex;
     align-items: center;
     justify-content: center;
-    aspect-ratio: 4 / 3;
+    padding-top: var(--space-4);
   }
-  .story-art svg {
+  .bridge-svg {
     width: 100%;
-    height: 100%;
+    max-width: 360px;
+    height: auto;
+  }
+  .story-footer {
+    display: flex;
+    gap: var(--space-10);
+    margin-top: var(--space-16);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-line);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-line);
+    letter-spacing: 0.1em;
   }
   @media (max-width: 800px) {
     .story-split {
@@ -82,10 +117,14 @@ const paragraphs = [
     .story-art {
       display: none;
     }
+    .story-footer {
+      gap: var(--space-6);
+      flex-wrap: wrap;
+    }
   }
   @media (max-width: 640px) {
     .story-para {
-      font-size: var(--text-xl);
+      font-size: var(--text-base);
     }
   }
 </style>

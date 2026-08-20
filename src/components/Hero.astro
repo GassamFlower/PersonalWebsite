@@ -1,14 +1,14 @@
 ---
 // Hero.astro — 档案 01 · 首屏定位
-// 大字开门句 + 小字署名 + 克制入口，不立即摆技能。
+// 超大衬线标题 + UI截图 + 底部三链接
 const brand = '独立系统建构者';
-const titleLine1 = '把复杂的事情';
+const titleLine1 = '把复杂的事情，';
 const titleLine2 = '变成可以运行的系统。';
 const subtitle = '8 年在真实系统里 · 工业数字化 · 全栈 · 真实交付';
 const footerLinks = [
-  { href: '#timeline', label: '独立交付 →' },
-  { href: '#capability', label: '业务落地 →' },
-  { href: '#contact', label: '边界诚实 →' },
+  { href: '#capability', label: '独立交付 →' },
+  { href: '#cases', label: '业务落地 →' },
+  { href: '#principles', label: '边界诚实 →' },
 ];
 ---
 
@@ -20,15 +20,89 @@ const footerLinks = [
 
     <h1 class="hero-title">
       {titleLine1}<br />
-      <span>{titleLine2}</span>
+      {titleLine2}
     </h1>
 
-    <p class="hero-sub">{subtitle}</p>
+    <div class="hero-bottom">
+      <div class="hero-left">
+        <p class="hero-sub">{subtitle}</p>
+        <a class="hero-focus" href="#cases">
+          精选作品 01—04 ↗
+        </a>
+      </div>
+      <div class="hero-screenshots" aria-hidden="true">
+        <!-- UI 截图占位：三张系统界面线稿 -->
+        <svg viewBox="0 0 560 280" class="screenshot-svg">
+          <!-- 截图1: 数据看板 -->
+          <rect x="0" y="0" width="180" height="240" rx="4" fill="none" stroke="var(--color-line)" stroke-width="1.5"/>
+          <rect x="8" y="8" width="164" height="20" rx="2" fill="var(--color-accent)" opacity="0.15"/>
+          <text x="14" y="22" font-size="8" fill="var(--color-accent)" font-family="var(--font-mono)">数据概览</text>
+          <rect x="12" y="36" width="70" height="40" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <text x="20" y="56" font-size="14" fill="var(--color-ink)" font-weight="700">32</text>
+          <rect x="90" y="36" width="70" height="40" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <text x="100" y="56" font-size="14" fill="var(--color-ink)" font-weight="700">16</text>
+          <rect x="12" y="84" width="70" height="40" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <text x="18" y="106" font-size="10" fill="var(--color-ink)">98.6%</text>
+          <rect x="90" y="84" width="70" height="40" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <text x="108" y="106" font-size="14" fill="var(--color-ink)" font-weight="700">3</text>
+          <!-- 折线图 -->
+          <polyline points="12,160 40,150 70,155 100,140 130,145 160,130" fill="none" stroke="var(--color-accent)" stroke-width="1.5"/>
+          <rect x="12" y="170" width="156" height="60" rx="2" fill="none" stroke="var(--color-line)" stroke-width="0.5" opacity="0.5"/>
 
-    <a class="hero-focus" href="#cases">
-      <span class="hero-focus-dot"></span>
-      精选作品 01—04 ↗
-    </a>
+          <!-- 截图2: 新建工单 -->
+          <rect x="195" y="0" width="150" height="240" rx="4" fill="none" stroke="var(--color-line)" stroke-width="1.5"/>
+          <rect x="203" y="8" width="134" height="20" rx="2" fill="var(--color-accent)" opacity="0.15"/>
+          <text x="210" y="22" font-size="8" fill="var(--color-accent)" font-family="var(--font-mono)">新建工单</text>
+          <rect x="203" y="36" width="134" height="24" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <text x="210" y="52" font-size="8" fill="var(--color-line)">设备名称</text>
+          <rect x="203" y="66" width="134" height="24" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <text x="210" y="82" font-size="8" fill="var(--color-line)">故障描述</text>
+          <rect x="203" y="96" width="134" height="24" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <text x="210" y="112" font-size="8" fill="var(--color-line)">优先级</text>
+          <rect x="203" y="126" width="134" height="24" rx="2" fill="none" stroke="var(--color-line)" stroke-width="1"/>
+          <text x="210" y="142" font-size="8" fill="var(--color-line)">负责人</text>
+          <rect x="203" y="160" width="134" height="30" rx="4" fill="var(--color-accent)" opacity="0.8"/>
+          <text x="230" y="180" font-size="10" fill="#fff">创建工单</text>
+
+          <!-- 截图3: 数据列表 -->
+          <rect x="360" y="0" width="200" height="240" rx="4" fill="none" stroke="var(--color-line)" stroke-width="1.5"/>
+          <rect x="368" y="8" width="184" height="20" rx="2" fill="var(--color-accent)" opacity="0.15"/>
+          <text x="374" y="22" font-size="8" fill="var(--color-accent)" font-family="var(--font-mono)">数据列表</text>
+          <!-- 表头 -->
+          <rect x="368" y="34" width="184" height="18" fill="var(--color-line)" opacity="0.1"/>
+          <text x="374" y="46" font-size="7" fill="var(--color-line)">编号</text>
+          <text x="420" y="46" font-size="7" fill="var(--color-line)">名称</text>
+          <text x="480" y="46" font-size="7" fill="var(--color-line)">状态</text>
+          <text x="530" y="46" font-size="7" fill="var(--color-line)">时间</text>
+          <!-- 行 -->
+          <line x1="368" y1="58" x2="552" y2="58" stroke="var(--color-line)" stroke-width="0.5"/>
+          <text x="374" y="70" font-size="7" fill="var(--color-ink)">001</text>
+          <text x="420" y="70" font-size="7" fill="var(--color-ink)">设备A</text>
+          <text x="480" y="70" font-size="7" fill="var(--color-accent)">正常</text>
+          <text x="520" y="70" font-size="7" fill="var(--color-line)">10:30</text>
+          <line x1="368" y1="76" x2="552" y2="76" stroke="var(--color-line)" stroke-width="0.5"/>
+          <text x="374" y="88" font-size="7" fill="var(--color-ink)">002</text>
+          <text x="420" y="88" font-size="7" fill="var(--color-ink)">设备B</text>
+          <text x="480" y="88" font-size="7" fill="var(--color-highlight)">告警</text>
+          <text x="520" y="88" font-size="7" fill="var(--color-line)">11:15</text>
+          <line x1="368" y1="94" x2="552" y2="94" stroke="var(--color-line)" stroke-width="0.5"/>
+          <text x="374" y="106" font-size="7" fill="var(--color-ink)">003</text>
+          <text x="420" y="106" font-size="7" fill="var(--color-ink)">设备C</text>
+          <text x="480" y="106" font-size="7" fill="var(--color-accent)">正常</text>
+          <text x="520" y="106" font-size="7" fill="var(--color-line)">12:00</text>
+          <line x1="368" y1="112" x2="552" y2="112" stroke="var(--color-line)" stroke-width="0.5"/>
+          <text x="374" y="124" font-size="7" fill="var(--color-ink)">004</text>
+          <text x="420" y="124" font-size="7" fill="var(--color-ink)">设备D</text>
+          <text x="480" y="124" font-size="7" fill="var(--color-accent)">正常</text>
+          <text x="520" y="124" font-size="7" fill="var(--color-line)">13:45</text>
+          <line x1="368" y1="130" x2="552" y2="130" stroke="var(--color-line)" stroke-width="0.5"/>
+          <text x="374" y="142" font-size="7" fill="var(--color-ink)">005</text>
+          <text x="420" y="142" font-size="7" fill="var(--color-ink)">设备E</text>
+          <text x="480" y="142" font-size="7" fill="var(--color-highlight)">维护</text>
+          <text x="520" y="142" font-size="7" fill="var(--color-line)">14:20</text>
+        </svg>
+      </div>
+    </div>
 
     <hr class="hr-line hero-hr" />
 
@@ -63,54 +137,64 @@ const footerLinks = [
   .hero-title {
     font-size: var(--text-hero);
     font-weight: 700;
-    letter-spacing: 0;
+    letter-spacing: -0.02em;
     line-height: 1.08;
-    margin-bottom: var(--space-8);
-    max-width: 14em;
-  }
-  .hero-title span {
+    margin-bottom: var(--space-12);
+    max-width: 16em;
     color: var(--color-ink);
+  }
+  .hero-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-12);
+    align-items: end;
+    margin-bottom: var(--space-16);
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
   }
   .hero-sub {
     font-size: var(--text-lg);
     color: var(--color-line);
-    max-width: 30em;
-    margin-bottom: var(--space-12);
+    max-width: 28em;
     line-height: 1.8;
   }
   .hero-focus {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-3);
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: var(--text-sm);
     letter-spacing: 0.06em;
     color: var(--color-accent);
-    margin-bottom: var(--space-16);
+    padding-bottom: var(--space-2);
+    border-bottom: 2px solid var(--color-highlight);
     transition: color 0.2s;
-    position: relative;
-    z-index: 1;
+    width: fit-content;
   }
   .hero-focus:hover {
     color: var(--color-highlight);
   }
-  .hero-focus-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--color-highlight);
-    display: inline-block;
+  .hero-screenshots {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .screenshot-svg {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
   }
   .hero-hr {
     margin-bottom: var(--space-6);
   }
   .hero-links {
     display: flex;
-    gap: var(--space-10);
+    gap: var(--space-12);
     flex-wrap: wrap;
   }
   .hero-links a {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: var(--text-sm);
     color: var(--color-ink);
     opacity: 0.7;
@@ -120,5 +204,18 @@ const footerLinks = [
   .hero-links a:hover {
     opacity: 1;
     color: var(--color-accent);
+  }
+  @media (max-width: 900px) {
+    .hero-bottom {
+      grid-template-columns: 1fr;
+    }
+    .hero-screenshots {
+      display: none;
+    }
+  }
+  @media (max-width: 640px) {
+    .hero-links {
+      gap: var(--space-6);
+    }
   }
 </style>
