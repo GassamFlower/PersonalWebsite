@@ -456,8 +456,14 @@ const tiers = [
     .tier { grid-template-columns: 46px 1fr; gap: var(--space-4); }
     .tier-no { font-size: 2.2rem; }
     .tool-shots { grid-template-columns: 1fr; }
-    /* 特大主标题底部留白收紧（字号已由 clamp 随屏收敛） */
-    .cap-mega { margin-bottom: var(--space-10); }
+    /* 特大主标题：手机端收敛字号 + 放开行高、收紧留白（避免拥挤偏大） */
+    .cap-mega {
+      font-size: 2.1rem;
+      line-height: 1.3;
+      letter-spacing: 0.02em;
+      margin: 0 0 var(--space-8);
+      text-wrap: balance;
+    }
     /* 工具卡纵排不放满整个屏宽 */
     .tool-card { max-width: 220px; }
     .cap-foot { flex-wrap: wrap; gap: var(--space-3); }
