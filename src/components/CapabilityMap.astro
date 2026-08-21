@@ -315,7 +315,7 @@ const tiers = [
   /* 特大衬线主标题 —— 参考图能力"边界清晰的自己" */
   .cap-mega {
     font-family: var(--font-serif);
-    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-size: clamp(2.4rem, 7vw, 5.5rem);
     font-weight: 700;
     line-height: 1.05;
     letter-spacing: 0.01em;
@@ -456,8 +456,8 @@ const tiers = [
     .tier { grid-template-columns: 46px 1fr; gap: var(--space-4); }
     .tier-no { font-size: 2.2rem; }
     .tool-shots { grid-template-columns: 1fr; }
-    /* 特大主标题收敛，避免手机端过大溢出 */
-    .cap-mega { font-size: 2.5rem; margin-bottom: var(--space-10); }
+    /* 特大主标题底部留白收紧（字号已由 clamp 随屏收敛） */
+    .cap-mega { margin-bottom: var(--space-10); }
     /* 工具卡纵排不放满整个屏宽 */
     .tool-card { max-width: 220px; }
     .cap-foot { flex-wrap: wrap; gap: var(--space-3); }

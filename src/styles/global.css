@@ -86,6 +86,14 @@ h1, h2, h3, h4 {
   line-height: var(--type-heading-lh);
   letter-spacing: 0;
   color: var(--color-ink);
+  /* 中文标题在窄屏断行更均衡；长 token 不撑破 */
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+/* 正文/长串兜底：避免长邮箱、技术栈、mono 标注在窄屏撑破容器 */
+p, li, a, span {
+  overflow-wrap: break-word;
 }
 
 .container {
@@ -172,15 +180,19 @@ h1, h2, h3, h4 {
   font-weight: 700;
 }
 
-/* 主标题 —— 大号衬线 1.1 行高（参考图） */
+/* 主标题 —— 大号衬线 1.1 行高（参考图）
+   用 vw 型 clamp：桌面随容器放大、手机自动收敛到合理 floor，避免单一 rem 在窄屏溢出/换行错乱 */
 .section-title {
-  font-size: var(--text-5xl);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
   font-weight: 700;
   line-height: var(--type-heading-lh);
   margin-bottom: var(--space-12);
   color: var(--color-ink);
   max-width: 16em;
   font-family: var(--font-serif);
+  /* 中文标题断行优化：平衡换行，避免首行孤短/末行孤字 */
+  text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 
 /* 档案分隔细线 utility */
@@ -219,16 +231,16 @@ h1, h2, h3, h4 {
   /* 分区纵向留白收敛，消除手机端过大的"空档" */
   .section { padding-block: var(--space-12); }
 
-  /* 大号衬线标题在窄屏收敛到 2.4rem，保持一致的编辑强度 */
-  .section-title { font-size: 2.4rem; margin-bottom: var(--space-10); }
-
   /* 档案头允许换行，避免 tag 被右侧 meta 挤压换行错乱 */
-  .section-head { flex-wrap: wrap; }
-  .section-head .right-nav { gap: var(--space-4); }
+  .section-head { flex-wrap: wrap; gap: var(--space-2); }
+  .section-head .right-nav { gap: var(--space-3); }
+  .section-head .meta { margin-left: auto; }
 }
 
-@media (max-width: 420px) {
-  .section-title { font-size: 2.1rem; }
+@media (max-width: 400px) {
+  .container { padding-inline: 1rem; }
+  .section-title { font-size: 2.05rem; }
+  .section { padding-block: var(--space-10); }
 }
 
 @media (prefers-reduced-motion: reduce) {
