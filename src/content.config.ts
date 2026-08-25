@@ -20,6 +20,8 @@ const cases = defineCollection({
     status: z.enum(['已上线', '内部系统', '开发中']), // 透明徽章
     problem: z.string().min(1),     // "问题 → 我做了什么"
     whatIDid: z.string(),
+    challenge: z.string().default(''), // 关键难点/取舍（诚实，不编造）
+    outcome: z.string().default(''),   // 结果/覆盖面锚点（不造假量级）
     stack: z.array(z.string()).default([]), // 技术栈（橄榄小字）
     evidence: z.string().optional(),// 证据说明
     image: z.string().optional(),   // 脱敏截图/示意槽路径（public/ 下）
