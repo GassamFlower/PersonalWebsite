@@ -186,7 +186,7 @@ p, li, a, span {
 /* 主标题 —— 大号衬线 1.1 行高（参考图）
    用 vw 型 clamp：桌面随容器放大、手机自动收敛到合理 floor，避免单一 rem 在窄屏溢出/换行错乱 */
 .section-title {
-  font-size: clamp(1.8rem, 4.2vw, 3.4rem);
+  font-size: var(--text-mega);
   font-weight: 700;
   line-height: var(--type-heading-lh);
   margin-bottom: var(--space-12);

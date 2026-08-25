@@ -129,7 +129,7 @@ const gates = [
     gap: var(--space-4);
   }
 
-  /* 标题行：4 等分，编号 + 标题 */
+  /* 标题行：4 等分，编号 + 标题（编号内联小标，不再单独成段） */
   .stages {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -137,20 +137,23 @@ const gates = [
   }
   .stage {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: baseline;
     gap: var(--space-2);
   }
+  /* 编号收为 0.85rem 内联小标，做装饰性索引，不再霸占视觉重量 */
   .stage-no {
-    font-family: var(--font-serif);
-    font-size: 2.6rem;
-    font-weight: 700;
-    line-height: 1;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.25;
     color: var(--color-gold);
-    letter-spacing: 0.01em;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+    flex-shrink: 0;
   }
   .stage-title {
-    font-size: var(--text-xl);
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--color-ink);
     letter-spacing: 0.01em;
@@ -252,7 +255,7 @@ const gates = [
       margin-bottom: var(--space-8);
       text-wrap: balance;
     }
-    .stage-no { font-size: 2rem; margin-bottom: var(--space-1); }
-    .stage-title { font-size: var(--text-lg); }
+    .stage-no { font-size: 0.78rem; }
+    .stage-title { font-size: 1.05rem; }
   }
 </style>
