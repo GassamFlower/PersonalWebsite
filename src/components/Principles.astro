@@ -122,15 +122,15 @@ const gates = [
     opacity: 0.85;
     margin-bottom: var(--space-12);
   }
-  /* 特大衬线主标题 —— 参考图 7 */
+  /* 特大衬线主标题 —— 参考图 7（统一口径：--text-mega） */
   .pr-mega {
     font-family: var(--font-serif);
-    font-size: clamp(2.4rem, 5.8vw, 4.6rem);
+    font-size: var(--text-mega);
     font-weight: 700;
-    line-height: 1.1;
+    line-height: 1.12;
     letter-spacing: 0.01em;
     color: var(--color-ink);
-    margin: 0 0 var(--space-12);
+    margin: 0 0 var(--space-10);
   }
   .ai {
     font-family: var(--font-sans);
@@ -160,7 +160,7 @@ const gates = [
   /* 大铜金编号 —— 参考图做事的规矩 */
   .stage-no {
     font-family: var(--font-serif);
-    font-size: 3.4rem;
+    font-size: 2.8rem;
     font-weight: 700;
     line-height: 1;
     color: var(--color-gold);
