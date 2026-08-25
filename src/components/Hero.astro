@@ -139,7 +139,7 @@ const props = [
   }
   .hero-title {
     font-family: var(--font-serif);
-    font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+    font-size: clamp(1.8rem, 4.2vw, 3.2rem);
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: 0;
@@ -206,10 +206,16 @@ const props = [
     .hero-foot { grid-template-columns: 1fr; }
     .hero-prop + .hero-prop { border-left: none; border-top: 1px solid var(--color-ink); padding-left: 0; }
   }
-  @media (max-width: 520px) {
-    /* 窄屏：三条示例卡片更紧凑、更"极小缩略图"不喧宾夺主 */
-    .hero-grid { gap: var(--space-10); }
-    .hero-shots { grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+  @media (max-width: 560px) {
+    /* 窄屏：三条示例卡片统一等高、不纵列错位，避免"大小不一" */
+    .hero-grid { gap: var(--space-8); }
+    .hero-shots {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-2);
+      align-items: stretch;
+    }
     .ui-card { padding: var(--space-2); }
+    .hero-sub { font-size: var(--text-sm); }
+    .hero-foot { margin-top: var(--space-4); }
   }
 </style>

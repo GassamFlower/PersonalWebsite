@@ -36,17 +36,17 @@
   --container-max: 1280px;
   --gutter: clamp(1.5rem, 5vw, 4rem);
 
-  /* ---- 排版（标题占行高 1.05-1.1） ---- */
-  --text-xs: 0.78rem;
-  --text-sm: 0.92rem;
-  --text-base: 1.0625rem;
-  --text-lg: 1.18rem;
-  --text-xl: 1.5rem;
-  --text-2xl: 1.85rem;
-  --text-3xl: 2.4rem;
-  --text-4xl: 3.4rem;
-  --text-5xl: 4.2rem;
-  --text-hero: clamp(3.6rem, 8vw, 6rem);
+  /* ---- 排版（标题占行高 1.05-1.1）· 整体字号收敛一档，站得更紧更克制 ---- */
+  --text-xs: 0.72rem;
+  --text-sm: 0.85rem;
+  --text-base: 1rem;
+  --text-lg: 1.08rem;
+  --text-xl: 1.3rem;
+  --text-2xl: 1.6rem;
+  --text-3xl: 2.1rem;
+  --text-4xl: 2.9rem;
+  --text-5xl: 3.5rem;
+  --text-hero: clamp(3.2rem, 7vw, 5.2rem);
 
   --type-cjk-lh: 1.55;
   --type-heading-lh: 1.1;
@@ -183,7 +183,7 @@ p, li, a, span {
 /* 主标题 —— 大号衬线 1.1 行高（参考图）
    用 vw 型 clamp：桌面随容器放大、手机自动收敛到合理 floor，避免单一 rem 在窄屏溢出/换行错乱 */
 .section-title {
-  font-size: clamp(2.05rem, 5vw, 4rem);
+  font-size: clamp(1.8rem, 4.2vw, 3.4rem);
   font-weight: 700;
   line-height: var(--type-heading-lh);
   margin-bottom: var(--space-12);
@@ -239,7 +239,7 @@ p, li, a, span {
 
 @media (max-width: 400px) {
   .container { padding-inline: 1rem; }
-  .section-title { font-size: 2.05rem; }
+  .section-title { font-size: 1.8rem; }
   .section { padding-block: var(--space-10); }
 }
 
