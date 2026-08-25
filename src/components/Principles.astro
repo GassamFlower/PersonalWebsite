@@ -65,20 +65,6 @@ const gates = [
       </div>
     </div>
 
-      <!-- 4 段描述（在水平线下方） -->
-      <div class="descs">
-        {
-          gates.map((g) => (
-            <div class="desc">
-              {g.desc.split('\n').map((line) => (
-                <p class="line">{line}</p>
-              ))}
-            </div>
-          ))
-        }
-      </div>
-    </div>
-
     <div class="pr-foot">
       <p class="pr-note">知识库与工作台分离，文档前缀排序，单一信源 SSOT。</p>
       <div class="stamp-art" aria-hidden="true">
