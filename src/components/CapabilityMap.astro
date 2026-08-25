@@ -38,8 +38,8 @@ const levelLabel = {
       {
         skills.map((s, i) => (
           <article class={`branch branch-${levelTone[s.data.level]}`}>
+            <span class="branch-no">{String(i + 1).padStart(2, '0')}</span>
             <div class="branch-head">
-              <span class="branch-no">{String(i + 1).padStart(2, '0')}</span>
               <h3 class="branch-domain">{s.data.domain}</h3>
               <span class={`badge badge-${levelTone[s.data.level]}`}>{levelLabel[s.data.level]}</span>
             </div>
@@ -118,12 +118,15 @@ const levelLabel = {
     align-items: start;
   }
   .branch-head {
+    grid-column: 2 / -1;
     display: flex;
     align-items: baseline;
     gap: var(--space-4);
+    flex-wrap: wrap;
   }
   .branch-no {
     grid-column: 1 / 2;
+    grid-row: 1;
     font-family: var(--font-serif);
     font-size: 2.6rem;
     font-weight: 700;
