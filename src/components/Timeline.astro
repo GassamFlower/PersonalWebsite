@@ -1,15 +1,14 @@
 ---
-// Timeline.astro — 参考图 3 · 做过的事
-// 上方横细线 · 左上"档案 03 · 做过的事"
-// 中间单列垂直时间线 + 圆点 + 年份/标题/描述
+// Timeline.astro — 参考图 3 · 做过的事（档案 03 · 纵向档案）
+// 内容真源：src/content/timeline/*.md（真实时间顺序 · 改内容只改 md）
+// 上方横细线 · 左上"档案 03 · 做过的事" · 中间单列垂直时间线
+// 每节点：等宽年份 / 衬线标题 / 一行总述 / 一句更实的过程 / 技术栈锚点 / 档标
 // 左下角三只档案盒（第二只半拉出）+ 圆形存档印章
-const nodes = [
-  { year: '2018—2025', title: '政务系统技术支持', desc: '业务与数据，SQL、远程支持' },
-  { year: '2025', title: '工业运维平台 OPS', desc: '从零搭建，Go+Next.js' },
-  { year: '2025', title: '统一用户中心 UUC', desc: '企业内部 SSO 权限中台' },
-  { year: '2026', title: '工程用车助手', desc: '外单微信小程序，已上线交付' },
-  { year: '2026', title: 'Vibe Coding 方法论与知识库', desc: '给 AI 定规矩、留体系' },
-];
+import { getCollection } from 'astro:content';
+
+const nodes = (await getCollection('timeline'))
+  .sort((a, b) => a.id.localeCompare(b.id, 'zh-Hans-CN', { numeric: true }))
+  .map((n) => n.data);
 ---
 
 <section id="timeline" class="section timeline">
@@ -27,9 +26,16 @@ const nodes = [
         nodes.map((n) => (
           <article class="tl-node">
             <span class="tl-marker" aria-hidden="true"></span>
-            <span class="tl-year">{n.year}</span>
-            <h3 class="tl-title">{n.title}</h3>
-            <p class="tl-desc">{n.desc}</p>
+            <div class="tl-head">
+              <span class="tl-year">{n.year}</span>
+              {n.flag && <span class="tl-flag">{n.flag}</span>}
+            </div>
+            <h3 class="tl-name">{n.title}</h3>
+            <p class="tl-role">{n.role}</p>
+            <p class="tl-desc">{n.detail}</p>
+            {n.stack.length > 0 && (
+              <p class="tl-stack">{n.stack.join('　/　')}</p>
+            )}
           </article>
         ))
       }
@@ -99,7 +105,7 @@ const nodes = [
   }
   .tl-node {
     position: relative;
-    padding-bottom: var(--space-10);
+    padding-bottom: var(--space-9);
   }
   .tl-node:last-child { padding-bottom: 0; }
   .tl-marker {
@@ -112,26 +118,56 @@ const nodes = [
     background: var(--color-ink);
     box-shadow: 0 0 0 3px var(--color-base);
   }
+  .tl-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
   .tl-year {
-    display: block;
+    display: inline-block;
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     color: var(--color-ink);
-    margin-bottom: var(--space-1);
     letter-spacing: 0.04em;
   }
-  .tl-title {
+  .tl-flag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
+    color: var(--color-gold);
+    border: 1px solid var(--color-line);
+    padding: 0.15em 0.6em;
+    border-radius: 99px;
+  }
+  .tl-name {
     font-family: var(--font-serif);
     font-size: 1.4rem;
     font-weight: 700;
     line-height: 1.25;
-    margin-bottom: var(--space-1);
+    margin: var(--space-2) 0 var(--space-1);
+  }
+  .tl-role {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-bottom: var(--space-2);
   }
   .tl-desc {
     font-family: var(--font-sans);
     font-size: var(--text-sm);
     color: var(--color-line);
     line-height: 1.7;
+    max-width: 56ch;
+  }
+  .tl-stack {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-line);
+    letter-spacing: 0.05em;
+    margin-top: var(--space-3);
   }
   .tl-art {
     margin-top: var(--space-12);

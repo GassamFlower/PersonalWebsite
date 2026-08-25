@@ -46,4 +46,17 @@ const skills = defineCollection({
   }),
 });
 
-export const collections = { growth, cases, skills };
+// 做过的事（真实时间线 · 纵向档案 · 档案 03）
+const timeline = defineCollection({
+  type: 'content',
+  schema: z.object({
+    year: z.string().min(1),       // 等宽年份，如 "2018—2025"
+    title: z.string().min(1),      // 项目名（衬线）
+    flag: z.string().default(''),  // 诚实档标，如 内部系统 / 外单·已上线 / 方法论
+    role: z.string().min(1),       // 一行总述（原设计的一行说明）
+    detail: z.string().min(1),     // 一句更实的过程描述（从 case 提取，不编造）
+    stack: z.array(z.string()).default([]), // 技术栈锚点
+  }),
+});
+
+export const collections = { growth, cases, skills, timeline };
