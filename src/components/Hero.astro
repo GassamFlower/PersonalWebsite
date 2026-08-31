@@ -11,7 +11,9 @@ const props = [
 ---
 
 <section id="hero" class="section hero">
-  <div class="container">
+  <!-- v4 3D 粒子背景（单色墨蓝·背景层·克制炫技）· JS/WebGL 不可用时不渲染不影响内容 -->
+  <canvas class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="container hero-inner">
     <div class="section-head">
       <span class="tag"><b>档案 01</b> · PERSONAL DOSSIER · 独立系统建构者</span>
     </div>
@@ -115,9 +117,107 @@ const props = [
   </div>
 </section>
 
+<script>
+  // v4 3D 粒子背景（Three.js · 单色墨蓝 · 仅 Hero 高光点）
+  // 纪律：prefers-reduced-motion 或 WebGL 不可用时直接不渲染，内容全量可见（降级为纯色底 + 前景文字）
+  import * as THREE from 'three';
+
+  (function initHeroScene() {
+    const canvas = document.querySelector('.hero-canvas');
+    const hero = document.getElementById('hero');
+    if (!canvas || !hero) return;
+
+    // 严格降级：减弱动效偏好 / 无 WebGL → 直接不画，canvas 隐藏
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const gl = canvas.getContext('webgl');
+    if (!gl) return;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    // 移动端降 DPR，控性能
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    renderer.setPixelRatio(dpr);
+    renderer.setClearColor(0x000000, 0);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
+    camera.position.z = 12;
+
+    // 墨蓝单色粒子（低透明、冷档案）
+    const COUNT = window.innerWidth < 720 ? 900 : 2200;
+    const positions = new Float32Array(COUNT * 3);
+    for (let i = 0; i < COUNT; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 24;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 16;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 12;
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    const mat = new THREE.PointsMaterial({
+      color: 0x2e4a8c, // 墨蓝
+      size: 0.08,
+      transparent: true,
+      opacity: 0.5,
+      sizeAttenuation: true,
+      blending: THREE.AdditiveBlending,
+    });
+    const points = new THREE.Points(geo, mat);
+    scene.add(points);
+
+    // 鼠标视差（缓动）
+    let targetRotX = 0, targetRotY = 0, curRotX = 0, curRotY = 0;
+    window.addEventListener('pointermove', (e) => {
+      const nx = e.clientX / window.innerWidth - 0.5;
+      const ny = e.clientY / window.innerHeight - 0.5;
+      targetRotY = nx * 0.4;
+      targetRotX = ny * 0.25;
+    }, { passive: true });
+
+    function resize() {
+      const w = hero.clientWidth;
+      const h = hero.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    let raf = 0;
+    function tick() {
+      curRotX += (targetRotX - curRotX) * 0.05;
+      curRotY += (targetRotY - curRotY) * 0.05;
+      points.rotation.x = curRotX;
+      points.rotation.y = curRotY;
+      points.rotation.z += 0.0006; // 极慢自转
+      renderer.render(scene, camera);
+      raf = requestAnimationFrame(tick);
+    }
+    // 等首帧确保 canvas 有尺寸
+    requestAnimationFrame(() => { resize(); tick(); });
+
+    // 清理（Astro 若切换视图时）
+    // Astro SPA 无路由，保持常驻；此处预留销毁接口防泄漏不过度
+  })();
+</script>
+
 <style>
   .hero {
+    position: relative;
+    overflow: hidden;
     padding-top: var(--space-10);
+  }
+  .hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
   }
   .hero-rule {
     height: 1px;
