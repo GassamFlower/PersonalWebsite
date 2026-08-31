@@ -87,7 +87,7 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 
                             <rect x="30" y="150" width="90" height="34" fill="none" stroke="var(--color-ink)" stroke-width="1.2"/>
                             <line x1="42" y1="167" x2="108" y2="167" stroke="var(--color-line)" stroke-width="0.8"/>
                             <line x1="75" y1="90" x2="75" y2="150" stroke="var(--color-accent)" stroke-width="1" stroke-dasharray="4 3"/>
-                            <rect x="236" y="56" width="104" height="122" rx="4" fill="none" stroke="var(--color-gold)" stroke-width="1.2"/>
+                            <rect x="236" y="56" width="104" height="122" rx="4" fill="none" stroke="var(--color-accent)" stroke-width="1.2"/>
                             <line x1="248" y1="72" x2="320" y2="72" stroke="var(--color-faint)" stroke-width="0.8"/>
                             <line x1="248" y1="140" x2="320" y2="140" stroke="var(--color-faint)" stroke-width="0.8"/>
                             <circle cx="248" cy="115" r="3" fill="var(--color-accent)" opacity="0.8"/>
@@ -126,7 +126,7 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 
                             <line x1="260" y1="92" x2="324" y2="92" stroke="var(--color-line)" stroke-width="0.8"/>
                             <line x1="96" y1="92" x2="250" y2="92" stroke="var(--color-accent)" stroke-width="1.2"/>
                             <polygon points="246,86 258,92 246,98" fill="var(--color-accent)"/>
-                            <rect x="150" y="120" width="110" height="26" rx="2" fill="none" stroke="var(--color-gold)" stroke-width="1"/>
+                            <rect x="150" y="120" width="110" height="26" rx="2" fill="none" stroke="var(--color-accent)" stroke-width="1"/>
                             <line x1="164" y1="132" x2="250" y2="132" stroke="var(--color-faint)" stroke-width="0.8"/>
                           </g>
                         )}
@@ -145,6 +145,26 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 
 </section>
 
 <style>
+  /* v4 深墨面板：唯一暗色高潮区（视觉方向-v4 §3/§6-4）
+     仅改暗区自身的文字/线色；.shot 白卡片保持原 token，不受影响。 */
+  .cases {
+    background: #17171b;
+    color: #f0f0ec;
+  }
+  .cases .section-title { color: #f0f0ec; }
+  .cases .section-head .tag { color: #d8d8d4; }
+  .cases .section-head .tag b { color: var(--color-accent); }
+  .cases .section-head .meta { color: #a9a9a4; }
+  .cases .case-card { border-top-color: #4a4a4a; }
+  .cases .case-card:last-child { border-bottom-color: #4a4a4a; }
+  .cases .case-title { color: #f0f0ec; }
+  .cases .case-line { color: #e4e4e0; }
+  .cases .case-line b { color: var(--color-accent); }
+  .cases .case-stack { color: #a9a9a4; }
+  .cases .case-status,
+  .cases .case-status .status-dot,
+  .cases .case-outcome { color: #e4e4e0; }
+  .cases .badge { color: #c8c8c4; }
   .case-list {
     display: flex;
     flex-direction: column;
@@ -170,7 +190,7 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 
     font-size: var(--text-5xl);
     font-weight: 700;
     line-height: 0.85;
-    color: var(--color-gold);
+    color: var(--color-accent);
   }
   .case-title {
     font-size: 1.4rem;
@@ -186,7 +206,7 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 
     font-family: var(--font-sans);
   }
   .badge-ok { color: var(--color-line); }
-  .badge-wc { color: var(--color-gold); }
+  .badge-wc { color: var(--color-accent); }
   .case-line {
     font-size: var(--text-sm);
     line-height: 1.8;
@@ -196,7 +216,7 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 
   .case-line b {
     font-family: var(--font-mono);
     font-size: var(--text-xs);
-    color: var(--color-gold);
+    color: var(--color-accent);
     letter-spacing: 0.1em;
   }
   .case-stack {
@@ -222,8 +242,8 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape']; // 01 竖 / 
   }
   .status-ok { color: var(--color-ink); }
   .status-ok .status-dot { background: var(--color-accent); }
-  .status-wc { color: var(--color-gold); }
-  .status-wc .status-dot { background: var(--color-gold); }
+  .status-wc { color: var(--color-accent); }
+  .status-wc .status-dot { background: var(--color-accent); }
 
   /* ---- 截图槽位（真实截图铺满） ---- */
   .case-visual {

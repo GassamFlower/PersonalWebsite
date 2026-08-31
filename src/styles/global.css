@@ -5,15 +5,15 @@
    ============================================================ */
 
 :root {
-  /* ---- 配色（对齐 docs/视觉方向-v3-架构门.md 锁定 token，属参考图生成依据） ---- */
-  --color-base: #f2efe9;          /* 骨白/暖灰白 · 主底   #F2EFE9 */
-  --color-ink: #1c1a17;           /* 近黑深灰 · 主文字    #1C1A17 */
-  --color-line: #8a8580;          /* 中性灰 · 说明/细线   #8A8580 */
-  --color-faint: #b8b3a8;         /* 浅灰   · 极细辅助线/占位虚框 */
-  --color-accent: #4A5A3A;        /* 深橄榄绿 · 全站唯一识别色 */
-  --color-gold: #8B6F47;          /* 铜棕/暗金 · 极少量点睛 */
-  --color-surface: #fdfbf5;       /* 卡片/占位槽/按钮面 · 略偏暖白（统一分散的硬编码底色） */
-  --color-on-accent: #fdfbf5;     /* 铜金/强调底上的文字/图标色（原 .btn-solid 硬编码） */
+  /* ---- 配色（对齐 docs/视觉方向-v4-墨水档案：冷白纸 + 墨黑 + 墨蓝 Ink） ---- */
+  --color-base: #f6f6f4;          /* 冷白纸 · 主底 */
+  --color-ink: #1a1a17;           /* 墨黑 · 主文字 */
+  --color-line: #8b8b88;          /* 冷灰 · 说明/细线 */
+  --color-faint: #c8c8c3;         /* 浅灰 · 极细辅助线/占位虚框 */
+  --color-accent: #2e4a8c;        /* 墨蓝 Ink · 全站唯一识别色 */
+  --color-accent-soft: #e9eef6;   /* 墨蓝浅底（画区/徽章底） */
+  --color-surface: #ffffff;       /* 卡片/占位槽/按钮面 · 纯白面 */
+  --color-on-accent: #ffffff;     /* 墨蓝底上的文字/图标色 */
   --shadow: 0 4px 14px color-mix(in srgb, var(--color-ink) 8%, transparent); /* 极轻阴影 */
 
   /* ---- 字体（标题用宋体细高对比） ---- */
@@ -150,7 +150,7 @@ p, li, a, span {
   gap: var(--space-4);
 }
 .section-head .tag b {
-  color: var(--color-gold);
+  color: var(--color-accent);
   font-weight: 600;
   margin-right: 0.5ch;
   font-family: var(--font-mono);
@@ -158,7 +158,7 @@ p, li, a, span {
   letter-spacing: 0.08em;
 }
 .section-head .tag {
-  color: var(--color-accent); /* 眉题用深橄榄识别色（架构门 §6） */
+  color: var(--color-accent); /* 眉题用墨蓝识别色（视觉方向-v4） */
   letter-spacing: 0.04em;
 }
 .section-head .meta {
@@ -223,13 +223,13 @@ p, li, a, span {
   transition: background-color 0.2s, color 0.2s;
 }
 .btn-solid {
-  background: var(--color-gold);
+  background: var(--color-accent);
   color: var(--color-on-accent);
   padding: var(--space-4) var(--space-10);
   font-size: var(--text-base);
 }
 .btn-solid:hover {
-  background: color-mix(in srgb, var(--color-gold) 88%, #000);
+  background: color-mix(in srgb, var(--color-accent) 88%, #000);
 }
 
 /* ============================================================

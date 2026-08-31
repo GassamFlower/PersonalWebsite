@@ -71,10 +71,10 @@ const nodes = (await getCollection('timeline'))
 
         <!-- 存档印章 -->
         <g transform="translate(238 80)">
-          <circle cx="34" cy="34" r="34" fill="none" stroke="var(--color-gold)" stroke-width="1.6"/>
-          <circle cx="34" cy="34" r="28" fill="none" stroke="var(--color-gold)" stroke-width="0.7"/>
+          <circle cx="34" cy="34" r="34" fill="none" stroke="var(--color-accent)" stroke-width="1.6"/>
+          <circle cx="34" cy="34" r="28" fill="none" stroke="var(--color-accent)" stroke-width="0.7"/>
           <text x="34" y="42" text-anchor="middle" font-family="var(--font-serif)"
-            font-size="18" fill="var(--color-gold)" font-weight="700">存档</text>
+            font-size="18" fill="var(--color-accent)" font-weight="700">存档</text>
         </g>
       </svg>
     </div>
@@ -100,8 +100,8 @@ const nodes = (await getCollection('timeline'))
     top: 8px;
     bottom: 8px;
     width: 1px;
-    background: var(--color-ink);
-    opacity: 0.7;
+    background: var(--color-accent);
+    opacity: 0.55;
   }
   .tl-node {
     position: relative;
@@ -115,7 +115,7 @@ const nodes = (await getCollection('timeline'))
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: var(--color-ink);
+    background: var(--color-accent);
     box-shadow: 0 0 0 3px var(--color-base);
   }
   .tl-head {
@@ -136,7 +136,7 @@ const nodes = (await getCollection('timeline'))
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     letter-spacing: 0.06em;
-    color: var(--color-gold);
+    color: var(--color-accent);
     border: 1px solid var(--color-line);
     padding: 0.15em 0.6em;
     border-radius: var(--radius);
