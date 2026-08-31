@@ -12,6 +12,9 @@
   --color-faint: #b8b3a8;         /* 浅灰   · 极细辅助线/占位虚框 */
   --color-accent: #4A5A3A;        /* 深橄榄绿 · 全站唯一识别色 */
   --color-gold: #8B6F47;          /* 铜棕/暗金 · 极少量点睛 */
+  --color-surface: #fdfbf5;       /* 卡片/占位槽/按钮面 · 略偏暖白（统一分散的硬编码底色） */
+  --color-on-accent: #fdfbf5;     /* 铜金/强调底上的文字/图标色（原 .btn-solid 硬编码） */
+  --shadow: 0 4px 14px color-mix(in srgb, var(--color-ink) 8%, transparent); /* 极轻阴影 */
 
   /* ---- 字体（标题用宋体细高对比） ---- */
   --font-serif: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
@@ -53,6 +56,11 @@
 
   --type-cjk-lh: 1.55;
   --type-heading-lh: 1.1;
+
+  /* ---- 圆角 & 动效曲线（架构 §5 圆角 0–2px；§7 克制动效） ---- */
+  --radius: 2px;                 /* 统一圆角（0–2px） */
+  --radius-pill: 999px;          /* 仅状态徽章使用（架构明确允许） */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);  /* 淡入/位移缓动 */
 }
 
 *,
@@ -209,14 +217,14 @@ p, li, a, span {
 .btn {
   display: inline-block;
   padding: var(--space-3) var(--space-7);
-  border-radius: 2px;
+  border-radius: var(--radius);
   font-size: var(--text-sm);
   letter-spacing: 0.04em;
   transition: background-color 0.2s, color 0.2s;
 }
 .btn-solid {
   background: var(--color-gold);
-  color: #fdfbf5;
+  color: var(--color-on-accent);
   padding: var(--space-4) var(--space-10);
   font-size: var(--text-base);
 }
