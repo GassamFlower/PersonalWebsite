@@ -1,0 +1,144 @@
+.prRule {
+  height: 1px;
+  background: var(--color-ink);
+  opacity: 0.85;
+  margin-bottom: var(--space-12);
+}
+.prMega {
+  font-family: var(--font-serif);
+  font-size: var(--text-mega);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+  margin: 0 0 var(--space-10);
+}
+.ai {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+}
+.flow {
+  display: grid;
+  gap: var(--space-4);
+}
+.stages {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+.stage {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+.stageNo {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+  flex-shrink: 0;
+}
+.stageTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+.flowLine {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  align-items: center;
+  padding: var(--space-2) 0;
+}
+.grayRail {
+  position: absolute;
+  left: 0;
+  right: 60px;
+  top: 50%;
+  height: 1px;
+  transform: translateY(-50%);
+  background: var(--color-ink);
+  opacity: 0.55;
+}
+.flowLine .node {
+  position: relative;
+  width: 11px;
+  height: 11px;
+  margin-inline: auto;
+  border-radius: 50%;
+  background: var(--color-base);
+  border: 1.6px solid var(--color-accent);
+  z-index: 1;
+}
+.flowLine .finish {
+  position: relative;
+  justify-self: end;
+  z-index: 1;
+}
+.finishSvg {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+.descs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  border-top: 1px solid var(--color-faint);
+  padding-top: var(--space-5);
+}
+.desc {
+  font-size: var(--text-sm);
+  line-height: 1.8;
+  color: var(--color-line);
+  white-space: pre-line;
+  letter-spacing: 0.02em;
+  padding-right: var(--space-4);
+}
+.desc .line { display: block; margin: 0; }
+.prFoot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-12);
+  margin-top: var(--space-16);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-ink);
+}
+.prNote {
+  font-size: var(--text-sm);
+  color: var(--color-line);
+  letter-spacing: 0.04em;
+  max-width: 36em;
+  line-height: 1.8;
+}
+.stampArt { flex-shrink: 0; }
+.stampSvg { width: 150px; height: auto; }
+@media (max-width: 960px) {
+  .flow { gap: var(--space-5); }
+  .stages, .descs { grid-template-columns: repeat(2, 1fr); gap: var(--space-6) var(--space-4); }
+  .flowLine { grid-template-columns: repeat(4, 1fr) auto; }
+}
+@media (max-width: 560px) {
+  .stages, .descs { grid-template-columns: 1fr; }
+  .flowLine { display: none; }
+  .prFoot { flex-direction: column; align-items: flex-start; gap: var(--space-6); }
+  .prMega {
+    font-size: 1.8rem;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-8);
+    text-wrap: balance;
+  }
+  .stageNo { font-size: 0.78rem; }
+  .stageTitle { font-size: 1.05rem; }
+}

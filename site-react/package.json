@@ -1,0 +1,29 @@
+{
+  "name": "personal-website-react",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal Website · 第三版换栈（Vite + React + r3f + 经典 CSS）· 纯静态单页站",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && vite build --config vite.config.ssr.ts && node scripts/prerender.mjs",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.185.1",
+    "@react-three/fiber": "^8.17.10",
+    "@react-three/drei": "^9.121.0",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@types/node": "^22.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "typescript": "^5.5.0",
+    "vite": "^6.0.0"
+  }
+}

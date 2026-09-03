@@ -1,0 +1,101 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--space-10);
+}
+.heroInner {
+  position: relative;
+  z-index: 1;
+}
+.heroRule {
+  height: 1px;
+  background: var(--color-ink);
+  opacity: 0.85;
+  margin-bottom: var(--space-16);
+}
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--space-12);
+  align-items: end;
+  margin-bottom: var(--space-16);
+}
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.heroTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-mega);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: var(--color-ink);
+  margin: 0;
+}
+.heroSub {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--color-ink);
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+}
+.heroFocus {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid var(--color-accent);
+  width: fit-content;
+  letter-spacing: 0.05em;
+}
+.heroShots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+.uiCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-faint);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  box-shadow: var(--shadow);
+}
+.uiCard:nth-child(2) { margin-top: var(--space-8); }
+.uiCard:nth-child(3) { margin-top: var(--space-16); }
+.uiCard svg { width: 100%; height: auto; }
+.heroFoot {
+  display: flex;
+  gap: var(--space-12);
+  border-top: 1px solid var(--color-ink);
+  padding-top: var(--space-8);
+}
+.heroProp {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-ink);
+  letter-spacing: 0.04em;
+}
+.heroProp .arrow { color: var(--color-accent); transition: transform 0.2s; }
+.heroProp:hover .arrow { transform: translateX(4px); }
+@media (max-width: 960px) {
+  .heroGrid { grid-template-columns: 1fr; gap: var(--space-8); }
+  .heroShots { max-width: 560px; }
+  .uiCard:nth-child(2), .uiCard:nth-child(3) { margin-top: 0; }
+}
+@media (max-width: 640px) {
+  .heroFoot { grid-template-columns: 1fr; flex-direction: column; gap: var(--space-3); }
+}
+@media (max-width: 560px) {
+  .heroGrid { gap: var(--space-8); }
+  .heroShots {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+    align-items: stretch;
+  }
+  .uiCard { padding: var(--space-2); }
+  .heroSub { font-size: var(--text-sm); }
+  .heroFoot { margin-top: var(--space-4); }
+}

@@ -1,0 +1,248 @@
+/* ============================================================
+   global.css — 设计 token（CSS Modules 版）
+   值从 Astro v4 版原样平移：冷白纸 + 墨黑 + 墨蓝 INK（脱敏容器外）
+   ============================================================ */
+
+:root {
+  /* ---- 配色（对齐 docs/视觉方向-v4：冷白纸 + 墨黑 + 墨蓝 Ink） ---- */
+  --color-base: #f6f6f4;          /* 冷白纸 · 主底 */
+  --color-ink: #1a1a17;           /* 墨黑 · 主文字 */
+  --color-line: #8b8b88;          /* 冷灰 · 说明/细线 */
+  --color-faint: #c8c8c3;         /* 浅灰 · 极细辅助线/占位虚框 */
+  --color-accent: #2e4a8c;        /* 墨蓝 Ink · 全站唯一识别色 */
+  --color-accent-soft: #e9eef6;   /* 墨蓝浅底（画区/徽章底） */
+  --color-surface: #ffffff;       /* 卡片/占位槽/按钮面 · 纯白面 */
+  --color-on-accent: #ffffff;     /* 墨蓝底上的文字/图标色 */
+  --shadow: 0 4px 14px color-mix(in srgb, var(--color-ink) 8%, transparent); /* 极轻阴影 */
+
+  /* 深墨面板（Cases 暗区专属 · v4 唯一暗色高潮区） */
+  --dpanel-bg: #17171b;
+  --dpanel-ink: #f0f0ec;
+  --dpanel-line: #e4e4e0;
+  --dpanel-muted: #a9a9a4;
+  --dpanel-faint: #c8c8c4;
+  --dpanel-rule: #4a4a4a;
+
+  /* ---- 字体（标题衬线细高对比） ---- */
+  --font-serif: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
+
+  /* ---- 间距 ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 1.75rem;
+  --space-8: 2rem;
+  --space-9: 2.25rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --container-max: 1280px;
+  --gutter: clamp(1.5rem, 5vw, 4rem);
+
+  /* ---- 排版（标题行高 1.05-1.1 · 站得更紧更克制） ---- */
+  --text-xs: 0.72rem;
+  --text-sm: 0.85rem;
+  --text-base: 1rem;
+  --text-lg: 1.08rem;
+  --text-xl: 1.3rem;
+  --text-2xl: 1.6rem;
+  --text-3xl: 2.1rem;
+  --text-4xl: 2.9rem;
+  --text-5xl: 3.5rem;
+  --text-hero: clamp(3.2rem, 7vw, 5.2rem);
+  --text-mega: clamp(1.6rem, 3vw, 2.5rem);
+
+  --type-cjk-lh: 1.55;
+  --type-heading-lh: 1.1;
+
+  /* ---- 圆角 & 动效曲线（架构 §5 圆角 0–2px；§7 克制动效） ---- */
+  --radius: 2px;
+  --radius-pill: 999px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-base);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--type-cjk-lh);
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; cursor: pointer; border: none; background: none; }
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: var(--type-heading-lh);
+  letter-spacing: 0;
+  color: var(--color-ink);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+p, li, a, span { overflow-wrap: break-word; }
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* 档案分隔横线 per-section */
+.rule {
+  height: 1px;
+  background: var(--color-ink);
+  opacity: 0.85;
+  border: 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: var(--space-3) var(--space-7);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  transition: background-color 0.2s, color 0.2s;
+}
+.btn-solid {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  padding: var(--space-4) var(--space-10);
+  font-size: var(--text-base);
+}
+.btn-solid:hover {
+  background: color-mix(in srgb, var(--color-accent) 88%, #000);
+}
+
+/* ---- 分区骨架（跨组件共享） ---- */
+.section {
+  padding-block: var(--space-16);
+  scroll-margin-top: 4rem;
+}
+
+/* 轻动效 fade-up（克制动效，由 useReveal 控制） */
+.section.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.section.reveal.in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  .section.reveal,
+  .section.reveal.in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* 档案头 —— 左上"档案 NN · 名字"，上接横线（共享 utility） */
+.section-head {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.section-head .tag b {
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-right: 0.5ch;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+}
+.section-head .tag {
+  color: var(--color-accent);
+  letter-spacing: 0.04em;
+}
+.section-head .meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-line);
+  letter-spacing: 0.1em;
+}
+.section-head .right-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+.section-head .right-nav a {
+  color: var(--color-ink);
+  opacity: 0.85;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  letter-spacing: 0.04em;
+}
+.section-head .right-nav a:hover { opacity: 1; }
+
+/* 主标题 —— 大号衬线（共享 utility） */
+.section-title {
+  font-size: var(--text-mega);
+  font-weight: 700;
+  line-height: var(--type-heading-lh);
+  margin-bottom: var(--space-12);
+  color: var(--color-ink);
+  max-width: 16em;
+  font-family: var(--font-serif);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+/* 档案分隔细线 utility */
+.rule {
+  height: 1px;
+  background: var(--color-ink);
+  opacity: 0.85;
+  border: 0;
+}
+
+@media (max-width: 720px) {
+  .section { padding-block: var(--space-12); }
+  .container { padding-inline: 1.25rem; }
+}
+@media (max-width: 400px) {
+  .container { padding-inline: 1rem; }
+  .section-title { font-size: 1.8rem; }
+  .section { padding-block: var(--space-10); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

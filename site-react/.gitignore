@@ -1,0 +1,6 @@
+# site-react — 依赖与构建产物（不提交）
+node_modules/
+dist/
+dist-server/
+*.log
+.DS_Store

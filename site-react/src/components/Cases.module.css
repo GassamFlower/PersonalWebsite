@@ -1,0 +1,131 @@
+/* Cases — 档案 04 深墨面板 */
+.cases {
+  background: #17171b;
+  color: #f0f0ec;
+}
+/* 深墨面板内覆盖共享 global 类（section-title / section-head） */
+.cases :global(.section-title) { color: #f0f0ec; }
+.cases :global(.section-head .tag) { color: #d8d8d4; }
+.cases :global(.section-head .tag b) { color: var(--color-accent); }
+.cases :global(.section-head .meta) { color: #a9a9a4; }
+.casesTitle { color: #f0f0ec; }
+
+.caseList {
+  display: flex;
+  flex-direction: column;
+}
+.caseCard {
+  border-top: 1px solid #4a4a4a;
+  padding-block: var(--space-10);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+.caseCard:last-child { border-bottom: 1px solid #4a4a4a; }
+.caseHead {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-6);
+  margin-bottom: var(--space-5);
+}
+.caseNo {
+  font-family: var(--font-serif);
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  line-height: 0.85;
+  color: var(--color-accent);
+}
+.caseTitle {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+  color: #f0f0ec;
+  margin-bottom: var(--space-2);
+}
+.badge {
+  display: inline-block;
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: #c8c8c4;
+  font-family: var(--font-sans);
+}
+.caseLine { color: #e4e4e0; }
+.caseLine b { color: var(--color-accent); font-weight: 600; }
+.caseLine { font-size: var(--text-sm); line-height: 1.8; margin-bottom: var(--space-3); }
+.caseStack {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: #a9a9a4;
+  letter-spacing: 0.05em;
+  margin: var(--space-4) 0 var(--space-4);
+}
+.caseStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  color: #e4e4e0;
+  font-size: var(--text-sm);
+}
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  display: inline-block;
+}
+.caseOutcome .statusDot { color: #e4e4e0; }
+
+/* 截图槽 */
+.caseVisual { min-width: 0; }
+.shot {
+  position: relative;
+  border: 1px solid var(--color-faint);
+  background: var(--color-surface);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shot_portrait { aspect-ratio: 3 / 4; }
+.shot_landscape { aspect-ratio: 4 / 3; }
+.shotReal { padding: 0; }
+.frameImg { width: 100%; height: 100%; object-fit: cover; }
+.shotSlot { flex-direction: column; gap: var(--space-4); }
+.slotType {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-line);
+  letter-spacing: 0.05em;
+}
+.slotSchematic {
+  width: 86%;
+  height: auto;
+}
+.slotHint {
+  position: absolute;
+  bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-faint);
+  letter-spacing: 0.05em;
+}
+@media (max-width: 860px) {
+  .caseCard {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .caseNo { font-size: var(--text-4xl); }
+}
+@media (max-width: 520px) {
+  .caseHead { align-items: baseline; gap: var(--space-3); }
+  .caseNo { font-size: var(--text-3xl); }
+  .caseTitle { font-size: var(--text-xl); margin-bottom: 0; }
+  .shot { max-width: 300px; margin-inline: auto; }
+  .caseInfo { grid-column: 1 / -1; }
+  .caseCard { padding-block: var(--space-6); }
+}
