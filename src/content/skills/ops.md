@@ -1,14 +1,20 @@
 ---
 order: 6
 domain: 运维与部署
-level: 在学
-tagline: 能完成基础的部署与日常运维工作，深层专项在持续学习。
+level: 已交付
+tagline: 从零搭过一整套自建的内网开发运维平台，部署、备份、监控、排障能闭环。
 skills:
-  - name: 静态站点部署
-    note: 本项目用 GitHub Pages 自动部署（CI/CD 流水线）
-  - name: 后端服务部署
-    note: 有过把内部系统 / 云开发服务部署运行的实操
+  - name: 私有化基础设施搭建
+    note: 从零搭起一台内网开发运维平台（Hyper-V + Ubuntu VM + Docker）
+  - name: 容器编排与部署
+    note: 全程用 docker run 拉起私有代码仓 / 数据库 / CI / 容器面板 / 网关 / 备份 全套服务
+  - name: 备份与灾难恢复
+    note: 每日加密去重备份 + 数据库逻辑备份，并做了恢复演练验证可用
+  - name: 监控与排障
+    note: 容器 / 磁盘 / 备份状态监控，沉淀问题复盘与分层排障方法
+  - name: 静态站点与后端服务部署
+    note: 本项目用 GitHub Pages 自动部署；内部系统与云服务均部署运行
   - name: Linux / 网络基础
-    note: 能完成很多基础与日常实用工作，深层专项在持续学习
-evidence: 本站在线部署运行中
+    note: 在 Linux 环境部署 VM、配网、挂存储、起服务的完整实操
+evidence: 一套内网私有化开发运维平台分阶段全验收通过（内部环境）
 ---

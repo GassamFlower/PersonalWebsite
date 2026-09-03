@@ -5,7 +5,7 @@ level: 会用
 tagline: 会建表、写 SQL、做报表与数据分析；深层优化持续精进。
 skills:
   - name: PostgreSQL
-    note: OPS 资产 / 监控 / 巡检 / 工单等模块用 PostgreSQL 存数据
+    note: OPS 资产 / 监控 / 巡检 / 工单等模块用 PostgreSQL 存数据；并独立部署过 PG 服务（数据落块设备、独立库/角色、每日 dump）
   - name: SQL / 报表
     note: 政务系统 8 年做 SQL 报表、数据核对与口径梳理
   - name: 表结构设计
