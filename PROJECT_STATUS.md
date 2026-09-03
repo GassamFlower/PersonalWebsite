@@ -9,8 +9,8 @@
 
 - **项目名称**：Personal Website（个人网站 · 接单交付凭证）
 - **开始日期**：2026-08
-- **当前状态**：架构/上线门推进中；**第三版换栈已授权**（Astro→Vite+React+r3f）；Astro 版先上线、React 版并行重建（site-react/ 9 区已迁移 + prerender 落地，构建通过）
-- **当前门禁**：架构门 → 上线门（推进中）；React 重建构建通过待浏览器视觉验证
+- **当前状态**：**Astro 版已接 GitHub 上线**（workflow build+deploy success，URL `https://gassamflower.github.io/PersonalWebsite/`）；第三版换栈已授权，Astro 版先上线达成；React 并行工作区已提交（site-react/），视觉细节深化待推进
+- **当前门禁**：上线门推进中（Astro 已上线待用户浏览器确认 URL）；React 版重建构建通过待视觉深化
 
 ---
 
@@ -39,9 +39,9 @@
 - [x] 实施真源结构落盘（src/content/：案例 4 + 成长 3，schema 校验）
 - [x] 部署流水线（.github/workflows/deploy.yml · GitHub Pages）
 
-### 待用户动作（推进上线门）
-- [ ] 接 GitHub 远端 + 推送 main → Pages 自动部署（唯一推荐 GitHub Pages）
-- [ ] 上线门：可访问 URL + 匿名化复核
+### 上线门（Astro 已部署，待浏览器确认）
+- [x] 接 GitHub 远端 + 推送 main → Pages 自动部署（`gh` 已登录、origin 已设、workflow `success`）
+- [ ] 上线门：可访问 URL + 匿名化复核（URL 在浏览器打开确认，本环境无外网浏览）
 
 ---
 
@@ -123,6 +123,7 @@
 | 2026-08 | **第三版换栈授权**：Astro → Vite + React + r3f + CSS Modules；宪法更新 v0.3(§35-40)，docs(g/d/e/c) 更新 | 用户确认四决策：改宪法+docs / CSS Modules+token / brandkit 文档化规范+组件 / 3D 限 Hero 1 处；上线策略采纳「Astro 先上线→React 并行重建→就绪切换」 |
 | 2026-08 | **React 版重建（site-react/）**：9 区全部迁移（Hero/Story/Timeline/Cases/CapabilityMap/Growth/Principles/Contact/Footer+SiteNav）；内容仍读根 src/content/（真源），r3f 粒子仅 Hero；CSS Modules + 全局 token | `tsc` + `vite build` 通过；内容 md 已进 bundle（工程用车助手 / 2026-08 验证在） |
 | 2026-08 | **用构建期预渲染(SSR·prerender)守住宪法 §17**：`entry-server.tsx` + `vite.config.ssr.ts` + `scripts/prerender.mjs`，把 9 区全部渲染进 dist/index.html#root，客户端 hydrateRoot 水合 | 纯 CSR 产物 #root 为空壳违背「无 JS 关键内容可见」；预渲染后 45.3kB 内容写入初始 HTML 验证通过 |
+| 2026-08 | **Astro 版接 GitHub 上线**：提交 `1dbd3a3`（docs 决策定稿 + .gitignore 增补）+ `0a40001`（site-react 并行工作区）；`git push -u origin main` 生效 | 远端 `GassamFlower/PersonalWebsite`；workflow `33720143174` build+deploy 均 `success`，Pages 部署成功；上线 URL 需用户浏览器确认（本环境无外网浏览能力） |
 
 ---
 
