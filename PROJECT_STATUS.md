@@ -9,8 +9,8 @@
 
 - **项目名称**：Personal Website（个人网站 · 接单交付凭证）
 - **开始日期**：2026-08
-- **当前状态**：架构门（骨架+排版+部署流水线就绪，待接 GitHub 发布）；第二版立项决议已固化（待用户确认后开发）
-- **当前门禁**：架构门 → 上线门（推进中）
+- **当前状态**：架构/上线门推进中；**第三版换栈已授权**（Astro→Vite+React+r3f）；Astro 版先上线、React 版并行重建（site-react/ 9 区已迁移 + prerender 落地，构建通过）
+- **当前门禁**：架构门 → 上线门（推进中）；React 重建构建通过待浏览器视觉验证
 
 ---
 
@@ -120,6 +120,9 @@
 | 2026-08 | Git 5 次提交 + .gitignore；更新 PROJECT_STATUS → 架构门 | 立项门闭环完成 |
 | 2026-08 | 第二版立项决议：售后(第三方表单→邮箱)+客服微信悬浮+不建后台；扩展合作流程/项目过程/成长资产化/客户见证；克制滚动动效 | 固化进宪法 v0.2 + 立项 §9 + 功能清单 + 阶段 P5；待用户确认后开发 |
 | 2026-08 | CapabilityMap「四梯队」→「技能树」：前端/后端/数据库/数据采集/AI智能体/运维/工程化 7 领域 × 诚实三档(已交付/会用/在学) + 证据锚点；内容迁入 src/content/skills/ | 回应"内容太空、无重点、缺说服力"；内容即真源（改内容只改 md 不再动组件）；全站字号收敛一档 + 移动端排布修正（用户指令）|
+| 2026-08 | **第三版换栈授权**：Astro → Vite + React + r3f + CSS Modules；宪法更新 v0.3(§35-40)，docs(g/d/e/c) 更新 | 用户确认四决策：改宪法+docs / CSS Modules+token / brandkit 文档化规范+组件 / 3D 限 Hero 1 处；上线策略采纳「Astro 先上线→React 并行重建→就绪切换」 |
+| 2026-08 | **React 版重建（site-react/）**：9 区全部迁移（Hero/Story/Timeline/Cases/CapabilityMap/Growth/Principles/Contact/Footer+SiteNav）；内容仍读根 src/content/（真源），r3f 粒子仅 Hero；CSS Modules + 全局 token | `tsc` + `vite build` 通过；内容 md 已进 bundle（工程用车助手 / 2026-08 验证在） |
+| 2026-08 | **用构建期预渲染(SSR·prerender)守住宪法 §17**：`entry-server.tsx` + `vite.config.ssr.ts` + `scripts/prerender.mjs`，把 9 区全部渲染进 dist/index.html#root，客户端 hydrateRoot 水合 | 纯 CSR 产物 #root 为空壳违背「无 JS 关键内容可见」；预渲染后 45.3kB 内容写入初始 HTML 验证通过 |
 
 ---
 

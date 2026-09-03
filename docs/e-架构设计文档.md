@@ -13,6 +13,8 @@
 - **Astro**（静态优先）+ 原生 CSS（token）+ Markdown 驱动 + 静态托管。
 - 单页站，输出为干净 HTML/CSS/少量 JS。
 
+> **v3（2026-08 用户授权换栈）**：本基线更新为 **Vite + React 18 + r3f（three）+ 经典 CSS（CSS Modules + 全局 token）+ Markdown 驱动**。输出仍为 `vite build` 生成的纯静态 `dist/`（无后端/数据库/登录/接口）。内容/视觉/9 分区不变。新目录结构见 §11。
+
 ---
 
 ## 1. 目录结构规则（每个目录职责 / 放什么 / 不放什么）
@@ -112,8 +114,35 @@ PersonalWebsite/
 
 ---
 
+## 11. v3 目录结构与框架复用（用户授权换栈后更新）
+
+> 本节为 v3（Vite + React + r3f）专属；与上方 V1 Astro 结构冲突处以后者为准。
+
+```
+src/
+├── content/                 # 内容真源（md, 原样保留）
+├── assets/styles/global.css # 设计 token（:root 变量，v4 原值平移）
+├── main.tsx                 # React 挂载入口
+├── App.tsx                  # 组装 9 区
+├── lib/                     # md → 结构化 JS 的解析工具（构建时读入）
+└── components/
+    ├── Hero/                # 含 r3f 3D 背景（唯一 3D 位置）
+    ├── Story/ Timeline/ Cases/ CapabilityMap/
+    ├── Growth/ Principles/ Contact/ SiteNav/ Footer/
+    └── ui/                  # .section-head / CTA / 徽章 复用件
+```
+
+**框架复用边界（v3）**：
+- 用 **React 组件**而非自造 HTML 生成器；用 **Vite 构建**而非手写打包。
+- r3f 仅 Hero 一处背景；**不引** react-router（单页锚点原生）/ zustand 全局状态 / GSAP 动效全家桶。
+- 内容 / 展示 / 样式三分离沿用；组件不硬编码业务文案。
+- 动效纪律：`prefers-reduced-motion` 时 r3f 不挂载、内容全显；无 JS 时关键内容可见。
+- 好代码资产（粒子 / Hero 交互）尽量由原 `.astro` 脚本平移动画 r3f，不改行为。
+
+---
+
 ## 待确认项
 
 - [ ] 目录结构是否认可
-- [ ] 是否同意"无接口/无数据库/无权限/无后端日志"的处理方式（不硬套）
+- [ ] 是否同意"无接口 / 无数据库 / 无权限 / 无后端日志"的处理方式（不硬套）
 - [ ] 统计方案（若有）待上线门评估

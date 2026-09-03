@@ -69,9 +69,31 @@
 
 ---
 
+## 6. 第三版技术栈（v3 · 2026-08 用户授权换栈 · 修订 §2 唯一推荐与 §3 淘汰）
+
+> 用户已确认：把前端框架从 **Astro 换到 Vite + React**，3D 改用 **r3f**，样式继续用**经典 CSS（CSS Modules + 全局 token）**。§2-§3 的「选 Astro / 不选 Vite+React」在此为 v3 更新；内容/视觉/纯静态约束不变。
+
+| 层 | 选择 | 说明 |
+|---|---|---|
+| 构建 | **Vite** | `vite build` → `dist/` 纯静态；dev HMR 更顺 |
+| 框架 | **React 18** | 渲染层，承接 v4 视觉与 9 区 |
+| 3D | **three + @react-three/fiber (r3f)** | 仅 Hero 高光点，克制 |
+| 样式 | **经典 CSS + CSS Modules + 全局 token** | 不用 Tailwind / UI 框架 |
+| 内容 | `src/content/**` md 构建时读入 | 不硬编码 |
+| 部署 | 静态托管（GitHub Pages / Vercel）| 不变 |
+
+**换栈的取舍（诚实）**：
+- 换栈让 **React 生态与 r3f 组件化**成为可能（Hero 3D 声明式、易扩展）。
+- 代价：`dist` 引入 React 运行时与依赖，首屏 JS 略增；页面需按 `v4` 保真重写。
+- **不被「全家桶」**：不引 react-router（单页锚点）/ 全局状态库（不需要）/ 动效 GSAP 全家桶；其他都尽量用经典 CSS + 原生 JS。
+
+**回退触发**：若 r3f 重写导致明显卡顿/包体积失控/移动端降级，或与上线转化冲突 → 保留 CLI 的纯 CSS/原生轻动效、不 hook 3D（仍合法，见后 §回退）。
+
+---
+
 ## 待确认项
 
-- [ ] 确认 Astro 为唯一技术栈
-- [ ] `three` 作为唯一新增依赖是否认可（已授权加入 v4）
+- [ ] 确认 v3 换栈文档已更新（本文件 + 宪法 v0.3 §35-40）
+- [ ] `three` 作为已新增依赖（v4 已授权，现随 r3f 一并使用）
 - [ ] 部署平台偏好：GitHub Pages / Vercel / CloudBase / EdgeOne（可上线门再定）
 - [ ] 中文 webfont：Google Fonts CDN（外部）是否可接受，或走系统字体回退（上线门定）
