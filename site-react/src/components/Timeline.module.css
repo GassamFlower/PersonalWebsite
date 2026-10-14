@@ -4,56 +4,50 @@
   opacity: 0.85;
   margin-bottom: var(--space-12);
 }
+/* 编年表（v6 §6）：年份列 │ 内容列 │ 发线行 */
 .tl {
-  position: relative;
-  padding-left: var(--space-8);
-  max-width: 640px;
-}
-.tl::before {
-  content: "";
-  position: absolute;
-  left: 4px;
-  top: 8px;
-  bottom: 8px;
-  width: 1px;
-  background: var(--color-accent);
-  opacity: 0.55;
+  list-style: none;
+  max-width: 760px;
 }
 .tlNode {
-  position: relative;
-  padding-bottom: var(--space-9);
+  display: grid;
+  grid-template-columns: 8.5em 1fr;
+  column-gap: var(--space-8);
+  border-top: 1px solid var(--color-faint);
+  padding-block: var(--space-6);
 }
-.tlNode:last-child { padding-bottom: 0; }
-.tlMarker {
-  position: absolute;
-  left: calc(-1 * var(--space-8) + 1px);
-  top: 8px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0 0 3px var(--color-base);
-}
-.tlHead {
+.tlNode:last-child { border-bottom: 1px solid var(--color-faint); }
+.tlPeriod {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+.tlMarker {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  margin-right: var(--space-3);
+  vertical-align: 0.28em;
 }
 .tlYear {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: var(--text-sm);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
   color: var(--color-ink);
-  letter-spacing: 0.04em;
 }
 .tlFlag {
   display: inline-block;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   letter-spacing: 0.06em;
-  color: var(--color-accent);
-  border: 1px solid var(--color-line);
+  color: var(--color-ink-soft);
+  border: 1px solid var(--color-faint);
   padding: 0.15em 0.6em;
   border-radius: var(--radius);
 }
@@ -74,14 +68,14 @@
 .tlDesc {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
-  color: var(--color-line);
+  color: var(--color-ink-soft);
   line-height: 1.7;
   max-width: 56ch;
 }
 .tlStack {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-line);
+  color: var(--color-ink-soft);
   letter-spacing: 0.05em;
   margin-top: var(--space-3);
 }
@@ -92,4 +86,11 @@
   width: 320px;
   max-width: 100%;
   height: auto;
+}
+
+@media (max-width: 640px) {
+  .tlNode { grid-template-columns: 1fr; row-gap: var(--space-3); }
+  .tlPeriod { flex-direction: row; align-items: baseline; gap: var(--space-4); }
+  .tlYear { font-size: var(--text-xl); }
+  .tlName { font-size: var(--text-xl); }
 }

@@ -151,8 +151,45 @@
 
 ---
 
-## 附：本文档的产出依据（证据路径）
+## 9 · v6 组件规格增量（site-react 专用 · 2026-10-14）
 
+> 视觉真源已升至 `docs/视觉方向-v6-技术图鉴.md`；本节只记录**组件级落地规格**（Astro 线视觉冻结，以下仅存在于 `site-react/`）。
+
+| 组件 | v6 规格（已落地） |
+|---|---|
+| `global.css` | 三色 token（纸白/墨黑/朱砂）+ 墨蓝退役别名 `--color-accent: var(--color-ink)`；深墨场 token `--color-field*`；图版装置全局类 `.field` `.plate-rail`（≥1200px）`.crop` `.regmark`；`.field .regmark>i.k` 与 `.field :focus-visible` 在墨场改提亮值（墨色不可见谎报/可达性失效均已处理） |
+| `SiteNav` | 图鉴索引：`01 封面 / 04 项目 / 05 能力 / 06 成长 / 07 规矩 / A 附录 / 08 联系`，mono 12px，页码 `--color-line` 着色（附录用 `A` 不占图版页码，避免 08 之后重排） |
+| `Hero` | 深墨场 + `--text-hero` 巨衬线（实测 clamp 下限 51.2px，旧值 2.5rem 已解锁）+ v5 档案卡压墨 + 四角裁切线 + 右上三色标；3D 粒子与 three 系依赖移除 |
+| `Story` | 图版 02：竖排区名；正文改**编号发线行**（01–05）；页脚轨 `PLATE 02/08 · CAT.2026-10 · REV v6 · BY 一个故事`；桥线稿全部墨黑 |
+| `Timeline` | 图版 03 编年表：`年份列(8.5em) │ 内容列 │ 发线行`；年份 mono `--text-2xl`（20.8px 实测），节点圆点墨黑内联于题名；存档线稿去蓝 |
+| `Cases` | 核心卷深墨场统一 `--color-field`；规格表 `问题/解决/关键/结果/技术栈`（缺字段不渲染）；线稿在 `.shotSlot` 内重定义 token 实现反白；图版级验收章 `--color-seal-on-dark` |
+| `CapabilityMap` | 图版 05：大编号 + `能力名 │ 实证说明 │ 发线` 规格表，末行「证据」；诚实三档徽章**墨色化**——已交付=墨实底纸白字（实测 `rgb(26,26,23)/(246,246,244)`）、会用=墨描边、在学=灰描边；**本区不出现朱砂** |
+| `Growth` | 图版 06 月度索引表：表头 `月份│本月的交代│标签` 三列 + 一行一月发线；tags 缺失则不渲染该格；折线去蓝 |
+| `Principles` | 图版 07 门禁流程图：编号/节点/完成勾全部墨黑，**无章**（章只绑案例级事实） |
+| `Offcat` | **附录 · 工作台之外（v6 §11 新增区）**：台账条 `编号(4.5em) │ 条目(衬线 text-lg) │ 日期+状态(6.5em) │ 标签(12em)`，表头 + 一行一条发线，行间 `--color-faint`、表头下 `--color-ink`；诚实四档徽章全墨系——已验证=墨实底、进行中=墨描边、计划中=灰描边、参考=无边纯字，**本区零朱砂零章**；右栏一张 Hyper-V→Ubuntu VM→Docker 拓扑示意线稿（`aria-label` 说明、**不标真实尺寸/网段/主机名**、≤980px 隐藏）；数据来自 `src/content/offcat/*.md`，`date` 缺失则该行不渲染日期（A-04 实测无日期）；区标题为 `h2 工作台之外 / OFF-CATALOGUE`（衬线 xl + mono 英文小注 + 一行副标），四条条目为 `h3`（v6 §12.3：此前只有 `section-head` 小标签，读 outline 会整区跳过） |
+| `Contact` | 封底黑尾：`微信/邮箱/索取` 规格表；主按钮改**纸白底墨黑字**（实测 `rgb(246,246,244)/(26,26,23)`）；右栏信封信稿反白 + **署名章**（2×2 印面「一个故事」，`--color-seal-on-dark`，rotate -3°，全页仅 1 枚、不计入 ≤6 验收章）+ 三色标 |
+| `Footer` | 并入 `field`（实测底色 `rgb(26,26,23)`），与封底同为黑尾，标记线稿提亮值 |
+| `Seal.tsx` | v5 装置原样继承（120ms 落章、reduced-motion/无 JS 静态可见、`.dark` 提亮变体） |
+
+**全站实测数值（2026-10-14 · 含附录区 · 铺开轮快照，上线门前整改后的数值见 §10）**：`npm run build` 通过（Astro 线 `npx astro build` 同步通过，`src/content.config.ts` 已声明 `offcat` 集合）；CSS 36.49 kB / gzip 7.15 kB；JS 278.09 kB / gzip 84.70 kB（粒子 868 kB chunk 仍归零）；prerender 注入 49.7 kB（无 JS 内容可见，附录 4 行台账与拓扑线稿均在静态 HTML 中）；渲染后 DOM：`.plate-rail` 9 处、验收章 `.seal` 2 枚 + 署名章 1 枚、规格表行 65 行 + 附录台账 4 行、computed style 全站点无 `#2e4a8c`、无失效 `undefined` 类名、附录区 computed style 扫描：0 处低于 AA、无朱砂、无横向溢出；**全站复扫 423 个文本节点 0 处不达标**（同轮修掉一处旧缺陷：`Story`/`CapabilityMap` 页脚分隔符 `.footSep` 用 `--color-faint`（纸白上 1.55:1）近乎隐形 → 改 `--color-line`，分隔符归"线"任职，按非文本 ≥3:1 判定）。
+
+---
+
+## 10 · 上线门前整改落点（v6 §12 · 2026-10-14）
+
+三条都不引入新视觉决策，但决定"本机目测通过"能否迁移到访客机器。真源条款在 `docs/视觉方向-v6-技术图鉴.md` §12，这里只记落点与实测。
+
+| 落点 | 文件 | 实测 |
+|---|---|---|
+| 衬线子集自托管 | `scripts/fonts.mjs`（生成/守卫）· `assets/fonts/fonts.css` + 5 个 woff2 + `serif-coverage.json` · 两条线 `global.css` 各 `@import` 一次 · 两条线 head 删除 Google Fonts 链接 | 810 码位 / 字重约 122 kB（分片方案要 806 kB/字重）；渲染后 5 face 全 loaded，网络面板 0 条外部请求；`build` 末尾 `--check` 抓到过 2 次缺字（「跳」「哪」） |
+| 分享卡片 | `scripts/og_image.py`（`npm run og`）→ `public/og.png` + `site-react/public/og.png`；两条线 head 各 11 条 `og:*` / `twitter:card` | 1200×630 / 75.7 kB，两线 `GET /PersonalWebsite/og.png` 均 200。**注意坑**：`.gitignore` 的 `images/` 会连带挡住 `public/images/`，卡片放那里等于没部署 |
+| 无障碍三件 | `App.tsx` / `Base.astro`：`a.skip-link` + `main#main[tabindex="-1"]`；两条线 `global.css`：`.skip-link{/-focus}` + `#main:focus{outline:none}`；`Offcat.tsx` 补 h2；`Story/CapabilityMap` 的 `.footSep` 加 `aria-hidden` | 真实 Tab 聚焦后链接落在 16/16（77×34，墨底纸白字），Enter 后 `location.hash=#main`；422 个文本节点 AA 扫描 **0 处不达标**；横向溢出 0 |
+
+**整改后 bundle**：CSS 38.09 kB / gzip 7.47 kB；JS 278.80 kB / gzip 84.92 kB（粒子 chunk 仍归零）；prerender 注入 50.0 kB；`.plate-rail` 9、`.seal` 2。两条线 `npm run build` 全绿。
+
+---
+
+## 附：本文档的产出依据（证据路径）
 - 审读了 `src/styles/global.css`、`src/layouts/Base.astro`、`src/pages/index.astro`、`src/components/{Hero,Story,Timeline,Cases,CapabilityMap,Growth,Principles,Contact,SiteNav}.astro` 全部组件。
 - 对照了 `docs/视觉方向-v3-架构门.md` 的锁定 token / 母题 / 反套路清单、`docs/e-架构设计文档.md` 的三分离约束、`docs/出图提示词-v3.md` 的 9 张参考图。
 - 结论在 §0–§5 已列，所有「✔ 合规」「⚠ 待修」均有文件级证据。

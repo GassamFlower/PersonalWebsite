@@ -4,6 +4,9 @@
    + 大宋体衬线标题 + 1px 横线作为档案分隔
    ============================================================ */
 
+/* 自托管字体（衬线子集 + mono latin）：原挂 fonts.googleapis.com，大陆不可达故改本地 */
+@import '../../assets/fonts/fonts.css';
+
 :root {
   /* ---- 配色（对齐 docs/视觉方向-v4-墨水档案：冷白纸 + 墨黑 + 墨蓝 Ink） ---- */
   --color-base: #f6f6f4;          /* 冷白纸 · 主底 */
@@ -256,4 +259,27 @@ p, li, a, span {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+}
+
+/* 跳转链接：键盘用户跳过导航直达正文，仅聚焦时显形 */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  background: var(--color-ink);
+  color: var(--color-base);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  padding: 0.5rem 0.85rem;
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: var(--space-4);
+  top: var(--space-4);
+}
+/* 跳转目标是非交互容器，聚焦描边会在整页内容外画一圈线，视觉上像故障 */
+#main:focus {
+  outline: none;
 }

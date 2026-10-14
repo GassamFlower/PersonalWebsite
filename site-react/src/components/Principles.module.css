@@ -39,7 +39,7 @@
   font-size: 0.85rem;
   font-weight: 500;
   line-height: 1.25;
-  color: var(--color-accent);
+  color: var(--color-ink);
   letter-spacing: 0.08em;
   opacity: 0.85;
   flex-shrink: 0;
@@ -76,7 +76,7 @@
   margin-inline: auto;
   border-radius: 50%;
   background: var(--color-base);
-  border: 1.6px solid var(--color-accent);
+  border: 1.6px solid var(--color-ink);
   z-index: 1;
 }
 .flowLine .finish {
@@ -99,7 +99,7 @@
 .desc {
   font-size: var(--text-sm);
   line-height: 1.8;
-  color: var(--color-line);
+  color: var(--color-ink-soft);
   white-space: pre-line;
   letter-spacing: 0.02em;
   padding-right: var(--space-4);
@@ -116,7 +116,7 @@
 }
 .prNote {
   font-size: var(--text-sm);
-  color: var(--color-line);
+  color: var(--color-ink-soft);
   letter-spacing: 0.04em;
   max-width: 36em;
   line-height: 1.8;

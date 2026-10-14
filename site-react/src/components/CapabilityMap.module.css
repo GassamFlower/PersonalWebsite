@@ -1,3 +1,5 @@
+/* CapabilityMap — 图版 05（v6：规格表 + 诚实三档墨色徽章；朱砂不进入此区） */
+
 .capRule {
   height: 1px;
   background: var(--color-ink);
@@ -16,7 +18,7 @@
 }
 .capIntro {
   font-size: var(--text-base);
-  color: var(--color-line);
+  color: var(--color-ink-soft);
   margin-bottom: var(--space-12);
   max-width: 40em;
   line-height: 1.8;
@@ -28,29 +30,26 @@
   border-top: 1px solid var(--color-ink);
 }
 .branch {
-  border-bottom: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-faint);
   padding-block: var(--space-8);
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
+  grid-template-columns: 4.5em minmax(0, 1fr);
   column-gap: var(--space-6);
-  row-gap: var(--space-3);
   align-items: start;
 }
+.branchNo {
+  font-family: var(--font-serif);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  line-height: 0.9;
+  color: var(--color-ink);
+}
+.branchMain { min-width: 0; }
 .branchHead {
-  grid-column: 2 / -1;
   display: flex;
   align-items: baseline;
   gap: var(--space-4);
   flex-wrap: wrap;
-}
-.branchNo {
-  grid-column: 1 / 2;
-  grid-row: 1;
-  font-family: var(--font-serif);
-  font-size: 2.6rem;
-  font-weight: 700;
-  line-height: 0.9;
-  color: var(--color-accent);
 }
 .branchDomain {
   font-family: var(--font-serif);
@@ -60,74 +59,61 @@
   line-height: 1.25;
   color: var(--color-ink);
 }
+
+/* 诚实三档徽章：已交付=墨实底 · 会用=墨描边 · 在学=灰描边（唯一色纪律：不出现朱砂） */
 .badge {
   font-size: var(--text-xs);
   font-family: var(--font-mono);
   letter-spacing: 0.08em;
   padding: 0.15em 0.6em;
-  border-radius: 2px;
+  border-radius: var(--radius);
   border: 1px solid;
   white-space: nowrap;
   flex-shrink: 0;
 }
-.badge_done { background: var(--color-accent); color: var(--color-on-accent); border-color: var(--color-accent); }
-.badge_use { color: var(--color-accent); border-color: var(--color-accent); }
-.badge_learning { color: var(--color-line); border-color: var(--color-line); }
+.badge_done { background: var(--color-ink); color: var(--color-base); border-color: var(--color-ink); }
+.badge_use { color: var(--color-ink); border-color: var(--color-ink); }
+.badge_learning { color: var(--color-ink-soft); border-color: var(--color-line); }
+
 .branchTagline {
-  grid-column: 2 / -1;
   font-size: var(--text-sm);
-  color: var(--color-ink);
-  opacity: 0.75;
+  color: var(--color-ink-soft);
   line-height: 1.7;
-  margin-top: var(--space-1);
+  margin: var(--space-3) 0 var(--space-4);
 }
-.branchSkills {
-  grid-column: 2 / -1;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-2) var(--space-6);
-  padding: 0;
-  margin: var(--space-1) 0 0;
-}
-.branchSkill {
+
+/* 规格表体裁 */
+.spec {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4em 0.7em;
-  align-items: baseline;
-  font-size: var(--text-sm);
-  line-height: 1.6;
+  flex-direction: column;
 }
-.skillName {
+.specRow {
+  display: grid;
+  grid-template-columns: minmax(0, 10em) 1fr;
+  column-gap: var(--space-4);
+  border-top: 1px solid var(--color-faint);
+  padding-block: var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+}
+.specRow dt {
   font-weight: 700;
   color: var(--color-ink);
   letter-spacing: 0.01em;
 }
-.skillName::after {
-  content: "——";
-  color: var(--color-faint);
-  font-weight: 400;
-  margin-left: 0.45em;
-}
-.skillNote {
-  color: var(--color-line);
-  font-size: var(--text-sm);
-}
-.branchEvidence {
-  grid-column: 2 / -1;
-  font-size: var(--text-sm);
-  color: var(--color-line);
-  line-height: 1.7;
-  margin-top: var(--space-1);
-  letter-spacing: 0.02em;
-}
-.branchEvidence b {
+.specRow dd { min-width: 0; }
+.specBare dt { grid-column: 1 / -1; }
+.specEvidence { color: var(--color-ink); }
+.specEvidence dt {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-accent);
+  font-weight: 400;
   letter-spacing: 0.1em;
-  margin-right: 0.4em;
+  color: var(--color-ink);
+  padding-top: 0.3em;
 }
+
 .capFoot {
   display: flex;
   align-items: center;
@@ -135,27 +121,24 @@
   margin-top: var(--space-16);
   padding-top: var(--space-5);
   border-top: 1px solid var(--color-ink);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-line);
   letter-spacing: 0.12em;
   flex-wrap: wrap;
 }
-.footSep { color: var(--color-faint); }
+.footSep { color: var(--color-line); } /* 同 Story：分隔符是「线」，faint 在纸白上近乎隐形 */
+
 @media (max-width: 720px) {
   .branch {
-    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-columns: 3em minmax(0, 1fr);
     column-gap: var(--space-4);
     padding-block: var(--space-6);
   }
-  .branchNo { font-size: 2.1rem; }
+  .branchNo { font-size: var(--text-3xl); }
   .branchHead { flex-wrap: wrap; gap: var(--space-2); }
   .branchDomain { font-size: var(--text-xl); width: 100%; }
-  .branchSkills { grid-template-columns: 1fr; gap: var(--space-2); }
-  .branchTagline, .branchSkills, .branchEvidence { grid-column: 2 / -1; }
+  .specRow { grid-template-columns: 1fr; row-gap: var(--space-1); }
 }
 @media (max-width: 400px) {
   .capMega { font-size: 2rem; }
-  .branch { grid-template-columns: 40px minmax(0, 1fr); column-gap: var(--space-3); }
-  .branchNo { font-size: 1.9rem; }
+  .branch { grid-template-columns: 2.5em minmax(0, 1fr); column-gap: var(--space-3); }
+  .branchNo { font-size: var(--text-2xl); }
 }

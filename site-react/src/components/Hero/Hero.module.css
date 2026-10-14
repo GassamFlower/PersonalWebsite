@@ -1,21 +1,31 @@
+/* Hero — 封面（v6 深墨场：黑头，色带与正文硬切） */
 .hero {
   position: relative;
   overflow: hidden;
-  padding-top: var(--space-10);
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-20);
 }
+/* 墨场上覆盖共享全局类（section-head / rail / plate-rail 均为纸白系） */
+.hero :global(.section-head) { color: var(--color-field-ink); }
+.hero :global(.section-head .tag) { color: var(--color-field-muted); }
+.hero :global(.section-head .tag b) { color: var(--color-field-ink); }
+.hero :global(.plate-rail) { color: var(--color-field-muted); }
+
 .heroInner {
   position: relative;
   z-index: 1;
 }
+.heroReg {
+  color: var(--color-field-line);
+}
 .heroRule {
   height: 1px;
-  background: var(--color-ink);
-  opacity: 0.85;
+  background: var(--color-field-rule);
   margin-bottom: var(--space-16);
 }
 .heroGrid {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1.15fr 1fr;
   gap: var(--space-12);
   align-items: end;
   margin-bottom: var(--space-16);
@@ -25,77 +35,141 @@
   flex-direction: column;
   gap: var(--space-6);
 }
+/* 墨场上的批注轨需高于全局 .rail 的纸白系配色：用双类选择器取胜（同特异度时源码顺序不定） */
+.hero .heroRail {
+  color: var(--color-field-muted);
+  margin-bottom: calc(var(--space-1) * -1);
+}
+.hero .heroRail :global(.gate) { color: var(--color-field-ink); }
+/* v6 字阶放开：封面启用 --text-hero（v4 定义但从未使用，本版修正） */
 .heroTitle {
   font-family: var(--font-serif);
-  font-size: var(--text-mega);
+  font-size: var(--text-hero);
   font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: 0;
-  color: var(--color-ink);
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  color: var(--color-field-ink);
   margin: 0;
+}
+/* 大字开机动效：标题由下上浮（克制动效；reduced-motion 关闭） */
+.heroTitleIn {
+  animation: heroRise var(--duration-slow) var(--ease-ink) both;
+}
+@keyframes heroRise {
+  0%   { opacity: 0; transform: translateY(0.5em) skewY(1deg); filter: blur(5px); }
+  45%  { opacity: 1; filter: blur(0); transform: translateY(0) skewY(0); }
+  100% { opacity: 1; transform: none; filter: none; }
 }
 .heroSub {
   font-family: var(--font-sans);
   font-size: var(--text-base);
-  color: var(--color-ink);
-  opacity: 0.7;
+  color: var(--color-field-ink);
+  opacity: 0.75;
   letter-spacing: 0.04em;
 }
 .heroFocus {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
-  color: var(--color-accent);
+  color: var(--color-field-line);
   padding-bottom: var(--space-1);
-  border-bottom: 1px solid var(--color-accent);
+  border-bottom: 1px solid var(--color-field-rule);
   width: fit-content;
   letter-spacing: 0.05em;
+  transition: border-color 0.2s;
 }
-.heroShots {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.heroFocus:hover { border-color: var(--color-field-line); }
+
+/* 白档案卡压在墨上（v5 资产继承，仅换场域） */
+.dossier {
+  width: 100%;
+  max-width: 460px;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 30%, transparent);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+  padding: var(--space-6);
+}
+.dossierHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--color-faint);
+  padding-bottom: var(--space-3);
+}
+.dossierName {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  color: var(--color-ink);
+}
+.factList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-3);
 }
-.uiCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-faint);
-  border-radius: var(--radius);
-  padding: var(--space-3);
-  box-shadow: var(--shadow);
+.factRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
 }
-.uiCard:nth-child(2) { margin-top: var(--space-8); }
-.uiCard:nth-child(3) { margin-top: var(--space-16); }
-.uiCard svg { width: 100%; height: auto; }
+.factStatus {
+  flex: none;
+  min-width: 5.5em;
+  color: var(--color-ink);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+}
+.factTitle {
+  flex: 1;
+}
+.dossierFoot {
+  border-top: 1px solid var(--color-faint);
+  padding-top: var(--space-4);
+}
+/* 主按钮=墨底纸白字（三色制内的反白，非彩色） */
+.dossierCta {
+  width: 100%;
+  text-align: center;
+  background: var(--color-ink);
+  color: var(--color-base);
+  transition: background-color 0.2s;
+}
+.dossierCta:hover { background: color-mix(in srgb, var(--color-ink) 82%, #fff); }
+
 .heroFoot {
   display: flex;
   gap: var(--space-12);
-  border-top: 1px solid var(--color-ink);
+  border-top: 1px solid var(--color-field-rule);
   padding-top: var(--space-8);
 }
 .heroProp {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--color-ink);
+  color: var(--color-field-ink);
   letter-spacing: 0.04em;
 }
-.heroProp .arrow { color: var(--color-accent); transition: transform 0.2s; }
+.heroProp .arrow { color: var(--color-field-muted); transition: transform 0.2s; }
 .heroProp:hover .arrow { transform: translateX(4px); }
+
 @media (max-width: 960px) {
   .heroGrid { grid-template-columns: 1fr; gap: var(--space-8); }
-  .heroShots { max-width: 560px; }
-  .uiCard:nth-child(2), .uiCard:nth-child(3) { margin-top: 0; }
+  .dossier { justify-self: stretch; max-width: none; }
 }
 @media (max-width: 640px) {
-  .heroFoot { grid-template-columns: 1fr; flex-direction: column; gap: var(--space-3); }
-}
-@media (max-width: 560px) {
-  .heroGrid { gap: var(--space-8); }
-  .heroShots {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-2);
-    align-items: stretch;
-  }
-  .uiCard { padding: var(--space-2); }
+  .hero { padding-top: var(--space-12); }
+  .heroFoot { flex-direction: column; gap: var(--space-3); }
   .heroSub { font-size: var(--text-sm); }
   .heroFoot { margin-top: var(--space-4); }
+  .factRow { flex-wrap: wrap; }
 }

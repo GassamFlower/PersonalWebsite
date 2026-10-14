@@ -1,4 +1,4 @@
-// Growth — 档案 06 · 成长记录（React 版 · md 驱动 getGrowth）
+// Growth — 图版 06 · 成长记录（v6：月度索引表 month │ takeaway │ tags）
 import { getGrowth } from '../lib/content';
 import s from './Growth.module.css';
 
@@ -13,7 +13,8 @@ const subNav = [
 export default function Growth() {
   const posts = getGrowth();
   return (
-    <section id="growth" className="section growth">
+    <section id="growth" className="section">
+      <span className="plate-rail">图版 06 · GROWTH</span>
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>档案 06</b> · 成长记录</span>
@@ -40,8 +41,8 @@ export default function Growth() {
                 <rect x="220" y="82" width="20" height="98" fill="var(--color-ink)" opacity="0.84" />
                 <rect x="256" y="58" width="20" height="122" fill="var(--color-ink)" opacity="0.95" />
                 <rect x="292" y="34" width="20" height="146" fill="var(--color-ink)" opacity="1" />
-                <polyline points="50,168 86,154 122,140 158,122 194,100 230,76 266,52 302,28" fill="none" stroke="var(--color-accent)" strokeWidth="1.6" />
-                <polyline points="294,30 302,28 300,36" fill="none" stroke="var(--color-accent)" strokeWidth="1.6" strokeLinecap="round" />
+                <polyline points="50,168 86,154 122,140 158,122 194,100 230,76 266,52 302,28" fill="none" stroke="var(--color-ink)" strokeWidth="1.6" />
+                <polyline points="294,30 302,28 300,36" fill="none" stroke="var(--color-ink)" strokeWidth="1.6" strokeLinecap="round" />
                 <circle cx="50" cy="168" r="2.5" fill="var(--color-base)" stroke="var(--color-ink)" strokeWidth="1.2" />
                 <circle cx="86" cy="154" r="2.5" fill="var(--color-base)" stroke="var(--color-ink)" strokeWidth="1.2" />
                 <circle cx="122" cy="140" r="2.5" fill="var(--color-base)" stroke="var(--color-ink)" strokeWidth="1.2" />
@@ -55,11 +56,18 @@ export default function Growth() {
           </div>
 
           <div className={s.growthList}>
+            <div className={`rail ${s.growthHead}`}>
+              <span>月份</span>
+              <span>本月的交代</span>
+              <span>标签</span>
+            </div>
             {posts.map((p, i) => (
               <article key={i} className={s.growthItem}>
                 <span className={s.growthMonth}>{p.month}</span>
                 <p className={s.growthTakeaway}>{p.takeaway}</p>
-                <span className={s.growthArrow}>→</span>
+                {!!p.tags?.length && (
+                  <span className={s.growthTags}>{p.tags.join(' · ')}</span>
+                )}
               </article>
             ))}
           </div>

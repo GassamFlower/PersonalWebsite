@@ -1,81 +1,146 @@
-.contactInner {
-  position: relative;
-  text-align: center;
-  padding-top: var(--space-2);
-}
+/* Contact — 封底（v6 §5：黑尾墨场 + 规格表 + 署名章）；共享全局类在此覆盖为纸白系 */
+
+.contact :global(.section-head) { color: var(--color-field-ink); }
+.contact :global(.section-head .tag) { color: var(--color-field-muted); }
+.contact :global(.section-head .tag b) { color: var(--color-field-ink); }
+.contact :global(.section-head .meta) { color: var(--color-field-muted); }
+.contact :global(.rail) { color: var(--color-field-muted); }
+.contact :global(.plate-rail) { color: var(--color-field-muted); }
+.contact :global(.ink-link)::after { background: var(--color-field-line); }
+
+.contactInner { position: relative; }
 .ctRule {
   height: 1px;
-  background: var(--color-ink);
-  opacity: 0.85;
+  background: var(--color-field-rule);
   margin-bottom: var(--space-12);
 }
-.envelopeArt {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: var(--space-4);
+.contactGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: var(--space-16);
+  align-items: start;
 }
-.envelopeSvg { width: 120px; height: auto; }
+.contactMain { min-width: 0; }
 .contactTitle {
   font-size: var(--text-4xl);
   letter-spacing: 0.01em;
-  margin: 0 auto var(--space-8);
+  margin: 0 0 var(--space-8);
   font-family: var(--font-serif);
   font-weight: 700;
   line-height: 1.15;
-  color: var(--color-ink);
+  color: var(--color-field-ink);
 }
-.contactInfo {
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  gap: var(--space-3);
-  flex-wrap: wrap;
-  margin-bottom: var(--space-10);
+
+/* 规格表体裁 */
+.spec { display: flex; flex-direction: column; }
+.specRow {
+  display: grid;
+  grid-template-columns: 5em 1fr;
+  column-gap: var(--space-4);
+  border-top: 1px solid var(--color-field-rule);
+  padding-block: var(--space-4);
   font-size: var(--text-base);
-  color: var(--color-ink);
+  line-height: 1.8;
+  color: var(--color-field-ink);
 }
-.infoItem b {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  color: var(--color-line);
+.specRow:first-child { border-top: none; }
+.specRow dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  color: var(--color-field-muted);
+  padding-top: 0.5em;
 }
-.infoSep { color: var(--color-faint); font-family: var(--font-mono); }
-.infoMail { color: var(--color-ink); transition: color 0.2s; }
-.infoMail:hover { color: var(--color-accent); }
+.specMono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--color-field-line);
+}
+.specNote {
+  font-size: var(--text-sm);
+  color: var(--color-field-muted);
+}
+.mailList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.infoMail {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  color: var(--color-field-line);
+}
+
+/* 主按钮：纸白底 · 墨黑字（v6 §4，墨蓝实心按钮退役） */
 .contactActions {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: var(--space-5);
   flex-wrap: wrap;
-  margin-bottom: var(--space-6);
+  margin-top: var(--space-8);
 }
-.btnSolid {
-  background: var(--color-accent);
-  color: var(--color-on-accent);
-  padding: var(--space-4) var(--space-12);
-  font-size: var(--text-base);
+.btnPaper {
+  padding: var(--space-4) var(--space-10);
+  background: var(--color-base);
+  color: var(--color-ink);
   border-radius: var(--radius);
+  font-size: var(--text-base);
   letter-spacing: 0.06em;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.2s;
 }
-.btnSolid:hover {
-  background: color-mix(in srgb, var(--color-accent) 88%, #000);
-}
-.contactNote {
-  font-size: var(--text-sm);
-  color: var(--color-line);
-  margin-bottom: var(--space-16);
-  letter-spacing: 0.04em;
-}
+.btnPaper:hover { background: var(--color-surface); }
+.btnPaper:active { transform: scale(0.985); }
+
 .contactSlogan {
-  font-size: var(--text-xs);
-  color: var(--color-line);
+  margin-top: var(--space-12);
   letter-spacing: 0.12em;
-  font-family: var(--font-mono);
 }
-@media (max-width: 720px) {
-  .envelopeArt { justify-content: center; }
+
+/* 封底右栏：信封线稿反白 + 署名章 + 三色标 */
+.contactBack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-12);
+}
+.envelopeArt {
+  --color-ink: var(--color-field-ink);
+  --color-line: var(--color-field-muted);
+}
+.envelopeSvg { width: 140px; height: auto; }
+
+.signWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+/* 署名章：大号朱砂方章（印面 2×2），深墨场内用提亮值保障对比度 */
+.signSeal {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.06em;
+  padding: 0.35em;
+  border: 2px solid var(--color-seal-on-dark);
+  border-radius: var(--radius);
+  color: var(--color-seal-on-dark);
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0;
+  transform: rotate(-3deg);
+}
+.signSeal span { text-align: center; }
+.signRail { letter-spacing: 0.12em; }
+
+@media (max-width: 860px) {
+  .contactGrid { grid-template-columns: 1fr; gap: var(--space-12); }
+  .contactBack { flex-direction: row; align-items: flex-end; justify-content: space-between; width: 100%; gap: var(--space-6); }
   .contactTitle { font-size: var(--text-3xl); }
-  .contactInfo { font-size: var(--text-sm); }
+}
+@media (max-width: 520px) {
+  .specRow { grid-template-columns: 1fr; row-gap: var(--space-1); }
+  .specRow dt { padding-top: 0; }
+  .contactBack { flex-wrap: wrap; }
 }

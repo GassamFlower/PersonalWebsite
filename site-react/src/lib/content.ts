@@ -40,6 +40,10 @@ export interface GrowthData { month: string; takeaway: string; tags: string[]; b
 export interface TimelineData {
   year: string; title: string; flag: string; role: string; detail: string; stack: string[];
 }
+export interface OffcatData {
+  no: string; title: string; date?: string;
+  status: '已验证' | '进行中' | '计划中' | '参考'; tags: string[];
+}
 
 function collect<T>(isMember: (d: Record<string, any>) => boolean): T[] {
   return entries
@@ -67,4 +71,9 @@ export function getSkills(): SkillData[] {
 
 export function getTimeline(): TimelineData[] {
   return collect<TimelineData>((d) => 'year' in d && 'role' in d);
+}
+
+// 附录台账：以唯一键 no（A-0n）判别，按编号升序
+export function getOffcat(): OffcatData[] {
+  return collect<OffcatData>((d) => 'no' in d && 'title' in d).sort((a, b) => a.no.localeCompare(b.no));
 }

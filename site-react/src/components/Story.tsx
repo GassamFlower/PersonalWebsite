@@ -1,4 +1,4 @@
-// Story — 档案 02 · 品牌故事（React 版 · 保真 Astro Story，桥 SVG 平移）
+// Story — 图版 02 · 品牌故事（v6：文字块图版化＝编号发线行 + 竖排区名；线稿墨黑）
 import s from './Story.module.css';
 
 const paragraphs = [
@@ -20,7 +20,8 @@ const subNav = [
 
 export default function Story() {
   return (
-    <section id="story" className="section story">
+    <section id="story" className="section">
+      <span className="plate-rail">图版 02 · STORY</span>
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>档案 02</b> · 品牌故事</span>
@@ -34,11 +35,14 @@ export default function Story() {
         <h2 className={s.storyHeadline}>在真实系统里，<br />把空白做成能用的东西</h2>
 
         <div className={s.storyGrid}>
-          <div className={s.storyBody}>
+          <ol className={s.storyBody}>
             {paragraphs.map((p, i) => (
-              <p key={i} className={s.storyPara}>{p}</p>
+              <li key={i} className={s.storyRow}>
+                <span className={s.storyNo}>{`0${i + 1}`}</span>
+                <p className={s.storyPara}>{p}</p>
+              </li>
             ))}
-          </div>
+          </ol>
 
           <div className={s.storyArt} aria-hidden="true">
             <svg viewBox="0 0 420 540" className={s.bridgeSvg}>
@@ -123,12 +127,14 @@ export default function Story() {
           </div>
         </div>
 
-        <div className={s.storyFoot}>
-          <span>FILE 02 / 06</span>
-          <span className={s.footSep}>|</span>
-          <span>DATE 2025-08-19</span>
-          <span className={s.footSep}>|</span>
-          <span>BY YIYI</span>
+        <div className={`rail ${s.storyFoot}`}>
+          <span>PLATE 02 / 08</span>
+          <span className={s.footSep} aria-hidden="true">|</span>
+          <span>CAT.2026-10</span>
+          <span className={s.footSep} aria-hidden="true">|</span>
+          <span>REV v6</span>
+          <span className={s.footSep} aria-hidden="true">|</span>
+          <span>BY 一个故事</span>
         </div>
       </div>
     </section>

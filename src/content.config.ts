@@ -61,4 +61,16 @@ const timeline = defineCollection({
   }),
 });
 
-export const collections = { growth, cases, skills, timeline };
+// 附录 · 工作台之外（OFF-CATALOGUE · 窄带台账，全站 ≤6 行）
+const offcat = defineCollection({
+  type: 'content',
+  schema: z.object({
+    no: z.string().min(1),                            // 附录编号 A-0n（不占图版页码）
+    title: z.string().min(1),
+    date: z.string().optional(),                      // 可缺：缺则该行不渲染日期
+    status: z.enum(['已验证', '进行中', '计划中', '参考']), // 诚实四档，不用朱砂
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { growth, cases, skills, timeline, offcat };

@@ -13,7 +13,23 @@
 .storyBody {
   display: flex;
   flex-direction: column;
-  gap: var(--space-7);
+  list-style: none;
+}
+/* 图版化正文：编号 │ 段落 │ 发线（v6 §3.3 行式体裁） */
+.storyRow {
+  display: grid;
+  grid-template-columns: 3.5em 1fr;
+  column-gap: var(--space-4);
+  border-top: 1px solid var(--color-faint);
+  padding-block: var(--space-5);
+}
+.storyRow:first-child { border-top: none; padding-top: 0; }
+.storyNo {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  color: var(--color-ink-soft);
+  padding-top: 0.6em;
 }
 .storyPara {
   font-family: var(--font-serif);
@@ -50,15 +66,14 @@
   margin-top: var(--space-12);
   padding-top: var(--space-5);
   border-top: 1px solid var(--color-ink);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-line);
   letter-spacing: 0.12em;
 }
-.footSep { color: var(--color-faint); }
+.footSep { color: var(--color-line); } /* 分隔符按「线」任职：≥3:1 非文本对比，faint 在纸白上近乎隐形 */
 @media (max-width: 860px) {
   .storyGrid { grid-template-columns: 1fr; gap: var(--space-8); }
   .storyArt { display: none; }
   .storyFoot { gap: var(--space-3); flex-wrap: wrap; }
   .storyPara { font-size: var(--text-base); line-height: 1.9; }
+  .storyRow { grid-template-columns: 1fr; row-gap: var(--space-1); }
+  .storyNo { padding-top: 0; }
 }

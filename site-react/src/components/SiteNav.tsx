@@ -1,13 +1,14 @@
-// SiteNav — 全局顶部水平导航（React 版 · 保真 Astro SiteNav）
+// SiteNav — 图鉴索引（v6 §6：页码 + 区名，mono）
 import s from './SiteNav.module.css';
 
 const navItems = [
-  { href: '#hero', label: '做过的' },
-  { href: '#cases', label: '项目' },
-  { href: '#capability', label: '能力' },
-  { href: '#growth', label: '成长' },
-  { href: '#principles', label: '规矩' },
-  { href: '#contact', label: '联系' },
+  { no: '01', href: '#hero', label: '封面' },
+  { no: '04', href: '#cases', label: '项目' },
+  { no: '05', href: '#capability', label: '能力' },
+  { no: '06', href: '#growth', label: '成长' },
+  { no: '07', href: '#principles', label: '规矩' },
+  { no: 'A', href: '#offcat', label: '附录' },
+  { no: '08', href: '#contact', label: '联系' },
 ];
 
 export default function SiteNav() {
@@ -21,7 +22,9 @@ export default function SiteNav() {
         </a>
         <nav className={s.navLinks} aria-label="主导航">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href}>{item.label}</a>
+            <a key={item.href} href={item.href}>
+              <span className={s.navNo}>{item.no}</span>{item.label}
+            </a>
           ))}
           <span className={s.navStatus}>
             <span className={s.statusDot}></span>在线

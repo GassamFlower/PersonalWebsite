@@ -1,8 +1,8 @@
-// Cases — 档案 04 · 项目案例（React 版 · 深墨面板 + 截图槽/示意线稿）
+// Cases — 核心卷（v6：深墨场统一 + 规格表体裁 + 蓝图线稿反白主视觉 + 图版级验收章）
 import { getCases } from '../lib/content';
+import Seal from './Seal';
 import s from './Cases.module.css';
 
-const statusLabel: Record<string, string> = { 已上线: '已上线 · 第 1 位', 内部系统: '内部系统', 开发中: '开发中' };
 const ratios = ['portrait', 'landscape', 'landscape', 'landscape'];
 
 function Schematic({ i }: { i: number }) {
@@ -61,7 +61,8 @@ function Schematic({ i }: { i: number }) {
 export default function Cases() {
   const cases = getCases();
   return (
-    <section id="cases" className={`section ${s.cases}`}>
+    <section id="cases" className={`section field ${s.cases}`}>
+      <span className="plate-rail">核心卷 · CASES</span>
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>档案 04</b> · 项目案例（卷宗）</span>
@@ -70,33 +71,44 @@ export default function Cases() {
         <h2 className={`section-title ${s.casesTitle}`}>做的项目，能看能查</h2>
 
         <div className={s.caseList}>
-          {cases.map((c, i) => (
+          {cases.map((c, i) => {
+            // 诚实分级绑定（v5 §2.2 继承）：仅「已上线」级事实盖朱砂章；内部/开发中不盖
+            const verified = c.status === '已上线';
+            const shotRatio = s[`shot_${ratios[i] ?? 'landscape'}`];
+            return (
             <article key={i} className={s.caseCard}>
-              <div className={s.caseInfo}>
+              <div className={s.caseInfo}>                {/* Claim：图版级大编号 + 衬线题名 */}
                 <div className={s.caseHead}>
                   <span className={s.caseNo}>0{i + 1}</span>
-                  <div>
-                    <h3 className={s.caseTitle}>{c.title}</h3>
-                    <span className={s.badge}>{statusLabel[c.status]}</span>
-                  </div>
+                  <h3 className={s.caseTitle}>{c.title}</h3>
                 </div>
-                <p className={s.caseLine}><b>问题</b>&nbsp;&nbsp;{c.problem}</p>
-                <p className={s.caseLine}><b>解决</b>&nbsp;&nbsp;{c.whatIDid}</p>
-                {c.challenge && <p className={s.caseLine}><b>关键</b>&nbsp;&nbsp;{c.challenge}</p>}
-                {c.outcome && <p className={`${s.caseLine} ${s.caseOutcome}`}><b>结果</b>&nbsp;&nbsp;{c.outcome}</p>}
-                <p className={s.caseStack}>{c.stack.join('　/　')}</p>
-                <p className={s.caseStatus}>
-                  <span className={s.statusDot}></span>{c.status}
-                </p>
+                <div className={`rail ${s.caseRail}`}>
+                  {verified && <><span className="gate">GATE✓</span> · </>}CASE/0{i + 1} · {c.status}
+                </div>
+
+                {/* 规格表体裁（v6 §3.3）：label│value│发线，字段缺失不渲染该行 */}
+                <dl className={s.spec}>
+                  <div className={s.specRow}><dt>问题</dt><dd>{c.problem}</dd></div>
+                  <div className={s.specRow}><dt>解决</dt><dd>{c.whatIDid}</dd></div>
+                  {c.challenge && <div className={s.specRow}><dt>关键</dt><dd>{c.challenge}</dd></div>}
+                  {c.outcome && (
+                    <div className={`${s.specRow} ${s.specResult}`}>
+                      <dt>结果</dt>
+                      <dd>{c.outcome}</dd>
+                      {verified && <Seal label="已验证" dark className={s.sealBig} />}
+                    </div>
+                  )}
+                  <div className={s.specRow}><dt>技术栈</dt><dd className={s.specMono}>{c.stack.join(' / ')}</dd></div>
+                </dl>
               </div>
 
               <div className={s.caseVisual}>
                 {c.image ? (
-                  <figure className={`${s.shot} ${s.shotReal} ${s[`shot_${ratios[i]}`]}`}>
+                  <figure className={`${s.shot} ${s.shotReal} ${shotRatio}`}>
                     <img className={s.frameImg} src={c.image} alt={c.imageAlt || `${c.title}截图`} loading="lazy" />
                   </figure>
                 ) : (
-                  <div className={`${s.shot} ${s.shotSlot} ${s[`shot_${ratios[i]}`]}`}>
+                  <div className={`${s.shot} ${s.shotSlot} ${shotRatio}`}>
                     <span className={s.slotType}>
                       {i === 0 ? '示意 · 手机端流程' : '示意 · 界面功能线稿'}
                     </span>
@@ -106,7 +118,8 @@ export default function Cases() {
                 )}
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

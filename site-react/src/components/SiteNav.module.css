@@ -23,16 +23,18 @@
 }
 .brandEn { font-weight: 600; }
 .brandZh {
-  color: var(--color-line);
+  color: var(--color-ink-soft);
   font-weight: 500;
   letter-spacing: 0.08em;
 }
-.dot { color: var(--color-accent); margin: 0 0.4ch; }
+.dot { color: var(--color-ink); margin: 0 0.4ch; }
 .navLinks {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--space-6);
-  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
   color: var(--color-ink);
 }
 .navLinks a {
@@ -42,20 +44,24 @@
   white-space: nowrap;
 }
 .navLinks a:hover { opacity: 1; }
+.navNo {
+  color: var(--color-ink-soft);
+  margin-right: 0.5ch;
+}
 .navStatus {
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
-  color: var(--color-accent);
-  font-size: var(--text-sm);
+  color: var(--color-ink);
+  font-size: var(--text-xs);
   white-space: nowrap;
   padding-left: var(--space-2);
 }
 .statusDot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--color-ink);
   display: inline-block;
 }
 .navRule {

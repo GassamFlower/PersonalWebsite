@@ -10,7 +10,8 @@ const gates = [
 
 export default function Principles() {
   return (
-    <section id="principles" className="section principles">
+    <section id="principles" className="section">
+      <span className="plate-rail">图版 07 · PRINCIPLES</span>
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>档案 07</b> · 做事的规矩</span>
@@ -38,8 +39,8 @@ export default function Principles() {
             <span className={s.node}></span>
             <span className={s.finish} aria-hidden="true">
               <svg viewBox="0 0 24 24" className={s.finishSvg}>
-                <circle cx="12" cy="12" r="11" fill="var(--color-base)" stroke="var(--color-accent)" strokeWidth="1.4" />
-                <polyline points="6,12 10.5,16.5 18,8" fill="none" stroke="var(--color-accent)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="12" cy="12" r="11" fill="var(--color-base)" stroke="var(--color-ink)" strokeWidth="1.4" />
+                <polyline points="6,12 10.5,16.5 18,8" fill="none" stroke="var(--color-ink)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
           </div>

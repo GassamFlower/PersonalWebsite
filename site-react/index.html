@@ -9,11 +9,22 @@
     />
     <title>PERSONAL DOSSIER · 独立交付档案</title>
     <link rel="icon" type="image/svg+xml" href="/PersonalWebsite/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+SC:wght@500;600;700&display=swap"
+    <!-- 分享卡片：与 Astro 线同源（scripts/og_image.py），绝对 URL 见 astro.config.mjs 的 site -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="PERSONAL DOSSIER" />
+    <meta property="og:url" content="https://gassamflower.github.io/PersonalWebsite/" />
+    <meta property="og:title" content="PERSONAL DOSSIER · 独立交付档案" />
+    <meta
+      property="og:description"
+      content="把一团乱麻，理成能用的系统 —— 独立系统建构者的公开交付档案。"
     />
+    <meta property="og:image" content="https://gassamflower.github.io/PersonalWebsite/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="纸白底、墨黑细线与裁切线的档案封面卡片，右下一枚朱砂署名章。" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- 字体自托管：由 assets/fonts/fonts.css 经打包器引用（文件名带 hash，故不写 preload） -->
   </head>
   <body>
     <div id="root"></div>

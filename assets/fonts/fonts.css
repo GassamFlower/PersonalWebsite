@@ -1,0 +1,43 @@
+/* assets/fonts/fonts.css — 自托管字体（v6 上线门前整改 2026-10-14）
+   为什么自托管：fonts.googleapis.com 在大陆网络不可达（本机 curl 12s 超时），
+   访客此前一直看的是系统回退字，衬线字阶在人家机器上塌掉。
+   中文衬线为按实际渲染字符子集化（810 字符 / 字重约 122 kB），
+   由 scripts/fonts.mjs 生成，内容改动后需重跑（build 里的 --check 会拦住缺字）。
+   拉丁等宽只有两个定宽字重、无中文，整字重 15 kB 可接受，直接从 @fontsource 产物复制入库。
+   许可：Noto Serif SC 与 IBM Plex Mono 均为 SIL Open Font License，允许子集化与再分发。 */
+
+@font-face {
+  font-family: 'Noto Serif SC';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./noto-serif-sc-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Noto Serif SC';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./noto-serif-sc-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Noto Serif SC';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./noto-serif-sc-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./plex-mono-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./plex-mono-500.woff2') format('woff2');
+}

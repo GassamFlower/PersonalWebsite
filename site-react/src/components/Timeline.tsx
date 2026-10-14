@@ -1,11 +1,12 @@
-// Timeline — 档案 03 · 做过的事（React 版 · 内容真源 getTimeline）
+// Timeline — 图版 03 · 做过的事（v6：编年表＝巨号 mono 年份 + 发线行 + 墨黑节点）
 import { getTimeline } from '../lib/content';
 import s from './Timeline.module.css';
 
 export default function Timeline() {
   const nodes = getTimeline();
   return (
-    <section id="timeline" className="section timeline">
+    <section id="timeline" className="section">
+      <span className="plate-rail">图版 03 · TIMELINE</span>
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>档案 03</b> · 做过的事</span>
@@ -13,25 +14,26 @@ export default function Timeline() {
         </div>
         <div className={s.tlRule}></div>
 
-        <h2 className={`section-title ${s.tlTitle}`}>干过的活，<br />都有据可查</h2>
+        <h2 className="section-title">干过的活，<br />都有据可查</h2>
 
-        <div className={s.tl}>
+        <ol className={s.tl}>
           {nodes.map((n, i) => (
-            <article key={i} className={s.tlNode}>
-              <span className={s.tlMarker} aria-hidden="true"></span>
-              <div className={s.tlHead}>
+            <li key={i} className={s.tlNode}>
+              <div className={s.tlPeriod}>
                 <span className={s.tlYear}>{n.year}</span>
                 {n.flag && <span className={s.tlFlag}>{n.flag}</span>}
               </div>
-              <h3 className={s.tlName}>{n.title}</h3>
-              <p className={s.tlRole}>{n.role}</p>
-              <p className={s.tlDesc}>{n.detail}</p>
-              {n.stack.length > 0 && (
-                <p className={s.tlStack}>{n.stack.join('　/　')}</p>
-              )}
-            </article>
+              <div className={s.tlBody}>
+                <h3 className={s.tlName}><i className={s.tlMarker} aria-hidden="true" />{n.title}</h3>
+                <p className={s.tlRole}>{n.role}</p>
+                <p className={s.tlDesc}>{n.detail}</p>
+                {n.stack.length > 0 && (
+                  <p className={`rail ${s.tlStack}`}>{n.stack.join(' / ')}</p>
+                )}
+              </div>
+            </li>
           ))}
-        </div>
+        </ol>
 
         {/* 左下角档案盒 + 存档印章 */}
         <div className={s.tlArt} aria-hidden="true">
@@ -45,7 +47,7 @@ export default function Timeline() {
             <rect x="92" y="32" width="3" height="60" fill="none" stroke="var(--color-faint)" strokeWidth="0.7" />
             <rect x="100" y="28" width="3" height="68" fill="none" stroke="var(--color-line)" strokeWidth="0.7" />
             <rect x="108" y="34" width="3" height="60" fill="none" stroke="var(--color-faint)" strokeWidth="0.7" />
-            <rect x="116" y="30" width="3" height="66" fill="none" stroke="var(--color-accent)" strokeWidth="1" />
+            <rect x="116" y="30" width="3" height="66" fill="none" stroke="var(--color-ink)" strokeWidth="1" />
             <rect x="124" y="32" width="3" height="62" fill="none" stroke="var(--color-faint)" strokeWidth="0.7" />
             <rect x="132" y="28" width="3" height="68" fill="none" stroke="var(--color-line)" strokeWidth="0.7" />
             <rect x="106" y="118" width="20" height="6" rx="1" fill="none" stroke="var(--color-ink)" strokeWidth="0.8" />
@@ -53,9 +55,9 @@ export default function Timeline() {
             <rect x="164" y="52" width="36" height="6" fill="none" stroke="var(--color-faint)" strokeWidth="0.6" />
             <rect x="164" y="64" width="36" height="6" fill="none" stroke="var(--color-faint)" strokeWidth="0.6" />
             <g transform="translate(238 80)">
-              <circle cx="34" cy="34" r="34" fill="none" stroke="var(--color-accent)" strokeWidth="1.6" />
-              <circle cx="34" cy="34" r="28" fill="none" stroke="var(--color-accent)" strokeWidth="0.7" />
-              <text x="34" y="42" textAnchor="middle" fontFamily="var(--font-serif)" fontSize="18" fill="var(--color-accent)" fontWeight="700">存档</text>
+              <circle cx="34" cy="34" r="34" fill="none" stroke="var(--color-ink)" strokeWidth="1.6" />
+              <circle cx="34" cy="34" r="28" fill="none" stroke="var(--color-ink)" strokeWidth="0.7" />
+              <text x="34" y="42" textAnchor="middle" fontFamily="var(--font-serif)" fontSize="18" fill="var(--color-ink)" fontWeight="700">存档</text>
             </g>
           </svg>
         </div>

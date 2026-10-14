@@ -6,8 +6,10 @@
   "description": "Personal Website · 接单交付凭证 · 纯静态单页站",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/fonts.mjs --check",
     "preview": "astro preview",
+    "fonts": "node scripts/fonts.mjs",
+    "og": "python scripts/og_image.py",
     "astro": "astro"
   },
   "dependencies": {

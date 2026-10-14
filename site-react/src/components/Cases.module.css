@@ -1,88 +1,111 @@
-/* Cases — 档案 04 深墨面板 */
-.cases {
-  background: #17171b;
-  color: #f0f0ec;
-}
-/* 深墨面板内覆盖共享 global 类（section-title / section-head） */
-.cases :global(.section-title) { color: #f0f0ec; }
-.cases :global(.section-head .tag) { color: #d8d8d4; }
-.cases :global(.section-head .tag b) { color: var(--color-accent); }
-.cases :global(.section-head .meta) { color: #a9a9a4; }
-.casesTitle { color: #f0f0ec; }
+/* Cases — 核心卷（v6：深墨场 .field 统一一种黑 + 规格表 + 线稿反白） */
+
+/* 墨场内覆盖共享全局类 */
+.cases :global(.section-head) { color: var(--color-field-ink); }
+.cases :global(.section-head .tag) { color: var(--color-field-muted); }
+.cases :global(.section-head .tag b) { color: var(--color-field-ink); }
+.cases :global(.section-head .meta) { color: var(--color-field-muted); }
+.cases :global(.section-title) { color: var(--color-field-ink); }
+.cases :global(.rail) { color: var(--color-field-muted); }
+.cases :global(.rail .gate) { color: var(--color-field-ink); }
+.cases :global(.plate-rail) { color: var(--color-field-muted); }
+.casesTitle { color: var(--color-field-ink); }
 
 .caseList {
   display: flex;
   flex-direction: column;
 }
 .caseCard {
-  border-top: 1px solid #4a4a4a;
+  border-top: 1px solid var(--color-field-rule);
   padding-block: var(--space-10);
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   gap: var(--space-12);
   align-items: center;
+  transition: background-color 0.35s var(--ease-ink);
 }
-.caseCard:last-child { border-bottom: 1px solid #4a4a4a; }
+.caseCard:last-child { border-bottom: 1px solid var(--color-field-rule); }
+.caseCard:hover {
+  background: color-mix(in srgb, var(--color-field-ink) 4%, transparent);
+}
+
+/* Claim：图版级编号（墨场上=纸白，hover 位移不染色） */
 .caseHead {
   display: flex;
   align-items: flex-end;
   gap: var(--space-6);
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-3);
 }
 .caseNo {
+  display: inline-block;
   font-family: var(--font-serif);
   font-size: var(--text-5xl);
   font-weight: 700;
   line-height: 0.85;
-  color: var(--color-accent);
+  color: var(--color-field-ink);
+  transition: transform 0.4s var(--ease-spring);
 }
+.caseCard:hover .caseNo { transform: translateX(6px); }
 .caseTitle {
   font-family: var(--font-serif);
   font-size: 1.4rem;
   letter-spacing: 0.01em;
   line-height: 1.25;
-  color: #f0f0ec;
+  color: var(--color-field-ink);
   margin-bottom: var(--space-2);
 }
-.badge {
-  display: inline-block;
-  font-size: var(--text-xs);
-  letter-spacing: 0.04em;
-  color: #c8c8c4;
-  font-family: var(--font-sans);
+.caseRail { margin-bottom: var(--space-5); }
+
+/* 规格表体裁（v6 §3.3）：label │ value │ 发线 */
+.spec {
+  display: flex;
+  flex-direction: column;
 }
-.caseLine { color: #e4e4e0; }
-.caseLine b { color: var(--color-accent); font-weight: 600; }
-.caseLine { font-size: var(--text-sm); line-height: 1.8; margin-bottom: var(--space-3); }
-.caseStack {
+.specRow {
+  display: grid;
+  grid-template-columns: 4.5em 1fr;
+  column-gap: var(--space-4);
+  border-top: 1px solid var(--color-field-rule);
+  padding-block: var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.8;
+  color: var(--color-field-line);
+}
+.specRow:first-child { border-top: none; padding-top: 0; }
+.specRow dt {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: #a9a9a4;
+  letter-spacing: 0.1em;
+  color: var(--color-field-muted);
+  padding-top: 0.35em;
+}
+.specRow dd { grid-column: 2; min-width: 0; }
+.specMono {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
   letter-spacing: 0.05em;
-  margin: var(--space-4) 0 var(--space-4);
+  color: var(--color-field-muted);
 }
-.caseStatus {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  color: #e4e4e0;
+/* Result 行：提亮 + 图版级验收章 */
+/* Result 行：提亮 + 图版级验收章（朱砂只出现在章上，标签不染色——唯一色纪律） */
+.specResult {
+  color: var(--color-field-ink);
+}
+.specResult dt { color: var(--color-field-ink); }
+.sealBig {
+  grid-column: 2;
+  justify-self: start;
+  margin-top: var(--space-2);
   font-size: var(--text-sm);
+  padding: 0.35rem 0.8rem;
+  letter-spacing: 0.18em;
 }
-.statusDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  display: inline-block;
-}
-.caseOutcome .statusDot { color: #e4e4e0; }
 
-/* 截图槽 */
-.caseVisual { min-width: 0; }
+/* 截图槽 / 蓝图线稿反白（v6：无白卡，线稿直接画在墨场上） */
+.caseVisual { min-width: 0; position: relative; }
 .shot {
   position: relative;
-  border: 1px solid var(--color-faint);
-  background: var(--color-surface);
+  border: 1px solid var(--color-field-rule);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -90,16 +113,25 @@
 }
 .shot_portrait { aspect-ratio: 3 / 4; }
 .shot_landscape { aspect-ratio: 4 / 3; }
-.shotReal { padding: 0; }
+.shotReal { background: var(--color-surface); padding: 0; }
 .frameImg { width: 100%; height: 100%; object-fit: cover; }
-.shotSlot { flex-direction: column; gap: var(--space-4); }
+.shotSlot {
+  flex-direction: column;
+  gap: var(--space-4);
+  background: transparent;
+  /* 反白关键：在子树内重定义线稿用的 token，SVG 的 var() 引用随之翻转 */
+  --color-faint: var(--color-field-rule);
+  --color-line: var(--color-field-muted);
+  --color-accent: var(--color-field-line);
+  --color-ink: var(--color-field-ink);
+}
 .slotType {
   position: absolute;
   top: var(--space-4);
   left: var(--space-4);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-line);
+  color: var(--color-field-muted);
   letter-spacing: 0.05em;
 }
 .slotSchematic {
@@ -111,9 +143,10 @@
   bottom: var(--space-3);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-faint);
+  color: var(--color-field-muted);
   letter-spacing: 0.05em;
 }
+
 @media (max-width: 860px) {
   .caseCard {
     grid-template-columns: 1fr;
@@ -128,4 +161,9 @@
   .shot { max-width: 300px; margin-inline: auto; }
   .caseInfo { grid-column: 1 / -1; }
   .caseCard { padding-block: var(--space-6); }
+  .specRow { grid-template-columns: 1fr; row-gap: var(--space-1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caseCard, .caseCard .caseNo { transition: none; }
 }
