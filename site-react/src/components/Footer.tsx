@@ -1,12 +1,14 @@
 // Footer — 黑尾收尾（v6 §2/§5：并入深墨场，与封面首尾合上「这本图鉴」）
+import { useUi } from '../i18n/LocaleContext';
 import s from './Footer.module.css';
 
 export default function Footer() {
+  const { t } = useUi();
   return (
     <footer className={`field ${s.siteFooter}`}>
       <div className={`container ${s.footerInner}`}>
-        <p className={s.footerNote}>展示内容均经匿名化脱敏，不涉及具体公司 / 客户信息</p>
-        <p className={s.footerTag}>把一团乱麻，理成能用的系统 · PERSONAL DOSSIER</p>
+        <p className={s.footerNote}>{t.footer.note}</p>
+        <p className={s.footerTag}>{t.footer.tagline} · PERSONAL DOSSIER</p>
         <span className={s.footerMark} aria-hidden="true">
           <svg viewBox="0 0 28 28">
             <rect x="1.5" y="1.5" width="25" height="25" fill="none" stroke="var(--color-field-line)" strokeWidth="1.2" />

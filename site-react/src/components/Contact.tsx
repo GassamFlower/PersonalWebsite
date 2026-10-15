@@ -1,5 +1,6 @@
 // Contact — 封底（v6 §5：黑尾墨场 + 联系方式规格表 + 大号朱砂署名章「一个故事」）
 import { useState } from 'react';
+import { useUi } from '../i18n/LocaleContext';
 import s from './Contact.module.css';
 
 const wechat = 'G10S7H21';
@@ -10,45 +11,46 @@ const emails = [
 ];
 
 export default function Contact() {
-  const [label, setLabel] = useState('加微信聊聊');
+  const { t } = useUi();
+  const [label, setLabel] = useState(t.contact.copyIdle);
 
   async function copyWechat() {
     try {
       await navigator.clipboard.writeText(wechat);
-      setLabel('已复制 · ' + wechat);
+      setLabel(t.contact.copyDone + ' · ' + wechat);
     } catch {
       try {
-        window.prompt('请手动复制微信号', wechat);
+        window.prompt(t.contact.promptText, wechat);
       } catch {
         /* 老环境忽略 */
       }
       return;
     }
-    setTimeout(() => setLabel('加微信聊聊'), 1500);
+    setTimeout(() => setLabel(t.contact.copyIdle), 1500);
   }
 
   return (
     <section id="contact" className={`section field ${s.contact}`}>
-      <span className="plate-rail">封底 · BACK COVER</span>
+      <span className="plate-rail">{t.contact.plateRail}</span>
       <div className={`container ${s.contactInner}`}>
         <div className="section-head">
-          <span className="tag"><b>档案 08</b> · 联系</span>
+          <span className="tag"><b>{t.contact.tagNo}</b> · {t.contact.tagZh}</span>
           <span className="meta">08</span>
         </div>
         <div className={s.ctRule}></div>
 
         <div className={s.contactGrid}>
           <div className={s.contactMain}>
-            <h2 className={s.contactTitle}>聊得来，就一起做事</h2>
+            <h2 className={s.contactTitle}>{t.contact.title}</h2>
 
             {/* 规格表体裁：联系方式作为可查字段 */}
             <dl className={s.spec}>
               <div className={s.specRow}>
-                <dt>微信</dt>
+                <dt>{t.contact.labelWechat}</dt>
                 <dd className={s.specMono}>{wechat}</dd>
               </div>
               <div className={s.specRow}>
-                <dt>邮箱</dt>
+                <dt>{t.contact.labelMail}</dt>
                 <dd className={s.mailList}>
                   {emails.map((e) => (
                     <a key={e} className={`ink-link ${s.infoMail}`} href={`mailto:${e}`}>{e}</a>
@@ -56,8 +58,8 @@ export default function Contact() {
                 </dd>
               </div>
               <div className={s.specRow}>
-                <dt>索取</dt>
-                <dd className={s.specNote}>雇主与过程细节对公开版隐去 · 详询索取</dd>
+                <dt>{t.contact.labelAsk}</dt>
+                <dd className={s.specNote}>{t.contact.askNote}</dd>
               </div>
             </dl>
 
@@ -65,7 +67,7 @@ export default function Contact() {
               <button className={s.btnPaper} data-copy={wechat} onClick={copyWechat}>{label}</button>
             </div>
 
-            <p className={`rail ${s.contactSlogan}`}>PERSONAL DOSSIER · 把一团乱麻，理成能用的系统</p>
+            <p className={`rail ${s.contactSlogan}`}>PERSONAL DOSSIER · {t.contact.slogan}</p>
           </div>
 
           <div className={s.contactBack}>
@@ -89,7 +91,7 @@ export default function Contact() {
               <span className={s.signSeal} aria-hidden="true">
                 <span>一</span><span>个</span><span>故</span><span>事</span>
               </span>
-              <span className={`rail ${s.signRail}`}>署名章 · 一个故事</span>
+              <span className={`rail ${s.signRail}`}>{t.contact.signRail}</span>
             </div>
 
             <span className="regmark" aria-hidden="true"><i className="k" /><i className="r" /><i className="w" /></span>

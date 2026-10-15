@@ -73,4 +73,16 @@ const offcat = defineCollection({
   }),
 });
 
-export const collections = { growth, cases, skills, timeline, offcat };
+// 「当下」区（docs/i §5.1）：全站恒一条，真源 src/content/now/current.md
+const now = defineCollection({
+  type: 'content',
+  schema: z.object({
+    updated: z.string().regex(/^\d{4}-\d{2}$/),
+    doing: z.array(z.object({ text: z.string().min(1), textEn: z.string().optional() })).default([]),
+    learning: z.array(z.object({ text: z.string().min(1), textEn: z.string().optional() })).default([]),
+    note: z.string().default(''),
+    noteEn: z.string().optional(),
+  }),
+});
+
+export const collections = { growth, cases, skills, timeline, offcat, now };

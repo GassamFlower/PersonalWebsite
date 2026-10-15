@@ -44,6 +44,11 @@ export interface OffcatData {
   no: string; title: string; date?: string;
   status: '已验证' | '进行中' | '计划中' | '参考'; tags: string[];
 }
+export interface NowItem { text: string; textEn?: string; }
+export interface NowData {
+  updated: string; doing: NowItem[]; learning: NowItem[];
+  note: string; noteEn?: string;
+}
 
 function collect<T>(isMember: (d: Record<string, any>) => boolean): T[] {
   return entries
@@ -76,4 +81,17 @@ export function getTimeline(): TimelineData[] {
 // 附录台账：以唯一键 no（A-0n）判别，按编号升序
 export function getOffcat(): OffcatData[] {
   return collect<OffcatData>((d) => 'no' in d && 'title' in d).sort((a, b) => a.no.localeCompare(b.no));
+}
+
+// 「当下」区：以唯一键 updated + doing 判别，全站恒一条（条数由 check-content 守卫把关）
+export function getNow(): NowData {
+  const found = entries.find((e) => 'updated' in e.data && 'doing' in e.data);
+  const d = (found?.data ?? {}) as Partial<NowData>;
+  return {
+    updated: d.updated ?? '',
+    doing: d.doing ?? [],
+    learning: d.learning ?? [],
+    note: d.note ?? '',
+    noteEn: d.noteEn,
+  };
 }

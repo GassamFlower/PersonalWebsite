@@ -1,30 +1,25 @@
 // Story — 图版 02 · 品牌故事（v6：文字块图版化＝编号发线行 + 竖排区名；线稿墨黑）
+import { useUi } from '../i18n/LocaleContext';
 import s from './Story.module.css';
 
-const paragraphs = [
-  '八年政务系统维护，让我懂业务、懂数据、也看见系统背后的真实需求与约束。',
-  '进入一家工业类企业，我看见长期被忽视的数字化空白——流程割裂、数据孤岛、体验落后。',
-  '我从零搭起工业运维平台 OPS 与统一用户中心 UUC，让数据流动，让一线可用，让管理可视。',
-  '靠强烈的好奇心与持续学习的劲头，我把系统做深、做实用；已经能上手 AI 落地（RAG、知识库、智能体），仍在往更深之处精进。',
-  '我自建「五级项目体系 + 单一信源 SSOT」的做事规矩，以结构化的方法，把复杂的事做成可持续的系统。',
-];
-
-const subNav = [
-  { href: '#hero', label: '定位' },
-  { href: '#story', label: '品牌故事' },
-  { href: '#principles', label: '方法与体系' },
-  { href: '#cases', label: '项目精选' },
-  { href: '#growth', label: '洞见' },
-  { href: '#contact', label: '联系' },
-];
-
 export default function Story() {
+  const { t } = useUi();
+  const paragraphs = [t.story.para1, t.story.para2, t.story.para3, t.story.para4, t.story.para5];
+  const subNav = [
+    { href: '#hero', label: t.story.linkPosition },
+    { href: '#story', label: t.story.linkStory },
+    { href: '#principles', label: t.story.linkMethod },
+    { href: '#cases', label: t.story.linkWorks },
+    { href: '#growth', label: t.story.linkInsight },
+    { href: '#contact', label: t.story.linkContact },
+  ];
+
   return (
     <section id="story" className="section">
-      <span className="plate-rail">图版 02 · STORY</span>
+      <span className="plate-rail">{t.story.plateRail}</span>
       <div className="container">
         <div className="section-head">
-          <span className="tag"><b>档案 02</b> · 品牌故事</span>
+          <span className="tag"><b>{t.story.tagNo}</b> · {t.story.tagZh}</span>
           <div className="right-nav">
             {subNav.map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}
             <span className="page-num">02</span>
@@ -32,7 +27,7 @@ export default function Story() {
         </div>
         <div className={s.storyRule}></div>
 
-        <h2 className={s.storyHeadline}>在真实系统里，<br />把空白做成能用的东西</h2>
+        <h2 className={s.storyHeadline}>{t.story.headline1}<br />{t.story.headline2}</h2>
 
         <div className={s.storyGrid}>
           <ol className={s.storyBody}>
@@ -134,7 +129,7 @@ export default function Story() {
           <span className={s.footSep} aria-hidden="true">|</span>
           <span>REV v6</span>
           <span className={s.footSep} aria-hidden="true">|</span>
-          <span>BY 一个故事</span>
+          <span>{t.story.footSigned}</span>
         </div>
       </div>
     </section>

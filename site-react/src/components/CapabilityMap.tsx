@@ -1,25 +1,27 @@
 // CapabilityMap — 图版 05 · 技能档案（v6：规格表体裁 + 诚实三档墨色徽章，不用朱砂）
 import { getSkills } from '../lib/content';
+import { useUi } from '../i18n/LocaleContext';
 import s from './CapabilityMap.module.css';
 
 const levelTone: Record<string, string> = { '已交付': 'done', '会用': 'use', '在学': 'learning' };
 
 export default function CapabilityMap() {
+  const { t } = useUi();
   const skills = getSkills();
   return (
     <section id="capability" className="section">
-      <span className="plate-rail">图版 05 · CAPABILITY</span>
+      <span className="plate-rail">{t.capability.plateRail}</span>
       <div className="container">
         <div className="section-head">
-          <span className="tag"><b>档案 05</b> · 技能树</span>
+          <span className="tag"><b>{t.capability.tagNo}</b> · {t.capability.tagZh}</span>
           <span className="meta">05</span>
         </div>
         <div className={s.capRule}></div>
 
-        <h2 className={s.capMega}>技能档案：<br />会什么，到什么程度</h2>
+        <h2 className={s.capMega}>{t.capability.headline1}<br />{t.capability.headline2}</h2>
 
         <p className={s.capIntro}>
-          按技术栈分领域，标出熟练程度与真实证据——不报菜名，边界诚实。
+          {t.capability.intro}
         </p>
 
         <div className={s.tree}>
@@ -44,7 +46,7 @@ export default function CapabilityMap() {
                   ))}
                   {s2.evidence && (
                     <div className={`${s.specRow} ${s.specEvidence}`}>
-                      <dt>证据</dt>
+                      <dt>{t.capability.labelEvidence}</dt>
                       <dd>{s2.evidence}</dd>
                     </div>
                   )}
@@ -55,7 +57,7 @@ export default function CapabilityMap() {
         </div>
 
         <div className={`rail ${s.capFoot}`}>
-          <span>LEVEL 分级诚实标注</span>
+          <span>{t.capability.footLevel}</span>
           <span className={s.footSep} aria-hidden="true">|</span>
           <span>PLATE 05 / 08</span>
           <span className={s.footSep} aria-hidden="true">|</span>

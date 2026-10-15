@@ -6,7 +6,7 @@
   "description": "Personal Website · 第三版换栈（Vite + React + r3f + 经典 CSS）· 纯静态单页站",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && vite build --config vite.config.ssr.ts && node scripts/prerender.mjs && node ../scripts/fonts.mjs --check",
+    "build": "tsc && vite build && vite build --config vite.config.ssr.ts && node scripts/prerender.mjs && node ../scripts/check-content.mjs && node ../scripts/fonts.mjs --check",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
   },

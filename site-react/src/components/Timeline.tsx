@@ -1,20 +1,22 @@
 // Timeline — 图版 03 · 做过的事（v6：编年表＝巨号 mono 年份 + 发线行 + 墨黑节点）
 import { getTimeline } from '../lib/content';
+import { useUi } from '../i18n/LocaleContext';
 import s from './Timeline.module.css';
 
 export default function Timeline() {
+  const { t } = useUi();
   const nodes = getTimeline();
   return (
     <section id="timeline" className="section">
-      <span className="plate-rail">图版 03 · TIMELINE</span>
+      <span className="plate-rail">{t.timeline.plateRail}</span>
       <div className="container">
         <div className="section-head">
-          <span className="tag"><b>档案 03</b> · 做过的事</span>
+          <span className="tag"><b>{t.timeline.tagNo}</b> · {t.timeline.tagZh}</span>
           <span className="meta">03</span>
         </div>
         <div className={s.tlRule}></div>
 
-        <h2 className="section-title">干过的活，<br />都有据可查</h2>
+        <h2 className="section-title">{t.timeline.headline1}<br />{t.timeline.headline2}</h2>
 
         <ol className={s.tl}>
           {nodes.map((n, i) => (
@@ -57,7 +59,7 @@ export default function Timeline() {
             <g transform="translate(238 80)">
               <circle cx="34" cy="34" r="34" fill="none" stroke="var(--color-ink)" strokeWidth="1.6" />
               <circle cx="34" cy="34" r="28" fill="none" stroke="var(--color-ink)" strokeWidth="0.7" />
-              <text x="34" y="42" textAnchor="middle" fontFamily="var(--font-serif)" fontSize="18" fill="var(--color-ink)" fontWeight="700">存档</text>
+              <text x="34" y="42" textAnchor="middle" fontFamily="var(--font-serif)" fontSize="18" fill="var(--color-ink)" fontWeight="700">{t.timeline.artArchived}</text>
             </g>
           </svg>
         </div>

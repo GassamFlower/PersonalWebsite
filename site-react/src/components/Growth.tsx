@@ -1,34 +1,35 @@
 // Growth — 图版 06 · 成长记录（v6：月度索引表 month │ takeaway │ tags）
 import { getGrowth } from '../lib/content';
+import { useUi } from '../i18n/LocaleContext';
 import s from './Growth.module.css';
 
-const subNav = [
-  { href: '#hero', label: '档案' },
-  { href: '#cases', label: '作品' },
-  { href: '#principles', label: '方法' },
-  { href: '#growth', label: '记录' },
-  { href: '#contact', label: '关于' },
-];
-
 export default function Growth() {
+  const { t } = useUi();
   const posts = getGrowth();
+  const subNav = [
+    { href: '#hero', label: t.growth.linkArchive },
+    { href: '#cases', label: t.growth.linkWorks },
+    { href: '#principles', label: t.growth.linkMethod },
+    { href: '#growth', label: t.growth.linkLog },
+    { href: '#contact', label: t.growth.linkAbout },
+  ];
   return (
     <section id="growth" className="section">
-      <span className="plate-rail">图版 06 · GROWTH</span>
+      <span className="plate-rail">{t.growth.plateRail}</span>
       <div className="container">
         <div className="section-head">
-          <span className="tag"><b>档案 06</b> · 成长记录</span>
+          <span className="tag"><b>{t.growth.tagNo}</b> · {t.growth.tagZh}</span>
           <div className="right-nav">
             {subNav.map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}
-            <a className={s.rightArrow} href="#contact" aria-label="下一页">→</a>
+            <a className={s.rightArrow} href="#contact" aria-label={t.growth.nextAria}>→</a>
           </div>
         </div>
         <div className={s.growthRule}></div>
 
         <div className={s.growthGrid}>
           <div className={s.growthLeft}>
-            <h2 className={`section-title ${s.growthTitle}`}>公开的成长，<br />一个月记一次</h2>
-            <p className={s.growthSub}>给自己一个月进步的交代</p>
+            <h2 className={`section-title ${s.growthTitle}`}>{t.growth.headline1}<br />{t.growth.headline2}</h2>
+            <p className={s.growthSub}>{t.growth.sub}</p>
             <div className={s.growthChart} aria-hidden="true">
               <svg viewBox="0 0 320 220">
                 <line x1="24" y1="180" x2="304" y2="180" stroke="var(--color-ink)" strokeWidth="1" />
@@ -57,9 +58,9 @@ export default function Growth() {
 
           <div className={s.growthList}>
             <div className={`rail ${s.growthHead}`}>
-              <span>月份</span>
-              <span>本月的交代</span>
-              <span>标签</span>
+              <span>{t.growth.thMonth}</span>
+              <span>{t.growth.thTakeaway}</span>
+              <span>{t.growth.thTags}</span>
             </div>
             {posts.map((p, i) => (
               <article key={i} className={s.growthItem}>

@@ -96,8 +96,8 @@
 - `src/i18n/ui.ts`：UI 文案字典。中文逐条照搬（一个字没改），`en` 各区分刻意留空——**英文措辞要你逐条裁决**（§3），所以这里不预制。
 - `src/i18n/LocaleContext.tsx` + `App.tsx` + `entry-server.tsx` + `main.tsx`：locale 贯穿到分区组件。
 - `scripts/prerender.mjs`：改成按语言发射多份静态 HTML；守卫 = **某语言列入发布但字典缺键即 build exit 1**（实测报出 `en 缺 21 个键：shell.skipLink, hero.plateRail…`），绝不让英文页静默回退中文。当前 `EMIT = ['zh']`，加 `'en'` 的前提是字典补齐。
-- 竖切片样板 = `shell`（跳转链接）+ `Hero`（封面 20 条串）已进字典；其余 9 个组件的中文硬编码串按同样方式逐区分批搬。
-- 实测：`npm run build` 全绿；**预渲染文本与改造前逐字相同**（去标签后 6,385 字符，两侧同一 md5）；本地 `vite preview` 水合后控制台 0 条消息。
+- 竖切片样板 = `shell` + `Hero` 之后，**2026-10-15 全部组件已搬完**：SiteNav/Story/Timeline/Cases/CapabilityMap/Growth/Principles/Offcat/Contact/Footer 的含中文 UI 串尽数入 `ui.ts`（含图版线稿内嵌文字与 aria 串）；`en` 侧合计 **145 键待你逐条裁决**（prerender 守卫实测报数）。刻意不进字典的两类：纯 Latin 装饰串（PLATE/CAT./GATE✓ 等，两语言同形）；内容枚举（status/level 显示值属 `src/content/` 数据，其 `*En` 映射归批 2）。署名「一个故事」按裁决 3 保留中文原样。
+- 实测（批 1 完工判据，2026-10-15）：`npm run build` 全绿；**预渲染文本与改造前逐字相同**（去标签 6,385 字符，md5 `fae2afdb7be9eee18c19166e54e55bba` 与基线全等）；字体子集覆盖 810/810 过；`vite preview` 水合后控制台 0 条消息。**批 1 已过门。**
 
 ---
 

@@ -1,11 +1,13 @@
 // Cases — 核心卷（v6：深墨场统一 + 规格表体裁 + 蓝图线稿反白主视觉 + 图版级验收章）
 import { getCases } from '../lib/content';
+import { useUi } from '../i18n/LocaleContext';
 import Seal from './Seal';
 import s from './Cases.module.css';
 
 const ratios = ['portrait', 'landscape', 'landscape', 'landscape'];
 
 function Schematic({ i }: { i: number }) {
+  const { t } = useUi();
   return (
     <svg className={s.slotSchematic} viewBox="0 0 360 240" aria-hidden="true">
       <rect x="18" y="16" width="324" height="22" rx="3" fill="none" stroke="var(--color-faint)" strokeWidth="1" />
@@ -29,7 +31,7 @@ function Schematic({ i }: { i: number }) {
             <rect key={`${r}-${c}`} x={26 + c * 112} y={54 + r * 58} width="92" height="44" fill="none"
               stroke={r === 0 && c === 0 ? 'var(--color-accent)' : 'var(--color-faint)'} strokeWidth="1" />
           )))}
-          <text x="26" y="40" fontFamily="var(--font-mono)" fontSize="10" fill="var(--color-line)">资产 · 监控 · 巡检 · 工单</text>
+          <text x="26" y="40" fontFamily="var(--font-mono)" fontSize="10" fill="var(--color-line)">{t.cases.artAssets}</text>
         </g>
       ) : i === 2 ? (
         <g>
@@ -40,7 +42,7 @@ function Schematic({ i }: { i: number }) {
             <line key={k} x1={44 + k * 90} y1={136} x2={150} y2={196} stroke="var(--color-line)" strokeWidth="0.8" />
           ))}
           <circle cx="150" cy="196" r="22" fill="none" stroke="var(--color-accent)" strokeWidth="1.4" />
-          <text x="150" y="201" textAnchor="middle" fontFamily="var(--font-serif)" fontSize="13" fill="var(--color-ink)">统一入口</text>
+          <text x="150" y="201" textAnchor="middle" fontFamily="var(--font-serif)" fontSize="13" fill="var(--color-ink)">{t.cases.artUnifiedEntry}</text>
         </g>
       ) : (
         <g>
@@ -59,16 +61,17 @@ function Schematic({ i }: { i: number }) {
 }
 
 export default function Cases() {
+  const { t } = useUi();
   const cases = getCases();
   return (
     <section id="cases" className={`section field ${s.cases}`}>
-      <span className="plate-rail">核心卷 · CASES</span>
+      <span className="plate-rail">{t.cases.plateRail}</span>
       <div className="container">
         <div className="section-head">
-          <span className="tag"><b>档案 04</b> · 项目案例（卷宗）</span>
+          <span className="tag"><b>{t.cases.tagNo}</b> · {t.cases.tagZh}</span>
           <span className="meta">04</span>
         </div>
-        <h2 className={`section-title ${s.casesTitle}`}>做的项目，能看能查</h2>
+        <h2 className={`section-title ${s.casesTitle}`}>{t.cases.title}</h2>
 
         <div className={s.caseList}>
           {cases.map((c, i) => {
@@ -88,32 +91,32 @@ export default function Cases() {
 
                 {/* 规格表体裁（v6 §3.3）：label│value│发线，字段缺失不渲染该行 */}
                 <dl className={s.spec}>
-                  <div className={s.specRow}><dt>问题</dt><dd>{c.problem}</dd></div>
-                  <div className={s.specRow}><dt>解决</dt><dd>{c.whatIDid}</dd></div>
-                  {c.challenge && <div className={s.specRow}><dt>关键</dt><dd>{c.challenge}</dd></div>}
+                  <div className={s.specRow}><dt>{t.cases.labelProblem}</dt><dd>{c.problem}</dd></div>
+                  <div className={s.specRow}><dt>{t.cases.labelDid}</dt><dd>{c.whatIDid}</dd></div>
+                  {c.challenge && <div className={s.specRow}><dt>{t.cases.labelKey}</dt><dd>{c.challenge}</dd></div>}
                   {c.outcome && (
                     <div className={`${s.specRow} ${s.specResult}`}>
-                      <dt>结果</dt>
+                      <dt>{t.cases.labelResult}</dt>
                       <dd>{c.outcome}</dd>
-                      {verified && <Seal label="已验证" dark className={s.sealBig} />}
+                      {verified && <Seal label={t.cases.sealVerified} dark className={s.sealBig} />}
                     </div>
                   )}
-                  <div className={s.specRow}><dt>技术栈</dt><dd className={s.specMono}>{c.stack.join(' / ')}</dd></div>
+                  <div className={s.specRow}><dt>{t.cases.labelStack}</dt><dd className={s.specMono}>{c.stack.join(' / ')}</dd></div>
                 </dl>
               </div>
 
               <div className={s.caseVisual}>
                 {c.image ? (
                   <figure className={`${s.shot} ${s.shotReal} ${shotRatio}`}>
-                    <img className={s.frameImg} src={c.image} alt={c.imageAlt || `${c.title}截图`} loading="lazy" />
+                    <img className={s.frameImg} src={c.image} alt={c.imageAlt || `${c.title}${t.cases.altSuffix}`} loading="lazy" />
                   </figure>
                 ) : (
                   <div className={`${s.shot} ${s.shotSlot} ${shotRatio}`}>
                     <span className={s.slotType}>
-                      {i === 0 ? '示意 · 手机端流程' : '示意 · 界面功能线稿'}
+                      {i === 0 ? t.cases.slotFlow : t.cases.slotUi}
                     </span>
                     <Schematic i={i} />
-                    <span className={s.slotHint}>示意线稿 · 非真实截图</span>
+                    <span className={s.slotHint}>{t.cases.slotHint}</span>
                   </div>
                 )}
               </div>

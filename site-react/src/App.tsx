@@ -2,6 +2,7 @@
 import React from 'react';
 import SiteNav from './components/SiteNav';
 import Hero from './components/Hero/Hero';
+import Now from './components/Now';
 import Story from './components/Story';
 import Timeline from './components/Timeline';
 import Cases from './components/Cases';
@@ -23,6 +24,7 @@ function Shell() {
       <SiteNav />
       <main id="main" tabIndex={-1}>
         <Hero />
+        <Now />
         <Story />
         <Timeline />
         <Cases />
