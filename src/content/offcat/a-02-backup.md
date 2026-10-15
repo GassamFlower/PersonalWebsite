@@ -7,6 +7,8 @@ tags:
   - restic
   - NAS
   - 异地
+titleEn: "Home data backup plan"
+tagsEn: ["restic", "NAS", "Offsite"]
 ---
 
 备份链路在搭建中，未验证完成前不标"已验证"。

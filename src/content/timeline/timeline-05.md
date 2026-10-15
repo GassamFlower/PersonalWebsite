@@ -8,4 +8,9 @@ stack:
   - 四门禁流程
   - 单一信源 SSOT
   - 项目分级体系
+titleEn: "Vibe Coding methodology & knowledge base"
+flagEn: "Methodology"
+roleEn: "Setting rules for AI · keeping the system"
+detailEn: "Crystallized a reusable way of working into methodology and a knowledge base: four gates, single source of truth, project tiers, retrospectives feeding back — this very site was built with it."
+stackEn: ["Four-gate flow", "Single source of truth (SSOT)", "Five-tier project system"]
 ---

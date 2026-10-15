@@ -1,6 +1,7 @@
 // Cases — 核心卷（v6：深墨场统一 + 规格表体裁 + 蓝图线稿反白主视觉 + 图版级验收章）
 import { getCases } from '../lib/content';
 import { useUi } from '../i18n/LocaleContext';
+import { pick, pickList, enumLabel, STATUS_EN } from '../i18n/enums';
 import Seal from './Seal';
 import s from './Cases.module.css';
 
@@ -61,7 +62,7 @@ function Schematic({ i }: { i: number }) {
 }
 
 export default function Cases() {
-  const { t } = useUi();
+  const { t, locale } = useUi();
   const cases = getCases();
   return (
     <section id="cases" className={`section field ${s.cases}`}>
@@ -83,32 +84,32 @@ export default function Cases() {
               <div className={s.caseInfo}>                {/* Claim：图版级大编号 + 衬线题名 */}
                 <div className={s.caseHead}>
                   <span className={s.caseNo}>0{i + 1}</span>
-                  <h3 className={s.caseTitle}>{c.title}</h3>
+                  <h3 className={s.caseTitle}>{pick(locale, c.title, c.titleEn)}</h3>
                 </div>
                 <div className={`rail ${s.caseRail}`}>
-                  {verified && <><span className="gate">GATE✓</span> · </>}CASE/0{i + 1} · {c.status}
+                  {verified && <><span className="gate">GATE✓</span> · </>}CASE/0{i + 1} · {enumLabel(locale, STATUS_EN, c.status)}
                 </div>
 
                 {/* 规格表体裁（v6 §3.3）：label│value│发线，字段缺失不渲染该行 */}
                 <dl className={s.spec}>
-                  <div className={s.specRow}><dt>{t.cases.labelProblem}</dt><dd>{c.problem}</dd></div>
-                  <div className={s.specRow}><dt>{t.cases.labelDid}</dt><dd>{c.whatIDid}</dd></div>
-                  {c.challenge && <div className={s.specRow}><dt>{t.cases.labelKey}</dt><dd>{c.challenge}</dd></div>}
+                  <div className={s.specRow}><dt>{t.cases.labelProblem}</dt><dd>{pick(locale, c.problem, c.problemEn)}</dd></div>
+                  <div className={s.specRow}><dt>{t.cases.labelDid}</dt><dd>{pick(locale, c.whatIDid, c.whatIDidEn)}</dd></div>
+                  {c.challenge && <div className={s.specRow}><dt>{t.cases.labelKey}</dt><dd>{pick(locale, c.challenge, c.challengeEn)}</dd></div>}
                   {c.outcome && (
                     <div className={`${s.specRow} ${s.specResult}`}>
                       <dt>{t.cases.labelResult}</dt>
-                      <dd>{c.outcome}</dd>
+                      <dd>{pick(locale, c.outcome, c.outcomeEn)}</dd>
                       {verified && <Seal label={t.cases.sealVerified} dark className={s.sealBig} />}
                     </div>
                   )}
-                  <div className={s.specRow}><dt>{t.cases.labelStack}</dt><dd className={s.specMono}>{c.stack.join(' / ')}</dd></div>
+                  <div className={s.specRow}><dt>{t.cases.labelStack}</dt><dd className={s.specMono}>{pickList(locale, c.stack, c.stackEn).join(' / ')}</dd></div>
                 </dl>
               </div>
 
               <div className={s.caseVisual}>
                 {c.image ? (
                   <figure className={`${s.shot} ${s.shotReal} ${shotRatio}`}>
-                    <img className={s.frameImg} src={c.image} alt={c.imageAlt || `${c.title}${t.cases.altSuffix}`} loading="lazy" />
+                    <img className={s.frameImg} src={c.image} alt={c.imageAlt || `${pick(locale, c.title, c.titleEn)}${t.cases.altSuffix}`} loading="lazy" />
                   </figure>
                 ) : (
                   <div className={`${s.shot} ${s.shotSlot} ${shotRatio}`}>

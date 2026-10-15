@@ -15,6 +15,12 @@ evidence: 已上线交付（甲方案例，匿名化处理）
 # image: /cases/case-01.png
 # imageAlt: 工程用车助手的脱敏示意
 published: true
+titleEn: "Workshop Vehicle Dispatcher (client project)"
+problemEn: "One company ran engineering-vehicle dispatch and registration on paper and by hand — messy, error-prone, with no traceable record."
+whatIDidEn: "Delivered solo, from requirements talk to launch: a phone-friendly vehicle-use assistant that chains registration, approval and records into one queryable flow — live and running for real users."
+challengeEn: "Keep it usable by the people right at the workshop floor — no walking the process back into the office: registration and approval done in a few taps on a phone."
+outcomeEn: "Delivered and live, in use by real users (client-project case, anonymized)."
+stackEn: ["WeChat mini program", "CloudBase", "OCR"]
 ---
 
 接的活、做出来、上线交付 —— 外单真实上线案例。具体甲方信息对公开版隐去。

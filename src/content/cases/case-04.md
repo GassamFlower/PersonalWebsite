@@ -13,6 +13,12 @@ evidence: 技术侧实操平台
 # image: /case-04.png
 # imageAlt: 视频批量混剪平台的示意
 published: true
+titleEn: "Batch Video Editing Web Platform"
+problemEn: "Batch video processing (subtitles, overlays, transcoding) was painfully slow done one clip at a time by hand."
+whatIDidEn: "Independently built a web platform for batch video processing, turning repetitive subtitle/overlay/transcode steps into batch flows — configure once, run a whole set."
+challengeEn: "Break the grind of hand-assembling clips one by one into reusable, batch-runnable pipeline steps."
+outcomeEn: "A hands-on technical platform — one configuration runs a batch of video jobs."
+stackEn: ["Standalone web platform", "Batch subtitles / overlays"]
 ---
 
 把"一条条手工攒视频"的重复劳动，做成能批量跑的流水线。

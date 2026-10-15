@@ -8,4 +8,9 @@ stack:
   - 微信小程序
   - 云开发
   - OCR
+titleEn: "Workshop Vehicle Dispatcher"
+flagEn: "Client project · Live"
+roleEn: "WeChat mini program · delivered and live"
+detailEn: "A client project delivered end to end alone: vehicle registration, approval and records chained into a phone-queryable flow, launched and running for real users."
+stackEn: ["WeChat mini program", "CloudBase", "OCR"]
 ---

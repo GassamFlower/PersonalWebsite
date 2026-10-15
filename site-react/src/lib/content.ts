@@ -29,20 +29,28 @@ export interface CaseData {
   challenge?: string; outcome?: string;
   stack: string[]; evidence?: string;
   image?: string; imageAlt?: string; published: boolean;
+  titleEn?: string; problemEn?: string; whatIDidEn?: string;
+  challengeEn?: string; outcomeEn?: string; stackEn?: string[];
 }
 export interface SkillItem { name: string; note?: string; }
 export interface SkillData {
   order: number; domain: string;
   level: '已交付' | '会用' | '在学';
   tagline: string; skills: SkillItem[]; evidence?: string;
+  domainEn?: string; taglineEn?: string; skillsEn?: SkillItem[]; evidenceEn?: string;
 }
-export interface GrowthData { month: string; takeaway: string; tags: string[]; body: string; }
+export interface GrowthData {
+  month: string; takeaway: string; tags: string[]; body: string;
+  takeawayEn?: string; tagsEn?: string[];
+}
 export interface TimelineData {
   year: string; title: string; flag: string; role: string; detail: string; stack: string[];
+  titleEn?: string; flagEn?: string; roleEn?: string; detailEn?: string; stackEn?: string[];
 }
 export interface OffcatData {
   no: string; title: string; date?: string;
   status: '已验证' | '进行中' | '计划中' | '参考'; tags: string[];
+  titleEn?: string; tagsEn?: string[];
 }
 export interface NowItem { text: string; textEn?: string; }
 export interface NowData {

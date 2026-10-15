@@ -83,10 +83,10 @@
 
 | 批 | 内容 | 过门判据 |
 |---|---|---|
-| 1 | i18n 字典抽取（163 条 UI 串）+ locale 进 SSR/prerender，先产出 `/en/` 骨架（英文字段缺失时按守卫报错，不静默回退中文） | 中文站渲染文本逐字不变；两线 build 绿 |
-| 2 | schema 加 `*En` 可选字段 + 覆盖率守卫 + **1 条样板**（建议 `cases` 里 order 最小的工程用车助手，它是外单可公开叙述） | 你裁决这一条的英文措辞，作为全站口径基线 |
-| 3 | 全量对照表：31 个 md / 242 字段，按集合分 5 张表一次交你审 | 逐条「照此执行 / 改」的裁决记录进本文档 |
-| 4 | 英文 OG 卡、`中/EN` 切换器、`hreflang`、`<html lang="en">`、字体守卫重跑、全站 AA 与横向溢出复扫 | 你浏览器目测两个语言版本 → 上线门 |
+| 1 ✅ | i18n 字典抽取（163 条 UI 串）+ locale 进 SSR/prerender，先产出 `/en/` 骨架（英文字段缺失时按守卫报错，不静默回退中文） | 中文站渲染文本逐字不变；两线 build 绿 |
+| 2 ✅ | schema 加 `*En` 可选字段 + 覆盖率守卫 + **1 条样板**（建议 `cases` 里 order 最小的工程用车助手，它是外单可公开叙述） | 你裁决这一条的英文措辞，作为全站口径基线 |
+| 3 ✅* | 全量对照表：31 个 md / 242 字段，按集合分 5 张表一次交你审 | 逐条「照此执行 / 改」的裁决记录进本文档（*2026-10-15 用户改授权「按建议执行」→ 措辞 AI 起草，裁决并入双语目测） |
+| 4 ✅* | 英文 OG 卡、`中/EN` 切换器、`hreflang`、`<html lang="en">`、字体守卫重跑、全站 AA 与横向溢出复扫 | 你浏览器目测两个语言版本 → 上线门（*代码线完成，剩目测） |
 
 ### 批 1 落地进度（2026-10-15，只在 site-react 一条线）
 
@@ -98,6 +98,18 @@
 - `scripts/prerender.mjs`：改成按语言发射多份静态 HTML；守卫 = **某语言列入发布但字典缺键即 build exit 1**（实测报出 `en 缺 21 个键：shell.skipLink, hero.plateRail…`），绝不让英文页静默回退中文。当前 `EMIT = ['zh']`，加 `'en'` 的前提是字典补齐。
 - 竖切片样板 = `shell` + `Hero` 之后，**2026-10-15 全部组件已搬完**：SiteNav/Story/Timeline/Cases/CapabilityMap/Growth/Principles/Offcat/Contact/Footer 的含中文 UI 串尽数入 `ui.ts`（含图版线稿内嵌文字与 aria 串）；`en` 侧合计 **145 键待你逐条裁决**（prerender 守卫实测报数）。刻意不进字典的两类：纯 Latin 装饰串（PLATE/CAT./GATE✓ 等，两语言同形）；内容枚举（status/level 显示值属 `src/content/` 数据，其 `*En` 映射归批 2）。署名「一个故事」按裁决 3 保留中文原样。
 - 实测（批 1 完工判据，2026-10-15）：`npm run build` 全绿；**预渲染文本与改造前逐字相同**（去标签 6,385 字符，md5 `fae2afdb7be9eee18c19166e54e55bba` 与基线全等）；字体子集覆盖 810/810 过；`vite preview` 水合后控制台 0 条消息。**批 1 已过门。**
+
+### 批 2–4 落地进度（2026-10-15，用户授权「剩余全部推进完，拿不定主意的按你的建议来」）
+
+- **批 2（schema + 守卫）**：`content.ts` 五类接口补可选 `*En` 字段；`scripts/check-content.mjs` 规则③上线——凡页面渲染的中文正文须有英文并列副本，**纯拉丁串豁免**（批 1 裁决延续），`skillsEn` 与 `skills` 条数须一致，now 条目 `text` 含中文须有 `textEn`。反向实测：删一个 `titleEn` build 即 exit 1。
+- **批 3（全量 31 个 md / 172 行 `*En`）**：措辞按 §3 术语表由 AI 起草（用户授权按建议执行），一次性脚本注入后已删除；**待用户目测审的就是这批措辞**，上线门即裁决场。附带修正 3 个历史脏文件（`skills/backend|crawling|database.md` 缺 frontmatter 闭合 `---`，gray-matter 一直宽容但 Astro 会翻车）。
+- **批 4（切换器 + head + OG）**：
+  - `SiteNav` 加 `中/EN` 原生 `<a>` 切换器（当前语言实底、另一路描边；两语言标签刻意不译）；
+  - `prerender.mjs` `EMIT=['zh','en']`，en 页 head 全量改写（`lang="en"`、title/description/og:\* 英文副本、`og:image→og-en.png`）+ 两页都发 `hreflang` zh-CN/en/x-default；找不到目标标签即报错，不静默；
+  - `og_image.py --locale en` 出 `og-en.png`（Pillow 手绘，禁 AI 生图红线不变），en 副说明/CAT 行缩短避让署名章；
+  - 字体子集重跑 823→**824**（en 页把半角逗号带进衬线文本）。
+- **两个实测踩坑（记进本档，防复发）**：① `vite.config.ssr.ts` 没有 `base` → SSR 里 `import.meta.env.BASE_URL='/'`，切换器 href 少了 `/PersonalWebsite/` 前缀且与水合不一致，SSR 配置补同 base 解决；② 英文副导航比中文长，窄视口下 `section-head` 整行撑破横向边界 → 共享样式加 `flex-wrap`（装得下不折行，中文观感零变化）。
+- **实测（2026-10-15）**：build 全绿；`en` 缺键 0、`zh` 缺键 0；`dist/en/index.html` 60.6 kB 发射；zh 页去标签文本 = 线上版 + 96 字符**纯新增**（now 区 + `中EN`），无任何既有文本变动；en 页残留中文仅署名「一个故事」与切换器「中」（均为裁决）；两页 `vite preview` 水合后控制台 0 条、516px 视口无横向溢出。**批 2–4 代码线完成，剩用户双语目测 → 上线门。**
 
 ---
 

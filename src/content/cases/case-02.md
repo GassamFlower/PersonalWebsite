@@ -15,6 +15,11 @@ evidence: 企业内部系统，截图脱敏 / 自绘示意
 # image: /case-02.png
 # imageAlt: OPS 平台的脱敏示意
 published: true
+titleEn: "Industrial Operations Platform OPS (internal system)"
+problemEn: "In an industrial company, equipment and operations information sat scattered and unmanaged for years — unfindable, untraceable, hard to diagnose."
+whatIDidEn: "Built an equipment-and-operations information platform from scratch, turning scattered needs across assets, monitoring, inspection, tickets, safety, knowledge base and user center into a system you can query, trace and diagnose."
+challengeEn: "First see the long-unmanaged digital gap, then decide how to fill it — pulling a running structure out of scattered information."
+outcomeEn: "Covers assets / monitoring / inspection / tickets / safety / knowledge base / user center — a queryable, traceable, diagnosable internal operations platform."
 ---
 
 看到长期被忽视的数字化空白，从零把它搭成能运行的系统。

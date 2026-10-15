@@ -2,11 +2,12 @@
 import { useEffect, useState } from 'react';
 import { getCases } from '../../lib/content';
 import { useUi } from '../../i18n/LocaleContext';
+import { pick, enumLabel, STATUS_EN } from '../../i18n/enums';
 import Seal from '../Seal';
 import s from './Hero.module.css';
 
 export default function Hero() {
-  const { t } = useUi();
+  const { t, locale } = useUi();
   const [inTitle, setInTitle] = useState(false);
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -58,8 +59,8 @@ export default function Hero() {
             <ul className={s.factList}>
               {facts.map((c) => (
                 <li key={c.title} className={s.factRow}>
-                  <span className={s.factStatus}>{c.status}</span>
-                  <span className={s.factTitle}>{c.title}</span>
+                  <span className={s.factStatus}>{enumLabel(locale, STATUS_EN, c.status)}</span>
+                  <span className={s.factTitle}>{pick(locale, c.title, c.titleEn)}</span>
                   {c.status === '已上线' && <Seal label={t.hero.sealVerified} />}
                 </li>
               ))}

@@ -1,10 +1,11 @@
 // Growth — 图版 06 · 成长记录（v6：月度索引表 month │ takeaway │ tags）
 import { getGrowth } from '../lib/content';
 import { useUi } from '../i18n/LocaleContext';
+import { pick, pickList } from '../i18n/enums';
 import s from './Growth.module.css';
 
 export default function Growth() {
-  const { t } = useUi();
+  const { t, locale } = useUi();
   const posts = getGrowth();
   const subNav = [
     { href: '#hero', label: t.growth.linkArchive },
@@ -65,9 +66,9 @@ export default function Growth() {
             {posts.map((p, i) => (
               <article key={i} className={s.growthItem}>
                 <span className={s.growthMonth}>{p.month}</span>
-                <p className={s.growthTakeaway}>{p.takeaway}</p>
+                <p className={s.growthTakeaway}>{pick(locale, p.takeaway, p.takeawayEn)}</p>
                 {!!p.tags?.length && (
-                  <span className={s.growthTags}>{p.tags.join(' · ')}</span>
+                  <span className={s.growthTags}>{pickList(locale, p.tags, p.tagsEn).join(' · ')}</span>
                 )}
               </article>
             ))}

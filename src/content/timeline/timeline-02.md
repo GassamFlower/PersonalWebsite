@@ -9,4 +9,8 @@ stack:
   - Next.js
   - PostgreSQL
   - MinIO
+titleEn: "Industrial Operations Platform OPS"
+flagEn: "Internal system"
+roleEn: "Built from scratch · Go + Next.js"
+detailEn: "Seeing equipment and operations info nobody managed in one industrial company, built it from scratch into a queryable, traceable, diagnosable system covering assets, monitoring, inspection, tickets, safety, knowledge base and user center."
 ---

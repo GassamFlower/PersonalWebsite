@@ -386,6 +386,8 @@ p, li, a, span { overflow-wrap: break-word; }
   align-items: baseline;
   justify-content: space-between;
   gap: var(--space-4);
+  /* 英文站副导航更长：装得下不折行（中文观感不变），装不下折到第二行而不是撑破横向边界 */
+  flex-wrap: wrap;
 }
 .section-head .tag b {
   color: var(--color-accent);
@@ -409,6 +411,8 @@ p, li, a, span { overflow-wrap: break-word; }
   display: flex;
   align-items: center;
   gap: var(--space-5);
+  flex-wrap: wrap;
+  row-gap: var(--space-2);
   font-size: var(--text-sm);
   color: var(--color-ink);
   font-family: var(--font-sans);

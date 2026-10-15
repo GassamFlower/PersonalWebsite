@@ -8,4 +8,8 @@ stack:
   - Go
   - Vue
   - PostgreSQL
+titleEn: "Unified User Center UUC"
+flagEn: "Internal system"
+roleEn: "Internal SSO · permission hub"
+detailEn: "Gathered accounts, identities and permissions that had gone separate ways across systems into one place — a company SSO hub with one entry and unified authorization."
 ---

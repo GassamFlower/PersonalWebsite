@@ -5,6 +5,8 @@ status: 参考
 tags:
   - 结构线稿
   - 工程制图
+titleEn: "Aesthetic source: bridges & blueprints"
+tagsEn: ["Structural line drawings", "Engineering drafting"]
 ---
 
 站点的斜拉桥线稿与图鉴版式不是装饰偏好，来源是结构线稿与工程制图那一类图纸语言。

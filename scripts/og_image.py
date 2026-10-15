@@ -1,4 +1,5 @@
 """scripts/og_image.py — 生成分享卡片 og.png（1200x630），一次写出两条线的静态根
+--locale en 出 og-en.png（英文文案副本，署名「一个故事」不译）；默认 zh 出 og.png。
 
 为什么自己画：微信/钉钉里第一次看到本站的人靠这张卡片判断气质；
 用 AI 生图会产出假汉字（糊出来的笔画），直接踩诚实红线。
@@ -8,6 +9,7 @@ v6 语言：纸白底 + 墨黑细线 + 一处朱砂署名章 + 裁切线 + 三�
 """
 from PIL import Image, ImageDraw, ImageFont
 import os
+import sys
 
 BASE = (246, 246, 244)
 INK = (26, 26, 23)
@@ -48,24 +50,47 @@ def font(path, size, weight=None):
 serif = pick(SERIF_CANDIDATES)
 sans = pick(SANS_CANDIDATES)
 
+# --locale en 出 og-en.png（英文分享卡片）；署名「一个故事」两种语言都不译（h §D 裁决）
+LOCALE = "zh"
+if "--locale" in sys.argv:
+    LOCALE = sys.argv[sys.argv.index("--locale") + 1]
+assert LOCALE in ("zh", "en"), f"[og] 未知 --locale: {LOCALE}"
+TEXTS = {
+    "zh": {
+        "eyebrow2": "独立交付档案 · 一个故事",
+        "line1": "把一团乱麻，",
+        "line2": "理成能用的系统",
+        "sub": "系统建构 / 数据与流程整理 / 内网私有化交付",
+        "cat": "CAT.2026-10 · REV v6 · 展示内容均经匿名化脱敏，不涉及具体公司与客户信息",
+        "file": "og.png",
+    },
+    "en": {
+        "eyebrow2": "Independent delivery dossier · 一个故事",
+        "line1": "Turning a tangle,",
+        "line2": "into a working system",
+        "sub": "Systems building / Data tidy-up / Self-hosted intranet delivery",
+        "cat": "CAT.2026-10 · REV v6 · Content anonymized — no real companies or clients",
+        "file": "og-en.png",
+    },
+}[LOCALE]
+
 img = Image.new("RGB", (W, H), BASE)
 d = ImageDraw.Draw(img)
 M = 72
 
 # 顶部眉栏 + 主规则线
 d.text((M, 56), "PERSONAL DOSSIER", font=font(sans, 22), fill=SOFT)
-d.text((M, 88), "独立交付档案 · 一个故事", font=font(sans, 20), fill=SOFT)
+d.text((M, 88), TEXTS["eyebrow2"], font=font(sans, 20), fill=SOFT)
 d.line([(M, 132), (W - M, 132)], fill=INK, width=2)
 
 # 主张（衬线大字，v6 的 --text-hero 档）
-d.text((M, 176), "把一团乱麻，", font=font(serif, 92, 700), fill=INK)
-d.text((M, 288), "理成能用的系统", font=font(serif, 92, 700), fill=INK)
+d.text((M, 176), TEXTS["line1"], font=font(serif, 92, 700), fill=INK)
+d.text((M, 288), TEXTS["line2"], font=font(serif, 92, 700), fill=INK)
 
 # 副说明 + 辅助发线
-d.text((M, 420), "系统建构 / 数据与流程整理 / 内网私有化交付", font=font(sans, 28), fill=SOFT)
+d.text((M, 420), TEXTS["sub"], font=font(sans, 28), fill=SOFT)
 d.line([(M, 476), (W - M - 180, 476)], fill=FAINT, width=1)
-d.text((M, 496), "CAT.2026-10 · REV v6 · 展示内容均经匿名化脱敏，不涉及具体公司与客户信息",
-       font=font(sans, 20), fill=SOFT)
+d.text((M, 496), TEXTS["cat"], font=font(sans, 20), fill=SOFT)
 
 # 右侧三色标（墨 / 朱 / 纸）
 bx, by = W - M - 132, 56
@@ -96,8 +121,8 @@ for x, y, dx, dy in [(M, M, -1, -1), (W - M, M, 1, -1), (M, H - M, -1, 1), (W - 
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTS = [
-    os.path.join(ROOT, "public", "og.png"),
-    os.path.join(ROOT, "site-react", "public", "og.png"),
+    os.path.join(ROOT, "public", TEXTS["file"]),
+    os.path.join(ROOT, "site-react", "public", TEXTS["file"]),
 ]
 for out in OUTS:
     os.makedirs(os.path.dirname(out), exist_ok=True)

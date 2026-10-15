@@ -13,4 +13,16 @@ skills:
   - name: 成长 / 复盘机制
     note: workLog 记录，PROJECT_STATUS 追踪，复盘反哺
 evidence: 本站即用这套方法建成，含门禁验收清单与工作日志
+domainEn: "Engineering & ways of working"
+taglineEn: "A self-built, reusable system of working — turning complex things into sustainable systems."
+skillsEn:
+  - name: "Four-gate flow"
+    note: "Idea / architecture / delivery / launch gates — one gate, one check; no code written out of thin air"
+  - name: "Single source of truth"
+    note: "Knowledge base separate from the workspace; docs sorted by prefix; one source of truth"
+  - name: "Project tier system"
+    note: "Self-built five-tier project system (FTPS); one ledger per project"
+  - name: "Growth / retrospective loop"
+    note: "workLog entries, PROJECT_STATUS tracking, retrospectives feeding back"
+evidenceEn: "This very site was built this way, gate checklists and work logs included"
 ---

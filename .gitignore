@@ -29,6 +29,7 @@ Thumbs.db
 *.temp
 .npm-cache/
 .npm-cache-react/
+.tmp-fontsrc/
 
 # 设计参考草稿（生图阶段的基准图，非站点素材，不入库）
 images/

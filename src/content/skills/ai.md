@@ -15,4 +15,18 @@ skills:
   - name: ComfyUI / 视频生成
     note: 了解、能做、不精通
 evidence: 已能上手 AI 落地的真实项目，仍在往更深之处精进
+domainEn: "AI agents & tooling"
+taglineEn: "Broad hands-on coverage, shipped in real use; not claiming mastery — honestly still sharpening."
+skillsEn:
+  - name: "RAG / knowledge base"
+    note: "Hands-on AI delivery: knowledge bases and retrieval Q&A"
+  - name: "Agent orchestration"
+    note: "LangGraph / CrewAI in real use; principles studied, sharpening in practice"
+  - name: "No-code / AI platforms"
+    note: "Coze / Dify / n8n — familiar, can build"
+  - name: "AI coding tools"
+    note: "Trae / Cursor / Claude Code / Codex used in development and writing; broad practical coverage"
+  - name: "ComfyUI / video generation"
+    note: "Familiar, can do, not expert"
+evidenceEn: "Real projects with AI features shipped; still pushing deeper"
 ---

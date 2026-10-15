@@ -1,12 +1,13 @@
 // CapabilityMap — 图版 05 · 技能档案（v6：规格表体裁 + 诚实三档墨色徽章，不用朱砂）
-import { getSkills } from '../lib/content';
+import { getSkills, type SkillItem } from '../lib/content';
 import { useUi } from '../i18n/LocaleContext';
+import { pick, enumLabel, LEVEL_EN } from '../i18n/enums';
 import s from './CapabilityMap.module.css';
 
 const levelTone: Record<string, string> = { '已交付': 'done', '会用': 'use', '在学': 'learning' };
 
 export default function CapabilityMap() {
-  const { t } = useUi();
+  const { t, locale } = useUi();
   const skills = getSkills();
   return (
     <section id="capability" className="section">
@@ -25,20 +26,22 @@ export default function CapabilityMap() {
         </p>
 
         <div className={s.tree}>
-          {skills.map((s2, i) => (
+          {skills.map((s2, i) => {
+            const items: SkillItem[] = locale === 'en' && s2.skillsEn?.length ? s2.skillsEn : s2.skills;
+            return (
             <article key={i} className={s.branch}>
               <span className={s.branchNo}>{String(i + 1).padStart(2, '0')}</span>
               <div className={s.branchMain}>
                 <div className={s.branchHead}>
-                  <h3 className={s.branchDomain}>{s2.domain}</h3>
-                  <span className={`${s.badge} ${s[`badge_${levelTone[s2.level]}`]}`}>{s2.level}</span>
+                  <h3 className={s.branchDomain}>{pick(locale, s2.domain, s2.domainEn)}</h3>
+                  <span className={`${s.badge} ${s[`badge_${levelTone[s2.level]}`]}`}>{enumLabel(locale, LEVEL_EN, s2.level)}</span>
                 </div>
 
-                <p className={s.branchTagline}>{s2.tagline}</p>
+                <p className={s.branchTagline}>{pick(locale, s2.tagline, s2.taglineEn)}</p>
 
                 {/* 规格表体裁（v6 §3.3）：能力名 │ 实证说明 │ 发线，缺说明则该行只有名 */}
                 <dl className={s.spec}>
-                  {s2.skills.map((k, j) => (
+                  {items.map((k, j) => (
                     <div key={j} className={`${s.specRow} ${k.note ? '' : s.specBare}`}>
                       <dt>{k.name}</dt>
                       {k.note && <dd>{k.note}</dd>}
@@ -47,13 +50,14 @@ export default function CapabilityMap() {
                   {s2.evidence && (
                     <div className={`${s.specRow} ${s.specEvidence}`}>
                       <dt>{t.capability.labelEvidence}</dt>
-                      <dd>{s2.evidence}</dd>
+                      <dd>{pick(locale, s2.evidence, s2.evidenceEn)}</dd>
                     </div>
                   )}
                 </dl>
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
 
         <div className={`rail ${s.capFoot}`}>

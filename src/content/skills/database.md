@@ -13,3 +13,16 @@ skills:
   - name: 数据维护 / 分析
     note: 长期做数据服务、数据维护、业务数据核对与远程支持
 evidence: 政务 8 年数据支持 + OPS / UUC 均为真实使用中的数据库系统
+domainEn: "Database"
+taglineEn: "Schema design, SQL, reports and data analysis; deep optimization is still a work in progress."
+skillsEn:
+  - name: "PostgreSQL"
+    note: "OPS modules (assets / monitoring / inspection / tickets) store data in PostgreSQL; also deployed PG standalone (data on block device, separate DB/roles, daily dumps)"
+  - name: "SQL / reports"
+    note: "Eight years of SQL reports, data reconciliation and metric definitions in government systems"
+  - name: "Schema design"
+    note: "Independently designed multi-module business schemas, from requirements to usable tables"
+  - name: "Data maintenance / analysis"
+    note: "Long-running data service, maintenance, business reconciliation and remote support"
+evidenceEn: "Eight years of government data support + OPS / UUC databases in real production use"
+---

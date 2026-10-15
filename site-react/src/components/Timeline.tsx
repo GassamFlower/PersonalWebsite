@@ -1,10 +1,11 @@
 // Timeline — 图版 03 · 做过的事（v6：编年表＝巨号 mono 年份 + 发线行 + 墨黑节点）
 import { getTimeline } from '../lib/content';
 import { useUi } from '../i18n/LocaleContext';
+import { pick, pickList } from '../i18n/enums';
 import s from './Timeline.module.css';
 
 export default function Timeline() {
-  const { t } = useUi();
+  const { t, locale } = useUi();
   const nodes = getTimeline();
   return (
     <section id="timeline" className="section">
@@ -23,14 +24,14 @@ export default function Timeline() {
             <li key={i} className={s.tlNode}>
               <div className={s.tlPeriod}>
                 <span className={s.tlYear}>{n.year}</span>
-                {n.flag && <span className={s.tlFlag}>{n.flag}</span>}
+                {n.flag && <span className={s.tlFlag}>{pick(locale, n.flag, n.flagEn)}</span>}
               </div>
               <div className={s.tlBody}>
-                <h3 className={s.tlName}><i className={s.tlMarker} aria-hidden="true" />{n.title}</h3>
-                <p className={s.tlRole}>{n.role}</p>
-                <p className={s.tlDesc}>{n.detail}</p>
+                <h3 className={s.tlName}><i className={s.tlMarker} aria-hidden="true" />{pick(locale, n.title, n.titleEn)}</h3>
+                <p className={s.tlRole}>{pick(locale, n.role, n.roleEn)}</p>
+                <p className={s.tlDesc}>{pick(locale, n.detail, n.detailEn)}</p>
                 {n.stack.length > 0 && (
-                  <p className={`rail ${s.tlStack}`}>{n.stack.join(' / ')}</p>
+                  <p className={`rail ${s.tlStack}`}>{pickList(locale, n.stack, n.stackEn).join(' / ')}</p>
                 )}
               </div>
             </li>

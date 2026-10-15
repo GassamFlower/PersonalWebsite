@@ -9,4 +9,9 @@ stack:
   - Gitea 私有代码仓 + GitHub 镜像
   - PostgreSQL / Woodpecker CI
   - Portainer / nginx 网关 / restic
+titleEn: "Self-hosted Private DevOps Platform"
+flagEn: "Internal system · Delivered"
+stackEn: ["Hyper-V / Ubuntu VM / Docker", "Private Git forge (Gitea) + GitHub mirror", "PostgreSQL / Woodpecker CI", "Portainer / nginx gateway / restic"]
+roleEn: "Full private infrastructure from scratch"
+detailEn: "One physical machine + Hyper-V + Ubuntu VM + Docker hosting a private code forge, database, CI/CD, container dashboard, business gateway, encrypted backups and monitoring on the intranet; the database on its own block device, daily encrypted backups with a restore drill — every stage passed acceptance."
 ---

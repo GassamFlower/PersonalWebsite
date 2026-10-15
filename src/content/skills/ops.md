@@ -17,4 +17,20 @@ skills:
   - name: Linux / 网络基础
     note: 在 Linux 环境部署 VM、配网、挂存储、起服务的完整实操
 evidence: 一套内网私有化开发运维平台分阶段全验收通过（内部环境）
+domainEn: "Ops & deployment"
+taglineEn: "Built a whole self-hosted intranet dev-ops platform from scratch; deployment, backup, monitoring and troubleshooting as a closed loop."
+skillsEn:
+  - name: "Private infrastructure build-out"
+    note: "Built the intranet dev-ops platform from scratch (Hyper-V + Ubuntu VM + Docker)"
+  - name: "Container orchestration & deployment"
+    note: "Everything brought up with docker run — code forge / database / CI / dashboard / gateway / backup"
+  - name: "Backup & disaster recovery"
+    note: "Daily encrypted, deduplicated backups plus logical DB backups, proven by a restore drill"
+  - name: "Monitoring & troubleshooting"
+    note: "Container / disk / backup monitoring; written-up retrospectives and layered troubleshooting"
+  - name: "Static sites & service deployment"
+    note: "This site deploys automatically via GitHub Pages; internal systems and cloud services also deployed and running"
+  - name: "Linux / networking basics"
+    note: "Complete hands-on: VMs, networking, storage mounts and services on Linux"
+evidenceEn: "One self-hosted intranet dev-ops platform, every stage accepted (internal environment)"
 ---

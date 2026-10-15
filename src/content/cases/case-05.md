@@ -15,6 +15,12 @@ evidence: 企业内部已落地一套完整自建基础设施（细节脱敏）
 # image: /cases/case-05.png
 # imageAlt: 内网私有化开发运维平台的脱敏示意
 published: true
+titleEn: "Self-hosted Private DevOps Platform (internal)"
+problemEn: "The company wanted to own its code, data and release flow, but lacked self-sustaining, closed-loop dev-ops infrastructure."
+whatIDidEn: "Built the whole private dev-ops platform from scratch: one physical machine + virtualization + container runtime, self-hosting a private Git forge, database, CI/CD, container dashboard, business gateway, encrypted backups and monitoring entirely on the intranet — a self-sustaining, reproducible, documented piece of infrastructure."
+challengeEn: "In an intranet with no public cloud to lean on: from tool choices, networking and storage isolation to making the whole chain “push → build → backup → restorable” actually run; key data lands on its own block device, and backups are proven by a real restore drill."
+outcomeEn: "Stages P0–P6 all passed acceptance: private code forge usable, database landed, CI auto-build, container dashboard, business gateway, daily encrypted backups, and one full restore drill passed."
+stackEn: ["Hyper-V + Ubuntu VM + Docker", "Private Git forge (Gitea) + GitHub mirror", "PostgreSQL / Woodpecker CI / Portainer", "nginx gateway / restic encrypted backup + monitoring"]
 ---
 
 把"没有现成基础设施"这件事，从选型到备份可恢复，完整地搭成一套能落地的私有开发运维平台。

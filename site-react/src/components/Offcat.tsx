@@ -2,6 +2,7 @@
 // v6 §11 台账条：编号 │ 条目 │ 日期+状态 │ 标签，右侧一张拓扑示意线稿（无真实尺寸/网络细节）
 import { getOffcat, type OffcatData } from '../lib/content';
 import { useUi } from '../i18n/LocaleContext';
+import { pick, pickList, enumLabel, OFFCAT_STATUS_EN } from '../i18n/enums';
 import s from './Offcat.module.css';
 
 const statusClass: Record<OffcatData['status'], string> = {
@@ -12,7 +13,7 @@ const statusClass: Record<OffcatData['status'], string> = {
 };
 
 export default function Offcat() {
-  const { t } = useUi();
+  const { t, locale } = useUi();
   const items = getOffcat();
   const subNav = [
     { href: '#cases', label: t.offcat.linkWorks },
@@ -48,12 +49,12 @@ export default function Offcat() {
             {items.map((it) => (
               <article key={it.no} className={s.row}>
                 <span className={s.rowNo}>{it.no}</span>
-                <h3 className={s.rowTitle}>{it.title}</h3>
+                <h3 className={s.rowTitle}>{pick(locale, it.title, it.titleEn)}</h3>
                 <div className={s.rowState}>
                   {!!it.date && <span className={s.rowDate}>{it.date}</span>}
-                  <span className={`${s.badge} ${statusClass[it.status]}`}>{it.status}</span>
+                  <span className={`${s.badge} ${statusClass[it.status]}`}>{enumLabel(locale, OFFCAT_STATUS_EN, it.status)}</span>
                 </div>
-                {!!it.tags?.length && <span className={s.rowTags}>{it.tags.join(' / ')}</span>}
+                {!!it.tags?.length && <span className={s.rowTags}>{pickList(locale, it.tags, it.tagsEn).join(' / ')}</span>}
               </article>
             ))}
             <div className={`rail ${s.ledgerFoot}`}>

@@ -6,6 +6,7 @@ status: 计划中
 tags:
   - LangGraph
   - CrewAI
+titleEn: "Sharpening agent orchestration"
 ---
 
 实操过、学过原理，还没到"会用得很稳"，所以标计划中而不是已验证。

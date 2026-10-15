@@ -14,6 +14,11 @@ evidence: 企业内部 SSO 中台，脱敏处理
 # image: /case-03.png
 # imageAlt: UUC 平台的脱敏示意
 published: true
+titleEn: "Unified User Center UUC (internal system)"
+problemEn: "Accounts, identities and permissions across several internal systems each went their own way — logins and authorization messy and hard to manage."
+whatIDidEn: "Built a unified identity-and-permission layer (an SSO hub) for the company, gathering dispersed user identities and permissions into one place: one entry, one authorization, one governance."
+challengeEn: "Turning “one employee, one account per system” into a single governed identity system."
+outcomeEn: "The company’s unified login and authorization hub — accounts, identities and permissions in one place."
 ---
 
 把"一人一套账号各自为政"，理成一套统一可管的身份体系。

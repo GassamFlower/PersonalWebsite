@@ -13,3 +13,16 @@ skills:
   - name: 接口对接
     note: 前后端联调、第三方能力对接（OCR 等）
 evidence: OPS / UUC 后端真实运行，工程用车助手后端云开发上线
+domainEn: "Back end"
+taglineEn: "Builds back-end services from scratch — APIs and database work that keep a whole system running."
+skillsEn:
+  - name: "Go"
+    note: "OPS back end and the UUC SSO hub both built from scratch in Go"
+  - name: "WeChat mini program CloudBase"
+    note: "The vehicle dispatcher runs its back end on CloudBase"
+  - name: "APIs & auth"
+    note: "UUC unified identity / permission system (SSO), handling login and authorization"
+  - name: "API integration"
+    note: "Front-back joint debugging and third-party capabilities (OCR etc.)"
+evidenceEn: "OPS / UUC back ends in real production use; the vehicle dispatcher back end live on CloudBase"
+---

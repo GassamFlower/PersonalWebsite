@@ -5,6 +5,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  // 与客户端同 base：切换器用 import.meta.env.BASE_URL 拼 href，两边不一致会水合错 href
+  base: '/PersonalWebsite/',
   plugins: [react()],
   ssr: {
     noExternal: true,

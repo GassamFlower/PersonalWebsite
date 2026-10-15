@@ -8,4 +8,9 @@ stack:
   - SQL
   - 数据支持
   - 远程排障
+titleEn: "Government-system technical support"
+flagEn: "Long-term practice"
+roleEn: "Business & data · SQL · remote support"
+detailEn: "Long-running business and data support inside real government systems — daily work with SQL, data and remote troubleshooting; making the job at hand solid enough to carry real business."
+stackEn: ["SQL", "Data support", "Remote troubleshooting"]
 ---
