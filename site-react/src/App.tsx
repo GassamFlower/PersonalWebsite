@@ -1,9 +1,8 @@
-// App.tsx — v7 叙事改向（v6 图鉴 §13）：封面 → 当下 → 故事 → 案例(03) → 写作(04) → 履历(05) → 成长 → 规矩 → 附录 → 封底。
-// 技能档案区已下线；总图版数仍为 8（写作区接替 04 号位，履历移到 05）。
+// App.tsx — v7.1 叙事微调（v6 图鉴 §13.8）：封面 → 故事(02·曾经/正在) → 案例(03) → 写作(04) → 来路(05) → 成长 → 规矩 → 附录 → 封底。
+// 「当下」插页撤下，doing 真源并入故事区「正在做什么」块；总图版数仍为 8。
 import React from 'react';
 import SiteNav from './components/SiteNav';
 import Hero from './components/Hero/Hero';
-import Now from './components/Now';
 import Story from './components/Story';
 import Cases from './components/Cases';
 import Writing from './components/Writing';
@@ -25,7 +24,6 @@ function Shell() {
       <SiteNav />
       <main id="main" tabIndex={-1}>
         <Hero />
-        <Now />
         <Story />
         <Cases />
         <Writing />

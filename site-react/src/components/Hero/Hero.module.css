@@ -41,15 +41,21 @@
   margin-bottom: calc(var(--space-1) * -1);
 }
 .hero .heroRail :global(.gate) { color: var(--color-field-ink); }
-/* v6 字阶放开：封面启用 --text-hero（v4 定义但从未使用，本版修正） */
+/* v7.1：封面改一排大标题——字号由列宽反推（列宽 ≈ (视口-边距-列距)×0.535，zh 全文 ≈10.2em），
+   保证 960px 以上单行不折行；≤960 单列后按整行宽反推，cap 回桌面字号。 */
 .heroTitle {
   font-family: var(--font-serif);
-  font-size: var(--text-hero);
+  font-size: calc((min(100vw, var(--container-max)) - 2 * var(--gutter) - var(--space-12)) * 0.535 / 10.9);
   font-weight: 700;
   line-height: 1.18;
   letter-spacing: 0.01em;
   color: var(--color-field-ink);
   margin: 0;
+  white-space: nowrap;
+}
+/* 英文同句实测 ≈15.3em 宽，分母换 16.2（≈6% 余量）才排得下同一列 */
+.heroTitleEn {
+  font-size: calc((min(100vw, var(--container-max)) - 2 * var(--gutter) - var(--space-12)) * 0.535 / 16.2);
 }
 /* 大字开机动效：标题由下上浮（克制动效；reduced-motion 关闭） */
 .heroTitleIn {
@@ -165,6 +171,9 @@
 @media (max-width: 960px) {
   .heroGrid { grid-template-columns: 1fr; gap: var(--space-8); }
   .dossier { justify-self: stretch; max-width: none; }
+  /* 单列后标题按整行宽反推，cap 回桌面字号 */
+  .heroTitle { font-size: min(3.5rem, calc((100vw - 2 * var(--gutter)) / 10.9)); }
+  .heroTitleEn { font-size: min(2.6rem, calc((100vw - 2 * var(--gutter)) / 16.2)); }
 }
 @media (max-width: 640px) {
   .hero { padding-top: var(--space-12); }

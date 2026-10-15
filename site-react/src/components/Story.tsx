@@ -1,10 +1,16 @@
-// Story — 图版 02 · 品牌故事（v6：文字块图版化＝编号发线行 + 竖排区名；线稿墨黑）
+// Story — 图版 02 · 一个人的故事（v7.1：标题「干过的活，都有据可查」自履历区移入；
+// 正文两块——「曾经做过什么」=故事段 1–3，「正在做什么」=now 真源 doing + 段 4–5；当下插页并入本区）
+import { getNow } from '../lib/content';
 import { useUi } from '../i18n/LocaleContext';
+import { pick } from '../i18n/enums';
 import s from './Story.module.css';
 
 export default function Story() {
-  const { t } = useUi();
-  const paragraphs = [t.story.para1, t.story.para2, t.story.para3, t.story.para4, t.story.para5];
+  const { t, locale } = useUi();
+  const now = getNow();
+  const past = [t.story.para1, t.story.para2, t.story.para3];
+  const doing = now.doing.map((x) => pick(locale, x.text, x.textEn)).filter((x) => x.length > 0);
+  const present = [...doing, t.story.para4, t.story.para5];
   const subNav = [
     { href: '#hero', label: t.story.linkPosition },
     { href: '#story', label: t.story.linkStory },
@@ -30,14 +36,32 @@ export default function Story() {
         <h2 className={s.storyHeadline}>{t.story.headline1}<br />{t.story.headline2}</h2>
 
         <div className={s.storyGrid}>
-          <ol className={s.storyBody}>
-            {paragraphs.map((p, i) => (
-              <li key={i} className={s.storyRow}>
-                <span className={s.storyNo}>{`0${i + 1}`}</span>
-                <p className={s.storyPara}>{p}</p>
-              </li>
-            ))}
-          </ol>
+          <div className={s.storyBodyCol}>
+            <div className={s.storyLabelRow}>
+              <span className={s.storyLabel}>{t.story.labelPast}</span>
+            </div>
+            <ol className={s.storyBody}>
+              {past.map((p, i) => (
+                <li key={i} className={s.storyRow}>
+                  <span className={s.storyNo}>{`0${i + 1}`}</span>
+                  <p className={s.storyPara}>{p}</p>
+                </li>
+              ))}
+            </ol>
+
+            <div className={s.storyLabelRow}>
+              <span className={s.storyLabel}>{t.story.labelNow}</span>
+              {now.updated && <span className={s.storyUpdated}>{t.story.updatedLabel} {now.updated}</span>}
+            </div>
+            <ol className={s.storyBody}>
+              {present.map((p, i) => (
+                <li key={i} className={s.storyRow}>
+                  <span className={s.storyNo}>{`0${i + 1}`}</span>
+                  <p className={s.storyPara}>{p}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
 
           <div className={s.storyArt} aria-hidden="true">
             <svg viewBox="0 0 420 540" className={s.bridgeSvg}>

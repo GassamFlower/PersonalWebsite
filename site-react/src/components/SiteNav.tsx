@@ -15,7 +15,7 @@ export default function SiteNav() {
   ];
 
   return (
-    <header className={s.siteNav}>
+    <header className={`${s.siteNav} ${locale === 'en' ? s.siteNavEn : ''}`}>
       <div className={`container ${s.navInner}`}>
         <a className={s.brand} href="#hero">
           <span className={s.brandEn}>PERSONAL DOSSIER</span>

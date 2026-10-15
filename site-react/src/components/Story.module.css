@@ -15,6 +15,34 @@
   flex-direction: column;
   list-style: none;
 }
+/* v7.1 两块结构：曾经做过什么 / 正在做什么——标签行=墨线+衬线标签，右端挂 now 更新日期 */
+.storyBodyCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.storyLabelRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  border-top: 1px solid var(--color-ink);
+  padding-top: var(--space-3);
+  margin-top: var(--space-2);
+}
+.storyLabel {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+.storyUpdated {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  color: var(--color-ink-soft);
+}
 /* 图版化正文：编号 │ 段落 │ 发线（v6 §3.3 行式体裁） */
 .storyRow {
   display: grid;

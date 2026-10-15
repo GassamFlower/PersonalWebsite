@@ -15,8 +15,7 @@ export interface HeroUi {
   role: string;
   railGate: string;
   signature: string;
-  titleLine1: string;
-  titleLine2: string;
+  title: string;
   subline: string;
   subline2: string;
   focusCta: string;
@@ -30,17 +29,6 @@ export interface HeroUi {
   propDelivery: string;
   propImpact: string;
   propPrinciples: string;
-}
-
-export interface NowUi {
-  plateRail: string;
-  tagNo: string;
-  tagZh: string;
-  updatedLabel: string;
-  headline: string;
-  labelDoing: string;
-  labelLearning: string;
-  labelNote: string;
 }
 
 export interface NavUi {  brandZh: string;
@@ -68,6 +56,9 @@ export interface StoryUi {
   linkContact: string;
   headline1: string;
   headline2: string;
+  labelPast: string;
+  labelNow: string;
+  updatedLabel: string;
   para1: string;
   para2: string;
   para3: string;
@@ -197,7 +188,6 @@ export interface FooterUi {
 export interface ZoneUi {
   shell: ShellUi;
   hero: HeroUi;
-  now: NowUi;
   nav: NavUi;
   story: StoryUi;
   timeline: TimelineUi;
@@ -221,8 +211,7 @@ const zh: ZoneUi = {
     role: '独立系统建构者',
     railGate: 'DOSSIER',
     signature: '一个故事',
-    titleLine1: 'Hi，',
-    titleLine2: '这里是一个故事。',
+    title: 'Hi，这里是一个故事。',
     subline: '一个普通人做过哪些事、正在做什么，都记在这里。',
     subline2: '故事都有出处。',
     focusCta: '聊聊你的问题 →',
@@ -236,16 +225,6 @@ const zh: ZoneUi = {
     propDelivery: '独立交付',
     propImpact: '业务落地',
     propPrinciples: '边界诚实',
-  },
-  now: {
-    plateRail: '插页 · NOW',
-    tagNo: '插页 F',
-    tagZh: '当下',
-    updatedLabel: '更新于',
-    headline: '此刻正在发生的',
-    labelDoing: '在做',
-    labelLearning: '在学',
-    labelNote: '闲笔',
   },
   nav: {
     brandZh: '独立交付档案',    ariaMain: '主导航',
@@ -269,8 +248,11 @@ const zh: ZoneUi = {
     linkWorks: '项目精选',
     linkInsight: '洞见',
     linkContact: '联系',
-    headline1: '在真实系统里，',
-    headline2: '把空白做成能用的东西',
+    headline1: '干过的活，',
+    headline2: '都有据可查',
+    labelPast: '曾经做过什么',
+    labelNow: '正在做什么',
+    updatedLabel: '更新于',
     para1: '八年政务系统维护，让我懂业务、懂数据、也看见系统背后的真实需求与约束。',
     para2: '进入一家工业类企业，我看见长期被忽视的数字化空白——流程割裂、数据孤岛、体验落后。',
     para3: '我从零搭起工业运维平台 OPS 与统一用户中心 UUC，让数据流动，让一线可用，让管理可视。',
@@ -282,8 +264,8 @@ const zh: ZoneUi = {
     plateRail: '图版 05 · TIMELINE',
     tagNo: '档案 05',
     tagZh: '来路',
-    headline1: '干过的活，',
-    headline2: '都有据可查',
+    headline1: '一年一步，',
+    headline2: '走到这里',
     artArchived: '存档',
   },
   cases: {
@@ -405,8 +387,7 @@ const en: PartialUi = {
     role: "Independent systems builder",
     railGate: "DOSSIER",
     signature: "一个故事",
-    titleLine1: "Hi,",
-    titleLine2: "this is one person's story.",
+    title: "Hi, this is one person's story.",
     subline: "What an ordinary person has done — and is doing now — all kept here.",
     subline2: "Every story has a source.",
     focusCta: "Tell me your problem →",
@@ -420,16 +401,6 @@ const en: PartialUi = {
     propDelivery: "Independent delivery",
     propImpact: "Business impact",
     propPrinciples: "Honest boundaries",
-  },
-  now: {
-    plateRail: "Flap · NOW",
-    tagNo: "Flap F",
-    tagZh: "Right now",
-    updatedLabel: "Updated",
-    headline: "What is happening now",
-    labelDoing: "Doing",
-    labelLearning: "Learning",
-    labelNote: "Off note",
   },
   nav: {
     brandZh: "Independent delivery dossier",
@@ -454,8 +425,11 @@ const en: PartialUi = {
     linkWorks: "Selected work",
     linkInsight: "Insights",
     linkContact: "Contact",
-    headline1: "In real systems,",
-    headline2: "turning blank spaces into things that work",
+    headline1: "Every job on record,",
+    headline2: "with evidence to back it",
+    labelPast: "What I have done",
+    labelNow: "What I am doing",
+    updatedLabel: "Updated",
     para1: "Eight years maintaining government systems taught me the business and the data — and the real needs and hard constraints behind any system.",
     para2: "Moving into an industrial company, I saw a long-ignored digital gap: fragmented processes, data silos, dated user experience.",
     para3: "I built the industrial operations platform OPS and the unified user center UUC from scratch — letting data flow, letting the front line use it, letting management see it.",
@@ -467,8 +441,8 @@ const en: PartialUi = {
     plateRail: "Plate 05 · TIMELINE",
     tagNo: "File 05",
     tagZh: "The path so far",
-    headline1: "Every job on record,",
-    headline2: "with evidence to back it",
+    headline1: "One step a year,",
+    headline2: "the road so far",
     artArchived: "Archived",
   },
   cases: {
@@ -582,7 +556,7 @@ export function uiFor(locale: Locale): ZoneUi {
   return (locale === 'zh' ? ui.zh : (ui.en as ZoneUi));
 }
 
-// 守卫用：返回该语言相对中文缺失的键路径，例如 'hero.titleLine1'。
+// 守卫用：返回该语言相对中文缺失的键路径，例如 'hero.title'。
 export function missingKeys(locale: Locale): string[] {
   const base = ui.zh as unknown as Record<string, Record<string, string>>;
   const target = (locale === 'zh' ? ui.zh : ui.en) as unknown as Record<string, Record<string, string> | undefined>;

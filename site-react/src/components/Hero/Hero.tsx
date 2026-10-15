@@ -42,8 +42,8 @@ export default function Hero() {
             <div className={`rail ${s.heroRail}`}>
               <span className="gate">{t.hero.railGate}</span> · {t.hero.signature} · {t.hero.role}
             </div>
-            <h1 className={`${s.heroTitle} ${inTitle ? s.heroTitleIn : ''}`}>
-              {t.hero.titleLine1}<br />{t.hero.titleLine2}
+            <h1 className={`${s.heroTitle} ${locale === 'en' ? s.heroTitleEn : ''} ${inTitle ? s.heroTitleIn : ''}`}>
+              {t.hero.title}
             </h1>
             <p className={s.heroSub}>{t.hero.subline}<br />{t.hero.subline2}</p>
             <a className={s.heroFocus} href="#contact">{t.hero.focusCta}</a>
