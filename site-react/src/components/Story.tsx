@@ -1,16 +1,12 @@
-// Story — 图版 02 · 一个人的故事（v7.1：标题「干过的活，都有据可查」自履历区移入；当下插页并入本区）
-// v7.2 事实跟改（用户自报）：曾经=法院维护八年(段1)；正在=工业企业现状(段2–3)+now 真源 doing+段4–5
-import { getNow } from '../lib/content';
+// Story — 图版 02 · 一个人的故事（v7.3：曾经=三段编年〔爬虫→保险运维→法院八年〕，正在=三段〔现状+从零搭建+深化段4〕；
+// now 真源 doing 不再渲染（now.md/守卫保留）；五级体系句撤出本区，由 Principles 07 流水图承载；行式去编号，层级靠标签行+竖线+发线）
 import { useUi } from '../i18n/LocaleContext';
-import { pick } from '../i18n/enums';
 import s from './Story.module.css';
 
 export default function Story() {
-  const { t, locale } = useUi();
-  const now = getNow();
-  const past = [t.story.para1];
-  const doing = now.doing.map((x) => pick(locale, x.text, x.textEn)).filter((x) => x.length > 0);
-  const present = [t.story.para2, t.story.para3, ...doing, t.story.para4, t.story.para5];
+  const { t } = useUi();
+  const past = [t.story.past1, t.story.past2, t.story.past3];
+  const present = [t.story.present1, t.story.present2, t.story.present3];
   const subNav = [
     { href: '#hero', label: t.story.linkPosition },
     { href: '#story', label: t.story.linkStory },
@@ -40,27 +36,24 @@ export default function Story() {
             <div className={s.storyLabelRow}>
               <span className={s.storyLabel}>{t.story.labelPast}</span>
             </div>
-            <ol className={s.storyBody}>
+            <ul className={s.storyBody}>
               {past.map((p, i) => (
                 <li key={i} className={s.storyRow}>
-                  <span className={s.storyNo}>{`0${i + 1}`}</span>
                   <p className={s.storyPara}>{p}</p>
                 </li>
               ))}
-            </ol>
+            </ul>
 
             <div className={s.storyLabelRow}>
               <span className={s.storyLabel}>{t.story.labelNow}</span>
-              {now.updated && <span className={s.storyUpdated}>{t.story.updatedLabel} {now.updated}</span>}
             </div>
-            <ol className={s.storyBody}>
+            <ul className={s.storyBody}>
               {present.map((p, i) => (
                 <li key={i} className={s.storyRow}>
-                  <span className={s.storyNo}>{`0${i + 1}`}</span>
                   <p className={s.storyPara}>{p}</p>
                 </li>
               ))}
-            </ol>
+            </ul>
           </div>
 
           <div className={s.storyArt} aria-hidden="true">

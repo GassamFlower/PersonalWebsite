@@ -58,12 +58,12 @@ export interface StoryUi {
   headline2: string;
   labelPast: string;
   labelNow: string;
-  updatedLabel: string;
-  para1: string;
-  para2: string;
-  para3: string;
-  para4: string;
-  para5: string;
+  past1: string;
+  past2: string;
+  past3: string;
+  present1: string;
+  present2: string;
+  present3: string;
   footSigned: string;
 }
 
@@ -268,12 +268,12 @@ const zh: ZoneUi = {
     headline2: '都有据可查',
     labelPast: '曾经做过什么',
     labelNow: '正在做什么',
-    updatedLabel: '更新于',
-    para1: '做过八年的法院政务系统维护工作，让我懂业务、懂数据、也看见系统背后的真实需求与约束。',
-    para2: '现在在一家工业类企业，我看见长期被忽视的数字化空白——流程割裂、数据孤岛、体验落后。',
-    para3: '正在从零搭起工业运维平台、统一用户中心、智能网关管理以及 ERP 系统数据维护等，让数据流动，让一线可用，让管理可视。',
-    para4: '靠强烈的好奇心与持续学习的劲头，我把系统做深、做实用；已经能上手 AI 落地（RAG、知识库、智能体），仍在往更深之处精进。',
-    para5: '我通常用「五级项目体系」的做事规矩，以结构化的方法，把复杂的事做成可持续的系统。',
+    past1: '起步于旅游数据爬虫，专做数据抓取与清洗——在杂乱数据与干净数据之间，练出了对数据的第一手感觉。',
+    past2: '之后在一家保险公司做运维，门户网站、业务流程与数据的维护管理都经手——学会让系统稳稳当当地服务业务。',
+    past3: '再然后是八年的法院政务系统维护，让我懂业务、懂数据，也看见系统背后的真实需求与约束。',
+    present1: '现在在一家工业类企业，我看见长期被忽视的数字化空白——流程割裂、数据孤岛、体验落后。',
+    present2: '正在从零搭起工业运维平台、统一用户中心、智能网关管理以及 ERP 系统数据维护等，让数据流动，让一线可用，让管理可视。',
+    present3: '支撑这一切的，是好奇心，更是持续学习的习惯——不满足于「能用」，而是追问每一层为什么这样设计。AI 也不停在演示里：把它落进 RAG、知识库与智能体的真实场景，让回答有据可查，让流程自己运转——更深一层的工程化与评估，仍在精进路上。',
     footSigned: 'BY 一个故事',
   },
   timeline: {
@@ -461,12 +461,12 @@ const en: PartialUi = {
     headline2: "with evidence to back it",
     labelPast: "What I have done",
     labelNow: "What I am doing",
-    updatedLabel: "Updated",
-    para1: "Eight years maintaining court administration systems taught me the business and the data — and the real needs and hard constraints behind any system.",
-    para2: "These days, at an industrial company, I see a long-ignored digital gap: fragmented processes, data silos, dated user experience.",
-    para3: "I am building it up from zero — the industrial operations platform, the unified user center, smart gateway management, ERP data maintenance and more — letting data flow, letting the front line use it, letting management see it.",
-    para4: "Driven by curiosity and steady learning, I take systems deep and practical; I can now ship AI features (RAG, knowledge bases, agents) and keep pushing further in.",
-    para5: "I usually work by the rules of my five-tier project system, turning complex work into sustainable systems with a structured method.",
+    past1: "It began with travel-data crawlers — scraping and cleaning data for a living, building my first instincts for data between the messy and the clean.",
+    past2: "Then came operations work at an insurance company: portal sites, business processes and data all under my watch — learning to keep systems steadily serving the business.",
+    past3: "After that, eight years maintaining court administration systems — learning the business and the data, and seeing the real needs and hard constraints behind any system.",
+    present1: "These days, at an industrial company, I see a long-ignored digital gap: fragmented processes, data silos, dated user experience.",
+    present2: "I am building it up from zero — the industrial operations platform, the unified user center, smart gateway management, ERP data maintenance and more — letting data flow, letting the front line use it, letting management see it.",
+    present3: "What carries all of this is curiosity backed by a habit of steady learning — never stopping at \"it works\", but asking why each layer is built the way it is. Nor does AI stop at demos: I put it to work in real scenarios — RAG, knowledge bases, agents — making answers traceable and workflows run themselves; the deeper engineering and evaluation is still under way.",
     footSigned: "BY 一个故事",
   },
   timeline: {
