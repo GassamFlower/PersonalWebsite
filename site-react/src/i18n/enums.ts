@@ -7,6 +7,8 @@ export const STATUS_EN: Record<string, string> = {
   已上线: 'Live',
   内部系统: 'Internal',
   开发中: 'In progress',
+  立项阶段: 'Planned',
+  演示案例: 'Demo case',
 };
 
 export const OFFCAT_STATUS_EN: Record<string, string> = {
