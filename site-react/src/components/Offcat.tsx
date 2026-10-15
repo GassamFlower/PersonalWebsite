@@ -17,7 +17,7 @@ export default function Offcat() {
   const items = getOffcat();
   const subNav = [
     { href: '#cases', label: t.offcat.linkWorks },
-    { href: '#capability', label: t.offcat.linkCapability },
+    { href: '#writing', label: t.offcat.linkWriting },
     { href: '#growth', label: t.offcat.linkLog },
     { href: '#contact', label: t.offcat.linkContact },
   ];

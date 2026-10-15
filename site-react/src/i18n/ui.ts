@@ -18,6 +18,7 @@ export interface HeroUi {
   titleLine1: string;
   titleLine2: string;
   subline: string;
+  subline2: string;
   focusCta: string;
   dossierAria: string;
   gateLabel: string;
@@ -26,8 +27,8 @@ export interface HeroUi {
   dossierName: string;
   sealVerified: string;
   worksCta: string;
-  propCapability: string;
-  propCases: string;
+  propDelivery: string;
+  propImpact: string;
   propPrinciples: string;
 }
 
@@ -48,7 +49,7 @@ export interface NavUi {  brandZh: string;
   statusOnline: string;
   itemHero: string;
   itemCases: string;
-  itemCapability: string;
+  itemWriting: string;
   itemGrowth: string;
   itemPrinciples: string;
   itemOffcat: string;
@@ -93,7 +94,6 @@ export interface CasesUi {
   labelDid: string;
   labelKey: string;
   labelResult: string;
-  labelStack: string;
   sealVerified: string;
   artAssets: string;
   artUnifiedEntry: string;
@@ -103,15 +103,13 @@ export interface CasesUi {
   altSuffix: string;
 }
 
-export interface CapabilityUi {
+export interface WritingUi {
   plateRail: string;
   tagNo: string;
   tagZh: string;
   headline1: string;
   headline2: string;
-  intro: string;
-  labelEvidence: string;
-  footLevel: string;
+  empty: string;
 }
 
 export interface GrowthUi {
@@ -157,7 +155,7 @@ export interface OffcatUi {
   tagNo: string;
   tagZh: string;
   linkWorks: string;
-  linkCapability: string;
+  linkWriting: string;
   linkLog: string;
   linkContact: string;
   nextAria: string;
@@ -204,7 +202,7 @@ export interface ZoneUi {
   story: StoryUi;
   timeline: TimelineUi;
   cases: CasesUi;
-  capability: CapabilityUi;
+  writing: WritingUi;
   growth: GrowthUi;
   principles: PrinciplesUi;
   offcat: OffcatUi;
@@ -223,9 +221,10 @@ const zh: ZoneUi = {
     role: '独立系统建构者',
     railGate: 'DOSSIER',
     signature: '一个故事',
-    titleLine1: '把复杂的事情，',
-    titleLine2: '变成可以运行的系统。',
-    subline: '8 年在真实系统里 · 工业数字化 · 全栈 · 真实交付',
+    titleLine1: 'Hi，',
+    titleLine2: '这里是一个故事。',
+    subline: '一个普通人做过哪些事、正在做什么，都记在这里。',
+    subline2: '故事都有出处。',
     focusCta: '聊聊你的问题 →',
     dossierAria: '已验证事实档案卡',
     gateLabel: 'GATE✓',
@@ -234,8 +233,8 @@ const zh: ZoneUi = {
     dossierName: '档案卡',
     sealVerified: '已验证',
     worksCta: '精选作品 01—04',
-    propCapability: '独立交付',
-    propCases: '业务落地',
+    propDelivery: '独立交付',
+    propImpact: '业务落地',
     propPrinciples: '边界诚实',
   },
   now: {
@@ -254,7 +253,7 @@ const zh: ZoneUi = {
     statusOnline: '在线',
     itemHero: '封面',
     itemCases: '项目',
-    itemCapability: '能力',
+    itemWriting: '写作',
     itemGrowth: '成长',
     itemPrinciples: '规矩',
     itemOffcat: '附录',
@@ -263,9 +262,9 @@ const zh: ZoneUi = {
   story: {
     plateRail: '图版 02 · STORY',
     tagNo: '档案 02',
-    tagZh: '品牌故事',
+    tagZh: '一个人的故事',
     linkPosition: '定位',
-    linkStory: '品牌故事',
+    linkStory: '故事',
     linkMethod: '方法与体系',
     linkWorks: '项目精选',
     linkInsight: '洞见',
@@ -280,23 +279,22 @@ const zh: ZoneUi = {
     footSigned: 'BY 一个故事',
   },
   timeline: {
-    plateRail: '图版 03 · TIMELINE',
-    tagNo: '档案 03',
-    tagZh: '做过的事',
+    plateRail: '图版 05 · TIMELINE',
+    tagNo: '档案 05',
+    tagZh: '来路',
     headline1: '干过的活，',
     headline2: '都有据可查',
     artArchived: '存档',
   },
   cases: {
     plateRail: '核心卷 · CASES',
-    tagNo: '档案 04',
+    tagNo: '档案 03',
     tagZh: '项目案例（卷宗）',
     title: '做的项目，能看能查',
     labelProblem: '问题',
     labelDid: '解决',
     labelKey: '关键',
     labelResult: '结果',
-    labelStack: '技术栈',
     sealVerified: '已验证',
     artAssets: '资产 · 监控 · 巡检 · 工单',
     artUnifiedEntry: '统一入口',
@@ -305,15 +303,13 @@ const zh: ZoneUi = {
     slotHint: '示意线稿 · 非真实截图',
     altSuffix: '截图',
   },
-  capability: {
-    plateRail: '图版 05 · CAPABILITY',
-    tagNo: '档案 05',
-    tagZh: '技能树',
-    headline1: '技能档案：',
-    headline2: '会什么，到什么程度',
-    intro: '按技术栈分领域，标出熟练程度与真实证据——不报菜名，边界诚实。',
-    labelEvidence: '证据',
-    footLevel: 'LEVEL 分级诚实标注',
+  writing: {
+    plateRail: '图版 04 · WRITING',
+    tagNo: '档案 04',
+    tagZh: '写作',
+    headline1: '写下来的，',
+    headline2: '才算想清楚',
+    empty: '第一篇在写。写好就挂在这里。',
   },
   growth: {
     plateRail: '图版 06 · GROWTH',
@@ -356,7 +352,7 @@ const zh: ZoneUi = {
     tagNo: '附录 A',
     tagZh: '工作台之外',
     linkWorks: '作品',
-    linkCapability: '能力',
+    linkWriting: '写作',
     linkLog: '记录',
     linkContact: '联系',
     nextAria: '下一页',
@@ -409,9 +405,10 @@ const en: PartialUi = {
     role: "Independent systems builder",
     railGate: "DOSSIER",
     signature: "一个故事",
-    titleLine1: "Turning complex things",
-    titleLine2: "into systems that run.",
-    subline: "8 years in real systems · industrial digitalization · full stack · delivered for real",
+    titleLine1: "Hi,",
+    titleLine2: "this is one person's story.",
+    subline: "What an ordinary person has done — and is doing now — all kept here.",
+    subline2: "Every story has a source.",
     focusCta: "Tell me your problem →",
     dossierAria: "Verified-facts dossier card",
     gateLabel: "GATE✓",
@@ -420,8 +417,8 @@ const en: PartialUi = {
     dossierName: "Dossier card",
     sealVerified: "Verified",
     worksCta: "Selected work 01–04",
-    propCapability: "Independent delivery",
-    propCases: "Business impact",
+    propDelivery: "Independent delivery",
+    propImpact: "Business impact",
     propPrinciples: "Honest boundaries",
   },
   now: {
@@ -441,7 +438,7 @@ const en: PartialUi = {
     statusOnline: "Online",
     itemHero: "Cover",
     itemCases: "Work",
-    itemCapability: "Skills",
+    itemWriting: "Writing",
     itemGrowth: "Growth",
     itemPrinciples: "Principles",
     itemOffcat: "Appendix",
@@ -450,7 +447,7 @@ const en: PartialUi = {
   story: {
     plateRail: "Plate 02 · STORY",
     tagNo: "File 02",
-    tagZh: "Brand story",
+    tagZh: "One person's story",
     linkPosition: "Position",
     linkStory: "Story",
     linkMethod: "Method",
@@ -467,23 +464,22 @@ const en: PartialUi = {
     footSigned: "BY 一个故事",
   },
   timeline: {
-    plateRail: "Plate 03 · TIMELINE",
-    tagNo: "File 03",
-    tagZh: "What I have done",
+    plateRail: "Plate 05 · TIMELINE",
+    tagNo: "File 05",
+    tagZh: "The path so far",
     headline1: "Every job on record,",
     headline2: "with evidence to back it",
     artArchived: "Archived",
   },
   cases: {
     plateRail: "Core Volume · CASES",
-    tagNo: "File 04",
+    tagNo: "File 03",
     tagZh: "Project cases (dossier)",
     title: "Work you can see and verify",
     labelProblem: "Problem",
     labelDid: "Solution",
     labelKey: "Key point",
     labelResult: "Result",
-    labelStack: "Stack",
     sealVerified: "Verified",
     artAssets: "Assets · Monitoring · Inspection · Tickets",
     artUnifiedEntry: "Single entry",
@@ -492,15 +488,13 @@ const en: PartialUi = {
     slotHint: "Wireframe sketch · not a real screenshot",
     altSuffix: "screenshot",
   },
-  capability: {
-    plateRail: "Plate 05 · CAPABILITY",
-    tagNo: "File 05",
-    tagZh: "Skill tree",
-    headline1: "Skills dossier:",
-    headline2: "what I can do, to what degree",
-    intro: "Grouped by stack, with proficiency levels and real evidence — no menu-padding, honest boundaries.",
-    labelEvidence: "Evidence",
-    footLevel: "LEVEL honestly graded",
+  writing: {
+    plateRail: "Plate 04 · WRITING",
+    tagNo: "File 04",
+    tagZh: "Writing",
+    headline1: "What is written down,",
+    headline2: "has been thought through",
+    empty: "First piece in progress — it will hang here when done.",
   },
   growth: {
     plateRail: "Plate 06 · GROWTH",
@@ -543,7 +537,7 @@ const en: PartialUi = {
     tagNo: "Appendix A",
     tagZh: "Off the workbench",
     linkWorks: "Work",
-    linkCapability: "Skills",
+    linkWriting: "Writing",
     linkLog: "Log",
     linkContact: "Contact",
     nextAria: "Next page",

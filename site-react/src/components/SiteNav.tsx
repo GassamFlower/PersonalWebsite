@@ -6,8 +6,8 @@ export default function SiteNav() {
   const { t, locale } = useUi();
   const navItems = [
     { no: '01', href: '#hero', label: t.nav.itemHero },
-    { no: '04', href: '#cases', label: t.nav.itemCases },
-    { no: '05', href: '#capability', label: t.nav.itemCapability },
+    { no: '03', href: '#cases', label: t.nav.itemCases },
+    { no: '04', href: '#writing', label: t.nav.itemWriting },
     { no: '06', href: '#growth', label: t.nav.itemGrowth },
     { no: '07', href: '#principles', label: t.nav.itemPrinciples },
     { no: 'A', href: '#offcat', label: t.nav.itemOffcat },

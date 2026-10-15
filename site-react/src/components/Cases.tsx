@@ -1,7 +1,7 @@
 // Cases — 核心卷（v6：深墨场统一 + 规格表体裁 + 蓝图线稿反白主视觉 + 图版级验收章）
 import { getCases } from '../lib/content';
 import { useUi } from '../i18n/LocaleContext';
-import { pick, pickList, enumLabel, STATUS_EN } from '../i18n/enums';
+import { pick, enumLabel, STATUS_EN } from '../i18n/enums';
 import Seal from './Seal';
 import s from './Cases.module.css';
 
@@ -70,7 +70,7 @@ export default function Cases() {
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>{t.cases.tagNo}</b> · {t.cases.tagZh}</span>
-          <span className="meta">04</span>
+          <span className="meta">03</span>
         </div>
         <h2 className={`section-title ${s.casesTitle}`}>{t.cases.title}</h2>
 
@@ -102,7 +102,6 @@ export default function Cases() {
                       {verified && <Seal label={t.cases.sealVerified} dark className={s.sealBig} />}
                     </div>
                   )}
-                  <div className={s.specRow}><dt>{t.cases.labelStack}</dt><dd className={s.specMono}>{pickList(locale, c.stack, c.stackEn).join(' / ')}</dd></div>
                 </dl>
               </div>
 

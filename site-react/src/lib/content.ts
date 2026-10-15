@@ -32,12 +32,9 @@ export interface CaseData {
   titleEn?: string; problemEn?: string; whatIDidEn?: string;
   challengeEn?: string; outcomeEn?: string; stackEn?: string[];
 }
-export interface SkillItem { name: string; note?: string; }
-export interface SkillData {
-  order: number; domain: string;
-  level: '已交付' | '会用' | '在学';
-  tagline: string; skills: SkillItem[]; evidence?: string;
-  domainEn?: string; taglineEn?: string; skillsEn?: SkillItem[]; evidenceEn?: string;
+export interface WritingData {
+  title: string; date: string; summary: string;
+  titleEn?: string; summaryEn?: string;
 }
 export interface GrowthData {
   month: string; takeaway: string; tags: string[]; body: string;
@@ -78,8 +75,9 @@ export function getCases(): CaseData[] {
     .sort((a, b) => a.order - b.order);
 }
 
-export function getSkills(): SkillData[] {
-  return collect<SkillData>((d) => 'domain' in d && 'level' in d).sort((a, b) => a.order - b.order);
+// 写作区（docs/j）：判别键 title+date+summary 三齐；按 date 倒序。真源为空时组件渲染诚实空态
+export function getWriting(): WritingData[] {
+  return collect<WritingData>((d) => hasAll(d, ['title', 'date', 'summary'])).sort((a, b) => b.date.localeCompare(a.date));
 }
 
 export function getTimeline(): TimelineData[] {

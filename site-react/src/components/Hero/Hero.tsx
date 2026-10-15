@@ -16,9 +16,10 @@ export default function Hero() {
 
   // 事实行取内容真源前 3 案，不硬编码；仅「已上线」级事实盖朱砂章（v5 §2.2 纪律继承）
   const facts = getCases().slice(0, 3);
+  // v7 §13.6：能力图谱下线后，三链改指案例/履历/规矩
   const props = [
-    { href: '#capability', label: t.hero.propCapability },
-    { href: '#cases', label: t.hero.propCases },
+    { href: '#cases', label: t.hero.propDelivery },
+    { href: '#timeline', label: t.hero.propImpact },
     { href: '#principles', label: t.hero.propPrinciples },
   ];
 
@@ -44,7 +45,7 @@ export default function Hero() {
             <h1 className={`${s.heroTitle} ${inTitle ? s.heroTitleIn : ''}`}>
               {t.hero.titleLine1}<br />{t.hero.titleLine2}
             </h1>
-            <p className={s.heroSub}>{t.hero.subline}</p>
+            <p className={s.heroSub}>{t.hero.subline}<br />{t.hero.subline2}</p>
             <a className={s.heroFocus} href="#contact">{t.hero.focusCta}</a>
           </div>
 

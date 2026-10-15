@@ -72,13 +72,6 @@
   line-height: 1.7;
   max-width: 56ch;
 }
-.tlStack {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-ink-soft);
-  letter-spacing: 0.05em;
-  margin-top: var(--space-3);
-}
 .tlArt {
   margin-top: var(--space-12);
 }

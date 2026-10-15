@@ -1,7 +1,7 @@
 // Timeline — 图版 03 · 做过的事（v6：编年表＝巨号 mono 年份 + 发线行 + 墨黑节点）
 import { getTimeline } from '../lib/content';
 import { useUi } from '../i18n/LocaleContext';
-import { pick, pickList } from '../i18n/enums';
+import { pick } from '../i18n/enums';
 import s from './Timeline.module.css';
 
 export default function Timeline() {
@@ -13,7 +13,7 @@ export default function Timeline() {
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>{t.timeline.tagNo}</b> · {t.timeline.tagZh}</span>
-          <span className="meta">03</span>
+          <span className="meta">05</span>
         </div>
         <div className={s.tlRule}></div>
 
@@ -30,9 +30,6 @@ export default function Timeline() {
                 <h3 className={s.tlName}><i className={s.tlMarker} aria-hidden="true" />{pick(locale, n.title, n.titleEn)}</h3>
                 <p className={s.tlRole}>{pick(locale, n.role, n.roleEn)}</p>
                 <p className={s.tlDesc}>{pick(locale, n.detail, n.detailEn)}</p>
-                {n.stack.length > 0 && (
-                  <p className={`rail ${s.tlStack}`}>{pickList(locale, n.stack, n.stackEn).join(' / ')}</p>
-                )}
               </div>
             </li>
           ))}

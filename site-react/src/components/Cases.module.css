@@ -80,12 +80,6 @@
   padding-top: 0.35em;
 }
 .specRow dd { grid-column: 2; min-width: 0; }
-.specMono {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.05em;
-  color: var(--color-field-muted);
-}
 /* Result 行：提亮 + 图版级验收章 */
 /* Result 行：提亮 + 图版级验收章（朱砂只出现在章上，标签不染色——唯一色纪律） */
 .specResult {

@@ -1,0 +1,38 @@
+/* Writing 区 — 复用 v6 体裁：列表行以细线分隔，日期 mono、标题衬线；空态一行墨弱字 */
+.empty {
+  margin-top: var(--space-6);
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  color: var(--color-ink-soft);
+}
+
+.list {
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+}
+
+.item {
+  border-top: 1px solid var(--color-line);
+  padding: var(--space-4) 0;
+}
+
+.date {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: var(--space-2) 0;
+}
+
+.summary {
+  font-size: var(--text-base);
+  color: var(--color-ink);
+  max-width: 68ch;
+}

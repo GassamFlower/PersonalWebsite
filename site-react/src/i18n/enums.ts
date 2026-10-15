@@ -9,12 +9,6 @@ export const STATUS_EN: Record<string, string> = {
   开发中: 'In progress',
 };
 
-export const LEVEL_EN: Record<string, string> = {
-  已交付: 'Delivered',
-  会用: 'Working knowledge',
-  在学: 'Learning',
-};
-
 export const OFFCAT_STATUS_EN: Record<string, string> = {
   已验证: 'Verified',
   进行中: 'In progress',
