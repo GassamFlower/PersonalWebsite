@@ -10,6 +10,7 @@
     "preview": "astro preview",
     "fonts": "node scripts/fonts.mjs",
     "og": "python scripts/og_image.py",
+    "share": "python scripts/share_cards.py",
     "astro": "astro"
   },
   "dependencies": {
