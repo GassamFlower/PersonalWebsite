@@ -1,4 +1,5 @@
 // Cases — 核心卷（v6：深墨场统一 + 规格表体裁 + 蓝图线稿反白主视觉 + 图版级验收章）
+// v7.4 两层化：tier=feature 详案卡；tier=minor 进「还做过这些」简表（题名+状态+一行定位），缺省按 feature 处理
 import { getCases } from '../lib/content';
 import { useUi } from '../i18n/LocaleContext';
 import { pick, enumLabel, STATUS_EN } from '../i18n/enums';
@@ -6,6 +7,8 @@ import Seal from './Seal';
 import s from './Cases.module.css';
 
 const ratios = ['portrait', 'landscape', 'landscape', 'landscape'];
+// v7.4：线稿按详案卡身份映射（0=车助手流程 1=OPS资产矩阵 3=内网DevOps流水线；原 2=统一入口 随 UUC 进简表退场）
+const schemOf = [0, 1, 3];
 
 function Schematic({ i }: { i: number }) {
   const { t } = useUi();
@@ -63,7 +66,9 @@ function Schematic({ i }: { i: number }) {
 
 export default function Cases() {
   const { t, locale } = useUi();
-  const cases = getCases();
+  const all = getCases();
+  const cases = all.filter((c) => c.tier !== 'minor');
+  const minor = all.filter((c) => c.tier === 'minor');
   return (
     <section id="cases" className={`section field ${s.cases}`}>
       <span className="plate-rail">{t.cases.plateRail}</span>
@@ -115,7 +120,7 @@ export default function Cases() {
                     <span className={s.slotType}>
                       {i === 0 ? t.cases.slotFlow : t.cases.slotUi}
                     </span>
-                    <Schematic i={i} />
+                    <Schematic i={schemOf[i] ?? 3} />
                     <span className={s.slotHint}>{t.cases.slotHint}</span>
                   </div>
                 )}
@@ -124,6 +129,25 @@ export default function Cases() {
             );
           })}
         </div>
+
+        {minor.length > 0 && (
+          <div className={s.moreBlock}>
+            <div className={s.moreHead}>
+              <span className={s.moreLabel}>{t.cases.labelMore}</span>
+            </div>
+            <ul className={s.moreList}>
+              {minor.map((c, i) => (
+                <li key={i} className={s.moreRow}>
+                  <div className={s.moreIdent}>
+                    <h3 className={s.moreTitle}>{pick(locale, c.title, c.titleEn)}</h3>
+                    <span className={`rail ${s.moreStatus}`}>{enumLabel(locale, STATUS_EN, c.status)}</span>
+                  </div>
+                  <p className={s.moreLine}>{pick(locale, c.challenge ?? c.whatIDid, c.challengeEn ?? c.whatIDidEn)}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   );

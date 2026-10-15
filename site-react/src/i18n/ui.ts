@@ -84,6 +84,7 @@ export interface CasesUi {
   labelProblem: string;
   labelDid: string;
   labelKey: string;
+  labelMore: string;
   labelResult: string;
   sealVerified: string;
   artAssets: string;
@@ -292,6 +293,7 @@ const zh: ZoneUi = {
     labelProblem: '问题',
     labelDid: '解决',
     labelKey: '关键',
+    labelMore: '还做过这些，就不一件件展开了',
     labelResult: '结果',
     sealVerified: '已验证',
     artAssets: '资产 · 监控 · 巡检 · 工单',
@@ -485,6 +487,7 @@ const en: PartialUi = {
     labelProblem: "Problem",
     labelDid: "Solution",
     labelKey: "Key point",
+    labelMore: "More things I have built",
     labelResult: "Result",
     sealVerified: "Verified",
     artAssets: "Assets · Monitoring · Inspection · Tickets",

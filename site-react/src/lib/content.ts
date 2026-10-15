@@ -25,6 +25,7 @@ const entries: Entry[] = Object.keys(raw).map((path) => {
 // 按 frontmatter 判别内容类型（各集合有互斥的必填唯一键）
 export interface CaseData {
   title: string; order: number; status: string;
+  tier?: string; // 'feature' 详案卡（默认）| 'minor' 简表一句话
   problem: string; whatIDid: string;
   challenge?: string; outcome?: string;
   stack: string[]; evidence?: string;
