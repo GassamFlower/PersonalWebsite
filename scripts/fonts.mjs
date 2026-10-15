@@ -14,9 +14,12 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-// 脚本在 scripts/ 下，仓库根要往上退一级
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.slice(1)), '..');
+// 脚本在 scripts/ 下，仓库根要往上退一级。
+// 必须用 fileURLToPath：早期用 pathname.slice(1) 只在 Windows 凑巧对（/E:/… 去首斜杠），
+// Linux（CI）上会变成相对路径，导致读不到子集清单——2026-10-14 CI 就是这么红的。
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const WEIGHTS = [500, 600, 700];
 const OUT_DIR = 'assets/fonts';
 const SOURCE = process.env.NOTO_SERIF_SOURCE || 'C:/Windows/Fonts/NotoSerifSC-VF.ttf';

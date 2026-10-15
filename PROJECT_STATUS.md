@@ -143,6 +143,7 @@
 | 日期 | 踩了什么坑 | 根因 | 是否反哺 Skill |
 |---|---|---|---|
 | 2026-10-14 | 分享卡片写进 `public/images/og.png` 后本地一切正常，但 CI 检出的站点根本不会有这张图 | `.gitignore` 的 `images/` 没有前导斜杠，连带挡住了部署资产目录 `public/images/`（本意只是挡生图草稿） | 是：**新增静态资源后必须 `git check-ignore -v <路径>` 验一次**，"本地能访问"不等于"部署里有"；产物落 `public/og.png` |
+| 2026-10-14 | `scripts/fonts.mjs` 首版 `SyntaxError: missing ) after argument list`；另一次产物写进 `scripts/public/…` 且只裁出 228 字符 | ① 编辑链路把 JS 字符串里的全角引号规范化成 ASCII，直接截断字面量 ② `ROOT` 用 `import.meta.url` 推导时少退一级 | 是：需要余量字符时用**码位数组**表达而非字面量；脚本落盘前先打印一次绝对路径 |
 | 2026-10-14 | v6 全站目测"衬线字阶成立"，而访客看到的是系统回退字 | 判断依据来自开发机：本机装了源字体、且 localhost 永远可达；`fonts.googleapis.com` 在大陆网络 12s 超时这一条从未被验证过 | 是：**视觉验收要区分"我的机器"与"访客的机器"**——外链字体/CDN 先测可达性，再谈目测通过 |
 | 2026-10-14 | `link.focus()` 后 `.skip-link:focus` 不生效，误判成 CSS 特异度问题 | in-app 自动化浏览器 `document.hasFocus()===false`，文档没焦点时 `:focus` 不应用；改用真实 `Tab` 按键才复现（链接落到 16/16） | 是：**自动化里验"聚焦态"要用真实按键事件，不能用 `element.focus()`**；同类还有截图表面不可用时的 computed style 审计 |
-| 2026-10-14 | `scripts/fonts.mjs` 首版 `SyntaxError: missing ) after argument list`；另一次产物写进 `scripts/public/…` 且只裁出 228 字符 | ① 编辑链路把 JS 字符串里的全角引号 `“”‘’` 规范化成 ASCII，直接截断字面量 ② `ROOT` 用 `import.meta.url` 推导时少退一级 | 是：需要余量字符时用**码位数组**表达而非字面量；脚本落盘前先打印一次绝对路径 |
+| 2026-10-14 | push 后 **GitHub Actions 首红**：CI 报「缺子集清单」，而本地 `node scripts/fonts.mjs --check` 一直是通过的 | `scripts/fonts.mjs` 用 `new URL(import.meta.url).pathname.slice(1)` 推仓库根：Windows 下 pathname 是 `/E:/…`，去掉首斜杠正好得到 `E:/…`；Linux（CI）下 pathname 本来就是 `/home/runner/…`，去掉首斜杠变相对路径，`fs.existsSync` 自然找不到清单 | 是：**脚本里拿自身路径一律 `fileURLToPath(import.meta.url)`**，并记住"本地绿、CI 红"优先怀疑平台相关的路径/换行处理，而不是先怀疑 CI 环境本身 |
