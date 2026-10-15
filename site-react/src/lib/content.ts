@@ -26,6 +26,8 @@ const entries: Entry[] = Object.keys(raw).map((path) => {
 export interface CaseData {
   title: string; order: number; status: string;
   tier?: string; // 'feature' 详案卡（默认）| 'minor' 简表一句话
+  series?: string; // '底座' = 归入内部系统系列块
+  part?: string; partEn?: string; // 系列部位名（地基/身份/出口/生产/搬运）
   problem: string; whatIDid: string;
   challenge?: string; outcome?: string;
   stack: string[]; evidence?: string;

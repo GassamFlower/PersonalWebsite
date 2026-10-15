@@ -187,6 +187,19 @@
   color: var(--color-field-muted);
 }
 
+/* v7.6 内部系统整合成一套系列：竖线绑定 + 总述 */
+.seriesIntro {
+  margin-top: var(--space-3);
+  max-width: 72ch;
+  font-size: var(--text-sm);
+  line-height: 1.85;
+  color: var(--color-field-muted);
+}
+.seriesBlock .moreIdent {
+  border-left: 1px solid var(--color-field-rule);
+  padding-left: var(--space-4);
+}
+
 @media (max-width: 860px) {
   .caseCard {
     grid-template-columns: 1fr;

@@ -68,7 +68,8 @@ export default function Cases() {
   const { t, locale } = useUi();
   const all = getCases();
   const cases = all.filter((c) => c.tier !== 'minor');
-  const minor = all.filter((c) => c.tier === 'minor');
+  const series = all.filter((c) => c.tier === 'minor' && c.series);
+  const minor = all.filter((c) => c.tier === 'minor' && !c.series);
   return (
     <section id="cases" className={`section field ${s.cases}`}>
       <span className="plate-rail">{t.cases.plateRail}</span>
@@ -93,6 +94,7 @@ export default function Cases() {
                 </div>
                 <div className={`rail ${s.caseRail}`}>
                   {verified && <><span className="gate">GATE✓</span> · </>}CASE/0{i + 1} · {enumLabel(locale, STATUS_EN, c.status)}
+                  {c.series && <> · {t.cases.seriesRail} · {pick(locale, c.part, c.partEn)}</>}
                 </div>
 
                 {/* 规格表体裁（v6 §3.3）：label│value│发线，字段缺失不渲染该行 */}
@@ -129,6 +131,26 @@ export default function Cases() {
             );
           })}
         </div>
+
+        {series.length > 0 && (
+          <div className={`${s.moreBlock} ${s.seriesBlock}`}>
+            <div className={s.moreHead}>
+              <span className={s.moreLabel}>{t.cases.seriesLabel}</span>
+              <p className={s.seriesIntro}>{t.cases.seriesIntro}</p>
+            </div>
+            <ul className={s.moreList}>
+              {series.map((c, i) => (
+                <li key={i} className={s.moreRow}>
+                  <div className={s.moreIdent}>
+                    <h3 className={s.moreTitle}>{pick(locale, c.title, c.titleEn)}</h3>
+                    <span className={`rail ${s.moreStatus}`}>{t.cases.seriesRail} · {pick(locale, c.part, c.partEn)} · {enumLabel(locale, STATUS_EN, c.status)}</span>
+                  </div>
+                  <p className={s.moreLine}>{pick(locale, c.challenge ?? c.whatIDid, c.challengeEn ?? c.whatIDidEn)}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {minor.length > 0 && (
           <div className={s.moreBlock}>

@@ -85,6 +85,9 @@ export interface CasesUi {
   labelDid: string;
   labelKey: string;
   labelMore: string;
+  seriesLabel: string;
+  seriesRail: string;
+  seriesIntro: string;
   labelResult: string;
   sealVerified: string;
   artAssets: string;
@@ -294,6 +297,10 @@ const zh: ZoneUi = {
     labelDid: '解决',
     labelKey: '关键',
     labelMore: '还做过这些，就不一件件展开了',
+    seriesLabel: '同一套底座 · 五个部位',
+    seriesRail: '底座',
+    seriesIntro:
+      '上面详案里的内网私有化平台与 OPS，加上这三块，不是五个各干各的工具：地基承载代码与发布，生产管住设备与运维，身份只管一次登录，搬运连起设计端与业务系统，出口统一 AI 与接口调用。接口与规矩互相咬合，缺一段就断链。',
     labelResult: '结果',
     sealVerified: '已验证',
     artAssets: '资产 · 监控 · 巡检 · 工单',
@@ -488,6 +495,10 @@ const en: PartialUi = {
     labelDid: "Solution",
     labelKey: "Key point",
     labelMore: "More things I have built",
+    seriesLabel: "One Shared Platform · Five Parts",
+    seriesRail: "Platform",
+    seriesIntro:
+      "The private dev-ops platform and OPS above, plus these three, are not five unrelated tools: the foundation carries code and releases, production runs equipment and operations, identity owns a single login, the mover links the design side to business systems, and the exit unifies AI and API calls. Interfaces and rules interlock — one missing link breaks the chain.",
     labelResult: "Result",
     sealVerified: "Verified",
     artAssets: "Assets · Monitoring · Inspection · Tickets",
