@@ -10,7 +10,7 @@
 - **项目名称**：Personal Website（个人网站 · 接单交付凭证）
 - **开始日期**：2026-08
 - **当前状态**：**Astro 版已接 GitHub 上线**（workflow build+deploy success，URL `https://gassamflower.github.io/PersonalWebsite/`）；React 并行工作区已提交（site-react/）；**v6「技术图鉴·墨与朱」已全站铺开**（9 区 + 附录「工作台之外」+ SiteNav + Footer，`docs/视觉方向-v6-技术图鉴.md` §9/§11 已逐条实测勾选；3D 粒子与 three 系依赖移除）；**上线门前整改已完成**（衬线子集自托管 + 分享卡片 + 无障碍三件，见 v6 §12 与 `docs/f-视觉落地设计.md` §10；JS 278.80 kB / gzip 84.92 kB、CSS 38.09 kB / gzip 7.47 kB、prerender 50.0 kB、字体 5 face 全本地 0 外部请求）
-- **当前门禁**：架构门 · v6 视觉与门前整改完成，待用户浏览器目测全站（含真机微信里的分享卡片）→ 上线门（React 线尚未部署，Astro 已上线版为视觉冻结的 v4/v5 前身；**注意**：`assets/fonts/*.woff2`、`public/og.png`、`site-react/public/og.png`、`scripts/{fonts.mjs,og_image.py}`、`src/content/offcat/` 是新增文件，CI 从 git 检出构建，不入库=线上没有字体与卡片——**已随 51beed3 提交（本地，未 push）**；`vibe_images/` 样张延续既有做法保持本地不入库）
+- **当前门禁**：**v6 中文站已 push 上线**（2026-10-14 用户「同步上传」；推 main 即触发 GitHub Pages 构建部署）；**英文版 i18n 立项门已过**（`docs/h-英文版-i18n.md` §6 四条裁决全定，宪法 §1.1「一份内容·两种语言·两个静态 HTML 仍属纯静态」已授权落地）→ 现进**架构门·批 1**（i18n 字典抽取 + locale 进 prerender，纯结构重构不改观感，过门判据是中文站渲染文本逐字不变）；React 线（site-react）仍未部署，Astro 线上版现含 v6 字体自托管与无障碍（视觉仍为 v4/v5 骨架）
 
 ---
 
