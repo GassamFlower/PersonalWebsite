@@ -1,16 +1,12 @@
 // Hero — 封面（v6：深墨场 + 巨衬线立论 + 白档案卡压在墨上；3D 粒子已按 Q3=b 移除）
 import { useEffect, useState } from 'react';
 import { getCases } from '../../lib/content';
+import { useUi } from '../../i18n/LocaleContext';
 import Seal from '../Seal';
 import s from './Hero.module.css';
 
-const props = [
-  { href: '#capability', label: '独立交付' },
-  { href: '#cases', label: '业务落地' },
-  { href: '#principles', label: '边界诚实' },
-];
-
 export default function Hero() {
+  const { t } = useUi();
   const [inTitle, setInTitle] = useState(false);
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -19,15 +15,20 @@ export default function Hero() {
 
   // 事实行取内容真源前 3 案，不硬编码；仅「已上线」级事实盖朱砂章（v5 §2.2 纪律继承）
   const facts = getCases().slice(0, 3);
+  const props = [
+    { href: '#capability', label: t.hero.propCapability },
+    { href: '#cases', label: t.hero.propCases },
+    { href: '#principles', label: t.hero.propPrinciples },
+  ];
 
   return (
     <section id="hero" className={`section hero field crop ${s.hero}`}>
       <i className="tl" /><i className="tr" /><i className="bl" /><i className="br" />
-      <span className="plate-rail">封面 · COVER</span>
+      <span className="plate-rail">{t.hero.plateRail}</span>
 
       <div className={`container ${s.heroInner}`}>
         <div className="section-head">
-          <span className="tag"><b>档案 01</b> · PERSONAL DOSSIER · 独立系统建构者</span>
+          <span className="tag"><b>{t.hero.eyebrowNo}</b> · {t.hero.siteLatin} · {t.hero.role}</span>
           <span className={s.heroReg} aria-hidden="true">
             <span className="regmark"><i className="k" /><i className="r" /><i className="w" /></span>
           </span>
@@ -37,21 +38,21 @@ export default function Hero() {
         <div className={s.heroGrid}>
           <div className={s.heroLeft}>
             <div className={`rail ${s.heroRail}`}>
-              <span className="gate">DOSSIER</span> · 一个故事 · 独立系统建构者
+              <span className="gate">{t.hero.railGate}</span> · {t.hero.signature} · {t.hero.role}
             </div>
             <h1 className={`${s.heroTitle} ${inTitle ? s.heroTitleIn : ''}`}>
-              把复杂的事情，<br />变成可以运行的系统。
+              {t.hero.titleLine1}<br />{t.hero.titleLine2}
             </h1>
-            <p className={s.heroSub}>8 年在真实系统里 · 工业数字化 · 全栈 · 真实交付</p>
-            <a className={s.heroFocus} href="#contact">聊聊你的问题 →</a>
+            <p className={s.heroSub}>{t.hero.subline}</p>
+            <a className={s.heroFocus} href="#contact">{t.hero.focusCta}</a>
           </div>
 
-          <aside className={s.dossier} aria-label="已验证事实档案卡">
+          <aside className={s.dossier} aria-label={t.hero.dossierAria}>
             <header className={s.dossierHead}>
               <span className="rail">
-                <span className="gate">GATE✓</span> · 上线 2026-08 · REV 2026-10
+                <span className="gate">{t.hero.gateLabel}</span> · {t.hero.releasedLabel} 2026-08 · {t.hero.revLabel} 2026-10
               </span>
-              <span className={s.dossierName}>档案卡</span>
+              <span className={s.dossierName}>{t.hero.dossierName}</span>
             </header>
 
             <ul className={s.factList}>
@@ -59,13 +60,13 @@ export default function Hero() {
                 <li key={c.title} className={s.factRow}>
                   <span className={s.factStatus}>{c.status}</span>
                   <span className={s.factTitle}>{c.title}</span>
-                  {c.status === '已上线' && <Seal label="已验证" />}
+                  {c.status === '已上线' && <Seal label={t.hero.sealVerified} />}
                 </li>
               ))}
             </ul>
 
             <footer className={s.dossierFoot}>
-              <a className={`btn ${s.dossierCta}`} href="#cases">精选作品 01—04</a>
+              <a className={`btn ${s.dossierCta}`} href="#cases">{t.hero.worksCta}</a>
             </footer>
           </aside>
         </div>

@@ -11,12 +11,15 @@ import Principles from './components/Principles';
 import Offcat from './components/Offcat';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { LocaleProvider, useUi } from './i18n/LocaleContext';
+import type { Locale } from './i18n/locale';
 import './styles/global.css';
 
-export default function App() {
+function Shell() {
+  const { t } = useUi();
   return (
     <React.Fragment>
-      <a className="skip-link" href="#main">跳到正文</a>
+      <a className="skip-link" href="#main">{t.shell.skipLink}</a>
       <SiteNav />
       <main id="main" tabIndex={-1}>
         <Hero />
@@ -31,5 +34,13 @@ export default function App() {
       </main>
       <Footer />
     </React.Fragment>
+  );
+}
+
+export default function App({ locale = 'zh' }: { locale?: Locale }) {
+  return (
+    <LocaleProvider locale={locale}>
+      <Shell />
+    </LocaleProvider>
   );
 }
