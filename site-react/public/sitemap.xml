@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 两个静态 HTML 互为语言副本（宪法 §1.1），故每条都带 xhtml:link 指向另一语言。 -->
+<!-- 更新时机：只在 dist 实际发射的语言变化时改本文件（现况 = zh + en 两条）。 -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://gassamflower.github.io/PersonalWebsite/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://gassamflower.github.io/PersonalWebsite/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://gassamflower.github.io/PersonalWebsite/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gassamflower.github.io/PersonalWebsite/" />
+  </url>
+  <url>
+    <loc>https://gassamflower.github.io/PersonalWebsite/en/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://gassamflower.github.io/PersonalWebsite/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://gassamflower.github.io/PersonalWebsite/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gassamflower.github.io/PersonalWebsite/" />
+  </url>
+</urlset>

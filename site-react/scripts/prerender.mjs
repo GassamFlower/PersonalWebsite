@@ -84,6 +84,12 @@ for (const locale of KNOWN) {
     html = replaceAttr(html, 'property="og:description"', `<meta property="og:description" content="${EN_HEAD.description}" />`);
     html = replaceAttr(html, 'property="og:image"', `<meta property="og:image" content="${SITE}og-en.png" />`);
     html = replaceAttr(html, 'property="og:image:alt"', `<meta property="og:image:alt" content="${EN_HEAD.imageAlt}" />`);
+    // canonical 必须跟着语言走，否则英文页把自己声明成中文主页的副本
+    html = replaceTag(
+      html,
+      /<link[^>]*rel="canonical"[^>]*\/>/,
+      `<link rel="canonical" href="${SITE}en/" />`
+    );
   }
   html = html.replace('</head>', `    ${LANG_LINKS}\n  </head>`);
   if (locale !== 'zh') {
