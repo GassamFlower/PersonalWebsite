@@ -1,5 +1,5 @@
-// Story — 图版 02 · 一个人的故事（v7.1：标题「干过的活，都有据可查」自履历区移入；
-// 正文两块——「曾经做过什么」=故事段 1–3，「正在做什么」=now 真源 doing + 段 4–5；当下插页并入本区）
+// Story — 图版 02 · 一个人的故事（v7.1：标题「干过的活，都有据可查」自履历区移入；当下插页并入本区）
+// v7.2 事实跟改（用户自报）：曾经=法院维护八年(段1)；正在=工业企业现状(段2–3)+now 真源 doing+段4–5
 import { getNow } from '../lib/content';
 import { useUi } from '../i18n/LocaleContext';
 import { pick } from '../i18n/enums';
@@ -8,9 +8,9 @@ import s from './Story.module.css';
 export default function Story() {
   const { t, locale } = useUi();
   const now = getNow();
-  const past = [t.story.para1, t.story.para2, t.story.para3];
+  const past = [t.story.para1];
   const doing = now.doing.map((x) => pick(locale, x.text, x.textEn)).filter((x) => x.length > 0);
-  const present = [...doing, t.story.para4, t.story.para5];
+  const present = [t.story.para2, t.story.para3, ...doing, t.story.para4, t.story.para5];
   const subNav = [
     { href: '#hero', label: t.story.linkPosition },
     { href: '#story', label: t.story.linkStory },

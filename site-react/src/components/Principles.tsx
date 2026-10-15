@@ -10,6 +10,14 @@ export default function Principles() {
     { no: '03', title: t.principles.gate3Title, desc: t.principles.gate3Desc },
     { no: '04', title: t.principles.gate4Title, desc: t.principles.gate4Desc },
   ];
+  // v7.2：用户自报「五级项目体系」目录流水图（Inbox→Archive），ASCII 稿转图版体裁
+  const tiers = [
+    { dir: 'Inbox/', name: t.principles.tier1Name, role: t.principles.tier1Role, act: t.principles.tier1Act },
+    { dir: 'Incubating/', name: t.principles.tier2Name, role: t.principles.tier2Role, act: t.principles.tier2Act },
+    { dir: 'Active/', name: t.principles.tier3Name, role: t.principles.tier3Role, act: t.principles.tier3Act },
+    { dir: 'Assets/', name: t.principles.tier4Name, role: t.principles.tier4Role, act: t.principles.tier4Act },
+    { dir: 'Archive/', name: t.principles.tier5Name, role: t.principles.tier5Role, act: t.principles.tier5Act },
+  ];
 
   return (
     <section id="principles" className="section">
@@ -56,6 +64,20 @@ export default function Principles() {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className={s.tiers}>
+          <p className={s.tierLead}>{t.principles.tierLead}</p>
+          <ol className={s.tierFlow}>
+            {tiers.map((x) => (
+              <li key={x.dir} className={s.tier}>
+                <span className={s.tierDir}>{x.dir}</span>
+                <h3 className={s.tierName}>{x.name}</h3>
+                <p className={s.tierRole}>{x.role}</p>
+                <p className={s.tierAct}><span aria-hidden="true">→</span> {x.act}</p>
+              </li>
+            ))}
+          </ol>
         </div>
 
         <div className={s.prFoot}>

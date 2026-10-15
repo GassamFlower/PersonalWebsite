@@ -136,6 +136,22 @@ export interface PrinciplesUi {
   gate3Desc: string;
   gate4Title: string;
   gate4Desc: string;
+  tierLead: string;
+  tier1Name: string;
+  tier1Role: string;
+  tier1Act: string;
+  tier2Name: string;
+  tier2Role: string;
+  tier2Act: string;
+  tier3Name: string;
+  tier3Role: string;
+  tier3Act: string;
+  tier4Name: string;
+  tier4Role: string;
+  tier4Act: string;
+  tier5Name: string;
+  tier5Role: string;
+  tier5Act: string;
   note: string;
   stampArchive: string;
   stampApproved: string;
@@ -253,11 +269,11 @@ const zh: ZoneUi = {
     labelPast: '曾经做过什么',
     labelNow: '正在做什么',
     updatedLabel: '更新于',
-    para1: '八年政务系统维护，让我懂业务、懂数据、也看见系统背后的真实需求与约束。',
-    para2: '进入一家工业类企业，我看见长期被忽视的数字化空白——流程割裂、数据孤岛、体验落后。',
-    para3: '我从零搭起工业运维平台 OPS 与统一用户中心 UUC，让数据流动，让一线可用，让管理可视。',
+    para1: '做过八年的法院政务系统维护工作，让我懂业务、懂数据、也看见系统背后的真实需求与约束。',
+    para2: '现在在一家工业类企业，我看见长期被忽视的数字化空白——流程割裂、数据孤岛、体验落后。',
+    para3: '正在从零搭起工业运维平台、统一用户中心、智能网关管理以及 ERP 系统数据维护等，让数据流动，让一线可用，让管理可视。',
     para4: '靠强烈的好奇心与持续学习的劲头，我把系统做深、做实用；已经能上手 AI 落地（RAG、知识库、智能体），仍在往更深之处精进。',
-    para5: '我自建「五级项目体系 + 单一信源 SSOT」的做事规矩，以结构化的方法，把复杂的事做成可持续的系统。',
+    para5: '我通常用「五级项目体系」的做事规矩，以结构化的方法，把复杂的事做成可持续的系统。',
     footSigned: 'BY 一个故事',
   },
   timeline: {
@@ -325,6 +341,22 @@ const zh: ZoneUi = {
     gate3Desc: '素材有清单，\n证据才能过',
     gate4Title: '四 · 上线门',
     gate4Desc: '可访问、可追溯、\n可复盘',
+    tierLead: '「五级项目体系」的目录流水线——碎片进来，资产出去：',
+    tier1Name: '收集区',
+    tier1Role: '大脑缓存，零门槛收录一切碎片',
+    tier1Act: '每周清空',
+    tier2Name: '孵化区',
+    tier2Role: '验证方向可行性，最小成本试错',
+    tier2Act: '填写验证卡',
+    tier3Name: '进行中',
+    tier3Role: '全力推进已立项的产品 / 工具',
+    tier3Act: '每日推进',
+    tier4Name: '资产库',
+    tier4Role: '可复用能力沉淀，越做越轻',
+    tier4Act: '项目结束时提取',
+    tier5Name: '归档区',
+    tier5Role: '阶段性收尾，保留复活可能',
+    tier5Act: '写总结卡',
     note: '知识库与工作台分离，文档前缀排序，单一信源 SSOT。',
     stampArchive: '档案',
     stampApproved: '通过',
@@ -430,11 +462,11 @@ const en: PartialUi = {
     labelPast: "What I have done",
     labelNow: "What I am doing",
     updatedLabel: "Updated",
-    para1: "Eight years maintaining government systems taught me the business and the data — and the real needs and hard constraints behind any system.",
-    para2: "Moving into an industrial company, I saw a long-ignored digital gap: fragmented processes, data silos, dated user experience.",
-    para3: "I built the industrial operations platform OPS and the unified user center UUC from scratch — letting data flow, letting the front line use it, letting management see it.",
+    para1: "Eight years maintaining court administration systems taught me the business and the data — and the real needs and hard constraints behind any system.",
+    para2: "These days, at an industrial company, I see a long-ignored digital gap: fragmented processes, data silos, dated user experience.",
+    para3: "I am building it up from zero — the industrial operations platform, the unified user center, smart gateway management, ERP data maintenance and more — letting data flow, letting the front line use it, letting management see it.",
     para4: "Driven by curiosity and steady learning, I take systems deep and practical; I can now ship AI features (RAG, knowledge bases, agents) and keep pushing further in.",
-    para5: "I work by my own rules — a five-stage project system with a single source of truth — turning complex work into sustainable systems.",
+    para5: "I usually work by the rules of my five-tier project system, turning complex work into sustainable systems with a structured method.",
     footSigned: "BY 一个故事",
   },
   timeline: {
@@ -502,6 +534,22 @@ const en: PartialUi = {
     gate3Desc: "Assets have a checklist;\nevidence gets things through",
     gate4Title: "IV · Launch gate",
     gate4Desc: "Reachable, traceable,\nreviewable",
+    tierLead: "The five-tier project system — a directory pipeline: fragments in, assets out:",
+    tier1Name: "Capture",
+    tier1Role: "A zero-friction cache for every spark and fragment",
+    tier1Act: "Emptied weekly",
+    tier2Name: "Incubation",
+    tier2Role: "Prove a direction viable, at minimal cost",
+    tier2Act: "Fill a validation card",
+    tier3Name: "In progress",
+    tier3Role: "Full push on products and tools already green-lit",
+    tier3Act: "Progress logged daily",
+    tier4Name: "Asset library",
+    tier4Role: "Reusable capability settles out — lighter every time",
+    tier4Act: "Extracted at project close",
+    tier5Name: "Archive",
+    tier5Role: "Staged wrap-up, kept ready to revive",
+    tier5Act: "Write a summary card",
     note: "Knowledge base and workspace stay separate; documents sorted by prefix; single source of truth (SSOT).",
     stampArchive: "Dossier",
     stampApproved: "Approved",
