@@ -9,6 +9,8 @@ import s from './Cases.module.css';
 const ratios = ['portrait', 'landscape', 'landscape', 'landscape'];
 // v7.4：线稿按详案卡身份映射（0=车助手流程 1=OPS资产矩阵 3=内网DevOps流水线；原 2=统一入口 随 UUC 进简表退场）
 const schemOf = [0, 1, 3];
+// 真图走 public/，必须带 base 前缀（站点部署在 /PersonalWebsite/ 子路径）
+const asset = (p: string) => `${import.meta.env.BASE_URL}${p.replace(/^\/+/, '')}`;
 
 function Schematic({ i }: { i: number }) {
   const { t } = useUi();
@@ -85,6 +87,8 @@ export default function Cases() {
             // 诚实分级绑定（v5 §2.2 继承）：仅「已上线」级事实盖朱砂章；内部/开发中不盖
             const verified = c.status === '已上线';
             const shotRatio = s[`shot_${ratios[i] ?? 'landscape'}`];
+            const shots = ([] as string[]).concat(c.image ?? []);
+            const alts = ([] as string[]).concat(locale === 'en' ? (c.imageAltEn ?? c.imageAlt) ?? [] : c.imageAlt ?? []);
             return (
             <article key={i} className={s.caseCard}>
               <div className={s.caseInfo}>                {/* Claim：图版级大编号 + 衬线题名 */}
@@ -113,10 +117,14 @@ export default function Cases() {
               </div>
 
               <div className={s.caseVisual}>
-                {c.image ? (
-                  <figure className={`${s.shot} ${s.shotReal} ${shotRatio}`}>
-                    <img className={s.frameImg} src={c.image} alt={c.imageAlt || `${pick(locale, c.title, c.titleEn)}${t.cases.altSuffix}`} loading="lazy" />
-                  </figure>
+                {shots.length > 0 ? (
+                  <div className={s.shotStack}>
+                    {shots.map((src, k) => (
+                      <figure key={k} className={`${s.shot} ${s.shotReal}`}>
+                        <img className={s.frameImg} src={asset(src)} alt={alts[k] || `${pick(locale, c.title, c.titleEn)}${t.cases.altSuffix}`} />
+                      </figure>
+                    ))}
+                  </div>
                 ) : (
                   <div className={`${s.shot} ${s.shotSlot} ${shotRatio}`}>
                     <span className={s.slotType}>

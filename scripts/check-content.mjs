@@ -47,7 +47,7 @@ function needEn(fm, zhKey) {
 }
 
 const EN_RULES = {
-  cases: { always: ['titleEn', 'problemEn', 'whatIDidEn'], cond: [['challenge', 'challengeEn'], ['outcome', 'outcomeEn'], ['stack', 'stackEn']] },
+  cases: { always: ['titleEn', 'problemEn', 'whatIDidEn'], cond: [['challenge', 'challengeEn'], ['outcome', 'outcomeEn'], ['stack', 'stackEn'], ['imageAlt', 'imageAltEn']] },
   timeline: { always: ['titleEn', 'roleEn', 'detailEn'], cond: [['flag', 'flagEn'], ['stack', 'stackEn']] },
   skills: { always: ['domainEn', 'taglineEn'], cond: [['evidence', 'evidenceEn']] },
   offcat: { always: ['titleEn'], cond: [['tags', 'tagsEn']] },
@@ -65,7 +65,8 @@ for (const [dir, rule] of Object.entries(EN_RULES)) {
       if (!scalar(fm, key)) errors.push(`${dir}/${f}: 缺 ${key}`);
     }
     for (const [zhKey, enKey] of rule.cond) {
-      if (needEn(fm, zhKey) && !scalar(fm, enKey)) errors.push(`${dir}/${f}: ${zhKey} 含中文但缺 ${enKey}`);
+      // En 侧允许单行标量或块式列表（imageAlt/imageAltEn 这类一图一alt的字段用块式）
+      if (needEn(fm, zhKey) && !scalar(fm, enKey) && !(items(fm, enKey) ?? []).length) errors.push(`${dir}/${f}: ${zhKey} 含中文但缺 ${enKey}`);
     }
   }
 }

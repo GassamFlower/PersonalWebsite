@@ -16,8 +16,9 @@ stack:
   - PostgreSQL
   - MinIO
 evidence: 企业内部系统，截图脱敏 / 自绘示意
-# image: /case-02.png
-# imageAlt: OPS 平台的脱敏示意
+image: /case-02.webp
+imageAlt: OPS 的运维知识库页：多源知识管理、语义搜索与分布统计
+imageAltEn: "The OPS knowledge base page: multi-source management, semantic search and distribution charts"
 published: true
 titleEn: "Industrial Operations Platform OPS (internal system)"
 problemEn: "In one industrial company the pain was stated in three sentences at kickoff: a server only revealed itself as down when users phoned in; equipment faults were guessed by a veteran's experience; design issued 100 orders and hardware received 90, with no one able to say which step dropped them. Equipment and operations information sat scattered — unfindable, untraceable, undiagnosable."

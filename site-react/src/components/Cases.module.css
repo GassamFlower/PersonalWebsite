@@ -107,7 +107,10 @@
 }
 .shot_portrait { aspect-ratio: 3 / 4; }
 .shot_landscape { aspect-ratio: 4 / 3; }
-.shotReal { background: var(--color-surface); padding: 0; }
+.shotReal { background: var(--color-surface); padding: 0; aspect-ratio: auto; }
+/* v7.8 真图：按截图自身比例整幅显示，不裁切；一案多图竖排 */
+.shotReal .frameImg { height: auto; object-fit: initial; display: block; }
+.shotStack { display: flex; flex-direction: column; gap: var(--space-4); }
 .frameImg { width: 100%; height: 100%; object-fit: cover; }
 .shotSlot {
   flex-direction: column;
@@ -213,6 +216,7 @@
   .caseNo { font-size: var(--text-3xl); }
   .caseTitle { font-size: var(--text-xl); margin-bottom: 0; }
   .shot { max-width: 300px; margin-inline: auto; }
+  .shotReal { max-width: none; }
   .caseInfo { grid-column: 1 / -1; }
   .caseCard { padding-block: var(--space-6); }
   .specRow { grid-template-columns: 1fr; row-gap: var(--space-1); }

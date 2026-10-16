@@ -31,7 +31,7 @@ export interface CaseData {
   problem: string; whatIDid: string;
   challenge?: string; outcome?: string;
   stack: string[]; evidence?: string;
-  image?: string; imageAlt?: string; published: boolean;
+  image?: string | string[]; imageAlt?: string | string[]; imageAltEn?: string | string[]; published: boolean;
   titleEn?: string; problemEn?: string; whatIDidEn?: string;
   challengeEn?: string; outcomeEn?: string; stackEn?: string[];
 }
