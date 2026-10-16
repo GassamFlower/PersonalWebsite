@@ -5,6 +5,7 @@ import SiteNav from './components/SiteNav';
 import Hero from './components/Hero/Hero';
 import Story from './components/Story';
 import Cases from './components/Cases';
+import Capability from './components/Capability';
 import Writing from './components/Writing';
 import Timeline from './components/Timeline';
 import Growth from './components/Growth';
@@ -26,6 +27,7 @@ function Shell() {
         <Hero />
         <Story />
         <Cases />
+        <Capability />
         <Writing />
         <Timeline />
         <Growth />

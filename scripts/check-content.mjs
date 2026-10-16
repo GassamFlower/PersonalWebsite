@@ -15,6 +15,12 @@ function front(str) {
   return m ? m[1] : '';
 }
 
+// md 正文（闭合 --- 之后的部分）；写作集合的中文正文放这里（docs/k §3）
+function bodyOf(str) {
+  const m = str.match(/^---\r?\n[\s\S]*?\r?\n---[ \t]*\r?\n?([\s\S]*)$/);
+  return m ? m[1].trim() : '';
+}
+
 // 标量值（key: value 单行式；本仓库 frontmatter 全用这一式）；空值/块式列表头返回 null
 function scalar(fm, key) {
   const m = fm.match(new RegExp(`^${key}:[ \\t]*(.*)$`, 'm'));
@@ -111,8 +117,54 @@ if (nowFiles.length !== 1) {
   if (note && CJK.test(note) && !scalar(fm, 'noteEn')) errors.push(`now/${nowFiles[0]}: note 含中文但缺 noteEn`);
 }
 
+// ③ skills 的 level 只允许两档（docs/k §1.2）：真源里没有「在学」，页面也不画「在学」；
+//    出现第三档或「精通」一律拦停——en 侧 LEVEL_EN 查不到键会静默回落中文，属于图文不符。
+const LEVELS = ['已交付', '会用'];
+for (const f of readdirSync(join(contentDir, 'skills')).filter((x) => x.endsWith('.md'))) {
+  const lv = scalar(front(readFileSync(join(contentDir, 'skills', f), 'utf8')), 'level');
+  if (!lv) errors.push(`skills/${f}: 缺 level`);
+  else if (!LEVELS.includes(lv)) errors.push(`skills/${f}: level=${lv} 不在两档（${LEVELS.join('/')}）之内`);
+}
+
+// ④ 写作集合（docs/k §3/§4）：目录可以不存在（第一篇未落地），存在则逐篇硬校验。
+//    中文正文走 md body，英文正文走 frontmatter bodyEn；两者缺一即该篇不上页。
+//    渲染器只认块级子集（## / - / 段落），所以行内语法必须在 build 时拦，不能让它原样吐到页面上。
+const INLINE = [
+  [/\*\*/, '**加粗**'],
+  [/`/, '`行内代码`'],
+  [/[[\]]/, '[链接]'],
+  [/!\[/, '!图片'],
+  [/^\s*>/m, '> 引用'],
+  [/^\s*#(?!# )/m, '非 ## 的标题层级'],
+  [/\|/, '表格'],
+];
+const writingDir = join(contentDir, 'writing');
+const writingFiles = existsSync(writingDir) ? readdirSync(writingDir).filter((x) => x.endsWith('.md')) : [];
+for (const f of writingFiles) {
+  const str = readFileSync(join(writingDir, f), 'utf8');
+  const fm = front(str);
+  if (!fm) { errors.push(`writing/${f}: frontmatter 解析失败（缺闭合 ---）`); continue; }
+  const d = basename(f, '.md');
+  for (const key of ['title', 'date', 'summary', 'titleEn', 'summaryEn', 'bodyEn']) {
+    if (!scalar(fm, key)) errors.push(`writing/${f}: 缺 ${key}`);
+  }
+  const date = scalar(fm, 'date');
+  if (date && !/^\d{4}-\d{2}(-\d{2})?$/.test(date)) errors.push(`writing/${f}: date=${date} 须形如 2026-10`);
+  else if (date && !d.startsWith(date.slice(0, 7))) errors.push(`writing/${f}: 文件名前缀须是 ${date.slice(0, 7)}`);
+  const body = bodyOf(str);
+  if (!body) errors.push(`writing/${f}: md body（中文正文）为空`);
+  for (const [re, label] of INLINE) {
+    if (re.test(body) || re.test(scalar(fm, 'bodyEn') || ''))
+      errors.push(`writing/${f}: 用了不支持的行内语法 ${label}（渲染器只认 ## / - / 段落）`);
+  }
+}
+
 if (errors.length) {
   console.error('[check-content] 未通过：\n  ' + errors.join('\n  '));
   process.exit(1);
 }
-console.log('[check-content] 通过（growth ' + readdirSync(growthDir).filter((x) => x.endsWith('.md')).length + ' 条 · now 1 条）');
+console.log(
+  '[check-content] 通过（growth ' + readdirSync(growthDir).filter((x) => x.endsWith('.md')).length +
+  ' 条 · now 1 条 · skills ' + readdirSync(join(contentDir, 'skills')).filter((x) => x.endsWith('.md')).length +
+  ' 档 · writing ' + writingFiles.length + ' 篇）'
+);

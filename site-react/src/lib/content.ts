@@ -27,7 +27,7 @@ export interface CaseData {
   title: string; order: number; status: string;
   tier?: string; // 'feature' 详案卡（默认）| 'minor' 简表一句话
   series?: string; // '底座' = 归入内部系统系列块
-  part?: string; partEn?: string; // 系列部位名（地基/身份/出口/生产/搬运）
+  part?: string; partEn?: string; // 系列部位名（入口/地基/生产/数据/身份/出口）
   problem: string; whatIDid: string;
   challenge?: string; outcome?: string;
   stack: string[]; evidence?: string;
@@ -35,9 +35,19 @@ export interface CaseData {
   titleEn?: string; problemEn?: string; whatIDidEn?: string;
   challengeEn?: string; outcomeEn?: string; stackEn?: string[];
 }
+// docs/k §3：中文正文放 md body（你口述/打字的自然入口），英文正文放 frontmatter bodyEn。
 export interface WritingData {
   title: string; date: string; summary: string;
-  titleEn?: string; summaryEn?: string;
+  titleEn?: string; summaryEn?: string; bodyEn?: string;
+  body: string;
+}
+export interface SkillItem {
+  name: string; note?: string;
+}
+export interface SkillData {
+  order: number; domain: string; level: '已交付' | '会用'; tagline: string;
+  skills: SkillItem[]; evidence: string;
+  domainEn?: string; taglineEn?: string; skillsEn?: SkillItem[]; evidenceEn?: string;
 }
 export interface GrowthData {
   month: string; takeaway: string; tags: string[]; body: string;
@@ -78,9 +88,20 @@ export function getCases(): CaseData[] {
     .sort((a, b) => a.order - b.order);
 }
 
-// 写作区（docs/j）：判别键 title+date+summary 三齐；按 date 倒序。真源为空时组件渲染诚实空态
+// 写作区（docs/k）：判别键 title+date+summary 三齐；带 md body；published: false 可压稿（沿用 cases 做法）。
+// 真源为空时组件渲染诚实空态。
 export function getWriting(): WritingData[] {
-  return collect<WritingData>((d) => hasAll(d, ['title', 'date', 'summary'])).sort((a, b) => b.date.localeCompare(a.date));
+  return entries
+    .filter((e) => hasAll(e.data, ['title', 'date', 'summary']) && e.data.published !== false)
+    .map((e) => ({ ...(e.data as unknown as Omit<WritingData, 'body'>), body: e.body.trim() }))
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+// 能力档位（docs/k §1.2）：判别键 domain+level；档位高的在前，同级按 order 升序。
+export function getSkills(): SkillData[] {
+  const RANK: Record<string, number> = { 已交付: 0, 会用: 1 };
+  return collect<SkillData>((d) => 'domain' in d && 'level' in d)
+    .sort((a, b) => (RANK[a.level] ?? 9) - (RANK[b.level] ?? 9) || a.order - b.order);
 }
 
 export function getTimeline(): TimelineData[] {

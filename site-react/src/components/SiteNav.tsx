@@ -7,11 +7,12 @@ export default function SiteNav() {
   const navItems = [
     { no: '01', href: '#hero', label: t.nav.itemHero },
     { no: '03', href: '#cases', label: t.nav.itemCases },
-    { no: '04', href: '#writing', label: t.nav.itemWriting },
-    { no: '06', href: '#growth', label: t.nav.itemGrowth },
-    { no: '07', href: '#principles', label: t.nav.itemPrinciples },
+    { no: '04', href: '#capability', label: t.nav.itemCapability },
+    { no: '05', href: '#writing', label: t.nav.itemWriting },
+    { no: '07', href: '#growth', label: t.nav.itemGrowth },
+    { no: '08', href: '#principles', label: t.nav.itemPrinciples },
     { no: 'A', href: '#offcat', label: t.nav.itemOffcat },
-    { no: '08', href: '#contact', label: t.nav.itemContact },
+    { no: '09', href: '#contact', label: t.nav.itemContact },
   ];
 
   return (

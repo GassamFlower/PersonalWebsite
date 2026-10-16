@@ -36,3 +36,80 @@
   color: var(--color-ink);
   max-width: 68ch;
 }
+
+/* 就地展开（docs/k §1.1）：原生 details，收起态正文仍在初始 HTML 内 */
+.doc {
+  margin-top: var(--space-2);
+}
+.head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--space-4);
+  cursor: pointer;
+  list-style: none;
+}
+.head::-webkit-details-marker {
+  display: none;
+}
+/* 日期占满一行，标题与展开标签同处第二行两列 */
+.date {
+  grid-column: 1 / -1;
+}
+.head .title {
+  margin: var(--space-2) 0 0;
+}
+.chev {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+}
+.doc[open] .title {
+  color: var(--color-ink);
+}
+.chev {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+}
+.onlyOpen {
+  display: none;
+}
+.doc[open] .onlyOpen {
+  display: inline;
+}
+.doc[open] .onlyClosed {
+  display: none;
+}
+
+/* 正文：长文本按 ≤75ch 行宽收，行间靠留白不靠线 */
+.body {
+  max-width: 75ch;
+  padding-top: var(--space-6);
+}
+.body p {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  line-height: 1.9;
+  color: var(--color-ink);
+  margin: 0 0 var(--space-5);
+}
+.h {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: var(--space-8) 0 var(--space-4);
+}
+.body ul {
+  margin: 0 0 var(--space-5);
+  padding-left: 1.4em;
+}
+.body li {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  line-height: 1.9;
+  margin-bottom: var(--space-2);
+}

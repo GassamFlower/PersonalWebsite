@@ -20,6 +20,10 @@
   letter-spacing: 0.04em;
   white-space: nowrap;
 }
+/* 英文 tagline 比中文长，≤460 排版不开单行（390 实测 sw418>cw375）——窄屏改折行 */
+@media (max-width: 460px) {
+  .footerTag { white-space: normal; }
+}
 .footerMark {
   display: block;
   width: 26px;

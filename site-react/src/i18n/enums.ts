@@ -16,6 +16,12 @@ export const OFFCAT_STATUS_EN: Record<string, string> = {
   参考: 'Reference',
 };
 
+// 能力档位（docs/k §1.2）：只有真源里存在的两档。会用=Working knowledge（docs/h §3 术语表）
+export const LEVEL_EN: Record<string, string> = {
+  已交付: 'Delivered',
+  会用: 'Working knowledge',
+};
+
 // 单语字段取词：en 且有 *En 副本时用副本，否则回落中文真源
 export function pick(locale: Locale, zh: string | undefined, alt?: string): string {
   return locale === 'en' && alt ? alt : zh ?? '';

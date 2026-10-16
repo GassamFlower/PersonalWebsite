@@ -25,7 +25,7 @@ export default function Principles() {
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>{t.principles.tagNo}</b> · {t.principles.tagZh}</span>
-          <span className="meta">07</span>
+          <span className="meta">08</span>
         </div>
         <div className={s.prRule}></div>
 

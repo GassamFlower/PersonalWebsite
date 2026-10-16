@@ -1,0 +1,94 @@
+/* Capability 区 — 台账条（docs/k §1.2）：域 │ 档位 │ 一句话边界，行间发线，零朱砂零章 */
+
+.sub {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-ink-soft);
+  max-width: 68ch;
+  margin: var(--space-2) 0 var(--space-8);
+}
+
+.head,
+.row {
+  display: grid;
+  grid-template-columns: 12em 12em 1fr;
+  gap: var(--space-4);
+  align-items: baseline;
+}
+.head {
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--color-ink);
+  border-bottom: 1px solid var(--color-ink);
+  letter-spacing: 0.12em;
+}
+
+.ledger {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.row {
+  padding-block: var(--space-5);
+  border-bottom: 1px solid var(--color-faint);
+}
+
+.domain {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+/* 档位：两档全用墨系区分，不引入第四色相（已交付=反白实心，会用=描边） */
+.badge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  padding: 1px 6px;
+  border: 1px solid var(--color-ink);
+  white-space: nowrap;
+  justify-self: start;
+}
+.stDone {
+  background: var(--color-ink);
+  color: var(--color-base);
+}
+.stKnow {
+  color: var(--color-ink);
+}
+
+.bound {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-ink);
+  margin: 0;
+  max-width: 46ch;
+}
+
+.foot {
+  padding-top: var(--space-6);
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 720px) {
+  .head {
+    display: none;
+  }
+  .row {
+    grid-template-columns: 1fr auto;
+    row-gap: var(--space-3);
+  }
+  .domain {
+    grid-column: 1;
+  }
+  .badge {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+  .bound {
+    grid-column: 1 / -1;
+  }
+}

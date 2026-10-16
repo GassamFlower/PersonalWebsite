@@ -86,22 +86,22 @@
   background: var(--color-ink);
   opacity: 0.85;
 }
-/* 折叠阈值是量出来的（iframe 实测 2026-10-15）：zh 单行导航需要 ≈926px 视口才排得下，
-   旧 720 阈值让 721–940 段（平板竖屏/小窗）横向溢出——该段此前从未被实测覆盖。 */
-@media (max-width: 940px) {
+/* 折叠阈值是量出来的（iframe 实测 2026-10-16，导航加入「能力」后共 8 项）：
+   zh 单行需要 ≈1020px，en 收起品牌中文尾巴后仍需 ≈1165px；
+   阈值刻意比实测值再放宽一档，宁可早点叠行，也不留 1019.5 这类亚像素死区（940.5 的死区踩过一次）。 */
+@media (max-width: 1040px) {
   .navInner { flex-direction: column; gap: var(--space-2); padding-block: var(--space-3); }
   .navLinks { gap: var(--space-3); flex-wrap: wrap; justify-content: center; }
   .brandZh { display: none; }
   .navStatus { display: none; }
 }
-/* en 导航标签比 zh 更宽（brand+7 项合计 ≈1300px），941–1349 段仍会溢出：
-   ≤1349 收起品牌中文尾巴；≤1160 直接走叠行紧凑排布。 */
-@media (max-width: 1349px) {
-  .siteNavEn .brandZh, .siteNavEn .dot { display: none; }
-}
-/* min-width 刻意比上面 940 阈值小 2px：视口存在 940.5 这类亚像素宽度，两条带都够不着会两头不塌 */
-@media (min-width: 938px) and (max-width: 1160px) {
+/* en：尾巴收起后仍要 ≈1165px 才排得下单行（1080 实测 sw1135>cw1065），
+   min-width 刻意比上面 1040 阈值小 1px：视口有 1040.4 这类亚像素宽度，两条带都够不着会两头不塌 */
+@media (min-width: 1039px) and (max-width: 1180px) {
   .siteNavEn .navInner { flex-direction: column; gap: var(--space-2); padding-block: var(--space-3); }
   .siteNavEn .navLinks { gap: var(--space-3); flex-wrap: wrap; justify-content: center; }
   .siteNavEn .navStatus { display: none; }
+}
+@media (max-width: 1540px) {
+  .siteNavEn .brandZh, .siteNavEn .dot { display: none; }
 }

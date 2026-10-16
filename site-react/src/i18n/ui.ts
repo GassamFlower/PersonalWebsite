@@ -37,6 +37,7 @@ export interface NavUi {  brandZh: string;
   statusOnline: string;
   itemHero: string;
   itemCases: string;
+  itemCapability: string;
   itemWriting: string;
   itemGrowth: string;
   itemPrinciples: string;
@@ -105,6 +106,21 @@ export interface WritingUi {
   headline1: string;
   headline2: string;
   empty: string;
+  expand: string;
+  collapse: string;
+}
+
+// 能力档位（docs/k §1.2）：档位只有两档，措辞含「没写进来=没做过」这条诚实边界
+export interface CapabilityUi {
+  plateRail: string;
+  tagNo: string;
+  tagZh: string;
+  headline1: string;
+  headline2: string;
+  sub: string;
+  thDomain: string;
+  thLevel: string;
+  thBound: string;
 }
 
 export interface GrowthUi {
@@ -212,6 +228,7 @@ export interface ZoneUi {
   story: StoryUi;
   timeline: TimelineUi;
   cases: CasesUi;
+  capability: CapabilityUi;
   writing: WritingUi;
   growth: GrowthUi;
   principles: PrinciplesUi;
@@ -252,6 +269,7 @@ const zh: ZoneUi = {
     statusOnline: '在线',
     itemHero: '封面',
     itemCases: '项目',
+    itemCapability: '能力',
     itemWriting: '写作',
     itemGrowth: '成长',
     itemPrinciples: '规矩',
@@ -281,8 +299,8 @@ const zh: ZoneUi = {
     footSigned: 'BY 一个故事',
   },
   timeline: {
-    plateRail: '图版 05 · TIMELINE',
-    tagNo: '档案 05',
+    plateRail: '图版 06 · TIMELINE',
+    tagNo: '档案 06',
     tagZh: '来路',
     headline1: '一年一步，',
     headline2: '走到这里',
@@ -300,7 +318,7 @@ const zh: ZoneUi = {
     seriesLabel: '同一套底座 · 六个部位',
     seriesRail: '底座',
     seriesIntro:
-      '上面详案里的门户、内网私有化平台与 OPS，加上这三块，不是六个各干各的工具：入口把几套系统收成一次登录，地基承载代码与发布，生产管住设备与运维，身份供给账号与授权，搬运连起设计端与业务系统，出口统一 AI 与接口调用。接口与规矩互相咬合，缺一段就断链。',
+      '上面详案里的门户、内网基础设施、OPS 与数据同步，加上这两块，不是六个各干各的工具：入口把几套系统收成一次登录，地基承载代码与发布，生产管住设备与运维，数据统一两边的口径与编号，身份供给账号与授权，出口统一 AI 与接口调用。接口与规矩互相咬合，缺一段就断链。',
     labelResult: '结果',
     sealVerified: '已验证',
     artAssets: '资产 · 监控 · 巡检 · 工单',
@@ -310,17 +328,30 @@ const zh: ZoneUi = {
     slotHint: '示意线稿 · 非真实截图',
     altSuffix: '截图',
   },
-  writing: {
-    plateRail: '图版 04 · WRITING',
+  capability: {
+    plateRail: '图版 04 · CAPABILITY',
     tagNo: '档案 04',
+    tagZh: '能力档位',
+    headline1: '会的东西，',
+    headline2: '按域摊开',
+    sub: '档位只有两档：已交付＝在这个域上真上线过东西；会用＝能独立完成日常工作，深度还在补。',
+    thDomain: '域',
+    thLevel: '档位',
+    thBound: '写到哪儿为止',
+  },
+  writing: {
+    plateRail: '图版 05 · WRITING',
+    tagNo: '档案 05',
     tagZh: '写作',
     headline1: '写下来的，',
     headline2: '才算想清楚',
     empty: '第一篇在写。写好就挂在这里。',
+    expand: '展开',
+    collapse: '收起',
   },
   growth: {
-    plateRail: '图版 06 · GROWTH',
-    tagNo: '档案 06',
+    plateRail: '图版 07 · GROWTH',
+    tagNo: '档案 07',
     tagZh: '成长记录',
     linkArchive: '档案',
     linkWorks: '作品',
@@ -336,8 +367,8 @@ const zh: ZoneUi = {
     thTags: '标签',
   },
   principles: {
-    plateRail: '图版 07 · PRINCIPLES',
-    tagNo: '档案 07',
+    plateRail: '图版 08 · PRINCIPLES',
+    tagNo: '档案 08',
     tagZh: '做事的规矩',
     headline1: '先立规矩，',
     headline2: '再让',
@@ -394,7 +425,7 @@ const zh: ZoneUi = {
   },
   contact: {
     plateRail: '封底 · BACK COVER',
-    tagNo: '档案 08',
+    tagNo: '档案 09',
     tagZh: '联系',
     title: '聊得来，就一起做事',
     labelWechat: '微信',
@@ -450,6 +481,7 @@ const en: PartialUi = {
     statusOnline: "Online",
     itemHero: "Cover",
     itemCases: "Work",
+    itemCapability: "Skills",
     itemWriting: "Writing",
     itemGrowth: "Growth",
     itemPrinciples: "Principles",
@@ -479,8 +511,8 @@ const en: PartialUi = {
     footSigned: "BY 一个故事",
   },
   timeline: {
-    plateRail: "Plate 05 · TIMELINE",
-    tagNo: "File 05",
+    plateRail: "Plate 06 · TIMELINE",
+    tagNo: "File 06",
     tagZh: "The path so far",
     headline1: "One step a year,",
     headline2: "the road so far",
@@ -498,7 +530,7 @@ const en: PartialUi = {
     seriesLabel: "One Shared Platform · Six Parts",
     seriesRail: "Platform",
     seriesIntro:
-      "The portal, the private dev-ops platform and OPS above, plus these three, are not six unrelated tools: the front door collapses several systems into one login, the foundation carries code and releases, the shop floor runs equipment and operations, identity supplies accounts and grants, the carrier links the design side to business systems, and the exit unifies AI and API calls. Interfaces and rules interlock — one missing link breaks the chain.",
+      "The portal, the intranet infrastructure, OPS and the data reconciliation above, plus these two, are not six unrelated tools: the front door collapses several systems into one login, the foundation carries code and releases, the shop floor runs equipment and operations, data settles what each side calls a thing and whose numbering wins, identity supplies accounts and grants, and the exit unifies AI and API calls. Interfaces and rules interlock — one missing link breaks the chain.",
     labelResult: "Result",
     sealVerified: "Verified",
     artAssets: "Assets · Monitoring · Inspection · Tickets",
@@ -509,16 +541,29 @@ const en: PartialUi = {
     altSuffix: "screenshot",
   },
   writing: {
-    plateRail: "Plate 04 · WRITING",
-    tagNo: "File 04",
+    plateRail: "Plate 05 · WRITING",
+    tagNo: "File 05",
     tagZh: "Writing",
     headline1: "What is written down,",
     headline2: "has been thought through",
     empty: "First piece in progress — it will hang here when done.",
+    expand: "Expand",
+    collapse: "Collapse",
+  },
+  capability: {
+    plateRail: "Plate 04 · CAPABILITY",
+    tagNo: "File 04",
+    tagZh: "Capabilities",
+    headline1: "What I can do,",
+    headline2: "laid out by domain",
+    sub: "Two levels only: Delivered = something actually went live on it; Working knowledge = day-to-day work done independently, depth still growing.",
+    thDomain: "Domain",
+    thLevel: "Level",
+    thBound: "Where it stops",
   },
   growth: {
-    plateRail: "Plate 06 · GROWTH",
-    tagNo: "File 06",
+    plateRail: "Plate 07 · GROWTH",
+    tagNo: "File 07",
     tagZh: "Growth log",
     linkArchive: "Dossier",
     linkWorks: "Work",
@@ -534,8 +579,8 @@ const en: PartialUi = {
     thTags: "Tags",
   },
   principles: {
-    plateRail: "Plate 07 · PRINCIPLES",
-    tagNo: "File 07",
+    plateRail: "Plate 08 · PRINCIPLES",
+    tagNo: "File 08",
     tagZh: "How I work",
     headline1: "Rules first,",
     headline2: "then let",
@@ -592,7 +637,7 @@ const en: PartialUi = {
   },
   contact: {
     plateRail: "Back cover · BACK COVER",
-    tagNo: "File 08",
+    tagNo: "File 09",
     tagZh: "Contact",
     title: "If we click, let us work together",
     labelWechat: "WeChat",

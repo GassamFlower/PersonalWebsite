@@ -13,7 +13,7 @@ export default function Timeline() {
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>{t.timeline.tagNo}</b> · {t.timeline.tagZh}</span>
-          <span className="meta">05</span>
+          <span className="meta">06</span>
         </div>
         <div className={s.tlRule}></div>
 
