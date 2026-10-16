@@ -12,9 +12,9 @@ stack:
   - 云开发
   - OCR
 evidence: 真实交付案例，企业信息已匿名化
-# 放真实脱敏截图到 public/cases/ 后，把下面两行 image/imageAlt 改为真实路径即可显示实图
-# image: /cases/case-01.png
-# imageAlt: 工程用车助手的脱敏示意
+image: /case-01.webp
+imageAlt: 用车助手手机端的演示模式首页：数据录入、拍照识别入口与数据概览，页面标注为演示数据
+imageAltEn: "The vehicle assistant's phone home screen in demo mode: data entry, photo recognition, and an overview the page marks as sample data"
 published: true
 titleEn: "Workshop Vehicle Dispatcher"
 problemEn: "A concrete-transport company ran engineering-vehicle dispatch on paper: which site a truck was on, who approved the trip, where fuel and repair money went — afterwards nobody could say, and nothing was traceable."
