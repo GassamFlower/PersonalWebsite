@@ -65,6 +65,7 @@ export interface StoryUi {
   present2: string;
   present3: string;
   footSigned: string;
+  artAlt: string;
 }
 
 export interface CasesUi {
@@ -284,6 +285,7 @@ const zh: ZoneUi = {
     present2: '正在从零搭起工业运维平台、统一用户中心、智能网关管理以及 ERP 系统数据维护等，让数据流动，让一线可用，让管理可视。',
     present3: '支撑这一切的，是好奇心，更是持续学习的习惯——不满足于「能用」，而是追问每一层为什么这样设计。AI 也不停在演示里：把它落进 RAG、知识库与智能体的真实场景，让回答有据可查，让流程自己运转——更深一层的工程化与评估，仍在精进路上。',
     footSigned: 'BY 一个故事',
+    artAlt: '一条五段路线的示意图：旅游数据的抓取与清洗 → 保险公司运维 → 八年法院政务系统 → 工业企业的数字化空白 → 把 AI 落进真实场景',
   },
   cases: {
     plateRail: '核心卷 · CASES',
@@ -486,6 +488,7 @@ const en: PartialUi = {
     present2: "I am building it up from zero — the industrial operations platform, the unified user center, smart gateway management, ERP data maintenance and more — letting data flow, letting the front line use it, letting management see it.",
     present3: "What carries all of this is curiosity backed by a habit of steady learning — never stopping at \"it works\", but asking why each layer is built the way it is. Nor does AI stop at demos: I put it to work in real scenarios — RAG, knowledge bases, agents — making answers traceable and workflows run themselves; the deeper engineering and evaluation is still under way.",
     footSigned: "BY 一个故事",
+    artAlt: "A five-stage route drawn as a diagram: scraping and cleaning travel data → running operations at an insurance company → eight years of court e-government systems → the digitalisation gap in a factory → putting AI into real scenarios",
   },
   cases: {
     plateRail: "Core Volume · CASES",

@@ -56,11 +56,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
 }
-.bridgeSvg {
+.storyArtImg {
   width: 100%;
-  max-width: 380px;
+  max-width: 460px;
   height: auto;
+  display: block;
 }
 .storyHeadline {
   font-family: var(--font-serif);
