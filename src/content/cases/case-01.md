@@ -1,5 +1,5 @@
 ---
-title: 工程用车助手（外单）
+title: 工程用车助手
 order: 1
 status: 已上线
 tier: feature
@@ -11,12 +11,12 @@ stack:
   - 微信小程序
   - 云开发
   - OCR
-evidence: 外单甲方案例，已匿名化
+evidence: 真实交付案例，企业信息已匿名化
 # 放真实脱敏截图到 public/cases/ 后，把下面两行 image/imageAlt 改为真实路径即可显示实图
 # image: /cases/case-01.png
 # imageAlt: 工程用车助手的脱敏示意
 published: true
-titleEn: "Workshop Vehicle Dispatcher (client project)"
+titleEn: "Workshop Vehicle Dispatcher"
 problemEn: "A concrete-transport company ran engineering-vehicle dispatch and registration on paper: which site a truck was on, who approved a trip, where fuel and repair money went — afterwards nobody could say, and nothing was traceable."
 whatIDidEn: "Worked solo from requirements talk to delivery: a phone-side vehicle-use assistant with 17 screens — live dashboard, photo entry, bulk entry, project roster, people and vehicle files, role permissions, user review, fuel and repair records — chaining trip → approval → record into one queryable flow."
 challengeEn: "Nobody fills forms properly on a job site, so entry was built around the site itself: photograph a plate or a slip and it fills in — table recognition first, automatic fallback to high-accuracy general recognition on failure. Only approved records count toward statistics, and the photo and bulk entries keep separate tallies so one trip never gets counted twice."
@@ -24,4 +24,4 @@ outcomeEn: "Live, in daily use by real users. Which site each vehicle is on, who
 stackEn: ["WeChat mini program", "CloudBase", "OCR"]
 ---
 
-接的活、做出来、上线交付 —— 外单真实上线案例。具体甲方信息对公开版隐去。
+从谈需求到上线交付，一个人做完。具体企业信息对公开版隐去。
