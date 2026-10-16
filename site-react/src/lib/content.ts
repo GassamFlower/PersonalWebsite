@@ -53,10 +53,6 @@ export interface GrowthData {
   month: string; takeaway: string; tags: string[]; body: string;
   takeawayEn?: string; tagsEn?: string[];
 }
-export interface TimelineData {
-  year: string; title: string; flag: string; role: string; detail: string; stack: string[];
-  titleEn?: string; flagEn?: string; roleEn?: string; detailEn?: string; stackEn?: string[];
-}
 export interface OffcatData {
   no: string; title: string; date?: string;
   status: '已验证' | '进行中' | '计划中' | '参考'; tags: string[];
@@ -102,10 +98,6 @@ export function getSkills(): SkillData[] {
   const RANK: Record<string, number> = { 已交付: 0, 会用: 1 };
   return collect<SkillData>((d) => 'domain' in d && 'level' in d)
     .sort((a, b) => (RANK[a.level] ?? 9) - (RANK[b.level] ?? 9) || a.order - b.order);
-}
-
-export function getTimeline(): TimelineData[] {
-  return collect<TimelineData>((d) => 'year' in d && 'role' in d);
 }
 
 // 附录台账：以唯一键 no（A-0n）判别，按编号升序

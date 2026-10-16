@@ -1,5 +1,5 @@
-// App.tsx — v7.1 叙事微调（v6 图鉴 §13.8）：封面 → 故事(02·曾经/正在) → 案例(03) → 写作(04) → 来路(05) → 成长 → 规矩 → 附录 → 封底。
-// 「当下」插页撤下，doing 真源并入故事区「正在做什么」块；总图版数仍为 8。
+// App.tsx — v7.1 叙事微调（v6 图鉴 §13.8）：封面 → 故事(02·曾经/正在) → 案例(03) → 能力(04) → 写作(05) → 成长(06) → 规矩(07) → 附录 → 封底(08)。
+// 「当下」插页撤下，doing 真源并入故事区「正在做什么」块；「来路」编年区按用户裁决下线（罗列=与故事区重复），md 真源与守卫保留。
 import React from 'react';
 import SiteNav from './components/SiteNav';
 import Hero from './components/Hero/Hero';
@@ -7,7 +7,6 @@ import Story from './components/Story';
 import Cases from './components/Cases';
 import Capability from './components/Capability';
 import Writing from './components/Writing';
-import Timeline from './components/Timeline';
 import Growth from './components/Growth';
 import Principles from './components/Principles';
 import Offcat from './components/Offcat';
@@ -29,7 +28,6 @@ function Shell() {
         <Cases />
         <Capability />
         <Writing />
-        <Timeline />
         <Growth />
         <Principles />
         <Offcat />

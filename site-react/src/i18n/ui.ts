@@ -27,7 +27,6 @@ export interface HeroUi {
   sealVerified: string;
   worksCta: string;
   propDelivery: string;
-  propImpact: string;
   propPrinciples: string;
 }
 
@@ -66,15 +65,6 @@ export interface StoryUi {
   present2: string;
   present3: string;
   footSigned: string;
-}
-
-export interface TimelineUi {
-  plateRail: string;
-  tagNo: string;
-  tagZh: string;
-  headline1: string;
-  headline2: string;
-  artArchived: string;
 }
 
 export interface CasesUi {
@@ -119,7 +109,6 @@ export interface CapabilityUi {
   headline2: string;
   sub: string;
   thDomain: string;
-  thLevel: string;
   thBound: string;
 }
 
@@ -226,7 +215,6 @@ export interface ZoneUi {
   hero: HeroUi;
   nav: NavUi;
   story: StoryUi;
-  timeline: TimelineUi;
   cases: CasesUi;
   capability: CapabilityUi;
   writing: WritingUi;
@@ -260,7 +248,6 @@ const zh: ZoneUi = {
     sealVerified: '已验证',
     worksCta: '精选作品 01—04',
     propDelivery: '独立交付',
-    propImpact: '业务落地',
     propPrinciples: '边界诚实',
   },
   nav: {
@@ -298,14 +285,6 @@ const zh: ZoneUi = {
     present3: '支撑这一切的，是好奇心，更是持续学习的习惯——不满足于「能用」，而是追问每一层为什么这样设计。AI 也不停在演示里：把它落进 RAG、知识库与智能体的真实场景，让回答有据可查，让流程自己运转——更深一层的工程化与评估，仍在精进路上。',
     footSigned: 'BY 一个故事',
   },
-  timeline: {
-    plateRail: '图版 06 · TIMELINE',
-    tagNo: '档案 06',
-    tagZh: '来路',
-    headline1: '一年一步，',
-    headline2: '走到这里',
-    artArchived: '存档',
-  },
   cases: {
     plateRail: '核心卷 · CASES',
     tagNo: '档案 03',
@@ -336,7 +315,6 @@ const zh: ZoneUi = {
     headline2: '按域摊开',
     sub: '档位只有两档：已交付＝在这个域上真上线过东西；会用＝能独立完成日常工作，深度还在补。',
     thDomain: '域',
-    thLevel: '档位',
     thBound: '写到哪儿为止',
   },
   writing: {
@@ -350,8 +328,8 @@ const zh: ZoneUi = {
     collapse: '收起',
   },
   growth: {
-    plateRail: '图版 07 · GROWTH',
-    tagNo: '档案 07',
+    plateRail: '图版 06 · GROWTH',
+    tagNo: '档案 06',
     tagZh: '成长记录',
     linkArchive: '档案',
     linkWorks: '作品',
@@ -367,8 +345,8 @@ const zh: ZoneUi = {
     thTags: '标签',
   },
   principles: {
-    plateRail: '图版 08 · PRINCIPLES',
-    tagNo: '档案 08',
+    plateRail: '图版 07 · PRINCIPLES',
+    tagNo: '档案 07',
     tagZh: '做事的规矩',
     headline1: '先立规矩，',
     headline2: '再让',
@@ -425,7 +403,7 @@ const zh: ZoneUi = {
   },
   contact: {
     plateRail: '封底 · BACK COVER',
-    tagNo: '档案 09',
+    tagNo: '档案 08',
     tagZh: '联系',
     title: '聊得来，就一起做事',
     labelWechat: '微信',
@@ -471,7 +449,6 @@ const en: PartialUi = {
     sealVerified: "Verified",
     worksCta: "Selected work 01–04",
     propDelivery: "Independent delivery",
-    propImpact: "Business impact",
     propPrinciples: "Honest boundaries",
   },
   nav: {
@@ -509,14 +486,6 @@ const en: PartialUi = {
     present2: "I am building it up from zero — the industrial operations platform, the unified user center, smart gateway management, ERP data maintenance and more — letting data flow, letting the front line use it, letting management see it.",
     present3: "What carries all of this is curiosity backed by a habit of steady learning — never stopping at \"it works\", but asking why each layer is built the way it is. Nor does AI stop at demos: I put it to work in real scenarios — RAG, knowledge bases, agents — making answers traceable and workflows run themselves; the deeper engineering and evaluation is still under way.",
     footSigned: "BY 一个故事",
-  },
-  timeline: {
-    plateRail: "Plate 06 · TIMELINE",
-    tagNo: "File 06",
-    tagZh: "The path so far",
-    headline1: "One step a year,",
-    headline2: "the road so far",
-    artArchived: "Archived",
   },
   cases: {
     plateRail: "Core Volume · CASES",
@@ -558,12 +527,11 @@ const en: PartialUi = {
     headline2: "laid out by domain",
     sub: "Two levels only: Delivered = something actually went live on it; Working knowledge = day-to-day work done independently, depth still growing.",
     thDomain: "Domain",
-    thLevel: "Level",
     thBound: "Where it stops",
   },
   growth: {
-    plateRail: "Plate 07 · GROWTH",
-    tagNo: "File 07",
+    plateRail: "Plate 06 · GROWTH",
+    tagNo: "File 06",
     tagZh: "Growth log",
     linkArchive: "Dossier",
     linkWorks: "Work",
@@ -579,8 +547,8 @@ const en: PartialUi = {
     thTags: "Tags",
   },
   principles: {
-    plateRail: "Plate 08 · PRINCIPLES",
-    tagNo: "File 08",
+    plateRail: "Plate 07 · PRINCIPLES",
+    tagNo: "File 07",
     tagZh: "How I work",
     headline1: "Rules first,",
     headline2: "then let",
@@ -637,7 +605,7 @@ const en: PartialUi = {
   },
   contact: {
     plateRail: "Back cover · BACK COVER",
-    tagNo: "File 09",
+    tagNo: "File 08",
     tagZh: "Contact",
     title: "If we click, let us work together",
     labelWechat: "WeChat",

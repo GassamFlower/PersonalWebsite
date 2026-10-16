@@ -35,7 +35,7 @@ export default function Contact() {
       <div className={`container ${s.contactInner}`}>
         <div className="section-head">
           <span className="tag"><b>{t.contact.tagNo}</b> · {t.contact.tagZh}</span>
-          <span className="meta">09</span>
+          <span className="meta">08</span>
         </div>
         <div className={s.ctRule}></div>
 

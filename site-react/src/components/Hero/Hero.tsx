@@ -16,10 +16,9 @@ export default function Hero() {
 
   // 事实行取内容真源前 3 案，不硬编码；仅「已上线」级事实盖朱砂章（v5 §2.2 纪律继承）
   const facts = getCases().slice(0, 3);
-  // v7 §13.6：能力图谱下线后，三链改指案例/履历/规矩
+  // v7 §13.6：能力图谱下线后，三链改指案例/履历/规矩；「来路」区下线后剩两链
   const props = [
     { href: '#cases', label: t.hero.propDelivery },
-    { href: '#timeline', label: t.hero.propImpact },
     { href: '#principles', label: t.hero.propPrinciples },
   ];
 
