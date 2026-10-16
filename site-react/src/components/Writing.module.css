@@ -89,8 +89,11 @@
   max-width: 75ch;
   padding-top: var(--space-6);
 }
+/* 正文段落/列表项用系统 sans（--font-sans 不挂 webfont，零字节）。
+   长文若仍吃衬线子集，每篇 2000 字要多拖 ~500 kB 字体。
+   ⚠ 与此处 font-family 绑定的是 Writing.tsx 里的 data-font="sans" 标记——
+   scripts/fonts.mjs 靠它把这些字挡在衬线子集外；改成衬线必须同时删标记，否则线上缺字。 */
 .body p {
-  font-family: var(--font-serif);
   font-size: var(--text-base);
   line-height: 1.9;
   color: var(--color-ink);
@@ -108,7 +111,6 @@
   padding-left: 1.4em;
 }
 .body li {
-  font-family: var(--font-serif);
   font-size: var(--text-base);
   line-height: 1.9;
   margin-bottom: var(--space-2);

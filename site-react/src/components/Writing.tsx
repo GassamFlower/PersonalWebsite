@@ -40,12 +40,12 @@ export default function Writing() {
                         <span className={s.onlyOpen}>{t.writing.collapse}</span>
                       </span>
                     </summary>
-                    <p className={s.summary}>{pick(locale, p.summary, p.summaryEn)}</p>
+                    <p className={s.summary} data-font="sans">{pick(locale, p.summary, p.summaryEn)}</p>
                     <div className={s.body}>
                       {parseBlocks(src).map((b, j) =>
                         b.kind === 'h' ? <h4 key={j} className={s.h}>{b.text}</h4>
-                          : b.kind === 'p' ? <p key={j}>{b.text}</p>
-                            : <ul key={j}>{b.items.map((x, k) => <li key={k}>{x}</li>)}</ul>
+                          : b.kind === 'p' ? <p key={j} data-font="sans">{b.text}</p>
+                            : <ul key={j}>{b.items.map((x, k) => <li key={k} data-font="sans">{x}</li>)}</ul>
                       )}
                     </div>
                   </details>

@@ -11,6 +11,8 @@
 //
 // 注：本文件刻意不在字符串字面量里写中文标点 —— 编辑链路会把全角引号规范化成 ASCII 从而截断字符串，
 // 需要余量时用码位表达。
+// 注 2：本文件是**脚本不是库**——顶层直接执行子集化。别 import 它做单测（会原地重跑三档，4 分钟），
+// 要测 serifText() 就把它抽进临时模块。
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -35,26 +37,59 @@ const MARGIN_CP = [
   ...'%#&*/\\|_+=-[]{}<>()~^@'.split('').map((c) => c.codePointAt(0)),
 ];
 
-const strip = (html) => html
-  .replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ')
-  .replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;|&#\d+;/g, ' ');
+const stripStyle = (html) => html
+  .replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ');
+
+const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
+
+// 只留下「真正用衬线渲染」的文本：带 data-font="sans" 的子树整段剔除。
+// 为什么需要剔除：--font-sans（Noto Sans SC → 系统字）不挂 webfont，零字节；
+// 长文正文因此走 sans。若仍把这些字收进衬线子集，一篇 2000 字的文章会白要 ~500 kB 字体。
+// 用栈而不是正则：正文里 <li> 可嵌套 <ul><li>，非贪婪匹配会提前截断、把后文漏进来。
+function serifText(html) {
+  const stack = [];
+  let out = '';
+  for (const tok of stripStyle(html).split(/(<[^>]*>)/g)) {
+    if (tok === '') continue;
+    if (tok[0] !== '<') {
+      if (!stack.some((e) => e.sans)) out += tok;
+      continue;
+    }
+    if (tok.startsWith('<!')) continue;
+    const name = /^<\/?([a-zA-Z][-\w]*)/.exec(tok)?.[1]?.toLowerCase();
+    if (!name) continue;
+    if (tok[1] === '/') {
+      const i = stack.map((e) => e.name).lastIndexOf(name);
+      if (i >= 0) stack.length = i;
+      continue;
+    }
+    if (!VOID.has(name) && !tok.endsWith('/>')) {
+      stack.push({ name, sans: /data-font\s*=\s*["']sans["']/.test(tok) });
+    }
+  }
+  return out.replace(/&[a-z]+;|&#\d+;/g, ' ');
+}
+
+// 子集输入 = 部署面的初始 HTML，不是 src/content 的 md 全文。
+// 原来扫 md 全文是把「未发布的草稿、不渲染的字段」也算进覆盖集（实测多要 65 码位），
+// 且永远不知道该字最终用哪档字体渲染；改扫 HTML 后，缺字判定与实际渲染面一一对应。
+// 顺序保证不失守：vite build → prerender → fonts --check，检查时 HTML 已是最新产物。
+const htmlFiles = (dir, out = []) => {
+  if (!fs.existsSync(dir)) return out;
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const f = path.join(dir, e.name);
+    if (e.isDirectory()) htmlFiles(f, out);
+    else if (e.name.endsWith('.html')) out.push(f);
+  }
+  return out;
+}
 
 function renderedChars() {
   const set = new Set(MARGIN_CP);
   const add = (t) => { for (const ch of t) { const cp = ch.codePointAt(0); if (cp > 0x1f) set.add(cp); } };
-  for (const p of ['dist/index.html', 'site-react/dist/index.html']) {
-    const f = path.join(ROOT, p);
-    if (fs.existsSync(f)) add(strip(fs.readFileSync(f, 'utf8')));
+  for (const dir of ['dist', 'site-react/dist']) {
+    for (const f of htmlFiles(path.join(ROOT, dir))) add(serifText(fs.readFileSync(f, 'utf8')));
   }
-  const walk = (d) => {
-    if (!fs.existsSync(d)) return;
-    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
-      const f = path.join(d, e.name);
-      if (e.isDirectory()) walk(f);
-      else if (e.name.endsWith('.md')) add(fs.readFileSync(f, 'utf8'));
-    }
-  };
-  walk(path.join(ROOT, 'src/content'));
   return set;
 }
 
