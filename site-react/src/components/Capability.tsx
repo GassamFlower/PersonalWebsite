@@ -1,8 +1,8 @@
-// Capability — 图版 04 · 能力档位（docs/k §1.2）
-// 读 src/content/skills/ 真源（v7 下线能力图谱后它一直是孤儿数据，此处回接渲染面）。
-// 体裁=台账条，沿用附录 A-0n 的胜出语言；**不复活雷达图/技术栈 rail/星级**。
-// 行内不挂档位徽章（用户目测裁决），两档信息只留在导语与页脚计数；真源没有「在学」，页面就不写「在学」。
-import { getSkills } from '../lib/content';
+// Capability — 图版 04 · 能力档位（docs/k §1.2 改版）
+// 用户裁决「没必要分类这么多域，改为整体，描述更多细节」→ 逐域台账撤下，改渲染 `capability.md` 的四小段自述。
+// 段落走系统 sans（打 `data-font="sans"` 标记，沿用 v8.0-b 取字口径：长文不倍增衬线子集字节）。
+// 档位计数仍从 skills 真源算出，不手写；**不复活雷达图/技术栈 rail/星级**，真源没有「在学」页面就不写「在学」。
+import { getCapability, getSkills } from '../lib/content';
 import { useUi } from '../i18n/LocaleContext';
 import { pick } from '../i18n/enums';
 import s from './Capability.module.css';
@@ -10,6 +10,7 @@ import s from './Capability.module.css';
 export default function Capability() {
   const { t, locale } = useUi();
   const items = getSkills();
+  const { intro, introEn } = getCapability();
   const delivered = items.filter((i) => i.level === '已交付').length;
 
   return (
@@ -24,19 +25,11 @@ export default function Capability() {
         <h2 className="section-title">{t.capability.headline1}<br />{t.capability.headline2}</h2>
         <p className={s.sub}>{t.capability.sub}</p>
 
-        <div className={`rail ${s.head}`}>
-          <span>{t.capability.thDomain}</span>
-          <span>{t.capability.thBound}</span>
-        </div>
-
-        <ul className={s.ledger}>
-          {items.map((it) => (
-            <li key={it.domain} className={s.row}>
-              <h3 className={s.domain}>{pick(locale, it.domain, it.domainEn)}</h3>
-              <p className={s.bound}>{pick(locale, it.tagline, it.taglineEn)}</p>
-            </li>
+        <div className={s.intro}>
+          {intro.map((p, i) => (
+            <p key={i} data-font="sans">{pick(locale, p, introEn?.[i] ?? p)}</p>
           ))}
-        </ul>
+        </div>
 
         {/* 档位计数直接来自真源，不手写数字（改 md 不用改这里） */}
         <div className={`rail ${s.foot}`}>

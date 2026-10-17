@@ -100,6 +100,16 @@ export function getSkills(): SkillData[] {
     .sort((a, b) => (RANK[a.level] ?? 9) - (RANK[b.level] ?? 9) || a.order - b.order);
 }
 
+// 能力档位整体自述（docs/k §1.2 改版）：全站恒一条，intro 与 introEn 条数一一对应（守卫把关）。
+// 判别键 = intro 是数组；skills md 用 domain+level，互不重叠。
+export interface CapabilityData {
+  intro: string[]; introEn?: string[];
+}
+export function getCapability(): CapabilityData {
+  const e = entries.find((x) => Array.isArray(x.data.intro));
+  return e ? { ...(e.data as unknown as CapabilityData) } : { intro: [] };
+}
+
 // 附录台账：以唯一键 no（A-0n）判别，按编号升序
 export function getOffcat(): OffcatData[] {
   return collect<OffcatData>((d) => 'no' in d && 'title' in d).sort((a, b) => a.no.localeCompare(b.no));

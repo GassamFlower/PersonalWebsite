@@ -87,6 +87,21 @@ for (const f of readdirSync(join(contentDir, 'skills')).filter((x) => x.endsWith
     errors.push(`skills/${f}: skillsEn ${enList.length} 条 ≠ skills ${zhList.length} 条`);
 }
 
+// ⑤ capability.md（docs/k §1.2 改版）：整体自述 intro / introEn 必须成对等长，缺一侧即图文不符
+{
+  const p = join(contentDir, 'capability.md');
+  if (!existsSync(p)) errors.push('capability.md 不存在（能力档位区整体自述真源）');
+  else {
+    const fm = front(readFileSync(p, 'utf8'));
+    const zhList = items(fm, 'intro');
+    const enList = items(fm, 'introEn');
+    if (!zhList.length) errors.push('capability.md: 缺 intro');
+    if (!enList.length) errors.push('capability.md: 缺 introEn');
+    else if (zhList.length !== enList.length)
+      errors.push(`capability.md: introEn ${enList.length} 条 ≠ intro ${zhList.length} 条`);
+  }
+}
+
 // ① growth：month === 文件名
 const growthDir = join(contentDir, 'growth');
 for (const f of readdirSync(growthDir).filter((x) => x.endsWith('.md'))) {

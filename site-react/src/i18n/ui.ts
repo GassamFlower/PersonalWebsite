@@ -109,8 +109,6 @@ export interface CapabilityUi {
   headline1: string;
   headline2: string;
   sub: string;
-  thDomain: string;
-  thBound: string;
 }
 
 export interface GrowthUi {
@@ -314,10 +312,8 @@ const zh: ZoneUi = {
     tagNo: '档案 04',
     tagZh: '能力档位',
     headline1: '会的东西，',
-    headline2: '按域摊开',
-    sub: '档位只有两档：已交付＝在这个域上真上线过东西；会用＝能独立完成日常工作，深度还在补。',
-    thDomain: '域',
-    thBound: '写到哪儿为止',
+    headline2: '一次说清',
+    sub: '档位只有两档：已交付＝在这个方向上真上线过东西；会用＝能独立完成日常工作，深度还在补。',
   },
   writing: {
     plateRail: '图版 05 · WRITING',
@@ -526,11 +522,9 @@ const en: PartialUi = {
     plateRail: "Plate 04 · CAPABILITY",
     tagNo: "File 04",
     tagZh: "Capabilities",
-    headline1: "What I can do,",
-    headline2: "laid out by domain",
+    headline1: "What I can do —",
+    headline2: "said in one piece",
     sub: "Two levels only: Delivered = something actually went live on it; Working knowledge = day-to-day work done independently, depth still growing.",
-    thDomain: "Domain",
-    thBound: "Where it stops",
   },
   growth: {
     plateRail: "Plate 06 · GROWTH",

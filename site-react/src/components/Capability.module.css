@@ -1,4 +1,4 @@
-/* Capability 区 — 台账条（docs/k §1.2）：域 │ 一句话边界，行间发线，零朱砂零章 */
+/* Capability 区 — 整体自述（docs/k §1.2 改版）：四小段正文，段宽与导语同 68ch，零朱砂零章 */
 
 .sub {
   font-size: var(--text-sm);
@@ -8,58 +8,18 @@
   margin: var(--space-2) 0 var(--space-8);
 }
 
-.head,
-.row {
-  display: grid;
-  grid-template-columns: 12em 1fr;
-  gap: var(--space-4);
-  align-items: baseline;
-}
-.head {
-  padding-block: var(--space-3);
-  border-top: 1px solid var(--color-ink);
-  border-bottom: 1px solid var(--color-ink);
-  letter-spacing: 0.12em;
-}
-
-.ledger {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.row {
-  padding-block: var(--space-5);
-  border-bottom: 1px solid var(--color-faint);
-}
-
-.domain {
-  font-family: var(--font-serif);
-  font-size: var(--text-lg);
-  font-weight: 600;
-  line-height: 1.4;
+.intro p {
+  font-size: var(--text-base);
+  line-height: 1.9;
   color: var(--color-ink);
-  margin: 0;
+  max-width: 68ch;
+  margin: 0 0 var(--space-5);
 }
-
-.bound {
-  font-size: var(--text-sm);
-  line-height: 1.7;
-  color: var(--color-ink);
-  margin: 0;
-  max-width: 46ch;
+.intro p:last-child {
+  margin-bottom: 0;
 }
 
 .foot {
   padding-top: var(--space-6);
   letter-spacing: 0.12em;
-}
-
-@media (max-width: 720px) {
-  .head {
-    display: none;
-  }
-  .row {
-    grid-template-columns: 1fr;
-    row-gap: var(--space-3);
-  }
 }
