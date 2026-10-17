@@ -102,6 +102,25 @@ for (const f of readdirSync(join(contentDir, 'skills')).filter((x) => x.endsWith
   }
 }
 
+// ⑥ writing-plan.md（docs/j §4）：空态实质内容。why/planLabel 单行标量须有 *En；topics 与 topicsEn 条数一一对应
+{
+  const p = join(contentDir, 'writing-plan.md');
+  if (!existsSync(p)) errors.push('writing-plan.md 不存在（写作区空态实质内容真源）');
+  else {
+    const fm = front(readFileSync(p, 'utf8'));
+    for (const [zhKey, enKey] of [['why', 'whyEn'], ['planLabel', 'planLabelEn']]) {
+      if (!scalar(fm, zhKey)) errors.push(`writing-plan.md: 缺 ${zhKey}`);
+      else if (CJK.test(scalar(fm, zhKey)) && !scalar(fm, enKey)) errors.push(`writing-plan.md: ${zhKey} 含中文但缺 ${enKey}`);
+    }
+    const zhList = items(fm, 'topics');
+    const enList = items(fm, 'topicsEn');
+    if (!zhList.length) errors.push('writing-plan.md: 缺 topics');
+    if (!enList.length) errors.push('writing-plan.md: 缺 topicsEn');
+    else if (zhList.length !== enList.length)
+      errors.push(`writing-plan.md: topicsEn ${enList.length} 条 ≠ topics ${zhList.length} 条`);
+  }
+}
+
 // ① growth：month === 文件名
 const growthDir = join(contentDir, 'growth');
 for (const f of readdirSync(growthDir).filter((x) => x.endsWith('.md'))) {

@@ -110,6 +110,16 @@ export function getCapability(): CapabilityData {
   return e ? { ...(e.data as unknown as CapabilityData) } : { intro: [] };
 }
 
+// 写作区空态实质内容（docs/j §4）：判别键 = topics 是数组，与文章集合的 title+date+summary 不重叠。
+export interface WritingPlanData {
+  why: string; whyEn?: string; planLabel: string; planLabelEn?: string;
+  topics: string[]; topicsEn?: string[];
+}
+export function getWritingPlan(): WritingPlanData | null {
+  const e = entries.find((x) => Array.isArray(x.data.topics));
+  return e ? (e.data as unknown as WritingPlanData) : null;
+}
+
 // 附录台账：以唯一键 no（A-0n）判别，按编号升序
 export function getOffcat(): OffcatData[] {
   return collect<OffcatData>((d) => 'no' in d && 'title' in d).sort((a, b) => a.no.localeCompare(b.no));

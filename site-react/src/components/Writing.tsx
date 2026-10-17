@@ -2,7 +2,7 @@
 // 真源为空时渲染诚实空态，绝不为填充区块编造文章。
 // 展开用原生 <details>/<summary>：正文在初始 HTML 里，无 JS 也读得到全文（宪法 §17），
 // 不引第三方折叠库，也不做独立文章页（多页=修宪，触发线见 docs/k §1.1）。
-import { getWriting } from '../lib/content';
+import { getWriting, getWritingPlan } from '../lib/content';
 import { parseBlocks } from '../lib/markdown';
 import { useUi } from '../i18n/LocaleContext';
 import { pick } from '../i18n/enums';
@@ -11,6 +11,7 @@ import s from './Writing.module.css';
 export default function Writing() {
   const { t, locale } = useUi();
   const pieces = getWriting();
+  const plan = getWritingPlan();
   return (
     <section id="writing" className="section">
       <span className="plate-rail">{t.writing.plateRail}</span>
@@ -53,6 +54,22 @@ export default function Writing() {
               );
             })}
           </ol>
+        )}
+
+        {/* 空态实质内容（docs/j §4）：真源 src/content/writing-plan.md。
+            全块 data-font="sans" 走系统 sans，不进衬线子集——加选题不撑破字体产物。 */}
+        {pieces.length === 0 && plan && (
+          <div className={s.queue} data-font="sans">
+            <p className={s.why}>{pick(locale, plan.why, plan.whyEn)}</p>
+            <p className={s.planLabel}>{pick(locale, plan.planLabel, plan.planLabelEn)}</p>
+            <ul className={s.topics}>
+              {plan.topics.map((x, i) => (
+                <li key={i} className={s.topic}>
+                  {pick(locale, x, plan.topicsEn?.[i] ?? x)}
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </div>
     </section>

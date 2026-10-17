@@ -31,12 +31,16 @@ summaryEn: "One-line summary"
 
 判别键：`title + date + summary` 三齐即入写作区（`site-react/src/lib/content.ts getWriting()`）。
 
-## 4. 渲染契约（当前 v1）
+## 4. 渲染契约（当前 v2）
 
-- 首页写作区显示：月份（mono）+ 标题（衬线）+ 摘要，按 date 倒序。
-- 文章数 > 0 之前，空态文案来自 `ui.ts writing.empty`（双语）。
+- 首页写作区显示：月份（mono）+ 标题（衬线）+ 摘要，按 date 倒序；就地展开用原生 `<details>`，正文在初始 HTML 内。
+- 空态一行文案来自 `ui.ts writing.empty`（双语，衬线）。
+- 文章数 = 0 时，空态之下再渲染**实质内容块**：这一区放什么＋为什么还空着＋排期中的选题。真源 = `src/content/writing-plan.md`（`why` / `planLabel` / `topics` 各配 `*En`，由 `scripts/check-content.mjs` 规则⑥守卫条数一一对应）。
+  - 整块 `data-font="sans"` 走系统 sans，**不进衬线子集**：加删选题不撑破字体产物。改回衬线必须同时删那个标记，否则线上缺字。
+  - 第一篇真文章落地后，本块自动让位给文章列表（`pieces.length === 0` 才渲染）。
+- **本块只写「打算写什么」与「为什么空着」，不得用来假装文章存在**——它是空态的说明，不是内容替代品。
 
-## 5. 建议选题池（仅建议，素材必须是用户真实经历）
+## 5. 建议选题池（候选，素材必须是用户真实经历；已上页的四条以 `writing-plan.md` 为准）
 
 - 把本站从 v4 做到 v6 双语上线的全过程（素材：growth 区 + PROJECT_STATUS）
 - 五级项目体系 / 四门禁是怎么用在自己身上的

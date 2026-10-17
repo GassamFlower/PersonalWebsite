@@ -6,6 +6,45 @@
   color: var(--color-ink-soft);
 }
 
+/* 空态实质内容（真源 src/content/writing-plan.md，docs/j §4）
+   ⚠ 这里的 font-family 与 Writing.tsx 里 div.queue 的 data-font="sans" 是绑定的：
+   整块靠系统 sans 渲染，脚本据此把这一块的字挡在衬线子集外，加选题不撑破字体产物。
+   改回衬线必须同时删那个标记，否则线上缺字。 */
+.queue {
+  font-family: var(--font-sans);
+  margin-top: var(--space-6);
+}
+.why {
+  font-size: var(--text-base);
+  line-height: 1.9;
+  color: var(--color-ink-soft);
+  max-width: 68ch;
+  margin: 0;
+}
+.planLabel {
+  font-size: var(--text-sm);
+  letter-spacing: 0.12em;
+  color: var(--color-ink-soft);
+  margin: var(--space-8) 0 var(--space-4);
+}
+/* 选题行：左竖线 = 层级（沿用故事区语言），不编 01–04 的号 */
+.topics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 68ch;
+}
+.topic {
+  border-left: 2px solid var(--color-line);
+  padding-left: var(--space-4);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-ink);
+}
+.topic + .topic {
+  margin-top: var(--space-3);
+}
+
 .list {
   list-style: none;
   margin: var(--space-6) 0 0;
