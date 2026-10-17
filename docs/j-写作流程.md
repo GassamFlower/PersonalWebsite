@@ -16,20 +16,27 @@
 4. **定稿落盘**：写入 `src/content/writing/YYYY-MM-slug.md`，用户确认为本人观点后发布。
 5. **守卫**：`npm run build` 全链路（字体 `--check` 自动覆盖新字；写作区 *En 覆盖率规则**待第一篇落地时**并入 `scripts/check-content.mjs`——当前目录为空，不挂空守卫）。
 
-## 3. md 契约（frontmatter）
+## 3. md 契约（frontmatter + body）
 
 ```yaml
 ---
 title: 文章标题
-date: "2026-10"          # 排序键，YYYY-MM 或 YYYY-MM-DD
+date: "2026-10"          # 排序键，YYYY-MM 或 YYYY-MM-DD；文件名前缀须等于它
 summary: 一句话摘要（列表页显示）
 titleEn: "Title"
 summaryEn: "One-line summary"
+published: false         # 可省；压稿时置 false，页面与字体子集都不收它
+bodyEn: |
+  英文正文放这里，块式标量（缩进两格），段间空行。
+  渲染器只认三种块：## 小标题、- 列表项、普通段落。
 ---
-正文（本区当前只渲染列表；独立文章页属"文章页静态副本"批，另行立项）
+
+中文正文直接写在闭合 --- 之后，同样只允许 ## / - / 段落。
 ```
 
-判别键：`title + date + summary` 三齐即入写作区（`site-react/src/lib/content.ts getWriting()`）。
+- **行内语法一律禁用**：加粗、行内代码、链接、图片、引用、表格、非 `##` 的标题层级——`scripts/check-content.mjs` 规则④当场拦（中英文正文都扫），因为渲染器只认那三种块，别的语法会原样吐到页面上。
+- 判别键：`title + date + summary` 三齐即入写作区（`site-react/src/lib/content.ts getWriting()`）。
+- 英文正文的落法在 v8.3 由「单行标量」改为「块式标量」（单行写两千字没法维护）；守卫 `block()` 认 `bodyEn: |`，同时兼容旧单行式。
 
 ## 4. 渲染契约（当前 v2）
 

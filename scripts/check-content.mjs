@@ -44,6 +44,22 @@ function items(fm, key) {
   return out;
 }
 
+// 块式标量（key: | 之后的缩进正文，按首行缩进 dedent）；英文正文 bodyEn 用它，避免把整篇文章塞进一行
+function block(fm, key) {
+  const lines = fm.split(/\r?\n/);
+  const start = lines.findIndex((l) => new RegExp(`^${key}:[ \\t]*[|>][-+]?[ \\t]*$`).test(l));
+  if (start === -1) return '';
+  const out = [];
+  let indent = null;
+  for (let i = start + 1; i < lines.length; i++) {
+    if (/^\S/.test(lines[i])) break;
+    const ind = lines[i].match(/^(\s*)/)[1].length;
+    if (indent === null && lines[i].trim()) indent = ind;
+    out.push(lines[i].slice(indent ?? 0));
+  }
+  return out.join('\n').trim();
+}
+
 // 条件副本：zh 字段存在、非空且含中文时，才要求 *En（纯拉丁串豁免）
 function needEn(fm, zhKey) {
   const v = scalar(fm, zhKey);
@@ -179,16 +195,19 @@ for (const f of writingFiles) {
   const fm = front(str);
   if (!fm) { errors.push(`writing/${f}: frontmatter 解析失败（缺闭合 ---）`); continue; }
   const d = basename(f, '.md');
-  for (const key of ['title', 'date', 'summary', 'titleEn', 'summaryEn', 'bodyEn']) {
+  for (const key of ['title', 'date', 'summary', 'titleEn', 'summaryEn']) {
     if (!scalar(fm, key)) errors.push(`writing/${f}: 缺 ${key}`);
   }
+  // 英文正文：块式 bodyEn 优先，单行标量也收（docs/j §3 改版后正文用块式标量）
+  const enBody = block(fm, 'bodyEn') || (scalar(fm, 'bodyEn') ?? '');
+  if (!enBody) errors.push(`writing/${f}: 缺 bodyEn（英文正文，块式标量 bodyEn: |）`);
   const date = scalar(fm, 'date');
   if (date && !/^\d{4}-\d{2}(-\d{2})?$/.test(date)) errors.push(`writing/${f}: date=${date} 须形如 2026-10`);
   else if (date && !d.startsWith(date.slice(0, 7))) errors.push(`writing/${f}: 文件名前缀须是 ${date.slice(0, 7)}`);
   const body = bodyOf(str);
   if (!body) errors.push(`writing/${f}: md body（中文正文）为空`);
   for (const [re, label] of INLINE) {
-    if (re.test(body) || re.test(scalar(fm, 'bodyEn') || ''))
+    if (re.test(body) || re.test(enBody))
       errors.push(`writing/${f}: 用了不支持的行内语法 ${label}（渲染器只认 ## / - / 段落）`);
   }
 }
