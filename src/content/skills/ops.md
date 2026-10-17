@@ -2,7 +2,7 @@
 order: 6
 domain: 运维与部署
 level: 已交付
-tagline: 从零搭过一整套自建的内网基础设施，部署、备份、审计、排障能闭环。
+tagline: 从零搭起自建内网底座，按阶段手册逐段过门；备份与恢复演练都实跑过。
 skills:
   - name: 私有化基础设施搭建
     note: 从零搭起内网底座（Ubuntu VM + Docker，两台宿主机按网段分工），按阶段手册逐段验收交付
@@ -22,7 +22,7 @@ skills:
     note: 在 Linux 环境部署 VM、配网、挂存储、起服务的完整实操
 evidence: 两台宿主机上的内网基础设施在用，流水线与基线约定表可查（内部环境）
 domainEn: "Ops & deployment"
-taglineEn: "Built a whole self-hosted intranet infrastructure from scratch; deployment, backup, auditing and troubleshooting as a closed loop."
+taglineEn: "Self-hosted intranet foundation built from scratch, gated stage by stage against written runbooks; backup and restore drills have both actually been run."
 skillsEn:
   - name: "Private infrastructure build-out"
     note: "Intranet foundation built from scratch (Ubuntu VM + Docker, two hosts split by network segment), delivered stage by stage against written runbook pass criteria"
