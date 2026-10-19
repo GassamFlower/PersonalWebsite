@@ -19,7 +19,8 @@ const EMIT = ['zh', 'en'];
 const KNOWN = ['zh', 'en'];
 
 // en 版 head 副本（中文原文以 site-react/index.html 为准，这里是对应译文，措辞见 docs/h §3）
-const SITE = 'https://gassamflower.github.io/PersonalWebsite/';
+// 自定义域生效后一切对外 URL（canonical / hreflang / og / JSON-LD）都走域名根，不再写 github.io 子路径
+const SITE = 'https://onetale.cn/';
 const EN_HEAD = {
   title: 'PERSONAL DOSSIER · Independent Delivery Archive',
   description:

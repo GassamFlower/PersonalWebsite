@@ -7,7 +7,7 @@ import { mdPlugin } from './md-plugin';
 
 export default defineConfig({
   // 与客户端同 base：切换器用 import.meta.env.BASE_URL 拼 href，两边不一致会水合错 href
-  base: '/PersonalWebsite/',
+  base: '/',
   plugins: [react(), mdPlugin()],
   ssr: {
     noExternal: true,

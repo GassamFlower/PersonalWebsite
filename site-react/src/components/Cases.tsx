@@ -11,7 +11,7 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape'];
 // v8.1 用户裁决：线稿红笔（stroke 走 --color-seal，墨场内由 .shotSlot 重映射为提亮朱砂）——每幅 ≤2 笔
 // v8.8 用户裁决（「帮我做样张放进去」）：按真源 order 绑定专属线稿，4=地基拓扑 5=数据口径对账；卡面 0i+1 会变，order 不会
 const SCHEM: Record<number, number> = { 1: 0, 2: 1, 5: 4, 11: 5, 19: 3 };
-// 真图走 public/，必须带 base 前缀（站点部署在 /PersonalWebsite/ 子路径）
+// 真图走 public/，前缀取 BASE_URL：写死 '/PersonalWebsite/' 在自定义域根目录下会全量 404
 const asset = (p: string) => `${import.meta.env.BASE_URL}${p.replace(/^\/+/, '')}`;
 
 // 线稿内的 text 一律只用拉丁与数字：新增汉字要扩子集字体，且蓝图体裁本就吃技术记号

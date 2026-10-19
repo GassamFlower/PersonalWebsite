@@ -4,7 +4,7 @@ import type { Locale } from '../i18n/locale';
 
 export type Route = { kind: 'home' } | { kind: 'post'; slug: string };
 
-const BASE = import.meta.env.BASE_URL; // '/PersonalWebsite/'
+const BASE = import.meta.env.BASE_URL; // 自定义域在站点根 → '/'
 
 // /writing/<slug>/ 与 /en/writing/<slug>/ → 同一篇的两个语言副本；其余一律主页
 export function routeFromPath(pathname: string): Route {
