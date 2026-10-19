@@ -1,28 +1,32 @@
 /* ============================================================
    global.css — 设计 token（CSS Modules 版）
-   v6「技术图鉴·墨与朱」三色制：纸白 · 墨黑 · 朱砂（灰为减淡层级）
-   真源：docs/视觉方向-v6-技术图鉴.md §1–§5
+   v8「纸墨工房」三色制：米白 · 墨黑 · 砖红（灰为减淡层级）
+   v8 裁决：D2 按调色卡 01 Paper & Ink 对齐（base #F7F4EF / ink #1A1A1A / on-accent 同 base）；
+   D4 砖红三层制（印=章配额不变 · 手=批注笔≤5 · 活=交互无配额，见 docs/components.md §2）。
+   砖红取 #BC4832：卡面原值 #C8553D 实测 3.97:1 不过 AA（站内红几乎全在 ≤16px 小字），
+   同族降半档到 4.66:1——卡面自己承诺「强可读性」，故保读性优先。
+   真源：docs/components.md §1–§2（v8 册）
    ============================================================ */
 
 /* 自托管字体（衬线子集 + mono latin），见 assets/fonts/fonts.css 顶部说明 */
 @import '../../../assets/fonts/fonts.css';
 
 :root {
-  /* ---- 三色体系（v6：墨蓝退役） ---- */
-  --color-base: #f6f6f4;          /* 纸白 · 主底 */
-  --color-ink: #1a1a17;           /* 墨黑 · 结构色（文字/细线/大编号/深墨场） */
-  --color-line: #8b8b88;          /* 冷灰 · 细线（减淡层级；仅用于线，不用于小字） */
-  --color-ink-soft: #636360;      /* 纸白场上的弱文字（实测 5.57:1 ≥ AA，线灰 3.16:1 不达标故分立） */
+  /* ---- 三色体系（v8 D2：照调色卡 01 Paper & Ink 对齐） ---- */
+  --color-base: #f7f4ef;          /* 米白 · 主底（卡面值） */
+  --color-ink: #1a1a1a;           /* 纯黑 · 结构色（文字/细线/大编号/深墨场，卡面值） */
+  --color-line: #8b8b88;          /* 灰 · 细线（减淡层级；仅用于线，不用于小字） */
+  --color-ink-soft: #636360;      /* 米白场上的弱文字（新底上实测 5.49:1 ≥ AA） */
   --color-faint: #c8c8c3;         /* 浅灰 · 极细辅助线/占位虚框 */
-  --color-accent: var(--color-ink);   /* ⚠ 退役过渡别名：漏改的"墨蓝"用法静默降级为黑，绝不落入朱砂。组件清完显式引用后删除 */
-  --color-surface: #ffffff;       /* 卡片/档案卡面 · 纯白面 */
-  --color-on-accent: #ffffff;     /* 墨底上的文字/图标色 */
+  --color-surface: #fcfaf5;       /* 卡片/档案卡面 · 提亮暖白面 */
+  --color-on-accent: #f7f4ef;     /* 砖红底上的文字色（暖纸白，不用纯白） */
   --shadow: 0 4px 14px color-mix(in srgb, var(--color-ink) 8%, transparent); /* 极轻阴影 */
 
-  /* ---- 朱砂（全站唯一彩色）：验收章纪律见 v5 §2.2（每屏≤1、全页≤6、仅已验证）+ v6 §5 署名章 ---- */
-  --color-seal: #c43c2b;          /* 朱砂 · 印泥红 */
-  --color-seal-faint: #f2e3df;    /* 朱砂极浅底 · 仅印章悬停底 */
-  --color-seal-on-dark: #e0705a;  /* 深墨场内提亮值（对比度 ≥4.5:1） */
+  /* ---- 砖红（全站唯一彩色）：D4 三层制——印（章配额不变）/手（批注笔）/活（交互态无配额），
+         禁入：正文/标题/状态徽章/事实行/规格表文字。纪律见 docs/components.md §2 砖红三层制 ---- */
+  --color-seal: #bc4832;          /* 砖红 · 卡砖 #C8553D 降半档（原值 3.97:1 不过 AA，此值 4.66:1） */
+  --color-seal-faint: #f2e3df;    /* 砖红极浅底 · 仅印章悬停底 */
+  --color-seal-on-dark: #e0705a;  /* 深墨场内提亮值（新墨上实测 5.50:1） */
 
   /* ---- v6 深墨场（黑头/黑腰/黑尾统一一种黑，色带硬切） ---- */
   --color-field: var(--color-ink);
@@ -72,10 +76,9 @@
   --type-cjk-lh: 1.55;
   --type-heading-lh: 1.1;
 
-  /* ---- 圆角 & 动效曲线（架构 §5 圆角 0–2px；§7 克制动效） ---- */
+  /* ---- 圆角 & 动效（架构 §5 圆角 0–2px；v8 §3 单曲线 easeOutExpo，时长分档见 components.md §3） ---- */
   --radius: 2px;
-  --radius-pill: 999px;
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *,
@@ -138,16 +141,17 @@ p, li, a, span { overflow-wrap: break-word; }
   border-radius: var(--radius);
   font-size: var(--text-sm);
   letter-spacing: 0.04em;
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.25s var(--ease-out), color 0.25s var(--ease-out);
 }
+/* 活·主按钮：砖红底暖纸白字（D4 交互层无配额）；hover 同系互混加深 */
 .btn-solid {
-  background: var(--color-accent);
+  background: var(--color-seal);
   color: var(--color-on-accent);
   padding: var(--space-4) var(--space-10);
   font-size: var(--text-base);
 }
 .btn-solid:hover {
-  background: color-mix(in srgb, var(--color-accent) 88%, #000);
+  background: color-mix(in srgb, var(--color-seal) 85%, var(--color-ink));
 }
 
 /* ---- 分区骨架（跨组件共享） ---- */
@@ -175,59 +179,17 @@ p, li, a, span { overflow-wrap: break-word; }
   }
 }
 
-/* ---- 动效升级层（v4.1 · 张开花板版 · 但仍守住 Mercury ink 单 accent + 0-2px） ---- */
-:root {
-  --ease-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
-  --ease-ink: cubic-bezier(0.65, 0, 0.35, 1);
-  --duration-std: 0.5s;
-  --duration-slow: 0.9s;
-}
-
-/* 滚动渐显：不透明度 + 位移 + 轻微 blur 入画（Motion band 6 档；reduced-motion 关闭） */
-@keyframes riseIn {
-  from { opacity: 0; transform: translateY(22px); filter: blur(4px); }
-  to   { opacity: 1; transform: none; filter: none; }
-}
-
-/* 档案积线：左边细线从左 `--accent` 伸长到右边，制造「表头线框延展」 */
-@keyframes ruleIn {
-  from { transform: scaleX(0); opacity: 0; }
-  to   { transform: scaleX(1); opacity: 0.85; }
-}
-
-/* 刷过短直线：hover/十字扫描线 */
-@keyframes scanX {
-  0%   { transform: translateX(-120%); }
-  100% { transform: translateX(220%); }
-}
-
-/* 档案章印：印章由透明虚化 → 实印（模拟盖章） */
-@keyframes stampIn {
-  0%   { opacity: 0; transform: scale(1.3) rotate(-6deg); filter: blur(3px); }
-  60%  { opacity: 1; }
-  100% { transform: scale(1) rotate(-6deg); filter: none; opacity: 1; }
-}
-
-/* 标题每行逐字滑入（Hero 大字） */
-@keyframes lineRise {
-  from { opacity: 0; transform: translateY(0.5em) skewY(1.6deg); }
-  to   { opacity: 1; transform: none; }
-}
-
-/* 便签卡片 ink-lift: 背景由墨蓝染入，文字反白 */
-@keyframes inkFill {
-  from { background-color: transparent; }
-  to   { background-color: var(--color-accent); }
-}
+/* ---- 动效统一（v8 §3）：单曲线 --ease-out（easeOutExpo）全站生效；
+   v4.1 的 spring/ink 双曲线与六组未引用关键帧（riseIn/ruleIn/scanX/stampIn/lineRise/inkFill）已删 ---- */
 
 /* 光标：整站 focus-visible 可见性（键盘可达） */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-seal);
   outline-offset: 3px;
   border-radius: var(--radius);
 }
-/* 深墨场内墨色 outline 不可见 → 换纸白系提亮值 */
-.field :focus-visible { outline-color: var(--color-field-line); }
+/* 深墨场内砖红原值对比不足 → 换提亮砖红 */
+.field :focus-visible { outline-color: var(--color-seal-on-dark); }
 
 /* ============================================================
    v5 装置：批注轨 .rail + 朱砂验收章 .seal（跨组件共享全局类）
@@ -242,9 +204,9 @@ p, li, a, span { overflow-wrap: break-word; }
   color: var(--color-ink-soft);
   line-height: 1.6;
 }
-.rail .gate { color: var(--color-accent); }
+.rail .gate { color: var(--color-seal); }
 
-/* 朱砂验收章：仅允许出现在「已上线/已交付/已验证」的 Result 行（纪律同 §2.2） */
+/* 砖红验收章：仅允许出现在「已上线/已交付/已验证」的 Result 行（纪律同 §2.2） */
 .seal {
   display: inline-flex;
   align-items: center;
@@ -348,11 +310,14 @@ p, li, a, span { overflow-wrap: break-word; }
   color: inherit;
 }
 
-/* 轻量可hover：底部描边 `::after` 供链接/按钮使用 */
+/* 轻量可hover：底部描边 `::after` 供链接/按钮使用（v8 D4 活层：常态砖红字 + 下划线生长 0.35s） */
 .ink-link {
   position: relative;
   display: inline-block;
+  color: var(--color-seal);
+  transition: color 0.25s var(--ease-out);
 }
+.ink-link:hover { color: color-mix(in srgb, var(--color-seal) 82%, var(--color-ink)); }
 .ink-link::after {
   content: "";
   position: absolute;
@@ -360,10 +325,10 @@ p, li, a, span { overflow-wrap: break-word; }
   bottom: -2px;
   height: 1px;
   width: 100%;
-  background: var(--color-accent);
+  background: var(--color-seal);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.35s var(--ease-ink);
+  transition: transform 0.35s var(--ease-out);
 }
 .ink-link:hover::after,
 .ink-link:focus-visible::after { transform: scaleX(1); }
@@ -389,8 +354,9 @@ p, li, a, span { overflow-wrap: break-word; }
   /* 英文站副导航更长：装得下不折行（中文观感不变），装不下折到第二行而不是撑破横向边界 */
   flex-wrap: wrap;
 }
+/* 眉栏编号：砖红（D4 活层，v8 §7-4）；区名保持墨色，不让整条眉栏染红 */
 .section-head .tag b {
-  color: var(--color-accent);
+  color: var(--color-seal);
   font-weight: 600;
   margin-right: 0.5ch;
   font-family: var(--font-mono);
@@ -398,7 +364,7 @@ p, li, a, span { overflow-wrap: break-word; }
   letter-spacing: 0.08em;
 }
 .section-head .tag {
-  color: var(--color-accent);
+  color: var(--color-ink);
   letter-spacing: 0.04em;
 }
 .section-head .meta {
@@ -437,14 +403,6 @@ p, li, a, span { overflow-wrap: break-word; }
   font-family: var(--font-serif);
   text-wrap: balance;
   overflow-wrap: anywhere;
-}
-
-/* 档案分隔细线 utility */
-.rule {
-  height: 1px;
-  background: var(--color-ink);
-  opacity: 0.85;
-  border: 0;
 }
 
 @media (max-width: 720px) {

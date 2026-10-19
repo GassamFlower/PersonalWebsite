@@ -3,12 +3,6 @@
 // 措辞按 docs/h §3 术语表；配套守卫 scripts/check-content.mjs 规则③ 保证内容 *En 不缺。
 import type { Locale } from './locale';
 
-export const STATUS_EN: Record<string, string> = {
-  已上线: 'Live',
-  内部系统: 'Internal',
-  开发中: 'In progress',
-};
-
 export const OFFCAT_STATUS_EN: Record<string, string> = {
   已验证: 'Verified',
   进行中: 'In progress',

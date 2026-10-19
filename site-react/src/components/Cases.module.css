@@ -3,11 +3,11 @@
 /* 墨场内覆盖共享全局类 */
 .cases :global(.section-head) { color: var(--color-field-ink); }
 .cases :global(.section-head .tag) { color: var(--color-field-muted); }
-.cases :global(.section-head .tag b) { color: var(--color-field-ink); }
+.cases :global(.section-head .tag b) { color: var(--color-seal-on-dark); }
 .cases :global(.section-head .meta) { color: var(--color-field-muted); }
 .cases :global(.section-title) { color: var(--color-field-ink); }
 .cases :global(.rail) { color: var(--color-field-muted); }
-.cases :global(.rail .gate) { color: var(--color-field-ink); }
+.cases :global(.rail .gate) { color: var(--color-seal-on-dark); }
 .cases :global(.plate-rail) { color: var(--color-field-muted); }
 .casesTitle { color: var(--color-field-ink); }
 
@@ -18,11 +18,13 @@
 .caseCard {
   border-top: 1px solid var(--color-field-rule);
   padding-block: var(--space-10);
+  /* 封面档案卡按 #case-<order> 跳进来时，别被吸顶导航压住卡头 */
+  scroll-margin-top: 5.5rem;
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   gap: var(--space-12);
   align-items: center;
-  transition: background-color 0.35s var(--ease-ink);
+  transition: background-color 0.35s var(--ease-out);
 }
 .caseCard:last-child { border-bottom: 1px solid var(--color-field-rule); }
 .caseCard:hover {
@@ -43,7 +45,7 @@
   font-weight: 700;
   line-height: 0.85;
   color: var(--color-field-ink);
-  transition: transform 0.4s var(--ease-spring);
+  transition: transform 0.35s var(--ease-out);
 }
 .caseCard:hover .caseNo { transform: translateX(6px); }
 .caseTitle {
@@ -80,20 +82,11 @@
   padding-top: 0.35em;
 }
 .specRow dd { grid-column: 2; min-width: 0; }
-/* Result 行：提亮 + 图版级验收章 */
-/* Result 行：提亮 + 图版级验收章（朱砂只出现在章上，标签不染色——唯一色纪律） */
+/* Result 行：提亮（唯一色纪律：标签不染色） */
 .specResult {
   color: var(--color-field-ink);
 }
 .specResult dt { color: var(--color-field-ink); }
-.sealBig {
-  grid-column: 2;
-  justify-self: start;
-  margin-top: var(--space-2);
-  font-size: var(--text-sm);
-  padding: 0.35rem 0.8rem;
-  letter-spacing: 0.18em;
-}
 
 /* 截图槽 / 蓝图线稿反白（v6：无白卡，线稿直接画在墨场上） */
 .caseVisual { min-width: 0; position: relative; }
@@ -110,16 +103,21 @@
 .shotReal { background: var(--color-surface); padding: 0; aspect-ratio: auto; }
 /* v7.8 真图：按截图自身比例整幅显示，不裁切；一案多图竖排 */
 .shotReal .frameImg { height: auto; object-fit: initial; display: block; }
+/* 2026-10-17 目测：竖幅真图半幅显示（比例不变、桌面居中；≤719px 维持 .shotReal 全宽惯例） */
+@media (min-width: 720px) {
+  .shotRealPortrait { max-width: 50%; margin-inline: auto; }
+}
 .shotStack { display: flex; flex-direction: column; gap: var(--space-4); }
 .frameImg { width: 100%; height: 100%; object-fit: cover; }
 .shotSlot {
   flex-direction: column;
   gap: var(--space-4);
   background: transparent;
-  /* 反白关键：在子树内重定义线稿用的 token，SVG 的 var() 引用随之翻转 */
+  /* 反白关键：在子树内重定义线稿用的 token，SVG 的 var() 引用随之翻转
+     （v8 D4：红笔线稿走 --color-seal，墨场内翻成提亮朱砂保对比度） */
   --color-faint: var(--color-field-rule);
   --color-line: var(--color-field-muted);
-  --color-accent: var(--color-field-line);
+  --color-seal: var(--color-seal-on-dark);
   --color-ink: var(--color-field-ink);
 }
 .slotType {

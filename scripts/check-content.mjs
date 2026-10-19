@@ -190,13 +190,25 @@ const INLINE = [
 ];
 const writingDir = join(contentDir, 'writing');
 const writingFiles = existsSync(writingDir) ? readdirSync(writingDir).filter((x) => x.endsWith('.md')) : [];
+// slug 即子页 URL 段（docs/j §4 · 宪法 §1.2），发布后改它等于换 URL；
+// en 是语言段，撞进来会让 /en/writing/<slug>/ 的解析两头不是人，故一并 reserved。
+const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const slugsSeen = new Map();
 for (const f of writingFiles) {
   const str = readFileSync(join(writingDir, f), 'utf8');
   const fm = front(str);
   if (!fm) { errors.push(`writing/${f}: frontmatter 解析失败（缺闭合 ---）`); continue; }
   const d = basename(f, '.md');
-  for (const key of ['title', 'date', 'summary', 'titleEn', 'summaryEn']) {
+  for (const key of ['title', 'date', 'summary', 'slug', 'titleEn', 'summaryEn']) {
     if (!scalar(fm, key)) errors.push(`writing/${f}: 缺 ${key}`);
+  }
+  const slug = scalar(fm, 'slug');
+  if (slug) {
+    if (!SLUG_RE.test(slug)) errors.push(`writing/${f}: slug=${slug} 须为 ASCII 小写字母数字加单个连字符，不以连字符开头结尾`);
+    else if (slug.length > 40) errors.push(`writing/${f}: slug=${slug} 长度 ${slug.length} > 40`);
+    else if (slug === 'en') errors.push(`writing/${f}: slug=en 与语言段冲突，换一个`);
+    if (slugsSeen.has(slug)) errors.push(`writing/${f}: slug=${slug} 与 ${slugsSeen.get(slug)} 重复（子页 URL 必须唯一）`);
+    else slugsSeen.set(slug, `writing/${f}`);
   }
   // 英文正文：块式 bodyEn 优先，单行标量也收（docs/j §3 改版后正文用块式标量）
   const enBody = block(fm, 'bodyEn') || (scalar(fm, 'bodyEn') ?? '');
@@ -211,6 +223,22 @@ for (const f of writingFiles) {
       errors.push(`writing/${f}: 用了不支持的行内语法 ${label}（渲染器只认 ## / - / 段落）`);
   }
 }
+
+// ⑦ 封面档案卡（docs/f §封面 · v8.7）：`featured: true` 恰好 3 条，且只能标在 tier=feature 的详案卡上。
+//    三行是卡面的设计容量，选哪三案属内容裁决——所以口径放真源、由守卫兜住，绝不写死在组件里。
+//    那行说明取 `whatIDid` 到第一个句读，故 featured 的案必须有 whatIDid（不另造字段=不新增事实）。
+const HERO_SLOTS = 3;
+const featured = [];
+for (const f of readdirSync(join(contentDir, 'cases')).filter((x) => x.endsWith('.md'))) {
+  const fm = front(readFileSync(join(contentDir, 'cases', f), 'utf8'));
+  if (!/^\s*featured:\s*true\s*$/m.test(fm)) continue;
+  const tier = scalar(fm, 'tier');
+  if (tier !== 'feature') errors.push(`cases/${f}: featured 只能标在 tier=feature 的详案卡上（当前 tier=${tier ?? '缺'}）`);
+  if (!scalar(fm, 'whatIDid')) errors.push(`cases/${f}: featured 但缺 whatIDid（封面卡那行说明的取词处）`);
+  featured.push(f);
+}
+if (featured.length !== HERO_SLOTS)
+  errors.push(`cases/: 封面档案卡需要恰好 ${HERO_SLOTS} 条 featured: true，当前 ${featured.length} 条${featured.length ? `（${featured.join('、')}）` : ''}`);
 
 if (errors.length) {
   console.error('[check-content] 未通过：\n  ' + errors.join('\n  '));

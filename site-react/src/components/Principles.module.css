@@ -183,6 +183,11 @@
   letter-spacing: 0.08em;
   color: var(--color-ink-soft);
 }
+/* v8 手层⑥：红笔箭头从首档左上指入 Inbox/（.mkSvg 自带 absolute，锚在 .tier 上） */
+.mkInbox {
+  top: -1.15em;
+  left: -0.35em;
+}
 .tierName {
   font-family: var(--font-serif);
   font-weight: 700;

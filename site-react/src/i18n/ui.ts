@@ -15,7 +15,10 @@ export interface HeroUi {
   role: string;
   railGate: string;
   signature: string;
-  title: string;
+  // v8：title 拆三段，「一个故事」套手绘圈注（MkCircle）；三段拼回原文一字不差
+  titlePre: string;
+  titleMark: string;
+  titlePost: string;
   subline: string;
   subline2: string;
   focusCta: string;
@@ -23,11 +26,9 @@ export interface HeroUi {
   gateLabel: string;
   releasedLabel: string;
   revLabel: string;
+  siteLabel: string;
   dossierName: string;
-  sealVerified: string;
   worksCta: string;
-  propDelivery: string;
-  propPrinciples: string;
 }
 
 export interface NavUi {  brandZh: string;
@@ -35,12 +36,11 @@ export interface NavUi {  brandZh: string;
   langAria: string;
   statusOnline: string;
   itemHero: string;
+  itemStory: string;
   itemCases: string;
   itemCapability: string;
   itemWriting: string;
-  itemGrowth: string;
   itemPrinciples: string;
-  itemOffcat: string;
   itemContact: string;
 }
 
@@ -52,10 +52,12 @@ export interface StoryUi {
   linkStory: string;
   linkMethod: string;
   linkWorks: string;
-  linkInsight: string;
   linkContact: string;
   headline1: string;
-  headline2: string;
+  // v8：headline2 拆三段，「有据可查」套手绘底线（MkUnderline）
+  headline2Pre: string;
+  headline2Mark: string;
+  headline2Post: string;
   labelPast: string;
   labelNow: string;
   past1: string;
@@ -74,18 +76,16 @@ export interface CasesUi {
   tagZh: string;
   title: string;
   labelProblem: string;
-  labelDid: string;
-  labelKey: string;
+  labelSolution: string;
   labelMore: string;
   seriesLabel: string;
   seriesRail: string;
   seriesIntro: string;
-  labelResult: string;
-  sealVerified: string;
   artAssets: string;
-  artUnifiedEntry: string;
   slotFlow: string;
   slotUi: string;
+  slotFoundation: string;
+  slotData: string;
   slotHint: string;
   altSuffix: string;
 }
@@ -97,8 +97,13 @@ export interface WritingUi {
   headline1: string;
   headline2: string;
   empty: string;
-  expand: string;
-  collapse: string;
+  read: string;
+}
+
+// 文章子页（docs/j §4，宪法 §1.2）：页面外壳只有「回写作区」与「出处」两条，其余全是内容真源的字段
+export interface PostUi {
+  back: string;
+  source: string;
 }
 
 // 能力档位（docs/k §1.2）：档位只有两档，措辞含「没写进来=没做过」这条诚实边界
@@ -109,24 +114,6 @@ export interface CapabilityUi {
   headline1: string;
   headline2: string;
   sub: string;
-}
-
-export interface GrowthUi {
-  plateRail: string;
-  tagNo: string;
-  tagZh: string;
-  linkArchive: string;
-  linkWorks: string;
-  linkMethod: string;
-  linkLog: string;
-  linkAbout: string;
-  nextAria: string;
-  headline1: string;
-  headline2: string;
-  sub: string;
-  thMonth: string;
-  thTakeaway: string;
-  thTags: string;
 }
 
 export interface PrinciplesUi {
@@ -164,30 +151,6 @@ export interface PrinciplesUi {
   stampArchive: string;
   stampApproved: string;
 }
-
-export interface OffcatUi {
-  plateRail: string;
-  tagNo: string;
-  tagZh: string;
-  linkWorks: string;
-  linkWriting: string;
-  linkLog: string;
-  linkContact: string;
-  nextAria: string;
-  title: string;
-  sub: string;
-  thNo: string;
-  thItem: string;
-  thStatus: string;
-  thTags: string;
-  diagramAria: string;
-  artBlockDevice: string;
-  artEncryptedBackup: string;
-  artOffsite: string;
-  caption: string;
-  footBy: string;
-}
-
 export interface ContactUi {
   plateRail: string;
   tagNo: string;
@@ -195,8 +158,7 @@ export interface ContactUi {
   title: string;
   labelWechat: string;
   labelMail: string;
-  labelAsk: string;
-  askNote: string;
+  labelGithub: string;
   copyIdle: string;
   copyDone: string;
   promptText: string;
@@ -217,9 +179,8 @@ export interface ZoneUi {
   cases: CasesUi;
   capability: CapabilityUi;
   writing: WritingUi;
-  growth: GrowthUi;
+  post: PostUi;
   principles: PrinciplesUi;
-  offcat: OffcatUi;
   contact: ContactUi;
   footer: FooterUi;
 }
@@ -235,31 +196,30 @@ const zh: ZoneUi = {
     role: '独立系统建构者',
     railGate: 'DOSSIER',
     signature: '一个故事',
-    title: 'Hi，这里是一个故事。',
+    titlePre: 'Hi，这里是',
+    titleMark: '一个故事',
+    titlePost: '。',
     subline: '一个普通人做过哪些事、正在做什么，都记在这里。',
     subline2: '故事都有出处。',
     focusCta: '聊聊你的问题 →',
-    dossierAria: '已验证事实档案卡',
+    dossierAria: '交付档案卡',
     gateLabel: 'GATE✓',
     releasedLabel: '上线',
     revLabel: 'REV',
+    siteLabel: '本站',
     dossierName: '档案卡',
-    sealVerified: '已验证',
-    worksCta: '精选作品 01—04',
-    propDelivery: '独立交付',
-    propPrinciples: '边界诚实',
+    worksCta: '进入详情介绍',
   },
   nav: {
     brandZh: '独立交付档案',    ariaMain: '主导航',
     langAria: '切换语言',
     statusOnline: '在线',
     itemHero: '封面',
+    itemStory: '故事',
     itemCases: '项目',
     itemCapability: '能力',
     itemWriting: '写作',
-    itemGrowth: '成长',
     itemPrinciples: '规矩',
-    itemOffcat: '附录',
     itemContact: '联系',
   },
   story: {
@@ -270,10 +230,11 @@ const zh: ZoneUi = {
     linkStory: '故事',
     linkMethod: '方法与体系',
     linkWorks: '项目精选',
-    linkInsight: '洞见',
     linkContact: '联系',
     headline1: '干过的活，',
-    headline2: '都有据可查',
+    headline2Pre: '都',
+    headline2Mark: '有据可查',
+    headline2Post: '',
     labelPast: '曾经做过什么',
     labelNow: '正在做什么',
     past1: '起步于旅游数据爬虫，专做数据抓取与清洗——在杂乱数据与干净数据之间，练出了对数据的第一手感觉。',
@@ -291,19 +252,17 @@ const zh: ZoneUi = {
     tagZh: '项目案例（卷宗）',
     title: '做的项目，能看能查',
     labelProblem: '问题',
-    labelDid: '解决',
-    labelKey: '关键',
+    labelSolution: '解法与结果',
     labelMore: '还做过这些，就不一件件展开了',
     seriesLabel: '同一套底座 · 六个部位',
     seriesRail: '底座',
     seriesIntro:
       '上面详案里的门户、内网基础设施、OPS 与数据同步，加上这两块，不是六个各干各的工具：入口把几套系统收成一次登录，地基承载代码与发布，生产管住设备与运维，数据统一两边的口径与编号，身份供给账号与授权，出口统一 AI 与接口调用。接口与规矩互相咬合，缺一段就断链。',
-    labelResult: '结果',
-    sealVerified: '已验证',
     artAssets: '资产 · 监控 · 巡检 · 工单',
-    artUnifiedEntry: '统一入口',
     slotFlow: '示意 · 手机端流程',
     slotUi: '示意 · 界面功能线稿',
+    slotFoundation: '示意 · 地底线稿',
+    slotData: '示意 · 数据线稿',
     slotHint: '示意线稿 · 非真实截图',
     altSuffix: '截图',
   },
@@ -313,7 +272,7 @@ const zh: ZoneUi = {
     tagZh: '能力档位',
     headline1: '会的东西，',
     headline2: '一次说清',
-    sub: '档位只有两档：已交付＝在这个方向上真上线过东西；会用＝能独立完成日常工作，深度还在补。',
+    sub: '档位只有两档：已交付＝真上线过东西；会用＝能独立完成日常工作，深度还在补。',
   },
   writing: {
     plateRail: '图版 05 · WRITING',
@@ -322,29 +281,15 @@ const zh: ZoneUi = {
     headline1: '写下来的，',
     headline2: '才算想清楚',
     empty: '第一篇在写。写好就挂在这里。',
-    expand: '展开',
-    collapse: '收起',
+    read: 'READ',
   },
-  growth: {
-    plateRail: '图版 06 · GROWTH',
-    tagNo: '档案 06',
-    tagZh: '成长记录',
-    linkArchive: '档案',
-    linkWorks: '作品',
-    linkMethod: '方法',
-    linkLog: '记录',
-    linkAbout: '关于',
-    nextAria: '下一页',
-    headline1: '公开的成长，',
-    headline2: '一个月记一次',
-    sub: '给自己一个月进步的交代',
-    thMonth: '月份',
-    thTakeaway: '本月的交代',
-    thTags: '标签',
+  post: {
+    back: '回写作区',
+    source: '出处',
   },
   principles: {
-    plateRail: '图版 07 · PRINCIPLES',
-    tagNo: '档案 07',
+    plateRail: '图版 06 · PRINCIPLES',
+    tagNo: '档案 06',
     tagZh: '做事的规矩',
     headline1: '先立规矩，',
     headline2: '再让',
@@ -377,37 +322,14 @@ const zh: ZoneUi = {
     stampArchive: '档案',
     stampApproved: '通过',
   },
-  offcat: {
-    plateRail: '附录 · APPENDIX',
-    tagNo: '附录 A',
-    tagZh: '工作台之外',
-    linkWorks: '作品',
-    linkWriting: '写作',
-    linkLog: '记录',
-    linkContact: '联系',
-    nextAria: '下一页',
-    title: '工作台之外',
-    sub: '正卷之外的几件事：用什么做、正在拆什么、审美从哪来',
-    thNo: '编号',
-    thItem: '条目',
-    thStatus: '状态',
-    thTags: '标签',
-    diagramAria: '工作台拓扑示意：一台物理机内跑 Hyper-V 与 Ubuntu 虚拟机，容器里承载代码仓、CI、面板与备份，数据库落在独立块设备，备份一份出网到异地',
-    artBlockDevice: '独立块设备',
-    artEncryptedBackup: '加密备份',
-    artOffsite: '异地',
-    caption: '工作台拓扑 · 示意（不含真实网段与主机名）',
-    footBy: 'BY 一个故事',
-  },
   contact: {
     plateRail: '封底 · BACK COVER',
-    tagNo: '档案 08',
+    tagNo: '档案 07',
     tagZh: '联系',
     title: '聊得来，就一起做事',
     labelWechat: '微信',
     labelMail: '邮箱',
-    labelAsk: '索取',
-    askNote: '雇主与过程细节对公开版隐去 · 详询索取',
+    labelGithub: 'GitHub',
     copyIdle: '加微信聊聊',
     copyDone: '已复制',
     promptText: '请手动复制微信号',
@@ -435,19 +357,19 @@ const en: PartialUi = {
     role: "Independent systems builder",
     railGate: "DOSSIER",
     signature: "一个故事",
-    title: "Hi, this is one person's story.",
+    titlePre: 'Hi, this is ',
+    titleMark: "one person's story",
+    titlePost: '.',
     subline: "What an ordinary person has done — and is doing now — all kept here.",
     subline2: "Every story has a source.",
     focusCta: "Tell me your problem →",
-    dossierAria: "Verified-facts dossier card",
+    dossierAria: "Delivery dossier card",
     gateLabel: "GATE✓",
     releasedLabel: "Live",
     revLabel: "REV",
+    siteLabel: "This site",
     dossierName: "Dossier card",
-    sealVerified: "Verified",
-    worksCta: "Selected work 01–04",
-    propDelivery: "Independent delivery",
-    propPrinciples: "Honest boundaries",
+    worksCta: "Case details",
   },
   nav: {
     brandZh: "Independent delivery dossier",
@@ -455,12 +377,11 @@ const en: PartialUi = {
     langAria: "Switch language",
     statusOnline: "Online",
     itemHero: "Cover",
+    itemStory: "Story",
     itemCases: "Work",
     itemCapability: "Skills",
     itemWriting: "Writing",
-    itemGrowth: "Growth",
     itemPrinciples: "Principles",
-    itemOffcat: "Appendix",
     itemContact: "Contact",
   },
   story: {
@@ -471,10 +392,11 @@ const en: PartialUi = {
     linkStory: "Story",
     linkMethod: "Method",
     linkWorks: "Selected work",
-    linkInsight: "Insights",
     linkContact: "Contact",
     headline1: "Every job on record,",
-    headline2: "with evidence to back it",
+    headline2Pre: '',
+    headline2Mark: 'with evidence to back it',
+    headline2Post: '',
     labelPast: "What I have done",
     labelNow: "What I am doing",
     past1: "It began with travel-data crawlers — scraping and cleaning data for a living, building my first instincts for data between the messy and the clean.",
@@ -492,19 +414,17 @@ const en: PartialUi = {
     tagZh: "Project cases (dossier)",
     title: "Work you can see and verify",
     labelProblem: "Problem",
-    labelDid: "Solution",
-    labelKey: "Key point",
+    labelSolution: "What I did, where it stands",
     labelMore: "More things I have built",
     seriesLabel: "One Shared Platform · Six Parts",
     seriesRail: "Platform",
     seriesIntro:
       "The portal, the intranet infrastructure, OPS and the data reconciliation above, plus these two, are not six unrelated tools: the front door collapses several systems into one login, the foundation carries code and releases, the shop floor runs equipment and operations, data settles what each side calls a thing and whose numbering wins, identity supplies accounts and grants, and the exit unifies AI and API calls. Interfaces and rules interlock — one missing link breaks the chain.",
-    labelResult: "Result",
-    sealVerified: "Verified",
     artAssets: "Assets · Monitoring · Inspection · Tickets",
-    artUnifiedEntry: "Single entry",
     slotFlow: "Sketch · mobile flow",
     slotUi: "Sketch · UI wireframe",
+    slotFoundation: "Sketch · foundation plan",
+    slotData: "Sketch · data plan",
     slotHint: "Wireframe sketch · not a real screenshot",
     altSuffix: "screenshot",
   },
@@ -515,8 +435,11 @@ const en: PartialUi = {
     headline1: "What is written down,",
     headline2: "has been thought through",
     empty: "First piece in progress — it will hang here when done.",
-    expand: "Expand",
-    collapse: "Collapse",
+    read: "READ",
+  },
+  post: {
+    back: "Back to writing",
+    source: "Source",
   },
   capability: {
     plateRail: "Plate 04 · CAPABILITY",
@@ -524,28 +447,11 @@ const en: PartialUi = {
     tagZh: "Capabilities",
     headline1: "What I can do —",
     headline2: "said in one piece",
-    sub: "Two levels only: Delivered = something actually went live on it; Working knowledge = day-to-day work done independently, depth still growing.",
-  },
-  growth: {
-    plateRail: "Plate 06 · GROWTH",
-    tagNo: "File 06",
-    tagZh: "Growth log",
-    linkArchive: "Dossier",
-    linkWorks: "Work",
-    linkMethod: "Method",
-    linkLog: "Log",
-    linkAbout: "About",
-    nextAria: "Next page",
-    headline1: "Growth in public,",
-    headline2: "one entry a month",
-    sub: "A monthly accounting to myself",
-    thMonth: "Month",
-    thTakeaway: "This month's takeaway",
-    thTags: "Tags",
+    sub: "Two levels only: Delivered = something actually went live; Working knowledge = day-to-day work done independently, depth still growing.",
   },
   principles: {
-    plateRail: "Plate 07 · PRINCIPLES",
-    tagNo: "File 07",
+    plateRail: "Plate 06 · PRINCIPLES",
+    tagNo: "File 06",
     tagZh: "How I work",
     headline1: "Rules first,",
     headline2: "then let",
@@ -578,37 +484,14 @@ const en: PartialUi = {
     stampArchive: "Dossier",
     stampApproved: "Approved",
   },
-  offcat: {
-    plateRail: "Appendix · APPENDIX",
-    tagNo: "Appendix A",
-    tagZh: "Off the workbench",
-    linkWorks: "Work",
-    linkWriting: "Writing",
-    linkLog: "Log",
-    linkContact: "Contact",
-    nextAria: "Next page",
-    title: "Off the workbench",
-    sub: "A few things outside the main volume: what I build with, what I am taking apart, where the taste comes from",
-    thNo: "No.",
-    thItem: "Entry",
-    thStatus: "Status",
-    thTags: "Tags",
-    diagramAria: "Workbench topology sketch: one physical host running Hyper-V and an Ubuntu VM; containers carry the code forge, CI, dashboard and backups; the database sits on its own block device; one backup copy leaves to an offsite location",
-    artBlockDevice: "Own block device",
-    artEncryptedBackup: "Encrypted backup",
-    artOffsite: "Offsite",
-    caption: "Workbench topology · sketch (no real subnets or hostnames)",
-    footBy: "BY 一个故事",
-  },
   contact: {
     plateRail: "Back cover · BACK COVER",
-    tagNo: "File 08",
+    tagNo: "File 07",
     tagZh: "Contact",
     title: "If we click, let us work together",
     labelWechat: "WeChat",
     labelMail: "Email",
-    labelAsk: "Discretion",
-    askNote: "Employers and process details are withheld from the public edition — ask and I will share",
+    labelGithub: "GitHub",
     copyIdle: "Add me on WeChat",
     copyDone: "Copied",
     promptText: "Please copy the WeChat ID manually",
@@ -629,6 +512,8 @@ export function uiFor(locale: Locale): ZoneUi {
 }
 
 // 守卫用：返回该语言相对中文缺失的键路径，例如 'hero.title'。
+// v8 起拆段键（titlePre/Mark/Post 等）允许合法空段（如 en 的 story.headline2Pre），
+// 故空串视为在场；真正「键不存在」（Partial 漏译）仍会被拦下。
 export function missingKeys(locale: Locale): string[] {
   const base = ui.zh as unknown as Record<string, Record<string, string>>;
   const target = (locale === 'zh' ? ui.zh : ui.en) as unknown as Record<string, Record<string, string> | undefined>;
@@ -636,8 +521,7 @@ export function missingKeys(locale: Locale): string[] {
   for (const zone of Object.keys(base)) {
     const dict = target[zone];
     for (const key of Object.keys(base[zone])) {
-      const value = dict?.[key];
-      if (typeof value !== 'string' || value.length === 0) {
+      if (typeof dict?.[key] !== 'string') {
         missing.push(`${zone}.${key}`);
       }
     }

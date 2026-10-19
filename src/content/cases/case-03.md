@@ -1,5 +1,5 @@
 ---
-title: 统一用户中心 UUC（内部系统）
+title: 统一用户中心 UUC
 order: 3
 status: 内部系统
 tier: minor
@@ -7,9 +7,9 @@ series: 底座
 part: 身份
 partEn: Identity
 problem: 企业内部多个系统的账号、身份、权限各自为政：一个人入职要在几套系统各开一份账号，谁有什么权限靠人记。
-whatIDid: 搭起企业内部的统一身份与权限体系（SSO 中台）：单点登录协议对接、双因素动态口令、敏感字段 AES-256-GCM 加密，把分散在各系统的账号、身份、权限收拢到一处，配审计与接入规范。
-challenge: 身份是别的服务都要依赖的地基，出错的代价最高。分三期推进、逐期验收（功能、性能与回归用例全部通过），权限对接一律 fail-closed——查不到就绝不放行。
-outcome: 多系统登录与授权统一为一个入口、一套规则。
+whatIDid: 搭起企业统一身份与权限体系（SSO 中台）：单点登录、双因素口令、敏感字段加密，把散在各系统的账号权限收拢一处，配审计与接入规范。
+challenge: 身份是所有系统的地基，出错代价最高：权限判定一律 fail-closed——查不到就绝不放行。
+outcome: 多系统登录与授权统一为一个入口、一套规则；新人入职不再要在几套系统里各开一遍账号。
 stack:
   - Go
   - Vue
@@ -18,11 +18,11 @@ evidence: 企业内部 SSO 中台，脱敏处理
 # image: /case-03.png
 # imageAlt: UUC 平台的脱敏示意
 published: true
-titleEn: "Unified User Center UUC (internal system)"
+titleEn: "Unified User Center UUC"
 problemEn: "Accounts, identities and permissions across several internal systems each went their own way: one new hire needed an account in every system, and who had which permission lived in someone's memory."
-whatIDidEn: "Built a unified identity-and-permission layer (an SSO hub) for the company: single sign-on protocol integration, two-factor one-time codes, AES-256-GCM encryption for sensitive fields, gathering accounts, identities and permissions dispersed across systems into one place, with audit trails and an integration spec."
-challengeEn: "Identity is the ground other services build on — the cost of getting it wrong is the highest of all. Delivered in three phases, each one signed off (functional, performance and regression cases all passing), and every permission check is fail-closed: no lookup, no access."
-outcomeEn: "Logins and authorization across systems now share one entry and one set of rules."
+whatIDidEn: "Built a unified identity-and-permission layer (an SSO hub) for the company: single sign-on, two-factor one-time codes, encryption for sensitive fields — accounts and permissions dispersed across systems gathered into one place, with audit trails and an integration spec."
+challengeEn: "Identity is the ground every other system builds on, where mistakes cost the most: every permission check is fail-closed — no lookup, no access."
+outcomeEn: "Logins and authorisation across systems now share one entry and one set of rules; onboarding a new hire is no longer an account in every system."
 ---
 
 把"一人一套账号各自为政"，理成一套统一可管的身份体系。

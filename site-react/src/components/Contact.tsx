@@ -4,6 +4,8 @@ import { useUi } from '../i18n/LocaleContext';
 import s from './Contact.module.css';
 
 const wechat = 'G10S7H21';
+// 公开代码主页（用户 2026-10-17 指定要上页）；与邮箱同一条联系方式体裁，不做「项目列表」
+const githubUrl = 'https://github.com/GassamFlower';
 const emails = [
   '1462882928@qq.com',
   'luoyongui07@gmail.com',
@@ -35,7 +37,7 @@ export default function Contact() {
       <div className={`container ${s.contactInner}`}>
         <div className="section-head">
           <span className="tag"><b>{t.contact.tagNo}</b> · {t.contact.tagZh}</span>
-          <span className="meta">08</span>
+          <span className="meta">07</span>
         </div>
         <div className={s.ctRule}></div>
 
@@ -58,8 +60,11 @@ export default function Contact() {
                 </dd>
               </div>
               <div className={s.specRow}>
-                <dt>{t.contact.labelAsk}</dt>
-                <dd className={s.specNote}>{t.contact.askNote}</dd>
+                <dt>{t.contact.labelGithub}</dt>
+                <dd>
+                  {/* .infoMail 是联系方式链接的 mono 小字样式，不只给邮箱用 */}
+                  <a className={`ink-link ${s.infoMail}`} href={githubUrl} rel="noopener noreferrer">github.com/GassamFlower</a>
+                </dd>
               </div>
             </dl>
 

@@ -1,5 +1,6 @@
 // Principles — 档案 07 · 做事的规矩（React 版 · 保真 Astro Principles）
 import { useUi } from '../i18n/LocaleContext';
+import { MkArrow } from './annotations/Annotations';
 import s from './Principles.module.css';
 
 export default function Principles() {
@@ -25,7 +26,7 @@ export default function Principles() {
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>{t.principles.tagNo}</b> · {t.principles.tagZh}</span>
-          <span className="meta">07</span>
+          <span className="meta">06</span>
         </div>
         <div className={s.prRule}></div>
 
@@ -69,8 +70,9 @@ export default function Principles() {
         <div className={s.tiers}>
           <p className={s.tierLead}>{t.principles.tierLead}</p>
           <ol className={s.tierFlow}>
-            {tiers.map((x) => (
+            {tiers.map((x, i) => (
               <li key={x.dir} className={s.tier}>
+                {i === 0 && <MkArrow className={s.mkInbox} />}
                 <span className={s.tierDir}>{x.dir}</span>
                 <h3 className={s.tierName}>{x.name}</h3>
                 <p className={s.tierRole}>{x.role}</p>

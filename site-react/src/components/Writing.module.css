@@ -1,4 +1,4 @@
-/* Writing 区 — 复用 v6 体裁：列表行以细线分隔，日期 mono、标题衬线；空态一行墨弱字 */
+/* Writing 区 — v8.6（docs/k §11）：卡片多列网格，暖白纸面 + 顶部发线，无圆角无阴影；空态一行墨弱字 */
 .empty {
   margin-top: var(--space-6);
   font-family: var(--font-serif);
@@ -47,13 +47,31 @@
 
 .list {
   list-style: none;
-  margin: var(--space-6) 0 0;
+  margin: var(--space-8) 0 0;
   padding: 0;
+  display: grid;
+  /* auto-fill 而非 auto-fit：一篇时左包一轨（约 1/3 宽）而不是被拉成整行空壳 */
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: var(--space-8);
 }
 
+/* 网格单元撑满 = 同行卡等高，底部 READ 行因此能对齐 */
 .item {
+  display: flex;
+}
+
+/* 卡片（docs/k §11 · v8.6）：暖白纸面 + 顶部一条发线，无圆角、无阴影、无四边框。
+   参考图（纯白 + 圆角 + 阴影 + 彩色 pill）只吸收它的网格骨架与卡内四层信息，
+   皮肤撞 v8 册 §2.1「唯一阴影 = 墨 8% 极轻投影」与圆角 0–2px 纪律，故不入。 */
+.card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: var(--color-surface);
   border-top: 1px solid var(--color-line);
-  padding: var(--space-4) 0;
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  color: inherit;
+  text-decoration: none;
 }
 
 .date {
@@ -66,91 +84,55 @@
   font-family: var(--font-serif);
   font-size: var(--text-xl);
   font-weight: 600;
+  line-height: var(--type-heading-lh);
   color: var(--color-ink);
-  margin: var(--space-2) 0;
+  margin: var(--space-3) 0 var(--space-4);
 }
 
+/* 摘要不截断：summary 是真源短句，clamp 会把用户自己写的话切半 */
 .summary {
   font-size: var(--text-base);
-  color: var(--color-ink);
-  max-width: 68ch;
-}
-
-/* 就地展开（docs/k §1.1）：原生 details，收起态正文仍在初始 HTML 内 */
-.doc {
-  margin-top: var(--space-2);
-}
-.head {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  gap: var(--space-4);
-  cursor: pointer;
-  list-style: none;
-}
-.head::-webkit-details-marker {
-  display: none;
-}
-/* 日期占满一行，标题与展开标签同处第二行两列 */
-.date {
-  grid-column: 1 / -1;
-}
-.head .title {
-  margin: var(--space-2) 0 0;
-}
-.chev {
-  grid-column: 2;
-  grid-row: 2;
-  align-self: end;
-}
-.doc[open] .title {
-  color: var(--color-ink);
-}
-.chev {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.12em;
+  line-height: 1.7;
   color: var(--color-ink-soft);
-  white-space: nowrap;
-}
-.onlyOpen {
-  display: none;
-}
-.doc[open] .onlyOpen {
-  display: inline;
-}
-.doc[open] .onlyClosed {
-  display: none;
+  margin: 0;
 }
 
-/* 正文：长文本按 ≤75ch 行宽收，行间靠留白不靠线 */
-.body {
-  max-width: 75ch;
-  padding-top: var(--space-6);
+/* 卡底 mono 行：贴到卡底，让同行卡的对齐线落在同一水平（图版排面） */
+.read {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-faint);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.08em;
+  color: var(--color-ink-soft);
 }
-/* 正文段落/列表项用系统 sans（--font-sans 不挂 webfont，零字节）。
-   长文若仍吃衬线子集，每篇 2000 字要多拖 ~500 kB 字体。
-   ⚠ 与此处 font-family 绑定的是 Writing.tsx 里的 data-font="sans" 标记——
-   scripts/fonts.mjs 靠它把这些字挡在衬线子集外；改成衬线必须同时删标记，否则线上缺字。 */
-.body p {
-  font-size: var(--text-base);
-  line-height: 1.9;
-  color: var(--color-ink);
-  margin: 0 0 var(--space-5);
+/* 生长线：常态收起，悬停/聚焦从左展到右（沿用 .ink-link 的下划线生长语言，0.35s expo） */
+.read::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s var(--ease-out);
 }
-.h {
-  font-family: var(--font-serif);
-  font-size: var(--text-lg);
-  font-weight: 700;
-  color: var(--color-ink);
-  margin: var(--space-8) 0 var(--space-4);
+
+/* 活层（D4）：砖红只走交互态——常态全墨 */
+.card .title,
+.card .read {
+  transition: color 0.25s var(--ease-out);
 }
-.body ul {
-  margin: 0 0 var(--space-5);
-  padding-left: 1.4em;
+.card:hover .title,
+.card:focus-visible .title,
+.card:hover .read,
+.card:focus-visible .read {
+  color: var(--color-seal);
 }
-.body li {
-  font-size: var(--text-base);
-  line-height: 1.9;
-  margin-bottom: var(--space-2);
+.card:hover .read::after,
+.card:focus-visible .read::after {
+  transform: scaleX(1);
 }

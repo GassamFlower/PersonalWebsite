@@ -1,11 +1,13 @@
 // Writing — 图版 05 · 写作（docs/j 管线 + docs/k §1.1 承载）
 // 真源为空时渲染诚实空态，绝不为填充区块编造文章。
-// 展开用原生 <details>/<summary>：正文在初始 HTML 里，无 JS 也读得到全文（宪法 §17），
-// 不引第三方折叠库，也不做独立文章页（多页=修宪，触发线见 docs/k §1.1）。
+// v8.5（docs/j §4 · 宪法 §1.2）：由页内 <details> 展开改为卡片列表 + 每篇一个静态子页。
+// 整卡是一个原生 <a>：键盘可达、无 JS 也点得进子页；卡内只放 date/title/summary 三个真源字段，不加配图不加标签。
+// v8.6（docs/k §11）：列表改多列卡片网格（暖白纸面 + 顶部发线，无圆角无阴影），卡底 mono READ 行只走交互态入朱。
 import { getWriting, getWritingPlan } from '../lib/content';
-import { parseBlocks } from '../lib/markdown';
 import { useUi } from '../i18n/LocaleContext';
 import { pick } from '../i18n/enums';
+import { postPath } from '../lib/routes';
+import { MkCircle } from './annotations/Annotations';
 import s from './Writing.module.css';
 
 export default function Writing() {
@@ -23,33 +25,22 @@ export default function Writing() {
 
         <h2 className="section-title">{t.writing.headline1}<br />{t.writing.headline2}</h2>
 
+        {/* v8 手层③：诚实空态套圈注——「在写」这件事本身是唯一可标的内容 */}
         {pieces.length === 0 ? (
-          <p className={s.empty}>{t.writing.empty}</p>
+          <p className={s.empty}><MkCircle>{t.writing.empty}</MkCircle></p>
         ) : (
           <ol className={s.list}>
             {pieces.map((p, i) => {
-              // 英文页只读 bodyEn；两者由守卫保证同时存在，这里仍显式选一侧，避免英文页混排中文正文
-              const src = locale === 'en' ? p.bodyEn ?? '' : p.body;
+              const title = pick(locale, p.title, p.titleEn);
               return (
-                <li key={i} className={s.item}>
-                  <details className={s.doc} id={`writing-${i + 1}`}>
-                    <summary className={s.head}>
-                      <span className={s.date}>{p.date}</span>
-                      <h3 className={s.title}>{pick(locale, p.title, p.titleEn)}</h3>
-                      <span className={s.chev} aria-hidden="true">
-                        <span className={s.onlyClosed}>{t.writing.expand}</span>
-                        <span className={s.onlyOpen}>{t.writing.collapse}</span>
-                      </span>
-                    </summary>
+                <li key={p.slug} className={s.item}>
+                  <a className={s.card} href={postPath(p.slug, locale)}>
+                    <span className={s.date}>{p.date}</span>
+                    {/* v8 手层：最新一篇标题套虚线圈注（全站 ≤8 处，与下方空态圈注互斥分支） */}
+                    <h3 className={s.title}>{i === 0 ? <MkCircle>{title}</MkCircle> : title}</h3>
                     <p className={s.summary} data-font="sans">{pick(locale, p.summary, p.summaryEn)}</p>
-                    <div className={s.body}>
-                      {parseBlocks(src).map((b, j) =>
-                        b.kind === 'h' ? <h4 key={j} className={s.h}>{b.text}</h4>
-                          : b.kind === 'p' ? <p key={j} data-font="sans">{b.text}</p>
-                            : <ul key={j}>{b.items.map((x, k) => <li key={k} data-font="sans">{x}</li>)}</ul>
-                      )}
-                    </div>
-                  </details>
+                    <span className={s.read}>{t.writing.read} {'→'}</span>
+                  </a>
                 </li>
               );
             })}

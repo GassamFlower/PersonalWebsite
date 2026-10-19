@@ -3,11 +3,12 @@
 // 输出仍为纯静态 dist/（无后端），SSR 仅作为「构建期一次渲染」。
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { mdPlugin } from './md-plugin';
 
 export default defineConfig({
   // 与客户端同 base：切换器用 import.meta.env.BASE_URL 拼 href，两边不一致会水合错 href
   base: '/PersonalWebsite/',
-  plugins: [react()],
+  plugins: [react(), mdPlugin()],
   ssr: {
     noExternal: true,
     target: 'node',

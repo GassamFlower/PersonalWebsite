@@ -1,0 +1,127 @@
+/* Post 子页 — 沿用图鉴体裁：mono 日期与导航、衬线大标题、正文 ≤75ch 行宽走系统 sans */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--color-base);
+}
+.barInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding-block: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+}
+/* 活层（D4）：交互链接常态砖红，hover 同系互混加深（不用 opacity——会掉出 AA） */
+.back {
+  color: var(--color-seal);
+  transition: color 0.25s var(--ease-out);
+  white-space: nowrap;
+}
+.back:hover {
+  color: color-mix(in srgb, var(--color-seal) 82%, var(--color-ink));
+}
+.langSwitch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+.langSwitch a {
+  border: 1px solid var(--color-seal);
+  padding: 1px 0.5em;
+  color: var(--color-seal);
+  transition: background-color 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+.langOn {
+  background: var(--color-seal);
+  color: var(--color-on-accent);
+}
+.barRule {
+  height: 1px;
+  background: var(--color-ink);
+  opacity: 0.85;
+}
+
+.doc {
+  padding-block: var(--space-16) var(--space-24);
+  max-width: 75ch;
+}
+.date {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+.title {
+  font-size: var(--text-4xl);
+  margin: var(--space-4) 0 var(--space-5);
+}
+.summary {
+  font-size: var(--text-lg);
+  line-height: 1.8;
+  color: var(--color-ink-soft);
+  margin: 0;
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--color-faint);
+}
+
+.body {
+  padding-top: var(--space-8);
+  counter-reset: plate;
+}
+/* 正文段落/列表项走系统 sans（--font-sans 不挂 webfont，零字节）。
+   ⚠ 与此处 font-family 绑定的是 Post.tsx 里 p/ul>li 的 data-font="sans" 标记——
+   scripts/fonts.mjs 靠它把这些字挡在衬线子集外；改成衬线必须同时删标记，否则线上缺字。 */
+.body p {
+  font-size: var(--text-base);
+  line-height: 1.9;
+  color: var(--color-ink);
+  margin: 0 0 var(--space-5);
+}
+.body ul {
+  margin: 0 0 var(--space-5);
+  padding-left: 1.4em;
+}
+.body li {
+  font-size: var(--text-base);
+  line-height: 1.9;
+  margin-bottom: var(--space-2);
+}
+/* ## 小标题是子页仅剩的两处衬线面之一（另一处是 title），必须留在子集内。
+   图版号由 CSS counter 生成：mono、走 ::before，不进正文文本节点，所以一个字也不占衬线子集；
+   真源里因此不写「一、二、」。四道门本身是序列，编号携带信息而不是装饰。 */
+.h {
+  counter-increment: plate;
+  font-size: var(--text-xl);
+  margin: var(--space-12) 0 var(--space-4);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-faint);
+}
+.h::before {
+  content: counter(plate, decimal-leading-zero);
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  color: var(--color-seal);
+}
+
+/* 出处行：正文之后的唯一一条外链，走 sans 不占衬线子集 */
+.source {
+  margin-top: var(--space-8);
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+@media (max-width: 719px) {
+  .title {
+    font-size: var(--text-3xl);
+  }
+  .doc {
+    padding-block: var(--space-12) var(--space-16);
+  }
+}

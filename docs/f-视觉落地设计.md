@@ -189,6 +189,23 @@
 
 ---
 
+## 11 · 封面档案卡改「可点索引」（v8.7 · 2026-10-17）
+
+用户裁决路径：先要求「这个优化需要讨论下，我现在还没有一个大概方向」→ 诊断 + 唯一推荐 + 样张 → 批准并追加两条（卡内不盖「已验证」、按钮文案「进入详情介绍」）。这里记视觉口径，内容口径在 `PROJECT_STATUS.md` v8.7 行。
+
+| 决策 | 理由 | 落点 |
+|---|---|---|
+| 三行由「名单」改「索引」 | 原卡把三件事同时摆在墨场上：卡眉 GATE✓、行尾朱砂章、rail 验收句——同一张卡三重验收是噪声不是证据；且名单不可点，读者要自己滚到案例区找 | 每行一个原生 `<a href="#case-<order>">`，整行是热区；卡内朱砂章撤，验收只剩卡眉一处 GATE✓ |
+| 行面 = 衬线题名 / sans 说明 / mono 箭头 | 档案卡是「纸面」而不是「台账」：题名要立得住，说明只是路标；三层用三种字体分职，比同一种 mono 三行更像人写的档案 | `.factLink` 双列 grid（`minmax(0,1fr) auto`）· `.factTitle` 衬线 600 · `.factNote` sans 13.6/1.6 `--color-ink-soft` · `.factArrow` mono `--color-line` `aria-hidden` |
+| 分行用 1px 发线，不用卡中卡 | 白卡里再套白卡是 v8 册禁的 AI 感模板；发线沿用全站 `--color-faint` 分行语言 | `.factRow + .factRow{border-top:1px solid var(--color-faint)}` |
+| 砖红只进交互层 | 常态零朱砂（D4：交互无配额，印层要留给章与署名印） | hover/focus 时题名与箭头入 `--color-seal`、箭头 `translateX(3px)`；说明行不变朱 |
+| 版本事实挪到卡脚 | 「上线 2026-08 · REV 2026-10」压在案例名单头上会被读成「这三个案子的上线时间」，而它说的是本站 | `.dossierSite` mono 细字左对齐，与 CTA 同栏竖排 |
+| 说明行取真源派生，不新写文案 | 内容真源纪律：封面不造第二套事实 | `getHeroFacts()` 把 `whatIDid` 截到第一个句读；案面选择改由 md `featured: true` 声明，`check-content.mjs` 规则⑦ 兜死「恰好 3 张、必须 `tier: feature`」 |
+
+**待回写**：`docs/components.md` §4 封面 Hero 行仍写着 v8.1 口径（「行只剩标题＋已验证章」，三案含 UUC），已被本批推翻——该文档另一路会话在途，此处只记债不代改。
+
+---
+
 ## 附：本文档的产出依据（证据路径）
 - 审读了 `src/styles/global.css`、`src/layouts/Base.astro`、`src/pages/index.astro`、`src/components/{Hero,Story,Timeline,Cases,CapabilityMap,Growth,Principles,Contact,SiteNav}.astro` 全部组件。
 - 对照了 `docs/视觉方向-v3-架构门.md` 的锁定 token / 母题 / 反套路清单、`docs/e-架构设计文档.md` 的三分离约束、`docs/出图提示词-v3.md` 的 9 张参考图。

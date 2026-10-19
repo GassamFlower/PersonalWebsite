@@ -1,0 +1,59 @@
+/* Annotations — v8 手层批注笔（D4 三层制之「手」）：蜡笔感手绘 SVG 圈注/底线/箭头
+   纪律：全站 ≤8 处（docs/components.md §5）；aria-hidden 纯装饰，文字本体永不被裁；
+   描画用 clip-path 关键帧（无 JS 也走完），reduced-motion 直接呈完整笔画 */
+
+.mk {
+  position: relative;
+  display: inline-block;
+}
+.mkSvg {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+  fill: none;
+  stroke: var(--mk-stroke, var(--color-seal));
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mkDark { --mk-stroke: var(--color-seal-on-dark); }
+
+/* 圈注：双圈套叠，微旋 -2.5deg，四周出血让笔画包住文字 */
+.mkCircle {
+  inset: -0.35em -0.3em;
+  width: calc(100% + 0.6em);
+  height: calc(100% + 0.7em);
+  transform: rotate(-2.5deg);
+}
+.mkDash { stroke-dasharray: 6 5; stroke-width: 1.6; }
+
+/* 底线：波浪一笔，压在文字基线下 */
+.mkUnder {
+  left: -1%;
+  bottom: -0.22em;
+  width: 102%;
+  height: 0.32em;
+  transform: rotate(-0.8deg);
+}
+.mkWave { stroke-width: 2.6; }
+
+/* 箭头：定点尺寸（不随文字伸缩），由调用方绝对定位 */
+.mkArrowSvg {
+  width: 2.1em;
+  height: 1.75em;
+}
+.mkArrowPath { stroke-width: 2; }
+
+/* 描画入场：左→右揭示 0.6s expo，延时避开首屏抢戏；无 JS 照常播放 */
+.draw {
+  clip-path: inset(-30% 100% -30% -5%);
+  animation: mkDraw 0.6s var(--ease-out) 0.4s forwards;
+}
+@keyframes mkDraw {
+  to { clip-path: inset(-30% -5% -30% -5%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .draw {
+    clip-path: none;
+    animation: none;
+  }
+}

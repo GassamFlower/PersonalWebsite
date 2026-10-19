@@ -8,7 +8,7 @@
 /* 墨场上覆盖共享全局类（section-head / rail / plate-rail 均为纸白系） */
 .hero :global(.section-head) { color: var(--color-field-ink); }
 .hero :global(.section-head .tag) { color: var(--color-field-muted); }
-.hero :global(.section-head .tag b) { color: var(--color-field-ink); }
+.hero :global(.section-head .tag b) { color: var(--color-seal-on-dark); }
 .hero :global(.plate-rail) { color: var(--color-field-muted); }
 
 .heroInner {
@@ -40,7 +40,7 @@
   color: var(--color-field-muted);
   margin-bottom: calc(var(--space-1) * -1);
 }
-.hero .heroRail :global(.gate) { color: var(--color-field-ink); }
+.hero .heroRail :global(.gate) { color: var(--color-seal-on-dark); }
 /* v7.1：封面改一排大标题——字号由列宽反推（列宽 ≈ (视口-边距-列距)×0.535，zh 全文 ≈10.2em），
    保证 960px 以上单行不折行；≤960 单列后按整行宽反推，cap 回桌面字号。 */
 .heroTitle {
@@ -59,7 +59,7 @@
 }
 /* 大字开机动效：标题由下上浮（克制动效；reduced-motion 关闭） */
 .heroTitleIn {
-  animation: heroRise var(--duration-slow) var(--ease-ink) both;
+  animation: heroRise 0.9s var(--ease-out) both;
 }
 @keyframes heroRise {
   0%   { opacity: 0; transform: translateY(0.5em) skewY(1deg); filter: blur(5px); }
@@ -97,7 +97,7 @@
   color: var(--color-ink);
   border: 1px solid color-mix(in srgb, var(--color-ink) 30%, transparent);
   border-radius: var(--radius);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 18px 48px color-mix(in srgb, var(--color-ink) 45%, transparent);
   padding: var(--space-6);
 }
 .dossierHead {
@@ -114,59 +114,72 @@
   font-size: var(--text-lg);
   color: var(--color-ink);
 }
+/* 三行索引（v8.7）：行 = 真源 featured 的详案卡，整行一个原生 <a> 跳到案例区那张卡。
+   分隔用 1px 细线而非卡片套卡片；只有悬停/聚焦时标题入朱，属 D4 交互层（无配额）。 */
 .factList {
   list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.factRow + .factRow { border-top: 1px solid var(--color-faint); }
+.factLink {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--space-3);
+  align-items: baseline;
+  padding: var(--space-3) 0;
+  color: inherit;
+  text-decoration: none;
+}
+.factTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+/* 说明行派生自真源 whatIDid（截到第一个句读），无新事实；sans 标记同 its 渲染口径，不进衬线子集 */
+.factNote {
+  grid-column: 1;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+}
+.factArrow {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-family: var(--font-mono);
+  color: var(--color-line);
+}
+.factTitle { transition: color 0.25s var(--ease-out); }
+.factArrow { transition: color 0.25s var(--ease-out), transform 0.25s var(--ease-out); }
+.factLink:hover .factTitle, .factLink:focus-visible .factTitle { color: var(--color-seal); }
+.factLink:hover .factArrow, .factLink:focus-visible .factArrow { color: var(--color-seal); transform: translateX(3px); }
+.dossierFoot {
+  border-top: 1px solid var(--color-faint);
+  padding-top: var(--space-4);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
 }
-.factRow {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
+/* 版本事实是本站 metadata，不是那三个案子的时间，故压到卡脚，mono 细字左对齐 */
+.dossierSite {
   font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--color-ink);
-}
-.factStatus {
-  flex: none;
-  min-width: 5.5em;
-  color: var(--color-ink);
   font-size: var(--text-xs);
   letter-spacing: 0.08em;
+  color: var(--color-ink-soft);
 }
-.factTitle {
-  flex: 1;
-}
-.dossierFoot {
-  border-top: 1px solid var(--color-faint);
-  padding-top: var(--space-4);
-}
-/* 主按钮=墨底纸白字（三色制内的反白，非彩色） */
+/* 主按钮=朱砂底暖纸白字（v8 D4 活层）；hover 同系互混加深，不出纯黑 */
 .dossierCta {
   width: 100%;
   text-align: center;
-  background: var(--color-ink);
-  color: var(--color-base);
-  transition: background-color 0.2s;
+  background: var(--color-seal);
+  color: var(--color-on-accent);
+  transition: background-color 0.25s var(--ease-out);
 }
-.dossierCta:hover { background: color-mix(in srgb, var(--color-ink) 82%, #fff); }
-
-.heroFoot {
-  display: flex;
-  gap: var(--space-12);
-  border-top: 1px solid var(--color-field-rule);
-  padding-top: var(--space-8);
-}
-.heroProp {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  color: var(--color-field-ink);
-  letter-spacing: 0.04em;
-}
-.heroProp .arrow { color: var(--color-field-muted); transition: transform 0.2s; }
-.heroProp:hover .arrow { transform: translateX(4px); }
+.dossierCta:hover { background: color-mix(in srgb, var(--color-seal) 85%, var(--color-ink)); }
 
 @media (max-width: 960px) {
   .heroGrid { grid-template-columns: 1fr; gap: var(--space-8); }
@@ -177,8 +190,5 @@
 }
 @media (max-width: 640px) {
   .hero { padding-top: var(--space-12); }
-  .heroFoot { flex-direction: column; gap: var(--space-3); }
   .heroSub { font-size: var(--text-sm); }
-  .heroFoot { margin-top: var(--space-4); }
-  .factRow { flex-wrap: wrap; }
 }

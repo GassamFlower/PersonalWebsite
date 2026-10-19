@@ -13,7 +13,6 @@ export default function Story() {
     { href: '#story', label: t.story.linkStory },
     { href: '#principles', label: t.story.linkMethod },
     { href: '#cases', label: t.story.linkWorks },
-    { href: '#growth', label: t.story.linkInsight },
     { href: '#contact', label: t.story.linkContact },
   ];
 
@@ -70,7 +69,7 @@ export default function Story() {
         </div>
 
         <div className={`rail ${s.storyFoot}`}>
-          <span>PLATE 02 / 08</span>
+          <span>PLATE 02 / 07</span>
           <span className={s.footSep} aria-hidden="true">|</span>
           <span>CAT.2026-10</span>
           <span className={s.footSep} aria-hidden="true">|</span>
