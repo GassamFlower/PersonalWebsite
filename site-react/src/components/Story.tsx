@@ -1,5 +1,7 @@
 // Story — 图版 02 · 一个人的故事（v7.3：曾经=三段编年〔爬虫→保险运维→法院八年〕，正在=三段〔现状+从零搭建+深化段4〕；
 // now 真源 doing 不再渲染（now.md/守卫保留）；五级体系句撤出本区，由 Principles 07 流水图承载；行式去编号，层级靠标签行+竖线+发线）
+// v9 降噪（docs/视觉方向-v9-降噪.md D2）：内嵌 right-nav 与区尾 meta 群（PLATE/CAT/REV/BY）整组删除，
+// 导航职责归顶导，图版号职责归眉栏与 plate-rail。
 import { useUi } from '../i18n/LocaleContext';
 import { MkUnderline } from './annotations/Annotations';
 import s from './Story.module.css';
@@ -8,13 +10,6 @@ export default function Story() {
   const { t } = useUi();
   const past = [t.story.past1, t.story.past2, t.story.past3];
   const present = [t.story.present1, t.story.present2, t.story.present3];
-  const subNav = [
-    { href: '#hero', label: t.story.linkPosition },
-    { href: '#story', label: t.story.linkStory },
-    { href: '#principles', label: t.story.linkMethod },
-    { href: '#cases', label: t.story.linkWorks },
-    { href: '#contact', label: t.story.linkContact },
-  ];
 
   return (
     <section id="story" className="section">
@@ -22,12 +17,8 @@ export default function Story() {
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>{t.story.tagNo}</b> · {t.story.tagZh}</span>
-          <div className="right-nav">
-            {subNav.map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}
-            <span className="page-num">02</span>
-          </div>
         </div>
-        <div className={s.storyRule}></div>
+        <div className="rule"></div>
 
         {/* v8 手层②：headline2 单行拼接防空白节点；「有据可查」套手绘波浪底线 */}
         <h2 className={s.storyHeadline}>{t.story.headline1}<br />{t.story.headline2Pre}<MkUnderline>{t.story.headline2Mark}</MkUnderline>{t.story.headline2Post}</h2>
@@ -66,16 +57,6 @@ export default function Story() {
               alt={t.story.artAlt}
             />
           </figure>
-        </div>
-
-        <div className={`rail ${s.storyFoot}`}>
-          <span>PLATE 02 / 07</span>
-          <span className={s.footSep} aria-hidden="true">|</span>
-          <span>CAT.2026-10</span>
-          <span className={s.footSep} aria-hidden="true">|</span>
-          <span>REV v6</span>
-          <span className={s.footSep} aria-hidden="true">|</span>
-          <span>{t.story.footSigned}</span>
         </div>
       </div>
     </section>

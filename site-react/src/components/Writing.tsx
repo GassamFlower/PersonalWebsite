@@ -20,8 +20,8 @@ export default function Writing() {
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>{t.writing.tagNo}</b> · {t.writing.tagZh}</span>
-          <span className="meta">05</span>
         </div>
+        <div className="rule"></div>
 
         <h2 className="section-title">{t.writing.headline1}<br />{t.writing.headline2}</h2>
 

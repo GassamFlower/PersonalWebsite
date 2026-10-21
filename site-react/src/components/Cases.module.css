@@ -4,7 +4,6 @@
 .cases :global(.section-head) { color: var(--color-field-ink); }
 .cases :global(.section-head .tag) { color: var(--color-field-muted); }
 .cases :global(.section-head .tag b) { color: var(--color-seal-on-dark); }
-.cases :global(.section-head .meta) { color: var(--color-field-muted); }
 .cases :global(.section-title) { color: var(--color-field-ink); }
 .cases :global(.rail) { color: var(--color-field-muted); }
 .cases :global(.rail .gate) { color: var(--color-seal-on-dark); }

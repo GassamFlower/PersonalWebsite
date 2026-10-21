@@ -1,9 +1,3 @@
-.storyRule {
-  height: 1px;
-  background: var(--color-ink);
-  opacity: 0.85;
-  margin-bottom: var(--space-12);
-}
 .storyGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -74,20 +68,9 @@
   margin: 0 0 var(--space-4);
   text-wrap: balance;
 }
-.storyFoot {
-  display: flex;
-  align-items: center;
-  gap: var(--space-5);
-  margin-top: var(--space-12);
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--color-ink);
-  letter-spacing: 0.12em;
-}
-.footSep { color: var(--color-line); } /* 分隔符按「线」任职：≥3:1 非文本对比，faint 在纸白上近乎隐形 */
 @media (max-width: 860px) {
   .storyGrid { grid-template-columns: 1fr; gap: var(--space-8); }
   .storyArt { display: none; }
-  .storyFoot { gap: var(--space-3); flex-wrap: wrap; }
   .storyPara { font-size: var(--text-base); line-height: 1.9; }
   .storyBody { padding-left: var(--space-4); }
 }

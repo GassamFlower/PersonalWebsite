@@ -133,8 +133,8 @@ export default function Cases() {
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>{t.cases.tagNo}</b> · {t.cases.tagZh}</span>
-          <span className="meta">03</span>
         </div>
+        <div className="rule"></div>
         <h2 className={`section-title ${s.casesTitle}`}>{t.cases.title}</h2>
 
         <div className={s.caseList}>

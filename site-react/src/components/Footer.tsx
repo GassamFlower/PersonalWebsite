@@ -1,4 +1,5 @@
 // Footer — 黑尾收尾（v6 §2/§5：并入深墨场，与封面首尾合上「这本图鉴」）
+// v9 降噪（docs/视觉方向-v9-降噪.md D5）：tagline 与封底 slogan 重复，页脚只留脱敏声明 + 署名标。
 import { useUi } from '../i18n/LocaleContext';
 import s from './Footer.module.css';
 
@@ -8,7 +9,6 @@ export default function Footer() {
     <footer className={`field ${s.siteFooter}`}>
       <div className={`container ${s.footerInner}`}>
         <p className={s.footerNote}>{t.footer.note}</p>
-        <p className={s.footerTag}>{t.footer.tagline} · PERSONAL DOSSIER</p>
         <span className={s.footerMark} aria-hidden="true">
           <svg viewBox="0 0 28 28">
             <rect x="1.5" y="1.5" width="25" height="25" fill="none" stroke="var(--color-field-line)" strokeWidth="1.2" />

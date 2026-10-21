@@ -47,10 +47,6 @@
 .navLinks a:hover {
   color: color-mix(in srgb, var(--color-seal) 82%, var(--color-ink));
 }
-.navNo {
-  color: var(--color-ink-soft);
-  margin-right: 0.5ch;
-}
 .navStatus {
   display: inline-flex;
   align-items: center;
@@ -90,10 +86,9 @@
   background: var(--color-ink);
   opacity: 0.85;
 }
-/* 折叠阈值是量出来的（iframe 实测 2026-10-17，补回「02 故事」后 7 项，导航编号与版面图版号 01–07 全对齐）：
-   zh 单行内在需 ≈950px，en 收起品牌中文尾巴后需 ≈1047px；
-   阈值刻意比实测值再放宽一档（zh 1000 / en 1120），宁可早点叠行，也不留亚像素死区（940.5 的死区踩过一次）。
-   边界实证：zh 1001/1020/1060、en 1121/1160/1200 六档均 7 项单行、横向溢出 0——加第 7 项没顶到临界，阈值无需收紧。 */
+/* 折叠阈值是量出来的（iframe 实测 2026-10-17 时 7 项带编号；v9 起 6 项无编号，内在宽度只减不增，
+   阈值保持原值 = 更早叠行，方向安全）：zh ≈1000 / en ≈1120。
+   边界实证：zh 1001/1020/1060、en 1121/1160/1200 六档均单行、横向溢出 0。 */
 @media (max-width: 1000px) {
   .navInner { flex-direction: column; gap: var(--space-2); padding-block: var(--space-3); }
   .navLinks { gap: var(--space-3); flex-wrap: wrap; justify-content: center; }

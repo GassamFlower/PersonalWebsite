@@ -26,9 +26,8 @@ export default function Principles() {
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>{t.principles.tagNo}</b> · {t.principles.tagZh}</span>
-          <span className="meta">06</span>
         </div>
-        <div className={s.prRule}></div>
+        <div className="rule"></div>
 
         <h2 className={s.prMega}>{t.principles.headline1}<br />{t.principles.headline2} <span className={s.ai}>AI</span> {t.principles.headline3}</h2>
 

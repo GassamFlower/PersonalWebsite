@@ -1,9 +1,3 @@
-.prRule {
-  height: 1px;
-  background: var(--color-ink);
-  opacity: 0.85;
-  margin-bottom: var(--space-12);
-}
 .prMega {
   font-family: var(--font-serif);
   font-size: var(--text-mega);

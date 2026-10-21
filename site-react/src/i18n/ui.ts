@@ -35,7 +35,6 @@ export interface NavUi {  brandZh: string;
   ariaMain: string;
   langAria: string;
   statusOnline: string;
-  itemHero: string;
   itemStory: string;
   itemCases: string;
   itemCapability: string;
@@ -48,11 +47,6 @@ export interface StoryUi {
   plateRail: string;
   tagNo: string;
   tagZh: string;
-  linkPosition: string;
-  linkStory: string;
-  linkMethod: string;
-  linkWorks: string;
-  linkContact: string;
   headline1: string;
   // v8：headline2 拆三段，「有据可查」套手绘底线（MkUnderline）
   headline2Pre: string;
@@ -66,7 +60,6 @@ export interface StoryUi {
   present1: string;
   present2: string;
   present3: string;
-  footSigned: string;
   artAlt: string;
 }
 
@@ -168,7 +161,6 @@ export interface ContactUi {
 
 export interface FooterUi {
   note: string;
-  tagline: string;
 }
 
 export interface ZoneUi {
@@ -214,7 +206,6 @@ const zh: ZoneUi = {
     brandZh: '独立交付档案',    ariaMain: '主导航',
     langAria: '切换语言',
     statusOnline: '在线',
-    itemHero: '封面',
     itemStory: '故事',
     itemCases: '项目',
     itemCapability: '能力',
@@ -226,11 +217,6 @@ const zh: ZoneUi = {
     plateRail: '图版 02 · STORY',
     tagNo: '档案 02',
     tagZh: '一个人的故事',
-    linkPosition: '定位',
-    linkStory: '故事',
-    linkMethod: '方法与体系',
-    linkWorks: '项目精选',
-    linkContact: '联系',
     headline1: '干过的活，',
     headline2Pre: '都',
     headline2Mark: '有据可查',
@@ -243,7 +229,6 @@ const zh: ZoneUi = {
     present1: '现在在一家工业类企业，我看见长期被忽视的数字化空白——流程割裂、数据孤岛、体验落后。',
     present2: '正在从零搭起工业运维平台、统一用户中心、智能网关管理以及 ERP 系统数据维护等，让数据流动，让一线可用，让管理可视。',
     present3: '支撑这一切的，是好奇心，更是持续学习的习惯——不满足于「能用」，而是追问每一层为什么这样设计。AI 也不停在演示里：把它落进 RAG、知识库与智能体的真实场景，让回答有据可查，让流程自己运转——更深一层的工程化与评估，仍在精进路上。',
-    footSigned: 'BY 一个故事',
     artAlt: '一条五段路线的示意图：旅游数据的抓取与清洗 → 保险公司运维 → 八年法院政务系统 → 工业企业的数字化空白 → 把 AI 落进真实场景',
   },
   cases: {
@@ -338,7 +323,6 @@ const zh: ZoneUi = {
   },
   footer: {
     note: '展示内容均经匿名化脱敏，不涉及具体公司 / 客户信息',
-    tagline: '把一团乱麻，理成能用的系统',
   },
 };
 
@@ -376,7 +360,6 @@ const en: PartialUi = {
     ariaMain: "Main navigation",
     langAria: "Switch language",
     statusOnline: "Online",
-    itemHero: "Cover",
     itemStory: "Story",
     itemCases: "Work",
     itemCapability: "Skills",
@@ -388,11 +371,6 @@ const en: PartialUi = {
     plateRail: "Plate 02 · STORY",
     tagNo: "File 02",
     tagZh: "One person's story",
-    linkPosition: "Position",
-    linkStory: "Story",
-    linkMethod: "Method",
-    linkWorks: "Selected work",
-    linkContact: "Contact",
     headline1: "Every job on record,",
     headline2Pre: '',
     headline2Mark: 'with evidence to back it',
@@ -405,7 +383,6 @@ const en: PartialUi = {
     present1: "These days, at an industrial company, I see a long-ignored digital gap: fragmented processes, data silos, dated user experience.",
     present2: "I am building it up from zero — the industrial operations platform, the unified user center, smart gateway management, ERP data maintenance and more — letting data flow, letting the front line use it, letting management see it.",
     present3: "What carries all of this is curiosity backed by a habit of steady learning — never stopping at \"it works\", but asking why each layer is built the way it is. Nor does AI stop at demos: I put it to work in real scenarios — RAG, knowledge bases, agents — making answers traceable and workflows run themselves; the deeper engineering and evaluation is still under way.",
-    footSigned: "BY 一个故事",
     artAlt: "A five-stage route drawn as a diagram: scraping and cleaning travel data → running operations at an insurance company → eight years of court e-government systems → the digitalisation gap in a factory → putting AI into real scenarios",
   },
   cases: {
@@ -500,7 +477,6 @@ const en: PartialUi = {
   },
   footer: {
     note: "Everything shown here is anonymized — no specific company or client information",
-    tagline: "Turning tangles into systems that work",
   },
 };
 

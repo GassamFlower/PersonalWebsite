@@ -127,12 +127,17 @@ p, li, a, span { overflow-wrap: break-word; }
   padding-inline: var(--gutter);
 }
 
-/* 档案分隔横线 per-section */
+/* 档案分隔横线 per-section（v9 D7：纸场各区统一——眉栏下接此线再进大标题；墨场用下面的 field 变体） */
 .rule {
   height: 1px;
   background: var(--color-ink);
   opacity: 0.85;
   border: 0;
+  margin-bottom: var(--space-12);
+}
+.field .rule {
+  background: var(--color-field-rule);
+  opacity: 1;
 }
 
 .btn {
@@ -351,7 +356,7 @@ p, li, a, span { overflow-wrap: break-word; }
   align-items: baseline;
   justify-content: space-between;
   gap: var(--space-4);
-  /* 英文站副导航更长：装得下不折行（中文观感不变），装不下折到第二行而不是撑破横向边界 */
+  /* 英文眉栏更长：装得下不折行（中文观感不变），装不下折到第二行而不是撑破横向边界 */
   flex-wrap: wrap;
 }
 /* 眉栏编号：砖红（D4 活层，v8 §7-4）；区名保持墨色，不让整条眉栏染红 */
@@ -367,30 +372,6 @@ p, li, a, span { overflow-wrap: break-word; }
   color: var(--color-ink);
   letter-spacing: 0.04em;
 }
-.section-head .meta {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-ink-soft);
-  letter-spacing: 0.1em;
-}
-.section-head .right-nav {
-  display: flex;
-  align-items: center;
-  gap: var(--space-5);
-  flex-wrap: wrap;
-  row-gap: var(--space-2);
-  font-size: var(--text-sm);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-}
-.section-head .right-nav a {
-  color: var(--color-ink);
-  opacity: 0.85;
-  white-space: nowrap;
-  transition: opacity 0.2s;
-  letter-spacing: 0.04em;
-}
-.section-head .right-nav a:hover { opacity: 1; }
 
 /* 主标题 —— 大号衬线（共享 utility） */
 .section-title {

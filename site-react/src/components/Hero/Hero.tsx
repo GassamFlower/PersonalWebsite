@@ -1,4 +1,5 @@
 // Hero — 封面（v6：深墨场 + 巨衬线立论 + 白档案卡压在墨上；3D 粒子已按 Q3=b 移除）
+// v9 降噪（docs/视觉方向-v9-降噪.md D3）：rail 行不再重复 role——「独立系统建构者」全页只在眉栏说一次。
 import { useEffect, useState } from 'react';
 import { getHeroFacts } from '../../lib/content';
 import { useUi } from '../../i18n/LocaleContext';
@@ -34,7 +35,7 @@ export default function Hero() {
         <div className={s.heroGrid}>
           <div className={s.heroLeft}>
             <div className={`rail ${s.heroRail}`}>
-              <span className="gate">{t.hero.railGate}</span> · {t.hero.signature} · {t.hero.role}
+              <span className="gate">{t.hero.railGate}</span> · {t.hero.signature}
             </div>
             {/* v8 手层①：h1 单行拼接防空白节点（nowrap）；「一个故事」套手绘圈注（dark=提亮朱砂） */}
             <h1 className={`${s.heroTitle} ${locale === 'en' ? s.heroTitleEn : ''} ${inTitle ? s.heroTitleIn : ''}`}>{t.hero.titlePre}<MkCircle dark>{t.hero.titleMark}</MkCircle>{t.hero.titlePost}</h1>

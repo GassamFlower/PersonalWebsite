@@ -6,11 +6,8 @@ import s from './Contact.module.css';
 const wechat = 'G10S7H21';
 // 公开代码主页（用户 2026-10-17 指定要上页）；与邮箱同一条联系方式体裁，不做「项目列表」
 const githubUrl = 'https://github.com/GassamFlower';
-const emails = [
-  '1462882928@qq.com',
-  'luoyongui07@gmail.com',
-  'dblandlyg@163.com',
-];
+// v9 降噪（docs/视觉方向-v9-降噪.md D5）：邮箱 3 → 1，三个入口稀释注意力。主邮箱取原列表首位，要换改这一行。
+const email = '1462882928@qq.com';
 
 export default function Contact() {
   const { t } = useUi();
@@ -37,9 +34,8 @@ export default function Contact() {
       <div className={`container ${s.contactInner}`}>
         <div className="section-head">
           <span className="tag"><b>{t.contact.tagNo}</b> · {t.contact.tagZh}</span>
-          <span className="meta">07</span>
         </div>
-        <div className={s.ctRule}></div>
+        <div className="rule"></div>
 
         <div className={s.contactGrid}>
           <div className={s.contactMain}>
@@ -53,10 +49,8 @@ export default function Contact() {
               </div>
               <div className={s.specRow}>
                 <dt>{t.contact.labelMail}</dt>
-                <dd className={s.mailList}>
-                  {emails.map((e) => (
-                    <a key={e} className={`ink-link ${s.infoMail}`} href={`mailto:${e}`}>{e}</a>
-                  ))}
+                <dd>
+                  <a className={`ink-link ${s.infoMail}`} href={`mailto:${email}`}>{email}</a>
                 </dd>
               </div>
               <div className={s.specRow}>

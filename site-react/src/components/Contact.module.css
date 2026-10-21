@@ -3,7 +3,6 @@
 .contact :global(.section-head) { color: var(--color-field-ink); }
 .contact :global(.section-head .tag) { color: var(--color-field-muted); }
 .contact :global(.section-head .tag b) { color: var(--color-seal-on-dark); }
-.contact :global(.section-head .meta) { color: var(--color-field-muted); }
 .contact :global(.rail) { color: var(--color-field-muted); }
 .contact :global(.plate-rail) { color: var(--color-field-muted); }
 .contact :global(.ink-link) { color: var(--color-seal-on-dark); }
@@ -11,11 +10,6 @@
 .contact :global(.ink-link)::after { background: var(--color-seal-on-dark); }
 
 .contactInner { position: relative; }
-.ctRule {
-  height: 1px;
-  background: var(--color-field-rule);
-  margin-bottom: var(--space-12);
-}
 .contactGrid {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
@@ -57,11 +51,6 @@
   font-family: var(--font-mono);
   letter-spacing: 0.08em;
   color: var(--color-field-line);
-}
-.mailList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
 }
 .infoMail {
   font-family: var(--font-mono);

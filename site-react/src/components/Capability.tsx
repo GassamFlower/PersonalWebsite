@@ -19,8 +19,8 @@ export default function Capability() {
       <div className="container">
         <div className="section-head">
           <span className="tag"><b>{t.capability.tagNo}</b> · {t.capability.tagZh}</span>
-          <span className="meta">04</span>
         </div>
+        <div className="rule"></div>
 
         <h2 className="section-title">{t.capability.headline1}<br />{t.capability.headline2}</h2>
         <p className={s.sub}>{t.capability.sub}</p>
