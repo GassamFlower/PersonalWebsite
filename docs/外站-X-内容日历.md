@@ -11,7 +11,9 @@
 - 节奏：每周 1–2 条「记录」+ 1 条「方法」，每月 1 条长推（与站内 `growth` 当月条目同源）。
 - 配图：`site-react/public/share/` 下的卡（`case-0n.png` / `method.png`），或站内区块的脱敏截图；头像用 `avatar.png`。
 - 链接：只在"想让人看细节"时挂锚点，别每条都挂（挂满链接的账号像广告位）。
-  站点 `https://gassamflower.github.io/PersonalWebsite/`，锚点 `#cases` `#capability` `#timeline` `#growth` `#principles` `#offcat` `#contact`。
+  站点 `https://onetale.cn/`（自定义域为准；旧串 `gassamflower.github.io/PersonalWebsite/` 实测仍 301 到主域，但不再作为对外书写口径——见 `docs/o-国内可达性实测-托管迁移建议.md` §2.4）。子页直链 `https://onetale.cn/writing/four-gates/`。
+  锚点（2026-10-22 按线上实测 `section[id]` 校准，共 7 个）：`#hero` `#story` `#cases` `#capability` `#writing` `#principles` `#contact`。
+- **死锚点告警（发推前必须先处理）**：下表 12 条存量推文中有 8 条挂 `#growth` / `#offcat` / `#timeline`，这三个分区已随 v9 及后续批次从页面上撤下（`docs/k` §"来路/成长区下线"），**锚点已不存在，点进去是空跳**。逐条要么改挂上表活锚点，要么删掉锚点只发正文。growth/offcat 的 md 真源仍在（可随时复活分区），但**站点当前不承载这两个区**——按「一处事实两处发布」纪律，页上没有的事实不该挂锚点。
 - 2026-01 与 2026-02 两条 `growth` 的收获原文相同，故合并为下面第 1 条，不拆成两条凑数。
 
 ## 2. 存量推文（12 条，可直接复制）
