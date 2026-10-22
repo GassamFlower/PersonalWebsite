@@ -102,7 +102,26 @@ function blogPosting(page) {
 }
 
 // 1) 读客户端 index.html 空壳（含 hashed 资源引用）；先读一次，各页都从这份壳出发
-const shell = readFileSync(resolve(root, 'dist', 'index.html'), 'utf8');
+// 首屏样式内联（docs/o §4 R1）：外部 CSS 是这条链路上唯一的「样式单点失败源」——
+// 本机实测 5 次取回 1 次在 TLS 之后被连接重置（docs/o §2.2），重置发生时访客看到的是裸 HTML。
+// 只内联 CSS，JS 仍外链：内容层由 SSR 兜住（宪法 §17），样式层没有等价兜底，所以补在这里。
+// 三条前提各由一道断言兜住，任一不成立即 build 失败，不做静默降级：
+//   ① url() 必须绝对路径——子页在 /writing/<slug>/，相对路径会解析到文章目录下去取字体；
+//   ② CSS 内不得出现 </style，否则内联即破相；
+//   ③ 内联后壳里不得再残留 rel="stylesheet"（将来 vite 拆出第二个 CSS 分片时会被这条拦下，
+//      而不是让某一页悄悄漏掉样式）。
+function inlineCss(html) {
+  const href = /<link[^>]*rel="stylesheet"[^>]*href="([^"]+)"[^>]*>/.exec(html)?.[1];
+  if (!href) throw new Error('dist/index.html 找不到样式表 link，无法内联首屏 CSS');
+  const css = readFileSync(resolve(root, 'dist', href.replace(/^\/+/, '')), 'utf8');
+  if (/<\/style/i.test(css)) throw new Error('CSS 内含 </style，内联会破相');
+  if (/url\(\s*['"]?[.]{1,2}\//.test(css)) throw new Error('CSS 含相对 url()，子页会解析错位，禁止内联');
+  const out = html.replace(/<link[^>]*rel="stylesheet"[^>]*>[ \t]*\r?\n?/, `    <style>${css}</style>\n`);
+  if (/rel="stylesheet"/.test(out)) throw new Error('样式表未完全内联：产物仍残留 rel="stylesheet"');
+  return out;
+}
+
+const shell = inlineCss(readFileSync(resolve(root, 'dist', 'index.html'), 'utf8'));
 const marker = '<div id="root"></div>';
 if (!shell.includes(marker)) {
   throw new Error('dist/index.html 中找不到 #root 空壳，无法注入 SSR 内容');
