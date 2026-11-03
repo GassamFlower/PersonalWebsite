@@ -143,6 +143,13 @@
 
 /* v7.4 简表「还做过这些」：标签行（反白粗线）> 一行式（题名+状态 │ 定位句），比详案卡整整降一级信息密度 */
 .moreBlock { margin-top: var(--space-10); }
+/* v10 断主次（2026-10-23）：5 张详案卡是主卷，尾段（系列/简表）另起一档呼吸；
+   只拉开第一段尾块，系列与简表之间仍保持原间距 */
+.caseList + .moreBlock { margin-top: var(--space-20); }
+/* 卷首：首张详案卡在双栏版面下加一档上下留白，作卷首；单栏移动端不放大 */
+@media (min-width: 861px) {
+  .caseList > .caseCard:first-child { padding-block: var(--space-16); }
+}
 .moreHead {
   border-top: 1px solid var(--color-field-ink);
   padding-top: var(--space-3);

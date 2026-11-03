@@ -12,7 +12,7 @@ export default function Story() {
   const present = [t.story.present1, t.story.present2, t.story.present3];
 
   return (
-    <section id="story" className="section">
+    <section id="story" className="section section--major">
       <span className="plate-rail">{t.story.plateRail}</span>
       <div className="container">
         <div className="section-head">

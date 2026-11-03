@@ -164,6 +164,12 @@ p, li, a, span { overflow-wrap: break-word; }
   padding-block: var(--space-16);
   scroll-margin-top: 4rem;
 }
+/* v10 版面权重（2026-10-23）：区际呼吸分两档，章节起始偏重（上大下小）；
+   移动端维持统一节奏——单列版面靠内容本身分段，不再压缩留白 */
+@media (min-width: 721px) {
+  .section--major { padding-block: var(--space-20) var(--space-16); }
+  .section--minor { padding-block: var(--space-10); }
+}
 
 /* 轻动效 fade-up（克制动效，由 useReveal 控制） */
 .section.reveal {

@@ -15,7 +15,7 @@ export default function Writing() {
   const pieces = getWriting();
   const plan = getWritingPlan();
   return (
-    <section id="writing" className="section">
+    <section id="writing" className="section section--minor">
       <span className="plate-rail">{t.writing.plateRail}</span>
       <div className="container">
         <div className="section-head">

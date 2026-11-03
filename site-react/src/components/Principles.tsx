@@ -21,7 +21,7 @@ export default function Principles() {
   ];
 
   return (
-    <section id="principles" className="section">
+    <section id="principles" className="section section--major">
       <span className="plate-rail">{t.principles.plateRail}</span>
       <div className="container">
         <div className="section-head">
