@@ -77,7 +77,8 @@
   transition: background-color 0.25s var(--ease-out), color 0.25s var(--ease-out);
 }
 .langSwitch a:hover { opacity: 1; }
-.langOn {
+/* 当前语种实底块：字号/颜色都要压过 .navLinks a（0,1,1），否则红字落红底变成一块空白方块 */
+.langSwitch a.langOn {
   background: var(--color-seal);
   color: var(--color-on-accent);
 }

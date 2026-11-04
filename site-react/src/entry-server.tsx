@@ -5,7 +5,7 @@
 import { renderToString } from 'react-dom/server';
 import App from './App';
 import { missingKeys } from './i18n/ui';
-import { getWriting, getPostMeta } from './lib/content';
+import { getWriting, getPostMeta, getHeroFacts } from './lib/content';
 import type { Locale } from './i18n/locale';
 import type { Route } from './lib/routes';
 
@@ -20,6 +20,17 @@ export function postSlugs(): string[] {
 
 export function postMeta(slug: string, locale: Locale) {
   return getPostMeta(slug, locale);
+}
+
+// 主页结构化数据用：三张 featured 详案卡，字段直接取自内容真源
+export function heroFacts() {
+  return getHeroFacts().map((c) => ({
+    order: c.order,
+    title: c.title,
+    titleEn: c.titleEn,
+    note: c.note,
+    noteEn: c.noteEn,
+  }));
 }
 
 export { missingKeys };

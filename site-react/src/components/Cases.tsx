@@ -10,7 +10,7 @@ const ratios = ['portrait', 'landscape', 'landscape', 'landscape'];
 // v7.4：线稿按详案卡身份映射（0=车助手流程 1=OPS资产矩阵 3=内网DevOps流水线；原 2=统一入口 随 UUC 进简表退场）
 // v8.1 用户裁决：线稿红笔（stroke 走 --color-seal，墨场内由 .shotSlot 重映射为提亮朱砂）——每幅 ≤2 笔
 // v8.8 用户裁决（「帮我做样张放进去」）：按真源 order 绑定专属线稿，4=地基拓扑 5=数据口径对账；卡面 0i+1 会变，order 不会
-const SCHEM: Record<number, number> = { 1: 0, 2: 1, 5: 4, 11: 5, 19: 3 };
+const SCHEM: Record<number, number> = { 1: 0, 2: 1, 5: 4, 11: 5, 19: 3, 20: 6 };
 // 真图走 public/，前缀取 BASE_URL：写死 '/PersonalWebsite/' 在自定义域根目录下会全量 404
 const asset = (p: string) => `${import.meta.env.BASE_URL}${p.replace(/^\/+/, '')}`;
 
@@ -97,6 +97,33 @@ function Schematic({ i }: { i: number }) {
         <text x="20" y="232" fontFamily="var(--font-mono)" fontSize="8" fill="var(--color-faint)">declared rows / written rows</text>
       </g>
     );
+  } else if (i === 6) {
+    // v12 团队协作：三列看板 + 日志聚合成周报；红笔 1 处 = 卡住的任务
+    body = (
+      <g>
+        {['TODO', 'DOING', 'DONE'].map((label, k) => (
+          <g key={label}>
+            <text x={26 + k * 112} y="48" fontFamily="var(--font-mono)" fontSize="8" fill="var(--color-line)">{label}</text>
+            <rect x={26 + k * 112} y="54" width="88" height="106" fill="none" stroke="var(--color-faint)" strokeWidth="1" />
+          </g>
+        ))}
+        {([[0, 64], [0, 88], [0, 112], [1, 64], [1, 88], [2, 64], [2, 88], [2, 112]] as const).map(([c, y], k) => (
+          <g key={k}>
+            <rect x={34 + c * 112} y={y} width="72" height="18" fill="none" stroke="var(--color-line)" strokeWidth="0.8" />
+            <line x1={42 + c * 112} y1={y + 9} x2={96 + c * 112} y2={y + 9} stroke="var(--color-faint)" strokeWidth="0.8" />
+          </g>
+        ))}
+        <rect x="140" y="84" width="80" height="26" fill="none" stroke="var(--color-seal)" strokeWidth="1" strokeDasharray="4 3" />
+        <line x1="26" y1="176" x2="336" y2="176" stroke="var(--color-faint)" strokeWidth="1" />
+        <text x="26" y="196" fontFamily="var(--font-mono)" fontSize="8" fill="var(--color-line)">LOG</text>
+        <line x1="56" y1="192" x2="204" y2="192" stroke="var(--color-line)" strokeWidth="1" />
+        <polygon points="200,188 210,192 200,196" fill="var(--color-line)" />
+        <rect x="216" y="178" width="120" height="28" fill="none" stroke="var(--color-ink)" strokeWidth="1.2" />
+        <text x="222" y="196" fontFamily="var(--font-mono)" fontSize="8" fill="var(--color-faint)">REPORT</text>
+        <line x1="270" y1="186" x2="328" y2="186" stroke="var(--color-faint)" strokeWidth="0.8" />
+        <line x1="270" y1="194" x2="316" y2="194" stroke="var(--color-faint)" strokeWidth="0.8" />
+      </g>
+    );
   } else {
     body = (
       <g>
@@ -137,6 +164,16 @@ export default function Cases() {
         <div className="rule"></div>
         <h2 className={`section-title ${s.casesTitle}`}>{t.cases.title}</h2>
 
+        {/* 区索引：六张详案卡纵向很长，区内给一条锚点；只跳转，不新增事实 */}
+        <nav className={s.caseIndex} aria-label={t.cases.indexAria}>
+          {cases.map((c, i) => (
+            <a key={c.order} href={`#case-${c.order}`} className={s.caseIndexItem}>
+              <span className={s.caseIndexNo}>{String(i + 1).padStart(2, '0')}</span>
+              <span>{pick(locale, c.title, c.titleEn)}</span>
+            </a>
+          ))}
+        </nav>
+
         <div className={s.caseList}>
           {cases.map((c, i) => {
             // 诚实分级绑定（v5 §2.2 继承）：仅「已上线」级事实带 GATE✓ 章；内部/开发中不盖（卡内「已验证」朱砂章 2026-10-17 目测裁决撤下）
@@ -149,6 +186,10 @@ export default function Cases() {
               : variant === 4 ? t.cases.slotFoundation
                 : variant === 5 ? t.cases.slotData
                   : t.cases.slotUi;
+            // 两段真源字段拼一句；英文句末紧接下一句会粘成「hand.Three」，补一个空格
+            const join = (a?: string, b?: string) => (b ? (locale === 'en' ? `${a} ${b}` : `${a}${b}`) : a);
+            const problemLine = join(pick(locale, c.problem, c.problemEn), pick(locale, c.challenge, c.challengeEn));
+            const resultLine = join(pick(locale, c.whatIDid, c.whatIDidEn), pick(locale, c.outcome, c.outcomeEn));
             // id 用真源 order 而非卡面编号：卡面 0i+1 是详案子集内的位置，order 才是稳定标识（封面档案卡按 #case-<order> 跳进来）
             return (
             <article key={i} id={`case-${c.order}`} className={s.caseCard}>
@@ -164,10 +205,10 @@ export default function Cases() {
 
                 {/* 两栏体裁（v8.1 用户裁决：四个小标题并成两个）：问题＝problem+challenge，解法与结果＝whatIDid+outcome。真源仍四字段，配对只在渲染面 */}
                 <dl className={s.spec}>
-                  <div className={s.specRow}><dt>{t.cases.labelProblem}</dt><dd>{pick(locale, c.problem, c.problemEn)}{pick(locale, c.challenge, c.challengeEn)}</dd></div>
+                  <div className={s.specRow}><dt>{t.cases.labelProblem}</dt><dd>{problemLine}</dd></div>
                   <div className={`${s.specRow} ${s.specResult}`}>
                     <dt>{t.cases.labelSolution}</dt>
-                    <dd>{pick(locale, c.whatIDid, c.whatIDidEn)}{pick(locale, c.outcome, c.outcomeEn)}</dd>
+                    <dd>{resultLine}</dd>
                   </div>
                 </dl>
               </div>
@@ -177,7 +218,7 @@ export default function Cases() {
                   <div className={s.shotStack}>
                     {shots.map((src, k) => (
                       <figure key={k} className={`${s.shot} ${s.shotReal}${ratios[i] === 'portrait' ? ` ${s.shotRealPortrait}` : ''}`}>
-                        <img className={s.frameImg} src={asset(src)} alt={alts[k] || `${pick(locale, c.title, c.titleEn)}${t.cases.altSuffix}`} />
+                        <img className={s.frameImg} src={asset(src)} alt={alts[k] || `${pick(locale, c.title, c.titleEn)}${t.cases.altSuffix}`} loading="lazy" decoding="async" />
                       </figure>
                     ))}
                   </div>

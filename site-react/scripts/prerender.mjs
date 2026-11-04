@@ -29,6 +29,26 @@ const EN_HEAD = {
     'A paper-white card with ink-black hairlines and crop marks, a vermilion signature seal at the lower right.',
 };
 
+// AI 爬虫分组（站主 2026-11-03 裁决：检索类与训练类都放行）。
+// 检索类决定能否被 AI 搜索引用；训练类只决定内容是否进入训练语料。
+// Google-Extended 不影响 Google 搜索与 AI Overviews，后者走 Googlebot。
+const AI_RETRIEVAL = [
+  'OAI-SearchBot',
+  'ChatGPT-User',
+  'PerplexityBot',
+  'Claude-User',
+  'Claude-SearchBot',
+  'Bingbot',
+  'Googlebot',
+];
+const AI_TRAINING = ['GPTBot', 'Google-Extended', 'ClaudeBot', 'CCBot', 'Applebot-Extended', 'meta-externalagent'];
+
+const FEED_TITLE = { zh: 'PERSONAL DOSSIER · 写作', en: 'PERSONAL DOSSIER · Writing' };
+const FEED_DESC = {
+  zh: '独立系统建构者的写作。',
+  en: 'Essays from an independent systems builder.',
+};
+
 // 中文主页的 head 事实直接从壳里读，不再在脚本里抄一份平行副本（改了 index.html 不会两头不一致）
 function zhHomeHead(html) {
   const title = /<title>([\s\S]*?)<\/title>/.exec(html)?.[1];
@@ -78,28 +98,87 @@ function applyHead(html, page) {
   }
   // canonical 必须跟着页面与语言走，否则子页会把自己声明成主页的副本
   out = replaceTag(out, /<link[^>]*rel="canonical"[^>]*\/>/, `<link rel="canonical" href="${attr(url)}" />`);
-  const ld = page.kind === 'post' ? blogPosting(page) : '';
-  return out.replace('</head>', `    ${langLinks(page)}\n${ld}  </head>`);
+  const ld = page.kind === 'post' ? blogPosting(page) + breadcrumb(page) : homeSchema(page);
+  const feed = `<link rel="alternate" type="application/rss+xml" title="${attr(FEED_TITLE[page.locale])}" href="${SITE}${page.locale === 'en' ? 'en/' : ''}rss.xml" />`;
+  return out.replace('</head>', `    ${langLinks(page)}\n    ${feed}\n${ld}  </head>`);
+}
+
+// 统一的 JSON-LD 输出：转义 < 防止内容里的尖括号截断脚本块
+function ldScript(data) {
+  return `    <script type="application/ld+json">${JSON.stringify(data, null, 2).replace(/</g, '\\u003c')}</script>\n`;
 }
 
 // 子页的机器可读层（docs/k §5）：一篇一个 BlogPosting，只写站内已成立的事实
 // （headline/description 取本篇真源字段，datePublished 是 YYYY-MM，作者与站点指主页已有的 @id）
 function blogPosting(page) {
   const url = `${SITE}${page.path}`;
-  const data = {
+  return ldScript({
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     '@id': `${url}#blogposting`,
     headline: page.title,
     description: page.description,
+    image: `${SITE}${page.locale === 'en' ? 'og-en.png' : 'og.png'}`,
     inLanguage: page.locale === 'en' ? 'en' : 'zh-CN',
     datePublished: page.date,
+    articleSection: page.locale === 'en' ? 'Writing' : '写作',
     author: { '@id': `${SITE}#person` },
+    publisher: { '@id': `${SITE}#person` },
     isPartOf: { '@id': `${SITE}#website` },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-  };
-  return `    <script type="application/ld+json">${JSON.stringify(data, null, 2).replace(/</g, '\\u003c')}</script>\n`;
+  });
 }
+
+// 面包屑只写真实存在的两级：语言主页 → 本篇。写作区没有独立列表页，不造中间层。
+function breadcrumb(page) {
+  const homeUrl = `${SITE}${page.locale === 'en' ? 'en/' : ''}`;
+  return ldScript({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: page.locale === 'en' ? 'Home' : '首页',
+        item: homeUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: page.title,
+        item: `${SITE}${page.path}`,
+      },
+    ],
+  });
+}
+
+// 主页：ProfilePage 指向主页已有的 Person；案例清单只收 featured 三张详案卡，
+// 名字与说明直接取自内容真源，不写评分、价格、客户名。
+function homeSchema(page) {
+  const homeUrl = `${SITE}${page.locale === 'en' ? 'en/' : ''}`;
+  return ldScript({
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    '@id': `${homeUrl}#profilepage`,
+    url: homeUrl,
+    inLanguage: page.locale === 'en' ? 'en' : 'zh-CN',
+    mainEntity: { '@id': `${SITE}#person` },
+    hasPart: {
+      '@type': 'ItemList',
+      itemListElement: heroFacts().map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'CreativeWork',
+          name: page.locale === 'en' ? (c.titleEn ?? c.title) : c.title,
+          description: page.locale === 'en' ? c.noteEn : c.note,
+          url: `${SITE}#case-${c.order}`,
+        },
+      })),
+    },
+  });
+}
+
 
 // 1) 读客户端 index.html 空壳（含 hashed 资源引用）；先读一次，各页都从这份壳出发
 // 首屏样式内联（docs/o §4 R1）：外部 CSS 是这条链路上唯一的「样式单点失败源」——
@@ -121,6 +200,122 @@ function inlineCss(html) {
   return out;
 }
 
+const xmlEscape = (s) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+
+// 站点地图的双语互指与首页 x-default（与 head 的 hreflang 同口径）
+function alternatesXml(page) {
+  const base = page.kind === 'home' ? '' : `writing/${page.slug}/`;
+  const zh = `${SITE}${base}`;
+  const en = `${SITE}en/${base}`;
+  let out = `    <xhtml:link rel="alternate" hreflang="zh-CN" href="${xmlEscape(zh)}" />\n`;
+  out += `    <xhtml:link rel="alternate" hreflang="en" href="${xmlEscape(en)}" />\n`;
+  if (page.kind === 'home') out += `    <xhtml:link rel="alternate" hreflang="x-default" href="${xmlEscape(zh)}" />\n`;
+  return out;
+}
+
+// 站点地图由页面清单生成：新增文章只改内容真源，这里随构建更新。
+// 文章真源只有年月（YYYY-MM），不补日期，因此不写 lastmod。
+function sitemapXml(pages) {
+  const urls = pages
+    .map((page) => `  <url>\n    <loc>${xmlEscape(`${SITE}${page.path}`)}</loc>\n${alternatesXml(page)}  </url>`)
+    .join('\n');
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${urls}
+</urlset>
+`;
+}
+
+function robotsTxt() {
+  const group = (ua) => `User-agent: ${ua}\nAllow: /\n`;
+  return [
+    'User-agent: *',
+    'Allow: /',
+    '',
+    '# 检索类：决定能否被 AI 搜索引用',
+    ...AI_RETRIEVAL.map(group),
+    '# 训练类：站主已放行',
+    ...AI_TRAINING.map(group),
+    `Sitemap: ${SITE}sitemap.xml`,
+    '',
+  ].join('\n');
+}
+
+function feedXml(locale, slugs) {
+  const en = locale === 'en';
+  const home = `${SITE}${en ? 'en/' : ''}`;
+  const self = `${home}rss.xml`;
+  const items = slugs
+    .map((slug) => {
+      const meta = postMeta(slug, locale);
+      if (!meta) throw new Error(`[feed] ${locale} 取不到 ${slug} 的 head 字段`);
+      const link = `${home}writing/${slug}/`;
+      return `    <item>
+      <title>${xmlEscape(meta.title)}</title>
+      <link>${xmlEscape(link)}</link>
+      <guid isPermaLink="true">${xmlEscape(link)}</guid>
+      <description>${xmlEscape(meta.description)}</description>
+    </item>`;
+    })
+    .join('\n');
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>${xmlEscape(FEED_TITLE[locale])}</title>
+    <link>${xmlEscape(home)}</link>
+    <description>${xmlEscape(FEED_DESC[locale])}</description>
+    <language>${en ? 'en' : 'zh-CN'}</language>
+    <atom:link href="${xmlEscape(self)}" rel="self" type="application/rss+xml" />
+${items ? `${items}\n` : ''}  </channel>
+</rss>
+`;
+}
+
+// 每页写盘前的机器层断言：JSON-LD 可解析、类型齐、canonical 与 feed 链接指向本页
+function assertPage(html, page) {
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+  if (blocks.length === 0) throw new Error(`[schema] ${page.path} 缺 JSON-LD`);
+  for (const block of blocks) {
+    try {
+      JSON.parse(block);
+    } catch (err) {
+      throw new Error(`[schema] ${page.path} JSON-LD 无法解析：${err.message}`);
+    }
+  }
+  const all = blocks.join('\n');
+  if (page.kind === 'home') {
+    if (!all.includes('"ProfilePage"')) throw new Error(`[schema] ${page.path} 缺 ProfilePage`);
+    if (!all.includes('"ItemList"')) throw new Error(`[schema] ${page.path} 缺案例 ItemList`);
+  } else {
+    if (!all.includes('"BlogPosting"')) throw new Error(`[schema] ${page.path} 缺 BlogPosting`);
+    if (!all.includes('"BreadcrumbList"')) throw new Error(`[schema] ${page.path} 缺 BreadcrumbList`);
+  }
+  if (!html.includes(`<link rel="canonical" href="${SITE}${page.path}" />`)) {
+    throw new Error(`[head] ${page.path} canonical 未指向本页`);
+  }
+  if (!html.includes('rel="alternate" type="application/rss+xml"')) {
+    throw new Error(`[head] ${page.path} 缺 RSS 链接`);
+  }
+}
+
+function assertMachineLayer(pages, sitemap, robots, feeds) {
+  const locCount = (sitemap.match(/<loc>/g) ?? []).length;
+  if (locCount !== pages.length) throw new Error(`[sitemap] URL 数 ${locCount} 不等于页面数 ${pages.length}`);
+  if (sitemap.includes('gassamflower')) throw new Error('[sitemap] 仍含旧域名 gassamflower');
+  for (const page of pages) {
+    if (!sitemap.includes(`<loc>${SITE}${page.path}</loc>`)) throw new Error(`[sitemap] 缺 ${page.path}`);
+  }
+  if (!robots.includes(`Sitemap: ${SITE}sitemap.xml`)) throw new Error('[robots] Sitemap 指向错误');
+  for (const ua of [...AI_RETRIEVAL, ...AI_TRAINING]) {
+    if (!robots.includes(`User-agent: ${ua}`)) throw new Error(`[robots] 缺 ${ua}`);
+  }
+  for (const [locale, xml] of Object.entries(feeds)) {
+    if (!xml.includes('<rss version="2.0"')) throw new Error(`[feed] ${locale} 不是 RSS 2.0`);
+    if (!xml.includes('<channel>')) throw new Error(`[feed] ${locale} 缺 channel`);
+  }
+}
+
 const shell = inlineCss(readFileSync(resolve(root, 'dist', 'index.html'), 'utf8'));
 const marker = '<div id="root"></div>';
 if (!shell.includes(marker)) {
@@ -130,7 +325,7 @@ const ZH_HOME = zhHomeHead(shell);
 
 // 2) 执行 SSR bundle
 const serverPath = resolve(root, 'dist-server', 'entry-server.cjs');
-const { render, missingKeys, postSlugs, postMeta } = require(serverPath);
+const { render, missingKeys, postSlugs, postMeta, heroFacts } = require(serverPath);
 
 // 3) 每个已知语言先过键位守卫（缺键不静默回退中文，直接 build 失败）
 for (const locale of KNOWN) {
@@ -175,9 +370,24 @@ for (const slug of posts) {
 for (const page of pages) {
   const appHtml = render(page.locale, page.route);
   const html = applyHead(shell.replace(marker, `<div id="root">${appHtml}</div>`), page);
+  assertPage(html, page);
   const outDir = resolve(root, 'dist', page.path);
   mkdirSync(outDir, { recursive: true });
   writeFileSync(resolve(outDir, 'index.html'), html, 'utf8');
   console.log(`[prerender] ${page.locale} ${page.kind} → dist/${page.path}index.html（${(appHtml.length / 1024).toFixed(1)} kB 内容）`);
 }
+
+// 机器可读层与页面同源生成：robots、sitemap、两套 RSS。静态 public/ 副本已移除，避免再次漂移。
+const sitemap = sitemapXml(pages);
+const robots = robotsTxt();
+const feeds = {};
+for (const locale of EMIT) {
+  const slugs = posts.filter((slug) => Boolean(postMeta(slug, locale)));
+  feeds[locale] = feedXml(locale, slugs);
+  writeFileSync(resolve(root, 'dist', locale === 'en' ? 'en/rss.xml' : 'rss.xml'), feeds[locale], 'utf8');
+}
+writeFileSync(resolve(root, 'dist', 'sitemap.xml'), sitemap, 'utf8');
+writeFileSync(resolve(root, 'dist', 'robots.txt'), robots, 'utf8');
+assertMachineLayer(pages, sitemap, robots, feeds);
+console.log(`[machine] robots + sitemap ×${pages.length} + RSS ×${EMIT.length} 已生成并自检`);
 console.log(`[prerender] 共发射 ${pages.length} 张静态页面（主页 ${EMIT.length} 张 + 子页 ${posts.length * EMIT.length} 张）`);

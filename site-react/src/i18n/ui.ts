@@ -68,6 +68,7 @@ export interface CasesUi {
   tagNo: string;
   tagZh: string;
   title: string;
+  indexAria: string;
   labelProblem: string;
   labelSolution: string;
   labelMore: string;
@@ -236,13 +237,14 @@ const zh: ZoneUi = {
     tagNo: '档案 03',
     tagZh: '项目案例（卷宗）',
     title: '做的项目，能看能查',
+    indexAria: '案例索引',
     labelProblem: '问题',
     labelSolution: '解法与结果',
     labelMore: '还做过这些，就不一件件展开了',
     seriesLabel: '同一套底座 · 六个部位',
     seriesRail: '底座',
     seriesIntro:
-      '上面详案里的门户、内网基础设施、OPS 与数据同步，加上这两块，不是六个各干各的工具：入口把几套系统收成一次登录，地基承载代码与发布，生产管住设备与运维，数据统一两边的口径与编号，身份供给账号与授权，出口统一 AI 与接口调用。接口与规矩互相咬合，缺一段就断链。',
+      '这套底座里的门户、内网基础设施、OPS 与数据同步，加上这两块，不是六个各干各的工具：入口把几套系统收成一次登录，地基承载代码与发布，生产管住设备与运维，数据统一两边的口径与编号，身份供给账号与授权，出口统一 AI 与接口调用。接口与规矩互相咬合，缺一段就断链。',
     artAssets: '资产 · 监控 · 巡检 · 工单',
     slotFlow: '示意 · 手机端流程',
     slotUi: '示意 · 界面功能线稿',
@@ -390,13 +392,14 @@ const en: PartialUi = {
     tagNo: "File 03",
     tagZh: "Project cases (dossier)",
     title: "Work you can see and verify",
+    indexAria: "Case index",
     labelProblem: "Problem",
-    labelSolution: "What I did, where it stands",
+    labelSolution: "Approach & result",
     labelMore: "More things I have built",
     seriesLabel: "One Shared Platform · Six Parts",
     seriesRail: "Platform",
     seriesIntro:
-      "The portal, the intranet infrastructure, OPS and the data reconciliation above, plus these two, are not six unrelated tools: the front door collapses several systems into one login, the foundation carries code and releases, the shop floor runs equipment and operations, data settles what each side calls a thing and whose numbering wins, identity supplies accounts and grants, and the exit unifies AI and API calls. Interfaces and rules interlock — one missing link breaks the chain.",
+      "Within this platform: the portal, the intranet infrastructure, OPS and the data reconciliation, plus these two, are not six unrelated tools: the front door collapses several systems into one login, the foundation carries code and releases, the shop floor runs equipment and operations, data settles what each side calls a thing and whose numbering wins, identity supplies accounts and grants, and the exit unifies AI and API calls. Interfaces and rules interlock — one missing link breaks the chain.",
     artAssets: "Assets · Monitoring · Inspection · Tickets",
     slotFlow: "Sketch · mobile flow",
     slotUi: "Sketch · UI wireframe",

@@ -1,31 +1,27 @@
-/* Hero — 封面（v6 深墨场：黑头，色带与正文硬切） */
+/* Hero — 封面（v11 经纬：米白纸面工作台，墨线在右半幅收束成结构，档案卡改为叠纸） */
 .hero {
   position: relative;
   overflow: hidden;
   padding-top: var(--space-16);
   padding-bottom: var(--space-20);
+  color: var(--color-ink);
 }
-/* 墨场上覆盖共享全局类（section-head / rail / plate-rail 均为纸白系） */
-.hero :global(.section-head) { color: var(--color-field-ink); }
-.hero :global(.section-head .tag) { color: var(--color-field-muted); }
-.hero :global(.section-head .tag b) { color: var(--color-seal-on-dark); }
-.hero :global(.plate-rail) { color: var(--color-field-muted); }
-
 .heroInner {
   position: relative;
   z-index: 1;
 }
 .heroReg {
-  color: var(--color-field-line);
+  color: var(--color-ink);
 }
 .heroRule {
   height: 1px;
-  background: var(--color-field-rule);
+  background: var(--color-ink);
+  opacity: 0.85;
   margin-bottom: var(--space-16);
 }
 .heroGrid {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
+  grid-template-columns: 1.05fr 0.95fr;
   gap: var(--space-12);
   align-items: end;
   margin-bottom: var(--space-16);
@@ -37,25 +33,25 @@
 }
 /* 墨场上的批注轨需高于全局 .rail 的纸白系配色：用双类选择器取胜（同特异度时源码顺序不定） */
 .hero .heroRail {
-  color: var(--color-field-muted);
+  color: var(--color-ink-soft);
   margin-bottom: calc(var(--space-1) * -1);
 }
-.hero .heroRail :global(.gate) { color: var(--color-seal-on-dark); }
-/* v7.1：封面改一排大标题——字号由列宽反推（列宽 ≈ (视口-边距-列距)×0.535，zh 全文 ≈10.2em），
-   保证 960px 以上单行不折行；≤960 单列后按整行宽反推，cap 回桌面字号。 */
+.hero .heroRail :global(.gate) { color: var(--color-seal); }
+/* 字号由列宽反推（左列 ≈ (视口-边距-列距)×0.525，zh 全文 ≈10.9em），960px 以上单行不折行。
+   分母沿用 v7.1 的实测值，只按新列宽换系数。 */
 .heroTitle {
   font-family: var(--font-serif);
-  font-size: calc((min(100vw, var(--container-max)) - 2 * var(--gutter) - var(--space-12)) * 0.535 / 10.9);
+  font-size: calc((min(100vw, var(--container-max)) - 2 * var(--gutter) - var(--space-12)) * 0.525 / 10.9);
   font-weight: 700;
   line-height: 1.18;
   letter-spacing: 0.01em;
-  color: var(--color-field-ink);
+  color: var(--color-ink);
   margin: 0;
   white-space: nowrap;
 }
 /* 英文同句实测 ≈15.3em 宽，分母换 16.2（≈6% 余量）才排得下同一列 */
 .heroTitleEn {
-  font-size: calc((min(100vw, var(--container-max)) - 2 * var(--gutter) - var(--space-12)) * 0.535 / 16.2);
+  font-size: calc((min(100vw, var(--container-max)) - 2 * var(--gutter) - var(--space-12)) * 0.525 / 16.2);
 }
 /* 大字开机动效：标题由下上浮（克制动效；reduced-motion 关闭） */
 .heroTitleIn {
@@ -69,36 +65,57 @@
 .heroSub {
   font-family: var(--font-sans);
   font-size: var(--text-base);
-  color: var(--color-field-ink);
-  opacity: 0.75;
+  color: var(--color-ink);
+  opacity: 0.72;
   letter-spacing: 0.04em;
 }
 .heroFocus {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
-  color: var(--color-field-line);
+  color: var(--color-seal);
   padding-bottom: var(--space-1);
-  border-bottom: 1px solid var(--color-field-rule);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-seal) 45%, transparent);
   width: fit-content;
   letter-spacing: 0.05em;
   transition: border-color 0.2s;
 }
-.heroFocus:hover { border-color: var(--color-field-line); }
+.heroFocus:hover { border-color: var(--color-seal); }
 
-/* 白档案卡压在墨上（v5 资产继承，仅换场域） */
+/* 档案卡（v11）：不是压在墨上的白卡，而是叠在纸面上的两张底纸 + 一张卡面。
+   厚度靠 1px 发线与错位，不用大阴影。 */
 .dossier {
+  position: relative;
   width: 100%;
   max-width: 460px;
-  justify-self: end;
+  isolation: isolate;
+}
+.paperBack,
+.paperMid {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-faint);
+  border-radius: var(--radius);
+  pointer-events: none;
+}
+.paperBack {
+  background: var(--color-base);
+  transform: translate(8px, 8px) rotate(0.35deg);
+}
+.paperMid {
+  background: color-mix(in srgb, var(--color-surface) 60%, var(--color-base));
+  transform: translate(4px, 4px) rotate(-0.3deg);
+}
+.dossierFace {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-4);
   background: var(--color-surface);
   color: var(--color-ink);
-  border: 1px solid color-mix(in srgb, var(--color-ink) 30%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 35%, transparent);
   border-radius: var(--radius);
-  box-shadow: 0 18px 48px color-mix(in srgb, var(--color-ink) 45%, transparent);
-  padding: var(--space-6);
+  padding: var(--space-5);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--color-ink) 8%, transparent);
 }
 .dossierHead {
   display: flex;
@@ -183,7 +200,8 @@
 
 @media (max-width: 960px) {
   .heroGrid { grid-template-columns: 1fr; gap: var(--space-8); }
-  .dossier { justify-self: stretch; max-width: none; }
+  .dossier { max-width: none; }
+  .paperBack { transform: translate(6px, 6px) rotate(0.3deg); }
   /* 单列后标题按整行宽反推，cap 回桌面字号 */
   .heroTitle { font-size: min(3.5rem, calc((100vw - 2 * var(--gutter)) / 10.9)); }
   .heroTitleEn { font-size: min(2.6rem, calc((100vw - 2 * var(--gutter)) / 16.2)); }
@@ -191,4 +209,7 @@
 @media (max-width: 640px) {
   .hero { padding-top: var(--space-12); }
   .heroSub { font-size: var(--text-sm); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .heroTitleIn { animation: none; }
 }

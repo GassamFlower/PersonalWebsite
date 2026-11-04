@@ -7,9 +7,9 @@ skills:
   - name: 私有化基础设施搭建
     note: 从零搭起内网底座（一台物理机上开 Hyper-V 虚机跑 Ubuntu + Docker），按阶段手册逐段验收交付
   - name: 容器化部署与运行
-    note: docker run 起 6 个在用容器：私有代码仓 / 数据库 / CI 服务端与 agent / 容器面板 / 网关（本环境 compose 装不上，编排这层刻意不做）
+    note: docker run 起 6 个基础容器：私有代码仓 / 数据库 / CI 服务端与 agent / 容器面板 / 网关；业务系统另起容器，经同一网关按子路径接入（本环境 compose 装不上，编排这层刻意不做）
   - name: 持续交付
-    note: 推主分支经 webhook 触发流水线构建已实测；测试与部署段留待真实项目补上，没写成已完成
+    note: 推主分支触发构建、测试与部署三段，已在 WorkMate 上跑绿（流水线 #17 构建成功、产物经网关校验）
   - name: 备份与异地副本
     note: 每日定时脚本跑逻辑备份 + 去重加密快照（保留 日 7 / 周 4 / 月 6）；代码另设外部镜像当异地副本，数据暂无第二份
   - name: 基线与恢复演练
@@ -27,9 +27,9 @@ skillsEn:
   - name: "Private infrastructure build-out"
     note: "Intranet foundation built from scratch on one physical host running an Ubuntu VM under Hyper-V with Docker, delivered stage by stage against written runbook pass criteria"
   - name: "Container deployment & operation"
-    note: "Six containers in service via docker run — code forge / database / CI server and agent / dashboard / gateway; compose wouldn't install here, so the orchestration layer is deliberately absent"
+    note: "Six base containers via docker run — code forge / database / CI server and agent / dashboard / gateway; business systems add their own containers behind the same gateway on a sub-path; compose wouldn't install here, so the orchestration layer is deliberately absent"
   - name: "Continuous delivery"
-    note: "Push to main triggering a build through a webhook is proven; the test and deploy stages still wait on a real project and are not claimed as done"
+    note: "Push-to-main now carries build, test and deploy end to end — proven green on WorkMate (pipeline #17 built successfully, artifact checked through the gateway)"
   - name: "Backup & off-site copy"
     note: "A daily scheduled script runs logical dumps plus deduplicated encrypted snapshots (keep 7 daily / 4 weekly / 6 monthly); the code mirrors out as an off-site copy, the data has no second copy yet"
   - name: "Baseline & restore drill"

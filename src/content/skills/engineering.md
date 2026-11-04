@@ -12,6 +12,10 @@ skills:
     note: 自建五级项目体系（FTPS），一个项目一套台账
   - name: 成长 / 复盘机制
     note: workLog 记录，PROJECT_STATUS 追踪，复盘反哺
+  - name: 测试基线
+    note: WorkMate 48 项自动化测试进流水线：26 后端单测 + 8 数据库/HTTP 集成 + 14 前端
+  - name: 安全审查
+    note: WorkMate 五维安全审查本地通过：govulncheck 可达漏洞 0、npm audit 生产依赖 0
 evidence: 本站即用这套方法建成，含门禁验收清单与工作日志
 domainEn: "Engineering & ways of working"
 taglineEn: "A self-built, reusable system of working — turning complex things into sustainable systems."
@@ -24,5 +28,9 @@ skillsEn:
     note: "Self-built five-tier project system (FTPS); one ledger per project"
   - name: "Growth / retrospective loop"
     note: "workLog entries, PROJECT_STATUS tracking, retrospectives feeding back"
+  - name: "Testing baseline"
+    note: "48 automated tests wired into the WorkMate pipeline: 26 back-end unit, 8 DB/HTTP integration, 14 front-end"
+  - name: "Security review"
+    note: "WorkMate's five-dimension security review passed locally: govulncheck reachable vulnerabilities 0, npm audit production dependencies 0"
 evidenceEn: "This very site was built this way, gate checklists and work logs included"
 ---

@@ -10,6 +10,35 @@
 .cases :global(.plate-rail) { color: var(--color-field-muted); }
 .casesTitle { color: var(--color-field-ink); }
 
+/* v12 区索引：卷首一行 mono 锚点，只做区內跳转 */
+.caseIndex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin-top: var(--space-4);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--color-field-rule);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+}
+.caseIndexItem {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  color: var(--color-field-line);
+  white-space: nowrap;
+  transition: color 0.25s var(--ease-out);
+}
+.caseIndexNo {
+  color: var(--color-field-muted);
+  letter-spacing: 0.08em;
+}
+.caseIndexItem:hover,
+.caseIndexItem:focus-visible { color: var(--color-seal-on-dark); }
+.caseIndexItem:hover .caseIndexNo,
+.caseIndexItem:focus-visible .caseIndexNo { color: var(--color-seal-on-dark); }
+
 .caseList {
   display: flex;
   flex-direction: column;
@@ -81,6 +110,11 @@
   padding-top: 0.35em;
 }
 .specRow dd { grid-column: 2; min-width: 0; }
+/* 英文标签更长：用 rem 而非 em（em 按 11.5px 的标签字号算，6em 只有 82px，仍会断行）；
+   「Approach & result」含字距约 136px，留 9rem（≤520 已改为上下堆叠） */
+@media (min-width: 521px) {
+  :lang(en) .specRow { grid-template-columns: 9rem 1fr; }
+}
 /* Result 行：提亮（唯一色纪律：标签不染色） */
 .specResult {
   color: var(--color-field-ink);
@@ -224,8 +258,20 @@
   .caseInfo { grid-column: 1 / -1; }
   .caseCard { padding-block: var(--space-6); }
   .specRow { grid-template-columns: 1fr; row-gap: var(--space-1); }
+  /* dd 的 grid-column:2 会撑出隐式第二列，把上面的单列堆叠抵消掉 */
+  .specRow dd { grid-column: 1; }
+  /* 六项在窄屏不换行，改为横向滚动；右缘渐隐提示还有内容 */
+  .caseIndex {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+  }
+  .caseIndex::-webkit-scrollbar { display: none; }
+  .caseIndexItem { flex: 0 0 auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .caseCard, .caseCard .caseNo { transition: none; }
+  .caseCard, .caseCard .caseNo, .caseIndexItem { transition: none; }
 }
