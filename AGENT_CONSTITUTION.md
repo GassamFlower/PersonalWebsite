@@ -34,8 +34,8 @@
 
 ## 四、技术/架构硬规则
 
-14. **框架优先，禁止自造**：用 Astro 官方构建/路由/内容集合；用原生 CSS + token；不引入 React/Vue、不手写 HTML 生成器、不自造 CSS 框架。
-15. **必须维护**：`src/styles/` 只负责设计 token（配色/字体/间距），全局统一。
+14. **框架优先，禁止自造**：前端为 **Vite + React**（本条按 §35 修订，Astro 线已退役）；用官方构建与内容能力、CSS Modules + token；不手写 HTML 生成器、不自造 CSS 框架。
+15. **必须维护**：`site-react/src/styles/global.css` 只负责设计 token（配色/字体/间距），全局统一。
 16. **read_only 目录**：`node_modules`、`dist`、`.git`、日志不外读不外搜（防上下文污染）。
 17. **无 JS 也要能用**：关键内容在 JS 失败/禁用时仍完整可见；动效必须尊重 `prefers-reduced-motion`。
 
