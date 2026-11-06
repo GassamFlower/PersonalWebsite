@@ -1,13 +1,13 @@
 // Contact — 封底（v6 §5：黑尾墨场 + 联系方式规格表 + 大号朱砂署名章「一个故事」）
 import { useState } from 'react';
 import { useUi } from '../i18n/LocaleContext';
+import { email } from '../lib/site';
 import s from './Contact.module.css';
 
 const wechat = 'G10S7H21';
 // 公开代码主页（用户 2026-10-17 指定要上页）；与邮箱同一条联系方式体裁，不做「项目列表」
 const githubUrl = 'https://github.com/GassamFlower';
-// v9 降噪（docs/视觉方向-v9-降噪.md D5）：邮箱 3 → 1，三个入口稀释注意力。主邮箱取原列表首位，要换改这一行。
-const email = '1462882928@qq.com';
+// v9 降噪（docs/视觉方向-v9-降噪.md D5）：邮箱 3 → 1，三个入口稀释注意力。主邮箱见 lib/site.ts。
 
 export default function Contact() {
   const { t } = useUi();

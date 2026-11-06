@@ -36,6 +36,7 @@ export interface NavUi {  brandZh: string;
   langAria: string;
   statusOnline: string;
   itemStory: string;
+  itemGates: string;
   itemCases: string;
   itemCapability: string;
   itemWriting: string;
@@ -61,6 +62,30 @@ export interface StoryUi {
   present2: string;
   present3: string;
   artAlt: string;
+}
+
+export interface GatesUi {
+  plateRail: string;
+  tagNo: string;
+  tagZh: string;
+  headline1: string;
+  headline2: string;
+  questionLabel: string;
+  criterionLabel: string;
+  ledgerLabel: string;
+  colItem: string;
+  colVerdict: string;
+  blockedLabel: string;
+  colReason: string;
+  colRetest: string;
+  reasonsLabel: string;
+  passLabel: string;
+  failLabel: string;
+  emptyValue: string;
+  intakeTitle: string;
+  intakeBody: string;
+  intakeCta: string;
+  mailSubject: string;
 }
 
 export interface CasesUi {
@@ -169,6 +194,7 @@ export interface ZoneUi {
   hero: HeroUi;
   nav: NavUi;
   story: StoryUi;
+  gates: GatesUi;
   cases: CasesUi;
   capability: CapabilityUi;
   writing: WritingUi;
@@ -192,7 +218,7 @@ const zh: ZoneUi = {
     titlePre: 'Hi，这里是',
     titleMark: '一个故事',
     titlePost: '。',
-    subline: '一个普通人做过哪些事、正在做什么，都记在这里。',
+    subline: '我给每一个 AI 热词一把尺子。量完，能过的才往前送。',
     subline2: '故事都有出处。',
     focusCta: '聊聊你的问题 →',
     dossierAria: '交付档案卡',
@@ -208,6 +234,7 @@ const zh: ZoneUi = {
     langAria: '切换语言',
     statusOnline: '在线',
     itemStory: '故事',
+    itemGates: '判据',
     itemCases: '项目',
     itemCapability: '能力',
     itemWriting: '写作',
@@ -215,8 +242,8 @@ const zh: ZoneUi = {
     itemContact: '联系',
   },
   story: {
-    plateRail: '图版 02 · STORY',
-    tagNo: '档案 02',
+    plateRail: '图版 03 · STORY',
+    tagNo: '档案 03',
     tagZh: '一个人的故事',
     headline1: '干过的活，',
     headline2Pre: '都',
@@ -232,9 +259,32 @@ const zh: ZoneUi = {
     present3: '支撑这一切的，是好奇心，更是持续学习的习惯——不满足于「能用」，而是追问每一层为什么这样设计。AI 也不停在演示里：把它落进 RAG、知识库与智能体的真实场景，让回答有据可查，让流程自己运转——更深一层的工程化与评估，仍在精进路上。',
     artAlt: '一条五段路线的示意图：旅游数据的抓取与清洗 → 保险公司运维 → 八年法院政务系统 → 工业企业的数字化空白 → 把 AI 落进真实场景',
   },
+  gates: {
+    plateRail: '图版 02 · GATE FILE',
+    tagNo: '档案 02',
+    tagZh: '四道门',
+    headline1: '判断一个热词，',
+    headline2: '先过四道门',
+    questionLabel: '问',
+    criterionLabel: '判据',
+    ledgerLabel: '记录 · LEDGER',
+    colItem: '热词 · 条目',
+    colVerdict: '判定',
+    blockedLabel: '拦截表 · 拦下的不删',
+    colReason: '理由',
+    colRetest: '复判条件',
+    reasonsLabel: '理由分类',
+    passLabel: '通过',
+    failLabel: '拦截',
+    emptyValue: '—',
+    intakeTitle: '把你的热词发我',
+    intakeBody: '我按四道门过一遍，过不了的直说。',
+    intakeCta: '发一个热词 →',
+    mailSubject: '热词过门：',
+  },
   cases: {
     plateRail: '核心卷 · CASES',
-    tagNo: '档案 03',
+    tagNo: '档案 04',
     tagZh: '项目案例（卷宗）',
     title: '做的项目，能看能查',
     indexAria: '案例索引',
@@ -254,16 +304,16 @@ const zh: ZoneUi = {
     altSuffix: '截图',
   },
   capability: {
-    plateRail: '图版 04 · CAPABILITY',
-    tagNo: '档案 04',
+    plateRail: '图版 05 · CAPABILITY',
+    tagNo: '档案 05',
     tagZh: '能力档位',
     headline1: '会的东西，',
     headline2: '一次说清',
     sub: '档位只有两档：已交付＝真上线过东西；会用＝能独立完成日常工作，深度还在补。',
   },
   writing: {
-    plateRail: '图版 05 · WRITING',
-    tagNo: '档案 05',
+    plateRail: '图版 06 · WRITING',
+    tagNo: '档案 06',
     tagZh: '写作',
     headline1: '写下来的，',
     headline2: '才算想清楚',
@@ -275,19 +325,19 @@ const zh: ZoneUi = {
     source: '出处',
   },
   principles: {
-    plateRail: '图版 06 · PRINCIPLES',
-    tagNo: '档案 06',
+    plateRail: '图版 07 · PRINCIPLES',
+    tagNo: '档案 07',
     tagZh: '做事的规矩',
     headline1: '先立规矩，',
     headline2: '再让',
     headline3: '干活',
-    gate1Title: '一 · 立项门',
+    gate1Title: '一 · 立项关',
     gate1Desc: '先把话说清楚，\n再动手',
-    gate2Title: '二 · 架构门',
+    gate2Title: '二 · 架构关',
     gate2Desc: '参考图为准绳，\n不凭感觉',
-    gate3Title: '三 · 业务门',
+    gate3Title: '三 · 业务关',
     gate3Desc: '素材有清单，\n证据才能过',
-    gate4Title: '四 · 上线门',
+    gate4Title: '四 · 上线关',
     gate4Desc: '可访问、可追溯、\n可复盘',
     tierLead: '「五级项目体系」的目录流水线——碎片进来，资产出去：',
     tier1Name: '收集区',
@@ -311,7 +361,7 @@ const zh: ZoneUi = {
   },
   contact: {
     plateRail: '封底 · BACK COVER',
-    tagNo: '档案 07',
+    tagNo: '档案 08',
     tagZh: '联系',
     title: '聊得来，就一起做事',
     labelWechat: '微信',
@@ -346,7 +396,7 @@ const en: PartialUi = {
     titlePre: 'Hi, this is ',
     titleMark: "one person's story",
     titlePost: '.',
-    subline: "What an ordinary person has done — and is doing now — all kept here.",
+    subline: "I hold every AI buzzword against one ruler. What passes goes forward.",
     subline2: "Every story has a source.",
     focusCta: "Tell me your problem →",
     dossierAria: "Delivery dossier card",
@@ -363,6 +413,7 @@ const en: PartialUi = {
     langAria: "Switch language",
     statusOnline: "Online",
     itemStory: "Story",
+    itemGates: "Gates",
     itemCases: "Work",
     itemCapability: "Skills",
     itemWriting: "Writing",
@@ -370,8 +421,8 @@ const en: PartialUi = {
     itemContact: "Contact",
   },
   story: {
-    plateRail: "Plate 02 · STORY",
-    tagNo: "File 02",
+    plateRail: "Plate 03 · STORY",
+    tagNo: "File 03",
     tagZh: "One person's story",
     headline1: "Every job on record,",
     headline2Pre: '',
@@ -387,9 +438,32 @@ const en: PartialUi = {
     present3: "What carries all of this is curiosity backed by a habit of steady learning — never stopping at \"it works\", but asking why each layer is built the way it is. Nor does AI stop at demos: I put it to work in real scenarios — RAG, knowledge bases, agents — making answers traceable and workflows run themselves; the deeper engineering and evaluation is still under way.",
     artAlt: "A five-stage route drawn as a diagram: scraping and cleaning travel data → running operations at an insurance company → eight years of court e-government systems → the digitalisation gap in a factory → putting AI into real scenarios",
   },
+  gates: {
+    plateRail: "Plate 02 · GATE FILE",
+    tagNo: "File 02",
+    tagZh: "Four gates",
+    headline1: "To judge a buzzword,",
+    headline2: "run it through four gates",
+    questionLabel: "Ask",
+    criterionLabel: "Test",
+    ledgerLabel: "Record · LEDGER",
+    colItem: "Buzzword",
+    colVerdict: "Verdict",
+    blockedLabel: "Blocked · nothing deleted",
+    colReason: "Reason",
+    colRetest: "Recheck when",
+    reasonsLabel: "Reason types",
+    passLabel: "Pass",
+    failLabel: "Blocked",
+    emptyValue: "—",
+    intakeTitle: "Send me your buzzword",
+    intakeBody: "I run it through the four gates and say straight out if it fails.",
+    intakeCta: "Send one →",
+    mailSubject: "Buzzword review: ",
+  },
   cases: {
     plateRail: "Core Volume · CASES",
-    tagNo: "File 03",
+    tagNo: "File 04",
     tagZh: "Project cases (dossier)",
     title: "Work you can see and verify",
     indexAria: "Case index",
@@ -409,8 +483,8 @@ const en: PartialUi = {
     altSuffix: "screenshot",
   },
   writing: {
-    plateRail: "Plate 05 · WRITING",
-    tagNo: "File 05",
+    plateRail: "Plate 06 · WRITING",
+    tagNo: "File 06",
     tagZh: "Writing",
     headline1: "What is written down,",
     headline2: "has been thought through",
@@ -422,27 +496,27 @@ const en: PartialUi = {
     source: "Source",
   },
   capability: {
-    plateRail: "Plate 04 · CAPABILITY",
-    tagNo: "File 04",
+    plateRail: "Plate 05 · CAPABILITY",
+    tagNo: "File 05",
     tagZh: "Capabilities",
     headline1: "What I can do —",
     headline2: "said in one piece",
     sub: "Two levels only: Delivered = something actually went live; Working knowledge = day-to-day work done independently, depth still growing.",
   },
   principles: {
-    plateRail: "Plate 06 · PRINCIPLES",
-    tagNo: "File 06",
+    plateRail: "Plate 07 · PRINCIPLES",
+    tagNo: "File 07",
     tagZh: "How I work",
     headline1: "Rules first,",
     headline2: "then let",
     headline3: "work",
-    gate1Title: "I · Idea gate",
+    gate1Title: "I · Idea checkpoint",
     gate1Desc: "Say it clearly first,\nthen build",
-    gate2Title: "II · Architecture gate",
+    gate2Title: "II · Architecture checkpoint",
     gate2Desc: "Reference art is the standard,\nnot gut feeling",
-    gate3Title: "III · Delivery gate",
+    gate3Title: "III · Delivery checkpoint",
     gate3Desc: "Assets have a checklist;\nevidence gets things through",
-    gate4Title: "IV · Launch gate",
+    gate4Title: "IV · Launch checkpoint",
     gate4Desc: "Reachable, traceable,\nreviewable",
     tierLead: "The five-tier project system — a directory pipeline: fragments in, assets out:",
     tier1Name: "Capture",
@@ -466,7 +540,7 @@ const en: PartialUi = {
   },
   contact: {
     plateRail: "Back cover · BACK COVER",
-    tagNo: "File 07",
+    tagNo: "File 08",
     tagZh: "Contact",
     title: "If we click, let us work together",
     labelWechat: "WeChat",

@@ -143,6 +143,21 @@ export function getWritingPlan(): WritingPlanData | null {
   return e ? (e.data as unknown as WritingPlanData) : null;
 }
 
+// 四道门（品牌策划 1.2/1.3）：唯一键 gates + gateQuestions 是数组，与写作/能力集合互不重叠。
+// 账本没有数字字段：真实记录落地前，组件只渲染空态，不写任何计数。
+export interface GatesData {
+  intro: string; introEn?: string;
+  gates: string[]; gatesEn?: string[];
+  gateQuestions: string[]; gateQuestionsEn?: string[];
+  gateCriteria: string[]; gateCriteriaEn?: string[];
+  ledgerNote: string; ledgerNoteEn?: string;
+  blockedReasons: string[]; blockedReasonsEn?: string[];
+}
+export function getGates(): GatesData | null {
+  const e = entries.find((x) => Array.isArray(x.data.gates) && Array.isArray(x.data.gateQuestions));
+  return e ? { ...(e.data as unknown as GatesData) } : null;
+}
+
 // 附录台账：以唯一键 no（A-0n）判别，按编号升序
 export function getOffcat(): OffcatData[] {
   return collect<OffcatData>((d) => 'no' in d && 'title' in d).sort((a, b) => a.no.localeCompare(b.no));

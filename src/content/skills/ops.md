@@ -2,7 +2,7 @@
 order: 6
 domain: 运维与部署
 level: 已交付
-tagline: 从零搭起自建内网底座，按阶段手册逐段过门；备份与恢复演练都实跑过。
+tagline: 从零搭起自建内网底座，按阶段手册逐段过关；备份与恢复演练都实跑过。
 skills:
   - name: 私有化基础设施搭建
     note: 从零搭起内网底座（一台物理机上开 Hyper-V 虚机跑 Ubuntu + Docker），按阶段手册逐段验收交付

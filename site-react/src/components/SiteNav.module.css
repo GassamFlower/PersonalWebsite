@@ -89,7 +89,8 @@
 }
 /* 折叠阈值是量出来的（iframe 实测 2026-10-17 时 7 项带编号；v9 起 6 项无编号，内在宽度只减不增，
    阈值保持原值 = 更早叠行，方向安全）：zh ≈1000 / en ≈1120。
-   边界实证：zh 1001/1020/1060、en 1121/1160/1200 六档均单行、横向溢出 0。 */
+   边界实证：zh 1001/1020/1060、en 1121/1160/1200 六档均单行、横向溢出 0。
+   v12.2 加「判据 / Gates」回到 7 项（短词）：2026-11-06 复测 zh 1001 与 en 1121 仍单行，阈值不改。 */
 @media (max-width: 1000px) {
   .navInner { flex-direction: column; gap: var(--space-2); padding-block: var(--space-3); }
   .navLinks { gap: var(--space-3); flex-wrap: wrap; justify-content: center; }

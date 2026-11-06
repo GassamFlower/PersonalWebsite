@@ -7,6 +7,7 @@ import s from './SiteNav.module.css';
 export default function SiteNav() {
   const { t, locale } = useUi();
   const navItems = [
+    { href: '#gates', label: t.nav.itemGates },
     { href: '#story', label: t.nav.itemStory },
     { href: '#cases', label: t.nav.itemCases },
     { href: '#capability', label: t.nav.itemCapability },

@@ -1,0 +1,183 @@
+/* Gates 区 — 四道门判据 + 空态账本（品牌策划 1.2/1.3）
+   版式沿用档案体裁：发线切格、mono 标注、零圆角零阴影；账本是「未开张的表单」，不是填充区。 */
+
+.intro {
+  font-size: var(--text-base);
+  line-height: 1.9;
+  color: var(--color-ink);
+  max-width: 68ch;
+  margin: var(--space-2) 0 var(--space-10);
+}
+
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--color-ink);
+  border-left: 1px solid var(--color-faint);
+  margin: 0 0 var(--space-12);
+  padding: 0;
+}
+@media (max-width: 720px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+.card {
+  border-right: 1px solid var(--color-faint);
+  border-bottom: 1px solid var(--color-faint);
+  padding: var(--space-6) var(--space-6) var(--space-7);
+}
+
+.no {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  color: var(--color-seal);
+}
+
+.name {
+  font-size: var(--text-xl);
+  margin: var(--space-2) 0 var(--space-4);
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+}
+.pair dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  color: var(--color-ink-soft);
+  padding-top: 0.3em;
+}
+.pair dd {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-ink);
+}
+
+/* 账本：表头即分类法，空行即纪律——没有记录就是空的，不做填充 */
+.ledger {
+  border: 1px solid var(--color-faint);
+  background: var(--color-surface);
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  margin-bottom: var(--space-12);
+}
+.ledgerHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+.legend {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+}
+/* 第二张表（拦截表）的副标题：一张档案两张表，靠一条发线隔开 */
+.subHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin: var(--space-6) 0 var(--space-4);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-faint);
+}
+.subLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+/* 理由分类是一句短语而非短标签：窄屏必须能折行，否则会把整页撑出横向滚动 */
+.subHead .legend {
+  white-space: normal;
+  text-align: right;
+}
+.tableWrap { overflow-x: auto; }
+.table {
+  width: 100%;
+  min-width: 32rem;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  text-align: left;
+  font-weight: 400;
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  padding: var(--space-2) var(--space-4) var(--space-2) 0;
+  border-bottom: 1px solid var(--color-faint);
+  white-space: nowrap;
+}
+.table th {
+  font-family: var(--font-mono);
+  color: var(--color-ink-soft);
+}
+.table td {
+  font-family: var(--font-mono);
+  /* 空表占位「—」按分隔符判，不按正文判（同 .footSep 的既有口径），故用 line 而非 faint */
+  color: var(--color-line);
+}
+.blankRow td { padding-block: var(--space-4); }
+/* 窄屏：账本 6 列不压缩字，改为横向滚动 + 右缘渐隐（同案例索引的既有做法） */
+@media (max-width: 600px) {
+  .tableWrap {
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, #000 86%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 86%, transparent 100%);
+  }
+  .tableWrap::-webkit-scrollbar { display: none; }
+}
+.note {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-faint);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-ink-soft);
+  max-width: 78ch;
+}
+
+.intake {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5);
+  border-top: 1px solid var(--color-ink);
+  padding-top: var(--space-6);
+}
+.intakeTitle {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-2);
+}
+.intakeBody {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-ink-soft);
+  max-width: 46ch;
+}
+.intakeCta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid var(--color-ink);
+  transition: color 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+}
+.intakeCta:hover,
+.intakeCta:focus-visible {
+  color: var(--color-seal);
+  border-color: var(--color-seal);
+}

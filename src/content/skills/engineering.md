@@ -4,8 +4,8 @@ domain: 工程化与做事方法
 level: 已交付
 tagline: 自建一套可复用的做事体系，把复杂的事做成可持续的系统。
 skills:
-  - name: 四门禁流程
-    note: 立项 / 架构 / 业务 / 上线，一门一验不凭空写代码
+  - name: 四关流程
+    note: 立项 / 架构 / 业务 / 上线，一关一验不凭空写代码
   - name: 单一信源 SSOT
     note: 知识库与工作台分离，文档前缀排序，单一信源
   - name: 项目分级体系
@@ -16,12 +16,12 @@ skills:
     note: WorkMate 48 项自动化测试进流水线：26 后端单测 + 8 数据库/HTTP 集成 + 14 前端
   - name: 安全审查
     note: WorkMate 五维安全审查本地通过：govulncheck 可达漏洞 0、npm audit 生产依赖 0
-evidence: 本站即用这套方法建成，含门禁验收清单与工作日志
+evidence: 本站即用这套方法建成，含四关验收清单与工作日志
 domainEn: "Engineering & ways of working"
 taglineEn: "A self-built, reusable system of working — turning complex things into sustainable systems."
 skillsEn:
-  - name: "Four-gate flow"
-    note: "Idea / architecture / delivery / launch gates — one gate, one check; no code written out of thin air"
+  - name: "Four-checkpoint flow"
+    note: "Idea / architecture / delivery / launch checkpoints — one checkpoint, one check; no code written out of thin air"
   - name: "Single source of truth"
     note: "Knowledge base separate from the workspace; docs sorted by prefix; one source of truth"
   - name: "Project tier system"

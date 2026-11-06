@@ -240,6 +240,35 @@ for (const f of readdirSync(join(contentDir, 'cases')).filter((x) => x.endsWith(
 if (featured.length !== HERO_SLOTS)
   errors.push(`cases/: 封面档案卡需要恰好 ${HERO_SLOTS} 条 featured: true，当前 ${featured.length} 条${featured.length ? `（${featured.join('、')}）` : ''}`);
 
+// ⑧ 四道门（品牌策划 1.2/1.3）：门名 / 问法 / 判据各 4 条，与 *En 逐条对应。
+//    4 条是版式容量（2×2 判据卡 + 账本表头）；缺 *En 即英文版回落中文，属图文不符。
+const GATE_COUNT = 4;
+const gatesFile = join(contentDir, 'gates.md');
+if (!existsSync(gatesFile)) {
+  errors.push('gates.md: 缺四道门真源（品牌策划 1.2/1.3）');
+} else {
+  const fm = front(readFileSync(gatesFile, 'utf8'));
+  for (const key of ['gates', 'gateQuestions', 'gateCriteria']) {
+    const zhList = items(fm, key);
+    const enList = items(fm, `${key}En`);
+    if (!zhList || zhList.length !== GATE_COUNT)
+      errors.push(`gates.md: ${key} 须恰好 ${GATE_COUNT} 条，当前 ${zhList ? zhList.length : 0} 条`);
+    else if (!enList || enList.length !== zhList.length)
+      errors.push(`gates.md: ${key}En 须与 ${key} 逐条对应，当前 ${enList ? enList.length : 0} 条`);
+  }
+  for (const key of ['intro', 'ledgerNote']) {
+    const text = scalar(fm, key);
+    if (!text) errors.push(`gates.md: 缺 ${key}`);
+    else if (CJK.test(text) && !scalar(fm, `${key}En`)) errors.push(`gates.md: ${key} 含中文但缺 ${key}En`);
+  }
+  // 拦截表的理由分类：页面上按「/」并列展示，空列表会让副标题只剩「理由分类 ·」
+  const reasons = items(fm, 'blockedReasons');
+  const reasonsEn = items(fm, 'blockedReasonsEn');
+  if (!reasons || reasons.length === 0) errors.push('gates.md: blockedReasons 至少 1 条');
+  else if (!reasonsEn || reasonsEn.length !== reasons.length)
+    errors.push(`gates.md: blockedReasonsEn 须与 blockedReasons 逐条对应，当前 ${reasonsEn ? reasonsEn.length : 0} 条`);
+}
+
 if (errors.length) {
   console.error('[check-content] 未通过：\n  ' + errors.join('\n  '));
   process.exit(1);

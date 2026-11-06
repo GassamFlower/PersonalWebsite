@@ -1,10 +1,12 @@
-// App.tsx — v7.1 叙事微调（v6 图鉴 §13.8）：封面 → 故事(02·曾经/正在) → 案例(03) → 能力(04) → 写作(05) → 规矩(06) → 封底(07)。
+// App.tsx — v12.2 叙事：封面 → 判据(02·四道门) → 故事(03·曾经/正在) → 案例(04) → 能力(05) → 写作(06) → 规矩(07) → 封底(08)。
+// 判据区放故事之前：先给出「拿什么标准看 AI 热词」，再讲人——定位先于履历。
 // 「当下」插页撤下，doing 真源并入故事区「正在做什么」块；「来路」编年区按用户裁决下线（罗列=与故事区重复），md 真源与守卫保留；
 // 「附录 · 工作台之外」按用户裁决整区撤下（2026-10-16），md 真源与 check-content 守卫保留。
 // 「成长」月度索引区按用户裁决整区撤下（2026-10-17，罗列+自评腔），md 真源与 check-content 守卫保留。
 import React from 'react';
 import SiteNav from './components/SiteNav';
 import Hero from './components/Hero/Hero';
+import Gates from './components/Gates';
 import Story from './components/Story';
 import Cases from './components/Cases';
 import Capability from './components/Capability';
@@ -27,6 +29,7 @@ function Shell() {
       <SiteNav />
       <main id="main" tabIndex={-1}>
         <Hero />
+        <Gates />
         <Story />
         <Cases />
         <Capability />
